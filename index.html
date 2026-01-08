@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progeta | System Overview</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- LOADER OVERLAY -->
+    <div id="loader-overlay">
+        <!-- Optional: Core/Spinner graphic could go here or keep simple -->
+        <div class="loader-invitation">
+            <div class="invitation-card">
+                <div class="invitation-header"
+                    style="color:var(--accent-primary); font-size:0.8rem; letter-spacing:2px; margin-bottom:1rem; font-family:var(--font-mono);">
+                    EST. 2024</div>
+                <h1
+                    style="margin: 0; font-size: 3.5rem; color: #fff; line-height:1; letter-spacing:-2px; text-transform: uppercase;">
+                    PROGETA TECHNOLOGIES</h1>
+                <p
+                    style="color: var(--text-tertiary); margin: 1.5rem 0 3rem; font-family:var(--font-mono); font-size:0.9rem; text-transform: uppercase; letter-spacing: 1px;">
+                    TAKE BACK CONTROL AND RISE ABOVE
+                </p>
+                <button id="enter-btn" class="invitation-action-btn"
+                    style="background:transparent; border:1px solid #333; color:#fff; padding:1rem 3rem; font-size:0.8rem; letter-spacing:2px;">ENTER</button>
+            </div>
+        </div>
+    </div>
+    <!-- Ascension Background (Subtle) -->
+    <div class="ascension-bg" id="ascension-container" style="opacity:0.3;"></div>
+
+    <header>
+        <nav>
+            <div class="logo">Progeta</div>
+            <div class="nav-links">
+                <a href="index.html" class="active">Home</a>
+                <a href="tracks.html">Tracks</a>
+                <a href="modules.html">Modules</a>
+                <a href="workshops.html">Workshops</a>
+                <a href="events.html">Events</a>
+                <a href="about.html">Mission</a>
+                <a href="contact.html" class="nav-btn">CONTACT</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="dashboard-container">
+
+        <!-- 1. SPLIT HERO: Heading Left + Testimonial Right -->
+        <section class="hero-split">
+            <div class="hero-left">
+                <h1 class="hero-big-title">TAKE BACK<br><span style="color:var(--accent-primary);">CONTROL</span></h1>
+                <p style="font-size: 1.2rem; color: var(--text-secondary); margin-bottom: 2.5rem; max-width: 500px;">
+                    From Theory to Operations. Master the offensive and defensive arts through immersive simulation.
+                </p>
+                <div style="display:flex; gap:1rem;">
+                    <a href="contact.html" class="invitation-btn" style="text-decoration:none;">JOIN THE RANKS</a>
+                    <a href="tracks.html" class="invitation-btn"
+                        style="text-decoration:none; background:transparent; border:1px solid var(--text-primary); color:var(--text-primary);">EXPLORE
+                        TRACKS</a>
+                </div>
+            </div>
+
+            <div class="hero-right" id="hero-testimonial">
+                <!-- Random Testimonial Injected Here -->
+            </div>
+        </section>
+
+        <!-- TRUST METRICS STRIP -->
+        <section class="home-section"
+            style="padding: 2rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); background: rgba(255,255,255,0.01);">
+            <div class="trust-metrics-grid" style="padding:0; gap:1rem; max-width:1200px; margin:0 auto;">
+                <div class="tm-stat" style="border:none; padding:1rem; background:transparent;">
+                    <span class="tm-value counter-anim" data-target="600" data-suffix="+"
+                        style="font-size:2.5rem; color:var(--text-primary);">0</span>
+                    <span class="tm-label" style="font-size:0.75rem;">STUDENTS TRAINED</span>
+                </div>
+                <div class="tm-stat" style="border:none; padding:1rem; background:transparent;">
+                    <span class="tm-value counter-anim" data-target="10" data-suffix="+"
+                        style="font-size:2.5rem; color:var(--text-primary);">0</span>
+                    <span class="tm-label" style="font-size:0.75rem;">COLLEGE PARTNERS</span>
+                </div>
+                <div class="tm-stat" style="border:none; padding:1rem; background:transparent;">
+                    <span class="tm-value counter-anim" data-target="100" data-suffix="%"
+                        style="font-size:2.5rem; color:var(--text-primary);">0</span>
+                    <span class="tm-label" style="font-size:0.75rem;">POSITIVE FEEDBACK</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. ARTICLES (3 Latest) -->
+        <section class="home-section">
+            <div class="home-section-header">
+                <h2 class="home-section-title">Latest Intelligence</h2>
+            </div>
+            <div class="content-preview-grid" id="home-articles-grid">
+                <!-- Populated by JS -->
+            </div>
+        </section>
+
+        <!-- 4. TRACKS (All 6) -->
+        <section class="home-section">
+            <div class="home-section-header">
+                <h2 class="home-section-title">Career Tracks</h2>
+                <a href="tracks.html" class="view-all-link">VIEW CURRICULUM &rarr;</a>
+            </div>
+            <div class="tracks-home-grid" id="home-tracks-grid">
+                <!-- Populated by JS -->
+            </div>
+        </section>
+
+        <!-- 5. WORKSHOPS (Featured) -->
+        <section class="home-section">
+            <div class="home-section-header">
+                <h2 class="home-section-title">Live Fire Workshops</h2>
+                <a href="workshops.html" class="view-all-link">VIEW ALL SIMULATIONS &rarr;</a>
+            </div>
+            <div class="content-preview-grid" id="home-workshops-grid">
+                <!-- Populated by JS -->
+            </div>
+        </section>
+
+        <!-- 6. EVENTS (Upcoming) -->
+        <section class="home-section" style="border-bottom: none;">
+            <div class="home-section-header">
+                <h2 class="home-section-title">Community Events</h2>
+                <a href="events.html" class="view-all-link">VIEW CALENDAR &rarr;</a>
+            </div>
+            <div class="content-preview-grid" id="home-events-grid">
+                <!-- Populated by JS -->
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER REMOVED FROM VIEW, KEPT IN tact BUT SIMPLIFIED IF NEEDED -->
+
+
+    <footer class="mega-footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <h2>PROGETA</h2>
+                <p>Forging the next generation of offensive and defensive security operators.</p>
+                <div
+                    style="margin-top: 2rem; font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-tertiary);">
+                    // EST. 2026<br>
+                    // ALL SYSTEMS OPERATIONAL
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h4>Education</h4>
+                <ul>
+                    <li><a href="tracks.html">Career Tracks</a></li>
+                    <li><a href="modules.html">Module Catalog</a></li>
+                    <li><a href="workshops.html">Workshops</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Ecosystem</h4>
+                <ul>
+                    <li><a href="events.html">Events & Summits</a></li>
+                    <li><a href="#">DefSec Tools</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="about.html">Mission</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="#">Privacy Protocol</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div
+            style="border-top: 1px solid var(--border-color); padding-top: 2rem; display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-tertiary);">
+            <span>&copy; 2026 PROGETA TECHNOLOGIES INC.</span>
+            <span style="font-family: var(--font-mono);">SECURE_CONN_ESTABLISHED</span>
+        </div>
+    </footer>
+
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            loadArticles();
+            loadTestimonials();
+            initHoloEffect();
+        });
+    </script>
+</body>
+
+</html>

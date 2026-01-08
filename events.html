@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progeta | Events</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="logo">Progeta</div>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="tracks.html">Tracks</a>
+                <a href="modules.html">Modules</a>
+                <a href="workshops.html">Workshops</a>
+                <a href="events.html" class="active">Events</a>
+                <a href="about.html">Mission</a>
+                <a href="contact.html" class="nav-btn">CONTACT</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-hero">
+            <h1>Community Events</h1>
+            <p>Join our vibrant community for hackathons, panels, and networking.</p>
+        </section>
+
+        <section>
+            <div class="cards-grid" id="events-grid">
+                <!-- Populated by JS -->
+            </div>
+        </section>
+    </main>
+
+    <footer class="mega-footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <h2>PROGETA</h2>
+                <p>Forging the next generation of offensive and defensive security operators.</p>
+                <div
+                    style="margin-top: 2rem; font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-tertiary);">
+                    // EST. 2026<br>
+                    // ALL SYSTEMS OPERATIONAL
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h4>Education</h4>
+                <ul>
+                    <li><a href="tracks.html">Career Tracks</a></li>
+                    <li><a href="modules.html">Module Catalog</a></li>
+                    <li><a href="workshops.html">Workshops</a></li>
+                    <li><a href="#" class="soon">Certification</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Ecosystem</h4>
+                <ul>
+                    <li><a href="events.html">Events & Summits</a></li>
+                    <li><a href="#" class="soon">Progeta Gear</a></li>
+                    <li><a href="#" class="soon">DefSec Tools</a></li>
+                    <li><a href="#" class="soon">Enterprise Solutions</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="about.html">Mission</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="#" class="soon">Careers</a></li>
+                    <li><a href="#">Privacy Protocol</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div
+            style="border-top: 1px solid var(--border-color); padding-top: 2rem; display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-tertiary);">
+            <span>&copy; 2026 PROGETA TECHNOLOGIES INC.</span>
+            <span style="font-family: var(--font-mono);">SECURE_CONN_ESTABLISHED</span>
+        </div>
+    </footer>
+
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            loadEvents();
+        });
+    </script>
+</body>
+
+</html>

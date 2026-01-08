@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progeta | Detail View</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="logo">Progeta</div>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="tracks.html">Career Tracks</a>
+                <a href="modules.html">Modules</a>
+                <a href="workshops.html">Workshops</a>
+                <a href="events.html">Events</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="detail-container">
+        <!-- Back Navigation -->
+        <a href="#" class="back-link" onclick="history.back()">← Return to Operations</a>
+
+        <!-- Dynamic Content Injection -->
+        <div id="detail-content" class="fade-in">
+            <!-- Header -->
+            <div class="detail-header">
+                <span id="detail-category" class="sys-code">// CLASSIFIED</span>
+                <h1 id="detail-title">Loading Artifact...</h1>
+            </div>
+
+            <!-- Primary Data Grid -->
+            <div class="detail-body">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+    </main>
+
+    <footer class="mega-footer">
+        <!-- Standard Footer -->
+    </footer>
+
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            loadDetailView();
+        });
+    </script>
+</body>
+
+</html>
