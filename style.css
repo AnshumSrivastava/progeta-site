@@ -313,11 +313,36 @@ nav {
         font-size: 2.5rem;
     }
 
-    .nav-links {
-        display: none;
+    /* FIX: Make Nav Visible */
+    nav {
+        height: auto;
+        flex-direction: column;
+        padding: 1rem 0;
+        background: rgba(5, 5, 5, 0.98);
+        /* Solid bg for readability */
     }
 
-    /* Add mobile menu later if asked */
+    .nav-links {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.8rem;
+        margin-top: 1rem;
+        width: 100%;
+    }
+
+    .nav-links a {
+        font-size: 0.75rem;
+        /* Smaller font */
+        padding: 0.2rem 0.5rem;
+    }
+
+    /* Hide the Contact button text if space is tight, keep icon? No, keep simple. */
+    .nav-btn {
+        margin-left: 0;
+        background: var(--text-primary);
+        color: #000;
+    }
 
     .modules-controls {
         flex-direction: column;
@@ -2630,9 +2655,11 @@ body.loaded #loader-overlay {
         border-color: var(--accent-secondary);
     }
 }
+
 /* --- ADVANCED STATS ANIMATION --- */
 .tm-stat {
-    position: relative; /* For absolute spinner centering */
+    position: relative;
+    /* For absolute spinner centering */
     opacity: 0;
     transform: translateY(30px);
     transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
@@ -2647,22 +2674,123 @@ body.loaded #loader-overlay {
 .stat-spinner {
     width: 30px;
     height: 30px;
-    border: 3px solid rgba(255,255,255,0.1);
+    border: 3px solid rgba(255, 255, 255, 0.1);
     border-top-color: var(--accent-primary);
     border-radius: 50%;
     animation: spin 0.8s linear infinite;
     position: absolute;
-    top: 30%; /* Approx position of number */
+    top: 30%;
+    /* Approx position of number */
     left: 50%;
     margin-left: -15px;
-    display: none; /* Hidden by default, toggled by JS */
+    display: none;
+    /* Hidden by default, toggled by JS */
 }
 
 @keyframes spin {
-    to { transform: rotate(360deg); }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 /* Helper to hide number while spinning */
 .tm-value.val-hidden {
     opacity: 0;
+}
+
+/* --- MOBILE RESPONSIVENESS OVERRIDES --- */
+@media (max-width: 768px) {
+
+    /* 1. HERO SPLIT: Stack Vertically */
+    .hero-split {
+        flex-direction: column;
+        padding: 8rem 1rem 4rem;
+        text-align: center;
+        width: 100%;
+        min-height: auto;
+    }
+
+    .hero-left,
+    .hero-right {
+        max-width: 100%;
+        width: 100%;
+        padding: 0;
+    }
+
+    .hero-big-title {
+        font-size: 3rem;
+        /* Smaller font for mobile */
+    }
+
+    .testimonial-stack {
+        width: 100%;
+        /* Fit screen */
+        height: auto;
+        min-height: 300px;
+    }
+
+    .hero-testimonial-card {
+        padding: 1.5rem;
+        /* Less padding */
+    }
+
+    /* 2. BRIDGE DIAGRAM: Stack Vertically */
+    .bridge-diagram {
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .bridge-line-container {
+        display: none;
+        /* Hide horizontal line */
+    }
+
+    .node.theory,
+    .node.reality {
+        transform: none !important;
+        /* Reset offsets */
+    }
+
+    /* Add vertical arrow instead of line */
+    .bridge-center {
+        position: relative;
+        transform: none;
+        top: auto;
+        left: auto;
+        margin: 2rem 0;
+    }
+
+    /* 3. PIPELINE: Vertical Stack */
+    .pipeline-steps {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .pipeline-track {
+        display: none;
+        /* Hide horizontal track */
+    }
+
+    /* 4. TRUST METRICS: Single Column */
+    .trust-metrics-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .tm-stat {
+        width: 100%;
+    }
+
+    /* 5. GENERAL PADDING */
+    .home-section {
+        padding: 3rem 1rem;
+    }
+
+    .page-hero {
+        padding: 8rem 1rem 4rem;
+    }
+
+    .page-hero h1 {
+        font-size: 2.5rem;
+    }
 }
