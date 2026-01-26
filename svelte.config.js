@@ -14,9 +14,7 @@ const config = {
 		adapter: adapter({
 			fallback: '404.html' // Use 404.html for GH Pages SPA-like behavior if dynamic routes are used, OR 'index.html' if using hash router. But SvelteKit defaults. Let's start with standard static.
 		}),
-		paths: {
-			base: process.argv.includes('dev') ? '' : process.env.BASE_PATH // Helper for GH pages if needed, but generic startup first.
-		}
+
 	}
 };
 
