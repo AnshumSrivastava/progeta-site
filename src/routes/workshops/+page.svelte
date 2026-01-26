@@ -48,7 +48,8 @@
     <div class="container">
         <div class="workshops-grid">
             {#each filteredWorkshops as workshop, i (workshop.title)}
-                <div
+                <a
+                    href="/workshops/{i}"
                     class="workshop-card"
                     use:tilt
                     use:reveal={{ delay: i * 50 }}
@@ -73,7 +74,7 @@
                             {/each}
                         </div>
                     {/if}
-                </div>
+                </a>
             {/each}
         </div>
     </div>
@@ -144,6 +145,8 @@
         flex-direction: column;
         height: 100%;
         transition: border-color 0.3s;
+        text-decoration: none;
+        color: inherit;
     }
     .workshop-card:hover {
         border-color: rgba(255, 255, 255, 0.2);
