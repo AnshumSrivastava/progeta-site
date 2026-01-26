@@ -1,38 +1,21 @@
-# sv
+# Progeta Technologies
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+**Take Back Control. Rise Above.**
 
-## Creating a project
+Progeta is an elite professional ecosystem designed to bridge the gap between potential and performance. We offer live-fire cyber simulations, advanced career tracks, and a vetted community of high-performance operators.
 
-If you're seeing this, you've probably already done this step. Congrats!
+## Stack
 
-```sh
-# create a new project in the current directory
-npx sv create
+- **Framework**: SvelteKit
+- **Styling**: Custom CSS (Glassmorphism/Dark Mode)
+- **Animation**: Svelte Transitions + Tilt.js
 
-# create a new project in my-app
-npx sv create my-app
-```
+## Deployment
 
-## Developing
+This repository contains the source code.
+To run locally:
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```sh
+```bash
+npm install
 npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
 ```
-
-## Building
-
-To create a production version of your app:
-
-```sh
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
