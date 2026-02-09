@@ -2,6 +2,7 @@
     import { page } from "$app/stores";
     import { fly, fade } from "svelte/transition";
     import { cubicOut } from "svelte/easing";
+    import { base } from "$app/paths";
 
     let isMenuOpen = false;
 
@@ -23,9 +24,9 @@
 <nav class="floating-nav">
     <div class="nav-content">
         <!-- Brand -->
-        <a href="/" class="brand" on:click={closeMenu}>
+        <a href="{base}/" class="brand" on:click={closeMenu}>
             <img
-                src="/logo_icon.svg"
+                src="{base}/logo_icon.svg"
                 alt="Progeta Technologies"
                 style="height:28px;"
             />
@@ -34,44 +35,48 @@
         <!-- Desktop Links -->
         <div class="links desktop-only">
             <a
-                href="/tracks"
-                class:active={$page.url.pathname.startsWith("/tracks")}
+                href="{base}/tracks"
+                class:active={$page.url.pathname.startsWith(base + "/tracks")}
                 >Tracks</a
             >
             <a
-                href="/modules"
-                class:active={$page.url.pathname.startsWith("/modules")}
+                href="{base}/modules"
+                class:active={$page.url.pathname.startsWith(base + "/modules")}
                 >Modules</a
             >
             <a
-                href="/workshops"
-                class:active={$page.url.pathname.startsWith("/workshops")}
-                >Workshops</a
+                href="{base}/workshops"
+                class:active={$page.url.pathname.startsWith(
+                    base + "/workshops",
+                )}>Workshops</a
             >
             <a
-                href="/events"
-                class:active={$page.url.pathname.startsWith("/events")}
+                href="{base}/events"
+                class:active={$page.url.pathname.startsWith(base + "/events")}
                 >Events</a
             >
             <a
-                href="/games"
-                class:active={$page.url.pathname.startsWith("/games")}>Games</a
+                href="{base}/games"
+                class:active={$page.url.pathname.startsWith(base + "/games")}
+                >Games</a
             >
             <a
-                href="/pricing"
-                class:active={$page.url.pathname.startsWith("/pricing")}
+                href="{base}/pricing"
+                class:active={$page.url.pathname.startsWith(base + "/pricing")}
                 >Pricing</a
             >
             <a
-                href="/community"
+                href="{base}/community"
                 class="nav-icon"
-                class:active={$page.url.pathname.startsWith("/community")}>?</a
+                class:active={$page.url.pathname.startsWith(
+                    base + "/community",
+                )}>?</a
             >
         </div>
 
         <!-- Desktop CTA -->
         <div class="cta-wrapper desktop-only">
-            <a href="/contact" class="nav-cta">Contact Us</a>
+            <a href="{base}/contact" class="nav-cta">Contact Us</a>
         </div>
 
         <!-- Mobile Menu Toggle -->
@@ -119,50 +124,53 @@
 
         <div class="mobile-links">
             <a
-                href="/"
+                href="{base}/"
                 on:click={closeMenu}
-                class:active={$page.url.pathname === "/"}>Home</a
+                class:active={$page.url.pathname === base + "/"}>Home</a
             >
             <a
-                href="/tracks"
+                href="{base}/tracks"
                 on:click={closeMenu}
-                class:active={$page.url.pathname.startsWith("/tracks")}
+                class:active={$page.url.pathname.startsWith(base + "/tracks")}
                 >Tracks</a
             >
             <a
-                href="/modules"
+                href="{base}/modules"
                 on:click={closeMenu}
-                class:active={$page.url.pathname.startsWith("/modules")}
+                class:active={$page.url.pathname.startsWith(base + "/modules")}
                 >Modules</a
             >
             <a
-                href="/workshops"
+                href="{base}/workshops"
                 on:click={closeMenu}
-                class:active={$page.url.pathname.startsWith("/workshops")}
-                >Workshops</a
+                class:active={$page.url.pathname.startsWith(
+                    base + "/workshops",
+                )}>Workshops</a
             >
             <a
-                href="/events"
+                href="{base}/events"
                 on:click={closeMenu}
-                class:active={$page.url.pathname.startsWith("/events")}
+                class:active={$page.url.pathname.startsWith(base + "/events")}
                 >Events</a
             >
             <a
-                href="/games"
+                href="{base}/games"
                 on:click={closeMenu}
-                class:active={$page.url.pathname.startsWith("/games")}>Games</a
+                class:active={$page.url.pathname.startsWith(base + "/games")}
+                >Games</a
             >
             <a
-                href="/pricing"
+                href="{base}/pricing"
                 on:click={closeMenu}
-                class:active={$page.url.pathname.startsWith("/pricing")}
+                class:active={$page.url.pathname.startsWith(base + "/pricing")}
                 >Pricing</a
             >
             <a
-                href="/community"
+                href="{base}/community"
                 on:click={closeMenu}
-                class:active={$page.url.pathname.startsWith("/community")}
-                >Community</a
+                class:active={$page.url.pathname.startsWith(
+                    base + "/community",
+                )}>Community</a
             >
         </div>
         <!-- Removed CTA as requested -->

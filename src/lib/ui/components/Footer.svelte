@@ -1,8 +1,9 @@
 <script>
     import { page } from "$app/stores";
+    import { base } from "$app/paths";
 </script>
 
-{#if !$page.url.pathname.startsWith("/community")}
+{#if !$page.url.pathname.startsWith(base + "/community")}
     <footer class="site-footer">
         <div class="container">
             <div class="footer-top">
@@ -20,20 +21,20 @@
                 <div class="footer-links">
                     <div class="col">
                         <h4>Platform</h4>
-                        <a href="/tracks">Tracks</a>
-                        <a href="/modules">Modules</a>
-                        <a href="/workshops">Workshops</a>
-                        <a href="/games">Games</a>
+                        <a href="{base}/tracks">Tracks</a>
+                        <a href="{base}/modules">Modules</a>
+                        <a href="{base}/workshops">Workshops</a>
+                        <a href="{base}/games">Games</a>
                     </div>
                     <div class="col">
                         <h4>Company</h4>
-                        <a href="/about">Mission</a>
-                        <a href="/pricing">Pricing</a>
-                        <a href="/contact">Contact</a>
+                        <a href="{base}/about">Mission</a>
+                        <a href="{base}/pricing">Pricing</a>
+                        <a href="{base}/contact">Contact</a>
                     </div>
                     <div class="col">
                         <h4>Resources</h4>
-                        <a href="/events">Events</a>
+                        <a href="{base}/events">Events</a>
                         <a href="#">Blog</a>
                         <a href="#">Support</a>
                     </div>

@@ -5,6 +5,7 @@
     import Card from "$lib/ui/components/Card.svelte";
     import ContactForm from "$lib/ui/components/ContactForm.svelte";
     import { onMount } from "svelte";
+    import { base } from "$app/paths";
 
     // Data Imports
     import { games } from "$lib/content/games";
@@ -84,11 +85,11 @@
             class="hero-cta-group"
             style="display: flex; gap: 1.5rem; justify-content: center; opacity: 0; animation: fadeUp 1s forwards 1.0s;"
         >
-            <MagneticButton href="/tracks" variant="primary"
+            <MagneticButton href="{base}/tracks" variant="primary"
                 >Explore Programs</MagneticButton
             >
             <div class="mobile-hide">
-                <MagneticButton href="/contact" variant="outline"
+                <MagneticButton href="{base}/contact" variant="outline"
                     >Contact Us</MagneticButton
                 >
             </div>
@@ -315,7 +316,7 @@
                 <h2>Career Tracks.</h2>
                 <p>Simulate your career trajectory with full diploma tracks.</p>
             </div>
-            <MagneticButton href="/tracks" variant="outline"
+            <MagneticButton href="{base}/tracks" variant="outline"
                 >Compare All &rarr;</MagneticButton
             >
         </div>
@@ -338,7 +339,7 @@
                     <span class="cat-pill">{article.category}</span>
                     <h3 style="margin-top: 1rem;">{article.title}</h3>
                     <p style="margin-bottom: 2rem;">{article.summary}</p>
-                    <a href="/articles/{article.id}" class="play-link"
+                    <a href="{base}/articles/{article.id}" class="play-link"
                         >READ INTEL &rarr;</a
                     >
                 </div>
@@ -362,7 +363,7 @@
                 <h2>Games.</h2>
                 <p>Sharpen your skills in a consequence-free environment.</p>
             </div>
-            <MagneticButton href="/games" variant="outline"
+            <MagneticButton href="{base}/games" variant="outline"
                 >Enter Game Library &rarr;</MagneticButton
             >
         </div>
@@ -372,7 +373,7 @@
         >
             {#each games as game}
                 <a
-                    href="/games/{game.id}"
+                    href="{base}/games/{game.id}"
                     class="bento-card game-card"
                     style="max-width: 400px; width: 100%;"
                     use:tilt

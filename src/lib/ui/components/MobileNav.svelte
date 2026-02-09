@@ -2,6 +2,7 @@
     import { page } from "$app/stores";
     import { fly, fade } from "svelte/transition";
     import { cubicOut } from "svelte/easing";
+    import { base } from "$app/paths";
 
     let isContentOpen = false;
 
@@ -15,8 +16,8 @@
 
     // Helper to check active state
     $: isActive = (path) =>
-        $page.url.pathname === path ||
-        $page.url.pathname.startsWith(path + "/");
+        $page.url.pathname === base + path ||
+        $page.url.pathname.startsWith(base + path + "/");
 </script>
 
 <!-- Content Drawer -->
@@ -45,38 +46,46 @@
             </button>
         </div>
         <div class="drawer-grid">
-            <a href="/workshops" on:click={closeContent} class="drawer-item">
+            <a
+                href="{base}/workshops"
+                on:click={closeContent}
+                class="drawer-item"
+            >
                 <div class="icon-box">W</div>
                 <span>Workshops</span>
             </a>
-            <a href="/modules" on:click={closeContent} class="drawer-item">
+            <a
+                href="{base}/modules"
+                on:click={closeContent}
+                class="drawer-item"
+            >
                 <div class="icon-box">M</div>
                 <span>Modules</span>
             </a>
-            <a href="/tracks" on:click={closeContent} class="drawer-item">
+            <a href="{base}/tracks" on:click={closeContent} class="drawer-item">
                 <div class="icon-box">T</div>
                 <span>Tracks</span>
             </a>
-            <a href="/events" on:click={closeContent} class="drawer-item">
+            <a href="{base}/events" on:click={closeContent} class="drawer-item">
                 <div class="icon-box">E</div>
                 <span>Events</span>
             </a>
             <a
-                href="/about"
+                href="{base}/about"
                 on:click={closeContent}
                 class="drawer-item secondary"
             >
                 <span>About</span>
             </a>
             <a
-                href="/community"
+                href="{base}/community"
                 on:click={closeContent}
                 class="drawer-item secondary"
             >
                 <span>Community</span>
             </a>
             <a
-                href="/pricing"
+                href="{base}/pricing"
                 on:click={closeContent}
                 class="drawer-item secondary"
             >
@@ -87,7 +96,11 @@
 {/if}
 
 <nav class="mobile-nav">
-    <a href="/" class="nav-item" class:active={$page.url.pathname === "/"}>
+    <a
+        href="{base}/"
+        class="nav-item"
+        class:active={$page.url.pathname === base + "/"}
+    >
         <div class="icon">
             <svg
                 viewBox="0 0 24 24"
@@ -104,7 +117,11 @@
         <span>Home</span>
     </a>
 
-    <a href="/articles" class="nav-item" class:active={isActive("/articles")}>
+    <a
+        href="{base}/articles"
+        class="nav-item"
+        class:active={isActive("/articles")}
+    >
         <div class="icon">
             <svg
                 viewBox="0 0 24 24"
@@ -148,7 +165,7 @@
         </div>
     </button>
 
-    <a href="/games" class="nav-item" class:active={isActive("/games")}>
+    <a href="{base}/games" class="nav-item" class:active={isActive("/games")}>
         <div class="icon">
             <svg
                 viewBox="0 0 24 24"
@@ -167,7 +184,11 @@
         <span>Games</span>
     </a>
 
-    <a href="/contact" class="nav-item" class:active={isActive("/contact")}>
+    <a
+        href="{base}/contact"
+        class="nav-item"
+        class:active={isActive("/contact")}
+    >
         <div class="icon">
             <svg
                 viewBox="0 0 24 24"
