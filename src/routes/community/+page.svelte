@@ -1,5 +1,6 @@
 <script>
     import { onMount } from "svelte";
+    import { base } from "$app/paths";
 
     /** @type {Array<{id: number, x: number, y: number, size: number, duration: number, delay: number, opacity: number, blur: number}>} */
     let particles = [];
@@ -48,7 +49,7 @@
         <h1 class="glitch" data-text="COMING SOON">COMING SOON</h1>
         <p class="sub-void">The extraction protocol is under maintenance.</p>
 
-        <a href="/" class="btn-void">
+        <a href="{base}/" class="btn-void">
             <span class="icon">←</span> GO BACK
         </a>
     </div>

@@ -3,8 +3,9 @@
     import { slide } from "svelte/transition";
     import { careerTracks } from "$lib/content/jobs";
     import { technicalModules, softSkillsModules } from "$lib/content/modules";
+    import { base } from "$app/paths";
 
-    $: id = parseInt($page.params.id);
+    $: id = parseInt($page.params.id || "0");
     $: track = careerTracks.find((t) => t.id === id);
 
     // STATE
@@ -68,7 +69,7 @@
     }
 
     function getModuleLink(cat, modId) {
-        return `/modules/${cat}/${modId}?trackId=${id}`;
+        return `${base}/modules/${cat}/${modId}?trackId=${id}`;
     }
 </script>
 
@@ -283,7 +284,7 @@
 {:else}
     <div class="layout-error">
         <h1>Solution Not Found</h1>
-        <a href="/tracks">Return to Base</a>
+        <a href="{base}/tracks">Return to Base</a>
     </div>
 {/if}
 

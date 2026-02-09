@@ -2,6 +2,7 @@
     import { games as allGames } from "$lib/content/games";
     import { reveal } from "$lib/ui/actions";
     import { onMount } from "svelte";
+    import { base } from "$app/paths";
 
     let filteredGames = allGames;
     let loading = true;
@@ -38,7 +39,7 @@
         <div class="category-group">
             <h3 class="cat-header">ONGOING STREAKS 🔥</h3>
             {#each filteredGames.filter((g) => g.lastPlayed === "Today") as game}
-                <a href="/games/{game.id}" class="game-row active">
+                <a href="{base}/games/{game.id}" class="game-row active">
                     <span class="status-dot online"></span>
                     {game.title}
                 </a>
@@ -51,7 +52,7 @@
         <div class="category-group">
             <h3 class="cat-header">CYBER OPS</h3>
             {#each filteredGames.filter((g) => g.category !== "Soft Skills" && g.lastPlayed !== "Today") as game}
-                <a href="/games/{game.id}" class="game-row">
+                <a href="{base}/games/{game.id}" class="game-row">
                     {game.title}
                 </a>
             {/each}
@@ -61,7 +62,7 @@
         <div class="category-group">
             <h3 class="cat-header">HUMAN INT (SOFT SKILLS)</h3>
             {#each filteredGames.filter((g) => g.category === "Soft Skills" && g.lastPlayed !== "Today") as game}
-                <a href="/games/{game.id}" class="game-row">
+                <a href="{base}/games/{game.id}" class="game-row">
                     {game.title}
                 </a>
             {/each}
@@ -74,15 +75,22 @@
             <!-- FEATURED HERO -->
             <div
                 class="lib-hero"
-                style="background: url({filteredGames[0]
+                style="background: url({base}{filteredGames[0]
                     .coverImage}) no-repeat center;"
             >
                 <div class="hero-content">
-                    <img src="/logo_icon.svg" alt="Logo" class="hero-logo" />
+                    <img
+                        src="{base}/logo_icon.svg"
+                        alt="Logo"
+                        class="hero-logo"
+                    />
                     <h1>{filteredGames[0].title}</h1>
                     <p>{filteredGames[0].description}</p>
                     <div class="hero-actions">
-                        <a href="/games/{filteredGames[0].id}" class="play-btn">
+                        <a
+                            href="{base}/games/{filteredGames[0].id}"
+                            class="play-btn"
+                        >
                             <svg viewBox="0 0 24 24" fill="currentColor"
                                 ><path d="M8 5v14l11-7z" /></svg
                             >
@@ -105,11 +113,11 @@
                         <div class="game-card">
                             <div
                                 class="cover-art"
-                                style="background: url({game.coverImage}) no-repeat center;"
+                                style="background: url({base}{game.coverImage}) no-repeat center;"
                             >
                                 <!-- Full Card Link (Underneath Overlay) -->
                                 <a
-                                    href="/games/{game.id}"
+                                    href="{base}/games/{game.id}"
                                     class="cover-click-target"
                                     aria-label="View Details"
                                 ></a>
@@ -117,7 +125,7 @@
                                 <!-- Hover Overlay -->
                                 <div class="card-overlay">
                                     <a
-                                        href="/games/{game.id}?play=1"
+                                        href="{base}/games/{game.id}?play=1"
                                         class="mini-play-btn"
                                         aria-label="Play {game.title}"
                                     >
@@ -130,7 +138,7 @@
                                 </div>
                             </div>
 
-                            <a href="/games/{game.id}" class="game-meta">
+                            <a href="{base}/games/{game.id}" class="game-meta">
                                 <h4>{game.title}</h4>
                                 <div class="tags">
                                     {#each game.tags.slice(0, 2) as tag}

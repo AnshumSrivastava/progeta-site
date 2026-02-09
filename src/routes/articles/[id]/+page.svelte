@@ -1,6 +1,7 @@
 <script>
     import { page } from "$app/stores";
     import { articles } from "$lib/content/articles";
+    import { base } from "$app/paths";
 
     $: id = parseInt($page.params.id || "0");
     $: article = articles.find((a) => a.id === id);
@@ -77,6 +78,6 @@
     <div style="padding:4rem; text-align:center;">
         <h1>ARTICLE NOT FOUND</h1>
         <p>The requested intelligence report is missing.</p>
-        <a href="/" class="cta-btn">RETURN TO DASHBOARD</a>
+        <a href="{base}/" class="cta-btn">RETURN TO DASHBOARD</a>
     </div>
 {/if}

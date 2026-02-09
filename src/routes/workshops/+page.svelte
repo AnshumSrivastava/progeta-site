@@ -1,6 +1,7 @@
 <script>
     import { workshops } from "$lib/content/workshops";
     import { reveal, tilt } from "$lib/ui/actions";
+    import { base } from "$app/paths";
 
     let searchTerm = "";
 
@@ -49,7 +50,7 @@
         <div class="workshops-grid">
             {#each filteredWorkshops as workshop, i (workshop.title)}
                 <a
-                    href="/workshops/{i}"
+                    href="{base}/workshops/{i}"
                     class="workshop-card"
                     use:tilt
                     use:reveal={{ delay: i * 50 }}

@@ -2,6 +2,7 @@
     import { page } from "$app/stores";
     import { events } from "$lib/content/events";
     import { reveal, tilt } from "$lib/ui/actions";
+    import { base } from "$app/paths";
 
     $: id = parseInt($page.params.id);
     $: event = events[id];
@@ -44,7 +45,11 @@
 {#if event}
     <section class="page-header">
         <div class="container">
-            <a href="/events" class="back-link" use:reveal={{ duration: 400 }}>
+            <a
+                href="{base}/events"
+                class="back-link"
+                use:reveal={{ duration: 400 }}
+            >
                 &larr; RETURN TO INTELLIGENCE
             </a>
 
@@ -138,7 +143,7 @@
     <div class="not-found">
         <h1>EVENT NOT FOUND</h1>
         <p>The requested event is invalid.</p>
-        <a href="/events" class="btn">RETURN TO CALENDAR</a>
+        <a href="{base}/events" class="btn">RETURN TO CALENDAR</a>
     </div>
 {/if}
 

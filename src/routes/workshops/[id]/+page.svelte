@@ -2,8 +2,9 @@
     import { page } from "$app/stores";
     import { workshops } from "$lib/content/workshops";
     import { reveal, tilt } from "$lib/ui/actions";
+    import { base } from "$app/paths";
 
-    $: id = parseInt($page.params.id);
+    $: id = parseInt($page.params.id || "0");
     $: workshop = workshops[id];
 </script>
 
@@ -17,7 +18,7 @@
     <section class="page-header">
         <div class="container">
             <a
-                href="/workshops"
+                href="{base}/workshops"
                 class="back-link"
                 use:reveal={{ duration: 400 }}
             >
@@ -72,7 +73,7 @@
                         {#if workshop.soft_mods && workshop.soft_mods.length > 0}
                             {#each workshop.soft_mods as m}
                                 <a
-                                    href="/modules/soft_skills/{m.id}"
+                                    href="{base}/modules/soft_skills/{m.id}"
                                     class="skill-chip"
                                     use:tilt
                                 >
@@ -104,7 +105,7 @@
                         {#if workshop.tech_mods && workshop.tech_mods.length > 0}
                             {#each workshop.tech_mods as m}
                                 <a
-                                    href="/modules/technical/{m.id}"
+                                    href="{base}/modules/technical/{m.id}"
                                     class="tech-item"
                                 >
                                     <div class="tech-info">
@@ -137,7 +138,7 @@
     <div class="not-found">
         <h1>SIMULATION NOT FOUND</h1>
         <p>Target simulation does not exist.</p>
-        <a href="/workshops" class="btn">RETURN TO BASE</a>
+        <a href="{base}/workshops" class="btn">RETURN TO BASE</a>
     </div>
 {/if}
 

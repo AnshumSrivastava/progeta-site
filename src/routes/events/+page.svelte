@@ -11,6 +11,7 @@
     const careerEvents = mappedEvents.filter(
         (e) => e.type !== "Technical Events",
     );
+    import { base } from "$app/paths";
 </script>
 
 <svelte:head>
@@ -36,7 +37,7 @@
         <div class="events-grid">
             {#each techEvents as event, i}
                 <a
-                    href="/events/{event.originalIndex}"
+                    href="{base}/events/{event.originalIndex}"
                     class="event-card"
                     use:tilt
                 >
@@ -63,7 +64,7 @@
         <div class="events-grid">
             {#each careerEvents as event, i}
                 <a
-                    href="/events/{event.originalIndex}"
+                    href="{base}/events/{event.originalIndex}"
                     class="event-card"
                     use:tilt
                 >

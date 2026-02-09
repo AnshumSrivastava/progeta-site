@@ -380,7 +380,7 @@
                 >
                     <div
                         class="game-cover"
-                        style="background-image: url('{game.coverImage}');"
+                        style="background-image: url('{base}{game.coverImage}');"
                     >
                         <div class="cover-overlay"></div>
                         <span class="game-cat">{game.category}</span>

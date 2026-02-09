@@ -2,6 +2,7 @@
     import { careerTracks } from "$lib/content/jobs";
     import { tilt, reveal } from "$lib/ui/actions";
     import { onMount } from "svelte";
+    import { base } from "$app/paths";
 
     let mounted = false;
     onMount(() => {
@@ -42,7 +43,7 @@
         <div class="tracks-grid">
             {#each careerTracks as track}
                 <a
-                    href="/tracks/{track.id}"
+                    href="{base}/tracks/{track.id}"
                     class="tech-card"
                     use:tilt
                     use:reveal={{ delay: track.id * 50 }}

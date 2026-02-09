@@ -15,7 +15,7 @@ const config = {
 			fallback: '404.html'
 		}),
 		paths: {
-			base: process.argv.includes('dev') ? '' : '/progeta-site'
+			base: process.env.NODE_ENV === 'production' ? '/progeta-site' : ''
 		}
 	}
 };

@@ -2,6 +2,7 @@
     import { articles } from "$lib/content/articles";
     import { reveal } from "$lib/ui/actions";
     import PageLoader from "$lib/ui/components/PageLoader.svelte";
+    import { base } from "$app/paths";
 </script>
 
 <svelte:head>
@@ -18,7 +19,7 @@
     <div class="articles-grid">
         {#each articles as article, i}
             <a
-                href="/articles/{article.id}"
+                href="{base}/articles/{article.id}"
                 class="article-card"
                 use:reveal={{ delay: i * 100 }}
             >

@@ -2,6 +2,7 @@
     import { page } from "$app/stores";
     import { technicalModules, softSkillsModules } from "$lib/content/modules";
     import { careerTracks } from "$lib/content/jobs";
+    import { base } from "$app/paths";
 
     $: cat = $page.params.cat;
     $: id = $page.params.id;
@@ -61,7 +62,7 @@
         <div class="zen-container">
             <!-- BREADCRUMB -->
             <div class="nav-bar">
-                <a href="/modules" class="nav-link">← RETURN TO BASE</a>
+                <a href="{base}/modules" class="nav-link">← RETURN TO BASE</a>
             </div>
 
             <!-- IMMERSIVE HERO -->
@@ -79,7 +80,7 @@
                         <div class="track-list">
                             {#each relatedTracks as track}
                                 <a
-                                    href="/tracks/{track.id}"
+                                    href="{base}/tracks/{track.id}"
                                     class="mini-track-pill"
                                 >
                                     {cleanText(track.title)}
@@ -152,7 +153,7 @@
 {:else}
     <div class="layout-error">
         <h1>Capability Not Found</h1>
-        <a href="/modules">Return to Catalog</a>
+        <a href="{base}/modules">Return to Catalog</a>
     </div>
 {/if}
 

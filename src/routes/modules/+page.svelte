@@ -1,6 +1,7 @@
 <script>
     import { allModules } from "$lib/content/modules";
     import { fade, fly } from "svelte/transition";
+    import { base } from "$app/paths";
 
     let searchQuery = "";
     let currentFilter = "all";
@@ -20,7 +21,7 @@
 
     function getLink(mod) {
         const typePath = mod.type === "Technical" ? "technical" : "soft_skills";
-        return `/modules/${typePath}/${mod.id}`;
+        return `${base}/modules/${typePath}/${mod.id}`;
     }
 </script>
 
