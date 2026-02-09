@@ -214,18 +214,25 @@
         bottom: 0;
         left: 0;
         width: 100%;
-        height: 80px; /* Increased height for breathiness */
-        background: rgba(10, 10, 10, 0.85); /* Slightly more transparent */
+        height: calc(80px + env(safe-area-inset-bottom)); /* Dynamic height */
+        background: rgba(10, 10, 10, 0.85);
         backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px); /* Safari support */
         border-top: 1px solid rgba(255, 255, 255, 0.05);
         display: flex;
         justify-content: space-around;
-        align-items: center;
+        align-items: flex-start; /* Align items to top to allow padding to push them */
+        padding-top: 15px; /* Manual adjustments to center visually */
+        padding-bottom: env(
+            safe-area-inset-bottom,
+            20px
+        ); /* Bottom padding with fallback */
         z-index: 1000;
-        padding-bottom: 20px; /* More safe area / whitespace */
         padding-left: 1rem;
         padding-right: 1rem;
         box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.5);
+        transform: translateZ(0); /* Hardware acceleration */
+        will-change: transform; /* Hint to browser */
     }
 
     .nav-item {
