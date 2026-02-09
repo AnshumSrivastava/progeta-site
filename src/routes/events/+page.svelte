@@ -197,6 +197,9 @@
     }
 
     @media (max-width: 768px) {
+        .page-header {
+            padding: 100px 0 40px; /* Reduced padding */
+        }
         .events-grid {
             grid-template-columns: 1fr;
         }

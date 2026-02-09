@@ -90,6 +90,12 @@
         );
         text-align: center;
     }
+
+    @media (max-width: 900px) {
+        .page-header {
+            padding: 100px 0 40px;
+        }
+    }
     .page-header h1 {
         margin-bottom: 1.5rem;
     }

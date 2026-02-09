@@ -51,7 +51,7 @@
 
 <!-- 1. HERO -->
 <section
-    style="min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; position: relative; z-index: 2;"
+    style="min-height: 100dvh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; position: relative; z-index: 2;"
 >
     <div class="container">
         <div
@@ -81,14 +81,17 @@
 
         <div
             use:reveal={{ delay: 800 }}
+            class="hero-cta-group"
             style="display: flex; gap: 1.5rem; justify-content: center; opacity: 0; animation: fadeUp 1s forwards 1.0s;"
         >
             <MagneticButton href="/tracks" variant="primary"
                 >Explore Programs</MagneticButton
             >
-            <MagneticButton href="/contact" variant="outline"
-                >Contact Us</MagneticButton
-            >
+            <div class="mobile-hide">
+                <MagneticButton href="/contact" variant="outline"
+                    >Contact Us</MagneticButton
+                >
+            </div>
         </div>
     </div>
 </section>
@@ -597,6 +600,43 @@
         position: relative;
     }
 
+    /* RESPONSIVE ADJUSTMENTS */
+    @media (max-width: 900px) {
+        .grid-3,
+        .grid-2 {
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        .hero-h1 .line-1 {
+            font-size: 2.5rem; /* Smaller for mobile */
+        }
+
+        .hero-h1 .line-2 {
+            font-size: 1.5rem;
+        }
+
+        .hero-bg-logo {
+            width: 100%;
+            height: auto;
+            opacity: 0.05;
+        }
+
+        section.section-padding {
+            padding: 60px 0;
+        }
+
+        .hero-cta-group {
+            flex-direction: column;
+            width: 100%;
+            padding: 0 2rem;
+        }
+
+        .mobile-hide {
+            display: none;
+        }
+    }
+
     /* CYBER GRID BACKGROUND */
     .cyber-grid-container {
         position: absolute;
@@ -798,6 +838,93 @@
         font-size: 0.8rem;
         font-weight: 600;
         letter-spacing: 0.05em;
+    }
+
+    /* --- MOBILE REDESIGN (SIMPLER & SPACIER) --- */
+    @media (max-width: 768px) {
+        /* Global Mobile Spacing */
+        .section-padding {
+            padding: 100px 0; /* More breathing room */
+        }
+
+        /* Hero Typography & Spacing */
+        .hero-h1 {
+            margin-bottom: 3rem; /* More space below headline */
+        }
+        .hero-h1 .line-1 {
+            font-size: clamp(2.5rem, 10vw, 3.5rem);
+            line-height: 1.1;
+        }
+        .hero-h1 .line-2 {
+            font-size: clamp(1.2rem, 5vw, 1.8rem);
+            margin-top: 0.5rem;
+        }
+
+        /* Stack Buttons in Hero with Gap */
+        section .container > div[use\:reveal] {
+            flex-direction: column;
+            width: 100%;
+            align-items: center;
+            gap: 1.5rem; /* Space between buttons */
+            margin-top: 2rem;
+        }
+
+        .mobile-hide {
+            display: none !important;
+        }
+
+        /* Grids to Single Column with LARGE Gaps */
+        .grid-3,
+        .grid-2 {
+            grid-template-columns: 1fr;
+            gap: 4rem; /* Much larger gap for "spacier" feel */
+        }
+
+        /* Simplify Cards on Mobile */
+        .bento-card {
+            padding: 2rem; /* Reduce padding slightly if needed, or keep generous */
+            background: rgba(255, 255, 255, 0.03); /* Simpler background */
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Hide complex decorative elements on mobile to reduce noise */
+        .shard,
+        .nodes-container,
+        .fog-layer {
+            display: none !important;
+        }
+
+        /* Ensure card content is readable without effects */
+        .card-content {
+            z-index: 10;
+        }
+
+        /* Contact Section Spacing */
+        .contact-layout {
+            grid-template-columns: 1fr;
+            display: flex;
+            flex-direction: column;
+            gap: 5rem; /* Big separation between text and form */
+        }
+
+        /* Section Headers */
+        .section-header {
+            margin-bottom: 4rem;
+            text-align: left;
+        }
+        .section-header h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .status-indicator {
+            margin-bottom: 1rem;
+        }
+
+        /* Adjust Marquee */
+        .marquee-content {
+            animation-duration: 20s;
+        }
     }
     .bulb {
         width: 6px;

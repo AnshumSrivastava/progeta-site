@@ -161,6 +161,12 @@
         padding-bottom: 80px;
     }
 
+    @media (max-width: 900px) {
+        .zen-page {
+            padding-top: 80px;
+        }
+    }
+
     .zen-container {
         max-width: 1400px;
         margin: 0 auto;
@@ -318,6 +324,7 @@
         margin-bottom: 24px;
         display: -webkit-box;
         -webkit-line-clamp: 3;
+        line-clamp: 3;
         -webkit-box-orient: vertical;
         overflow: hidden;
         flex-grow: 1;

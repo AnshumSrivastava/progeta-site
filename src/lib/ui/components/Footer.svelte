@@ -111,4 +111,39 @@
         display: flex;
         gap: 1.5rem;
     }
+
+    @media (max-width: 768px) {
+        .footer-top {
+            flex-direction: column;
+            gap: 4rem; /* Spacier */
+            text-align: center;
+        }
+
+        .footer-brand,
+        .col {
+            align-items: center; /* Center flex items */
+            width: 100%;
+            max-width: none;
+        }
+
+        /* Add more space for brand on mobile */
+        .footer-brand {
+            margin-bottom: 2rem;
+        }
+
+        .footer-links {
+            justify-content: center;
+            gap: 3.5rem; /* More space between link columns */
+            width: 100%;
+            flex-direction: column; /* Stack link columns too for cleaner look? Or keep row? Let's keep flex-wrap but wide gap */
+        }
+
+        .footer-bottom {
+            flex-direction: column;
+            gap: 2rem;
+            align-items: center;
+            text-align: center;
+            margin-top: 2rem;
+        }
+    }
 </style>
