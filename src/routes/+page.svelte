@@ -4,6 +4,7 @@
     import TrackGrid from "$lib/ui/components/TrackGrid.svelte";
     import Card from "$lib/ui/components/Card.svelte";
     import ContactForm from "$lib/ui/components/ContactForm.svelte";
+    import ImpactStats from "$lib/ui/components/ImpactStats.svelte";
     import { onMount } from "svelte";
     import { base } from "$app/paths";
 
@@ -74,10 +75,18 @@
 
         <p
             use:reveal={{ delay: 600 }}
-            style="max-width: 650px; margin: 0 auto 3rem; font-size: 1.25rem; opacity: 0; animation: fadeUp 1s forwards 0.8s; text-shadow: 0 0 10px rgba(0,0,0,0.5);"
+            style="max-width: 700px; margin: 0 auto 1.5rem; font-size: 1.25rem; opacity: 0; animation: fadeUp 1s forwards 0.8s; text-shadow: 0 0 10px rgba(0,0,0,0.5);"
         >
-            An elite ecosystem for professional mastery. We bridge the gap
-            between potential and performance.
+            Progeta builds campus ecosystems that make students digitally aware,
+            technically skilled, leadership-ready, and execution-driven.
+        </p>
+
+        <p
+            use:reveal={{ delay: 700 }}
+            style="max-width: 650px; margin: 0 auto 3rem; font-size: 1rem; opacity: 0; animation: fadeUp 1s forwards 0.9s; color: var(--text-secondary);"
+        >
+            Through Awareness Sessions, Skill Tracks, Student Chapters,
+            Productivity Systems, and Certifications.
         </p>
 
         <div
@@ -85,14 +94,12 @@
             class="hero-cta-group"
             style="display: flex; gap: 1.5rem; justify-content: center; opacity: 0; animation: fadeUp 1s forwards 1.0s;"
         >
-            <MagneticButton href="{base}/tracks" variant="primary"
-                >Explore Programs</MagneticButton
+            <MagneticButton href="{base}/students" variant="primary"
+                >I'm a Student</MagneticButton
             >
-            <div class="mobile-hide">
-                <MagneticButton href="{base}/contact" variant="outline"
-                    >Contact Us</MagneticButton
-                >
-            </div>
+            <MagneticButton href="{base}/colleges" variant="outline"
+                >I'm from a College</MagneticButton
+            >
         </div>
     </div>
 </section>
@@ -435,6 +442,108 @@
     </div>
 </section>
 
+<!-- 6.5 PROGRAMME CARDS -->
+<section class="section-padding">
+    <div class="container">
+        <div class="section-header" use:reveal>
+            <h2>Our Programmes.</h2>
+            <p>
+                Six offerings designed to cover every stage of the student
+                lifecycle.
+            </p>
+        </div>
+
+        <div class="prog-cards-grid">
+            <a
+                href="{base}/programmes"
+                class="prog-mini-card"
+                use:reveal={{ delay: 0 }}
+                use:tilt
+            >
+                <span class="pmc-tag">STAGE 01</span>
+                <h3>Awareness Sessions</h3>
+                <p>Campus-wide digital literacy drives.</p>
+                <span class="pmc-arrow">&rarr;</span>
+            </a>
+            <a
+                href="{base}/tracks"
+                class="prog-mini-card"
+                use:reveal={{ delay: 80 }}
+                use:tilt
+            >
+                <span class="pmc-tag">STAGE 02</span>
+                <h3>Skill Tracks</h3>
+                <p>Full diploma programmes for career specialization.</p>
+                <span class="pmc-arrow">&rarr;</span>
+            </a>
+            <a
+                href="{base}/workshops"
+                class="prog-mini-card"
+                use:reveal={{ delay: 160 }}
+                use:tilt
+            >
+                <span class="pmc-tag">STAGE 02</span>
+                <h3>Workshops</h3>
+                <p>Hands-on simulation labs and live-fire training.</p>
+                <span class="pmc-arrow">&rarr;</span>
+            </a>
+            <a
+                href="{base}/chapters"
+                class="prog-mini-card"
+                use:reveal={{ delay: 240 }}
+                use:tilt
+            >
+                <span class="pmc-tag">STAGE 03</span>
+                <h3>Student Chapters</h3>
+                <p>Leadership platform for campus ambassadors.</p>
+                <span class="pmc-arrow">&rarr;</span>
+            </a>
+            <a
+                href="{base}/certifications"
+                class="prog-mini-card"
+                use:reveal={{ delay: 320 }}
+                use:tilt
+            >
+                <span class="pmc-tag">STAGE 04</span>
+                <h3>Certifications</h3>
+                <p>Verifiable credentials for every achievement.</p>
+                <span class="pmc-arrow">&rarr;</span>
+            </a>
+            <a
+                href="{base}/programmes"
+                class="prog-mini-card"
+                use:reveal={{ delay: 400 }}
+                use:tilt
+            >
+                <span class="pmc-tag">STAGE 04</span>
+                <h3>Productivity Systems</h3>
+                <p>Execution frameworks for long-term performance.</p>
+                <span class="pmc-arrow">&rarr;</span>
+            </a>
+        </div>
+
+        <div style="text-align: center; margin-top: 3rem;" use:reveal>
+            <MagneticButton href="{base}/programmes" variant="outline"
+                >View All Programmes &rarr;</MagneticButton
+            >
+        </div>
+    </div>
+</section>
+
+<!-- 6.7 IMPACT STATS -->
+<section
+    class="section-padding"
+    style="border-top: 1px solid var(--glass-border);"
+>
+    <div class="container">
+        <div class="section-header text-center" use:reveal>
+            <h2>Measured Impact.</h2>
+            <p>Real outcomes across campuses and students.</p>
+        </div>
+        <ImpactStats />
+    </div>
+</section>
+
 <!-- 7. CONTACT -->
 <section
     style="padding: 100px 0; background: var(--glass-surface); border-top: 1px solid var(--glass-border);"
@@ -447,14 +556,14 @@
                     class="section-header"
                     style="text-align: left; margin-bottom: 2rem;"
                 >
-                    <span class="pill-label">Get in Touch</span>
+                    <span class="pill-label">Get Started</span>
                     <h2 style="font-size: 3rem; margin-top: 1rem;">
-                        Let’s start a conversation.
+                        Train 500+ students on cyber hygiene in 1 semester.
                     </h2>
                     <p>
-                        Whether you’re interested in a partnership, have a
-                        technical question, or just want to explore what Progeta
-                        can do for you.
+                        Book a campus awareness session, start a student
+                        chapter, or enroll in a skill track. Tell us what you
+                        need.
                     </p>
                 </div>
 
@@ -1253,5 +1362,65 @@
     }
     .value:hover {
         color: var(--accent-blue);
+    }
+
+    /* PROGRAMME MINI-CARDS */
+    .prog-cards-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+    }
+    .prog-mini-card {
+        display: flex;
+        flex-direction: column;
+        padding: 2rem;
+        background: rgba(13, 13, 18, 0.6);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 20px;
+        text-decoration: none;
+        color: inherit;
+        transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+    .prog-mini-card:hover {
+        border-color: rgba(255, 255, 255, 0.2);
+        transform: translateY(-4px);
+    }
+    .prog-mini-card h3 {
+        margin-bottom: 0.5rem;
+        font-size: 1.2rem;
+    }
+    .prog-mini-card p {
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+        flex-grow: 1;
+    }
+    .pmc-tag {
+        font-family: var(--font-mono);
+        font-size: 0.7rem;
+        color: var(--accent-blue, #3b82f6);
+        letter-spacing: 0.1em;
+        margin-bottom: 0.75rem;
+    }
+    .pmc-arrow {
+        margin-top: 1rem;
+        font-size: 1.2rem;
+        opacity: 0.5;
+        transition:
+            opacity 0.3s,
+            transform 0.3s;
+    }
+    .prog-mini-card:hover .pmc-arrow {
+        opacity: 1;
+        transform: translateX(4px);
+    }
+    .text-center {
+        text-align: center;
+    }
+
+    @media (max-width: 900px) {
+        .prog-cards-grid {
+            grid-template-columns: 1fr;
+        }
     }
 </style>

@@ -1,6 +1,7 @@
 <script lang="ts">
     import { reveal, tilt } from "$lib/ui/actions";
     import MagneticButton from "$lib/ui/components/MagneticButton.svelte";
+    import ImpactStats from "$lib/ui/components/ImpactStats.svelte";
     import { base } from "$app/paths";
     import { onMount } from "svelte";
 
@@ -190,9 +191,19 @@
 
         <div class="cta-section text-center mt-12" use:reveal={{ delay: 400 }}>
             <MagneticButton href="{base}/contact" variant="primary"
-                >Partner With Us</MagneticButton
+                >Schedule Campus Consultation</MagneticButton
             >
         </div>
+    </div>
+</section>
+
+<!-- IMPACT STATS -->
+<section
+    class="section-padding"
+    style="border-top: 1px solid var(--glass-border);"
+>
+    <div class="container">
+        <ImpactStats />
     </div>
 </section>
 

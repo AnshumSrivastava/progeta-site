@@ -20,11 +20,19 @@
 
                 <div class="footer-links">
                     <div class="col">
-                        <h4>Platform</h4>
+                        <h4>Programmes</h4>
+                        <a href="{base}/programmes">All Programmes</a>
                         <a href="{base}/tracks">Tracks</a>
-                        <a href="{base}/modules">Modules</a>
                         <a href="{base}/workshops">Workshops</a>
-                        <a href="{base}/games">Games</a>
+                        <a href="{base}/chapters">Chapters</a>
+                        <a href="{base}/certifications">Certifications</a>
+                    </div>
+                    <div class="col">
+                        <h4>For You</h4>
+                        <a href="{base}/students">Students</a>
+                        <a href="{base}/colleges">Colleges</a>
+                        <a href="{base}/community">Community</a>
+                        <a href="{base}/events">Events</a>
                     </div>
                     <div class="col">
                         <h4>Company</h4>
@@ -32,20 +40,14 @@
                         <a href="{base}/pricing">Pricing</a>
                         <a href="{base}/contact">Contact</a>
                     </div>
-                    <div class="col">
-                        <h4>Resources</h4>
-                        <a href="{base}/events">Events</a>
-                        <a href="#">Blog</a>
-                        <a href="#">Support</a>
-                    </div>
                 </div>
             </div>
 
             <div class="footer-bottom">
                 <span>&copy; 2026 Progeta Technologies Inc.</span>
                 <div class="legal-links">
-                    <a href="#">Privacy</a>
-                    <a href="#">Terms</a>
+                    <a href="{base}/privacy">Privacy</a>
+                    <a href="{base}/terms">Terms</a>
                 </div>
             </div>
         </div>

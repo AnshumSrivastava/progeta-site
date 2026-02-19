@@ -1,6 +1,7 @@
 <script lang="ts">
     import { reveal, tilt } from "$lib/ui/actions";
     import MagneticButton from "$lib/ui/components/MagneticButton.svelte";
+    import ImpactStats from "$lib/ui/components/ImpactStats.svelte";
     import { base } from "$app/paths";
     import { onMount } from "svelte";
 
@@ -150,18 +151,53 @@
     </div>
 </section>
 
+<!-- SEMESTER KPIs -->
+<section class="section-padding">
+    <div class="container">
+        <div class="section-header" use:reveal>
+            <h2>Semester KPIs.</h2>
+            <p>What your chapter will achieve each semester.</p>
+        </div>
+
+        <div class="grid-3">
+            <div class="bento-card" use:reveal={{ delay: 100 }} use:tilt>
+                <h3 style="font-size: 2.5rem; font-weight: 800;">2+</h3>
+                <p>Awareness Drives per semester</p>
+            </div>
+            <div class="bento-card" use:reveal={{ delay: 200 }} use:tilt>
+                <h3 style="font-size: 2.5rem; font-weight: 800;">50+</h3>
+                <p>Students engaged per drive</p>
+            </div>
+            <div class="bento-card" use:reveal={{ delay: 300 }} use:tilt>
+                <h3 style="font-size: 2.5rem; font-weight: 800;">4+</h3>
+                <p>Workshops or Labs hosted</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- IMPACT STATS -->
+<section
+    class="section-padding"
+    style="border-top: 1px solid var(--glass-border);"
+>
+    <div class="container">
+        <ImpactStats />
+    </div>
+</section>
+
 <!-- APPLY CTA -->
 <section class="section-padding bg-glass">
     <div class="container">
         <div class="apply-section" use:reveal>
             <h2>Start a Chapter.</h2>
             <p class="mt-4">
-                Ready to bring Progeta to your campus? Join our waitlist for the
-                next phase of chapter expansion.
+                Ready to bring Progeta to your campus? Apply now and receive
+                your semester roadmap, KPI playbook, and mentorship access.
             </p>
             <div class="mt-10">
                 <MagneticButton href="{base}/contact" variant="primary"
-                    >Apply Now &rarr;</MagneticButton
+                    >Apply to Lead &rarr;</MagneticButton
                 >
             </div>
         </div>

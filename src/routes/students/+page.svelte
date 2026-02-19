@@ -1,6 +1,7 @@
 <script lang="ts">
     import { reveal, tilt } from "$lib/ui/actions";
     import MagneticButton from "$lib/ui/components/MagneticButton.svelte";
+    import ImpactStats from "$lib/ui/components/ImpactStats.svelte";
     import { base } from "$app/paths";
     import { onMount } from "svelte";
 
@@ -36,6 +37,54 @@
             Progeta is not just a learning platform. it's an ecosystem designed
             to take you from awareness to elite execution.
         </p>
+    </div>
+</section>
+
+<!-- WHERE ARE YOU? SELF-SELECTION -->
+<section class="section-padding bg-glass">
+    <div class="container">
+        <div class="section-header" use:reveal>
+            <h2>Where Are You Right Now?</h2>
+            <p>Choose your starting point.</p>
+        </div>
+
+        <div class="grid-3">
+            <a
+                href="{base}/programmes"
+                class="path-card"
+                use:reveal={{ delay: 100 }}
+                use:tilt
+            >
+                <div class="path-emoji">🌱</div>
+                <h3>Beginner</h3>
+                <p>
+                    I'm new to cybersecurity and want to understand the basics.
+                </p>
+                <span class="path-action">Start with Awareness &rarr;</span>
+            </a>
+            <a
+                href="{base}/tracks"
+                class="path-card"
+                use:reveal={{ delay: 200 }}
+                use:tilt
+            >
+                <div class="path-emoji">⚡</div>
+                <h3>Career Builder</h3>
+                <p>I want technical skills and verifiable certifications.</p>
+                <span class="path-action">Explore Skill Tracks &rarr;</span>
+            </a>
+            <a
+                href="{base}/chapters"
+                class="path-card"
+                use:reveal={{ delay: 300 }}
+                use:tilt
+            >
+                <div class="path-emoji">🚀</div>
+                <h3>Leader</h3>
+                <p>I want to lead a chapter and build something on campus.</p>
+                <span class="path-action">Start a Chapter &rarr;</span>
+            </a>
+        </div>
     </div>
 </section>
 
@@ -237,6 +286,16 @@
                 </ul>
             </div>
         </div>
+    </div>
+</section>
+
+<!-- IMPACT STATS -->
+<section
+    class="section-padding"
+    style="border-top: 1px solid var(--glass-border);"
+>
+    <div class="container">
+        <ImpactStats />
     </div>
 </section>
 
@@ -531,5 +590,48 @@
         100% {
             transform: perspective(500px) rotateX(60deg) translateY(60px);
         }
+    }
+
+    /* PATH CARDS (self-selection) */
+    .path-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 3rem 2rem;
+        background: rgba(13, 13, 18, 0.6);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 20px;
+        text-decoration: none;
+        color: inherit;
+        transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+    .path-card:hover {
+        border-color: rgba(255, 255, 255, 0.2);
+        transform: translateY(-5px);
+    }
+    .path-emoji {
+        font-size: 2.5rem;
+        margin-bottom: 1.5rem;
+    }
+    .path-card h3 {
+        margin-bottom: 0.75rem;
+    }
+    .path-card p {
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+        flex-grow: 1;
+        margin-bottom: 1.5rem;
+    }
+    .path-action {
+        color: var(--text-primary);
+        font-weight: 600;
+        font-size: 0.9rem;
+        opacity: 0.7;
+        transition: opacity 0.3s;
+    }
+    .path-card:hover .path-action {
+        opacity: 1;
     }
 </style>

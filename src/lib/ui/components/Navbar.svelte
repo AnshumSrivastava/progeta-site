@@ -5,6 +5,7 @@
     import { base } from "$app/paths";
 
     let isMenuOpen = false;
+    let isResourcesOpen = false;
 
     function toggleMenu() {
         isMenuOpen = !isMenuOpen;
@@ -19,7 +20,28 @@
         isMenuOpen = false;
         document.body.style.overflow = "";
     }
+
+    function toggleResources() {
+        isResourcesOpen = !isResourcesOpen;
+    }
+
+    function closeResources() {
+        isResourcesOpen = false;
+    }
+
+    // Resource pages — secondary items behind dropdown
+    const resourceLinks = [
+        { href: "/tracks", label: "Tracks" },
+        { href: "/modules", label: "Modules" },
+        { href: "/workshops", label: "Workshops" },
+        { href: "/events", label: "Events" },
+        { href: "/games", label: "Games" },
+        { href: "/articles", label: "Articles" },
+        { href: "/pricing", label: "Pricing" },
+    ];
 </script>
+
+<svelte:window on:click={closeResources} />
 
 <nav class="floating-nav">
     <div class="nav-content">
@@ -35,6 +57,12 @@
         <!-- Desktop Links -->
         <div class="links desktop-only">
             <a
+                href="{base}/programmes"
+                class:active={$page.url.pathname.startsWith(
+                    base + "/programmes",
+                )}>Programmes</a
+            >
+            <a
                 href="{base}/students"
                 class:active={$page.url.pathname.startsWith(base + "/students")}
                 >Students</a
@@ -45,48 +73,69 @@
                 >Colleges</a
             >
             <a
-                href="{base}/tracks"
-                class:active={$page.url.pathname.startsWith(base + "/tracks")}
-                >Tracks</a
-            >
-            <a
-                href="{base}/modules"
-                class:active={$page.url.pathname.startsWith(base + "/modules")}
-                >Modules</a
-            >
-            <a
-                href="{base}/workshops"
-                class:active={$page.url.pathname.startsWith(
-                    base + "/workshops",
-                )}>Workshops</a
-            >
-            <a
-                href="{base}/events"
-                class:active={$page.url.pathname.startsWith(base + "/events")}
-                >Events</a
-            >
-            <a
-                href="{base}/games"
-                class:active={$page.url.pathname.startsWith(base + "/games")}
-                >Games</a
-            >
-            <a
-                href="{base}/pricing"
-                class:active={$page.url.pathname.startsWith(base + "/pricing")}
-                >Pricing</a
+                href="{base}/chapters"
+                class:active={$page.url.pathname.startsWith(base + "/chapters")}
+                >Chapters</a
             >
             <a
                 href="{base}/community"
-                class="nav-icon"
                 class:active={$page.url.pathname.startsWith(
                     base + "/community",
-                )}>?</a
+                )}>Community</a
             >
+
+            <!-- Resources Dropdown -->
+            <div
+                class="resources-dropdown"
+                on:click|stopPropagation
+                on:keydown|stopPropagation
+                role="menu"
+                tabindex="0"
+            >
+                <button
+                    class="resources-trigger"
+                    class:active={isResourcesOpen}
+                    on:click={toggleResources}
+                >
+                    Resources
+                    <svg
+                        class="chevron"
+                        class:open={isResourcesOpen}
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                        width="14"
+                        height="14"
+                    >
+                        <path
+                            fill-rule="evenodd"
+                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                            clip-rule="evenodd"
+                        />
+                    </svg>
+                </button>
+
+                {#if isResourcesOpen}
+                    <div
+                        class="dropdown-panel"
+                        transition:fly={{ y: -10, duration: 200 }}
+                    >
+                        {#each resourceLinks as link}
+                            <a
+                                href="{base}{link.href}"
+                                class:active={$page.url.pathname.startsWith(
+                                    base + link.href,
+                                )}
+                                on:click={closeResources}>{link.label}</a
+                            >
+                        {/each}
+                    </div>
+                {/if}
+            </div>
         </div>
 
         <!-- Desktop CTA -->
         <div class="cta-wrapper desktop-only">
-            <a href="{base}/contact" class="nav-cta">Contact Us</a>
+            <a href="{base}/contact" class="nav-cta">Contact</a>
         </div>
 
         <!-- Mobile Menu Toggle -->
@@ -109,6 +158,8 @@
     <div
         class="mobile-backdrop"
         on:click={closeMenu}
+        on:keydown={closeMenu}
+        role="presentation"
         transition:fade={{ duration: 200 }}
     ></div>
 
@@ -117,7 +168,7 @@
         class="mobile-drawer"
         transition:fly={{ x: 300, duration: 300, easing: cubicOut }}
     >
-        <!-- Close Button (Inside Drawer) -->
+        <!-- Close Button -->
         <button class="close-btn" on:click={closeMenu} aria-label="Close Menu">
             <svg
                 viewBox="0 0 24 24"
@@ -139,6 +190,13 @@
                 class:active={$page.url.pathname === base + "/"}>Home</a
             >
             <a
+                href="{base}/programmes"
+                on:click={closeMenu}
+                class:active={$page.url.pathname.startsWith(
+                    base + "/programmes",
+                )}>Programmes</a
+            >
+            <a
                 href="{base}/students"
                 on:click={closeMenu}
                 class:active={$page.url.pathname.startsWith(base + "/students")}
@@ -151,41 +209,10 @@
                 >Colleges</a
             >
             <a
-                href="{base}/tracks"
+                href="{base}/chapters"
                 on:click={closeMenu}
-                class:active={$page.url.pathname.startsWith(base + "/tracks")}
-                >Tracks</a
-            >
-            <a
-                href="{base}/modules"
-                on:click={closeMenu}
-                class:active={$page.url.pathname.startsWith(base + "/modules")}
-                >Modules</a
-            >
-            <a
-                href="{base}/workshops"
-                on:click={closeMenu}
-                class:active={$page.url.pathname.startsWith(
-                    base + "/workshops",
-                )}>Workshops</a
-            >
-            <a
-                href="{base}/events"
-                on:click={closeMenu}
-                class:active={$page.url.pathname.startsWith(base + "/events")}
-                >Events</a
-            >
-            <a
-                href="{base}/games"
-                on:click={closeMenu}
-                class:active={$page.url.pathname.startsWith(base + "/games")}
-                >Games</a
-            >
-            <a
-                href="{base}/pricing"
-                on:click={closeMenu}
-                class:active={$page.url.pathname.startsWith(base + "/pricing")}
-                >Pricing</a
+                class:active={$page.url.pathname.startsWith(base + "/chapters")}
+                >Chapters</a
             >
             <a
                 href="{base}/community"
@@ -194,8 +221,29 @@
                     base + "/community",
                 )}>Community</a
             >
+
+            <div class="mobile-divider"></div>
+            <span class="mobile-section-label">Resources</span>
+            {#each resourceLinks as link}
+                <a
+                    href="{base}{link.href}"
+                    on:click={closeMenu}
+                    class="mobile-resource-link"
+                    class:active={$page.url.pathname.startsWith(
+                        base + link.href,
+                    )}>{link.label}</a
+                >
+            {/each}
+
+            <div class="mobile-divider"></div>
+            <a
+                href="{base}/contact"
+                on:click={closeMenu}
+                class="mobile-cta-link"
+                class:active={$page.url.pathname.startsWith(base + "/contact")}
+                >Contact Us</a
+            >
         </div>
-        <!-- Removed CTA as requested -->
     </div>
 {/if}
 
@@ -218,7 +266,7 @@
         backdrop-filter: blur(16px);
         -webkit-backdrop-filter: blur(16px);
         border: 1px solid rgba(255, 255, 255, 0.08);
-        border-radius: 100px; /* Full Pill */
+        border-radius: 100px;
         padding: 0.75rem 1.5rem;
         display: flex;
         justify-content: space-between;
@@ -233,17 +281,18 @@
         font-weight: 700;
         font-family: var(--font-display);
         font-size: 1.1rem;
-        z-index: 1001; /* Above mobile menu overlay */
+        z-index: 1001;
         position: relative;
     }
 
     .links {
         display: flex;
-        gap: 1.75rem;
+        gap: 1.5rem;
+        align-items: center;
     }
 
     .links a {
-        font-size: 0.9rem;
+        font-size: 0.85rem;
         color: var(--text-secondary);
         font-weight: 500;
         transition: color 0.2s;
@@ -254,24 +303,68 @@
         color: var(--text-primary);
     }
 
-    .nav-icon {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 32px;
-        height: 32px;
-        border-radius: 50%;
-        background: rgba(255, 255, 255, 0.1);
-        font-family: var(--font-mono);
-        color: var(--text-secondary);
-        font-weight: 700;
-        transition: all 0.2s;
+    /* RESOURCES DROPDOWN */
+    .resources-dropdown {
+        position: relative;
     }
-    .nav-icon:hover,
-    .nav-icon.active {
-        background: var(--text-primary);
-        color: #000 !important;
-        transform: scale(1.1);
+
+    .resources-trigger {
+        display: flex;
+        align-items: center;
+        gap: 0.35rem;
+        background: none;
+        border: none;
+        font-size: 0.85rem;
+        color: var(--text-secondary);
+        font-weight: 500;
+        cursor: pointer;
+        font-family: inherit;
+        padding: 0;
+        transition: color 0.2s;
+    }
+
+    .resources-trigger:hover,
+    .resources-trigger.active {
+        color: var(--text-primary);
+    }
+
+    .chevron {
+        transition: transform 0.2s;
+    }
+    .chevron.open {
+        transform: rotate(180deg);
+    }
+
+    .dropdown-panel {
+        position: absolute;
+        top: calc(100% + 16px);
+        left: 50%;
+        transform: translateX(-50%);
+        min-width: 180px;
+        background: rgba(15, 15, 20, 0.95);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 16px;
+        padding: 0.75rem;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .dropdown-panel a {
+        padding: 0.6rem 1rem;
+        border-radius: 10px;
+        font-size: 0.85rem;
+        color: var(--text-secondary);
+        font-weight: 500;
+        transition: all 0.15s;
+        text-decoration: none;
+    }
+
+    .dropdown-panel a:hover,
+    .dropdown-panel a.active {
+        background: rgba(255, 255, 255, 0.06);
+        color: var(--text-primary);
     }
 
     .nav-cta {
@@ -279,31 +372,29 @@
         color: #000;
         padding: 0.5rem 1.25rem;
         border-radius: 100px;
-        font-size: 0.9rem;
+        font-size: 0.85rem;
         font-weight: 600;
         transition: transform 0.2s;
+        text-decoration: none;
     }
-
     .nav-cta:hover {
         transform: scale(1.05);
     }
 
-    /* Mobile Menu Styles */
+    /* Mobile */
     .mobile-only {
         display: none !important;
     }
 
-    /* Hamburger Button */
     .menu-toggle {
         background: none;
         border: none;
         cursor: pointer;
         width: 40px;
         height: 40px;
-        /* display: flex; REMOVED to let mobile-only handle it */
         align-items: center;
         justify-content: center;
-        z-index: 1001; /* Keeping it above everything */
+        z-index: 1001;
         position: relative;
     }
 
@@ -312,7 +403,6 @@
         height: 14px;
         position: relative;
     }
-
     .hamburger span {
         position: absolute;
         height: 2px;
@@ -320,32 +410,28 @@
         background: var(--text-primary);
         transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
     }
-
     .hamburger span:first-child {
         top: 0;
     }
-
     .hamburger span:last-child {
         bottom: 0;
     }
-
     .hamburger.open span:first-child {
         transform: rotate(45deg);
         top: 6px;
     }
-
     .hamburger.open span:last-child {
         transform: rotate(-45deg);
         bottom: 6px;
     }
 
-    /* Side Drawer Styles */
+    /* Mobile Drawer */
     .mobile-backdrop {
         position: fixed;
         inset: 0;
         background: rgba(0, 0, 0, 0.6);
         backdrop-filter: blur(4px);
-        z-index: 2000; /* Above floating nav (1000) */
+        z-index: 2000;
     }
 
     .mobile-drawer {
@@ -355,14 +441,15 @@
         bottom: 0;
         width: 75%;
         max-width: 320px;
-        background: #050505; /* Solid dark background */
+        background: #050505;
         border-left: 1px solid rgba(255, 255, 255, 0.1);
-        z-index: 2001; /* Above backdrop */
+        z-index: 2001;
         display: flex;
         flex-direction: column;
         justify-content: center;
         padding: 2rem;
         box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+        overflow-y: auto;
     }
 
     .close-btn {
@@ -382,12 +469,10 @@
             color 0.2s,
             transform 0.2s;
     }
-
     .close-btn:hover {
         color: var(--text-primary);
         transform: rotate(90deg);
     }
-
     .close-btn svg {
         width: 32px;
         height: 32px;
@@ -396,14 +481,14 @@
     .mobile-links {
         display: flex;
         flex-direction: column;
-        align-items: flex-start; /* Left align looks cleaner in drawer */
-        gap: 1.5rem; /* Reduced gap */
+        align-items: flex-start;
+        gap: 1.25rem;
         width: 100%;
     }
 
     .mobile-links a {
         font-family: var(--font-display);
-        font-size: 1.5rem; /* Smaller, cleaner font size */
+        font-size: 1.5rem;
         font-weight: 500;
         color: var(--text-secondary);
         transition:
@@ -411,25 +496,47 @@
             transform 0.2s;
         letter-spacing: 0.02em;
         width: 100%;
+        text-decoration: none;
     }
 
     .mobile-links a:hover,
     .mobile-links a.active {
         color: var(--text-primary);
-        transform: translateX(5px); /* Slide right slightly on hover */
+        transform: translateX(5px);
     }
 
-    /* .btn-mobile-cta removed */
+    .mobile-resource-link {
+        font-size: 1.15rem !important;
+        opacity: 0.8;
+    }
+
+    .mobile-divider {
+        width: 100%;
+        height: 1px;
+        background: rgba(255, 255, 255, 0.08);
+        margin: 0.5rem 0;
+    }
+
+    .mobile-section-label {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--text-tertiary);
+        font-weight: 600;
+    }
+
+    .mobile-cta-link {
+        color: var(--text-primary) !important;
+        font-weight: 600 !important;
+    }
 
     @media (max-width: 900px) {
         .desktop-only {
             display: none;
         }
-
         .mobile-only {
-            display: flex !important; /* Show hamburger */
+            display: flex !important;
         }
-
         .floating-nav {
             top: 16px;
             width: 95%;
