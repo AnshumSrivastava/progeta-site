@@ -47,6 +47,22 @@
         </div>
         <div class="drawer-grid">
             <a
+                href="{base}/students"
+                on:click={closeContent}
+                class="drawer-item"
+            >
+                <div class="icon-box">S</div>
+                <span>Students</span>
+            </a>
+            <a
+                href="{base}/colleges"
+                on:click={closeContent}
+                class="drawer-item"
+            >
+                <div class="icon-box">C</div>
+                <span>Colleges</span>
+            </a>
+            <a
                 href="{base}/workshops"
                 on:click={closeContent}
                 class="drawer-item"

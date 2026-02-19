@@ -49,9 +49,14 @@
         <h1 class="glitch" data-text="COMING SOON">COMING SOON</h1>
         <p class="sub-void">The extraction protocol is under maintenance.</p>
 
-        <a href="{base}/" class="btn-void">
-            <span class="icon">←</span> GO BACK
-        </a>
+        <div style="display: flex; gap: 1rem; justify-content: center;">
+            <a href="{base}/contact" class="btn-void primary">
+                JOIN COMMUNITY
+            </a>
+            <a href="{base}/" class="btn-void">
+                <span class="icon">←</span> GO BACK
+            </a>
+        </div>
     </div>
 </div>
 
@@ -149,6 +154,15 @@
         background: #fff;
         color: #000;
         box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+    }
+    .btn-void.primary {
+        background: #fff;
+        color: #000;
+        border-color: #fff;
+    }
+    .btn-void.primary:hover {
+        background: rgba(255, 255, 255, 0.9);
+        box-shadow: 0 0 40px rgba(255, 255, 255, 0.5);
     }
     .icon {
         font-size: 1.1rem;

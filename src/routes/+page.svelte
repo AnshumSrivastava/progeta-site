@@ -97,6 +97,45 @@
     </div>
 </section>
 
+<!-- 1.5 HOW PROGETA WORKS -->
+<section class="section-padding" style="position: relative; z-index: 2;">
+    <div class="container">
+        <div class="section-header text-center" use:reveal>
+            <h2>How Progeta Works.</h2>
+            <p>
+                Our systematic approach to student growth and institutional
+                impact.
+            </p>
+        </div>
+
+        <div class="flow-diagram">
+            <div class="flow-step" use:reveal={{ delay: 100 }}>
+                <div class="step-num">01</div>
+                <h3>Awareness</h3>
+                <p>Campus drives and threat demonstrations.</p>
+            </div>
+            <div class="flow-connector"></div>
+            <div class="flow-step" use:reveal={{ delay: 200 }}>
+                <div class="step-num">02</div>
+                <h3>Skill Development</h3>
+                <p>Technical tracks and simulation labs.</p>
+            </div>
+            <div class="flow-connector"></div>
+            <div class="flow-step" use:reveal={{ delay: 300 }}>
+                <div class="step-num">03</div>
+                <h3>Student Leadership</h3>
+                <p>Campus Chapters and community drives.</p>
+            </div>
+            <div class="flow-connector"></div>
+            <div class="flow-step" use:reveal={{ delay: 400 }}>
+                <div class="step-num">04</div>
+                <h3>Career Readiness</h3>
+                <p>Elite certifications and professional roles.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- 2. SOCIAL TRANSMISSION - INFINITE MARQUEE -->
 <div class="marquee-container">
     <div class="marquee-content">
@@ -1111,6 +1150,60 @@
         gap: 4rem;
         align-items: center;
     }
+
+    /* FLOW DIAGRAM */
+    .flow-diagram {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-top: 4rem;
+        position: relative;
+    }
+    .flow-step {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        z-index: 1;
+        padding: 0 1rem;
+    }
+    .step-num {
+        width: 50px;
+        height: 50px;
+        background: var(--glass-surface);
+        border: 1px solid var(--glass-border);
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: var(--font-mono);
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        transition: all 0.3s;
+    }
+    .flow-step:hover .step-num {
+        background: var(--text-primary);
+        color: #000;
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+    }
+    .flow-connector {
+        flex: 0.5;
+        height: 1px;
+        background: var(--glass-border);
+        margin-top: 25px;
+        opacity: 0.3;
+    }
+    @media (max-width: 900px) {
+        .flow-diagram {
+            flex-direction: column;
+            gap: 3rem;
+        }
+        .flow-connector {
+            display: none;
+        }
+    }
+
     .pill-label {
         background: rgba(255, 255, 255, 0.1);
         color: var(--accent-blue);

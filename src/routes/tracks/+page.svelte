@@ -3,6 +3,7 @@
     import { tilt, reveal } from "$lib/ui/actions";
     import { onMount } from "svelte";
     import { base } from "$app/paths";
+    import MagneticButton from "$lib/ui/components/MagneticButton.svelte";
 
     let mounted = false;
     onMount(() => {
@@ -94,7 +95,43 @@
     </div>
 </section>
 
+<!-- FINAL CTA -->
+<section
+    class="section-padding bg-glass"
+    style="position: relative; z-index: 2;"
+>
+    <div class="container text-center">
+        <div use:reveal>
+            <h2>Ready to Begin?</h2>
+            <p class="mt-4 mb-8">
+                Select your track and start your journey towards operational
+                mastery.
+            </p>
+            <MagneticButton href="{base}/contact" variant="primary"
+                >Explore Tracks &rarr;</MagneticButton
+            >
+        </div>
+    </div>
+</section>
+
 <style>
+    .section-padding {
+        padding: 100px 0;
+    }
+    .bg-glass {
+        background: var(--glass-surface);
+        border-top: 1px solid var(--glass-border);
+        border-bottom: 1px solid var(--glass-border);
+    }
+    .mb-8 {
+        margin-bottom: 2rem;
+    }
+    .mt-4 {
+        margin-top: 1rem;
+    }
+    .text-center {
+        text-align: center;
+    }
     /* 1. BACKGROUND ENGINE (Synced) */
     .cyber-grid-container {
         position: absolute;

@@ -35,6 +35,16 @@
         <!-- Desktop Links -->
         <div class="links desktop-only">
             <a
+                href="{base}/students"
+                class:active={$page.url.pathname.startsWith(base + "/students")}
+                >Students</a
+            >
+            <a
+                href="{base}/colleges"
+                class:active={$page.url.pathname.startsWith(base + "/colleges")}
+                >Colleges</a
+            >
+            <a
                 href="{base}/tracks"
                 class:active={$page.url.pathname.startsWith(base + "/tracks")}
                 >Tracks</a
@@ -127,6 +137,18 @@
                 href="{base}/"
                 on:click={closeMenu}
                 class:active={$page.url.pathname === base + "/"}>Home</a
+            >
+            <a
+                href="{base}/students"
+                on:click={closeMenu}
+                class:active={$page.url.pathname.startsWith(base + "/students")}
+                >Students</a
+            >
+            <a
+                href="{base}/colleges"
+                on:click={closeMenu}
+                class:active={$page.url.pathname.startsWith(base + "/colleges")}
+                >Colleges</a
             >
             <a
                 href="{base}/tracks"
