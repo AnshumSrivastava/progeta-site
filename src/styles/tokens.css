@@ -75,12 +75,12 @@
     --sp-12: 256px;
 
     /* Section vertical rhythm (fluid) */
-    --section-pad: clamp(80px, 10vw, 160px);
+    --section-pad: clamp(72px, 10vw, 140px);
 
     /* Container widths */
     --w-text: 640px;
     --w-wide: 1000px;
-    --w-full: 1280px;
+    --w-full: 1200px;
     --w-bleed: 100%;
 
     /* Container horizontal padding */

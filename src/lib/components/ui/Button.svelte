@@ -45,10 +45,14 @@
     text-transform: uppercase;
     text-decoration: none;
     cursor: pointer;
-    transition: all 0.15s ease;
+    transition: all 0.2s ease;
     white-space: nowrap;
     border: none;
     outline: none;
+  }
+  
+  .btn:hover {
+    transform: scale(1.02);
   }
 
   .btn--sm { font-size: var(--text-xs); padding: 10px 18px; }
@@ -61,7 +65,6 @@
   }
   .btn--primary:hover {
     filter: brightness(0.85);
-    transform: translateY(-1px);
   }
 
   .btn--secondary {

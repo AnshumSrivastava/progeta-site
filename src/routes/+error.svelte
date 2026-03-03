@@ -1,93 +1,85 @@
 <script lang="ts">
-    import { page } from "$app/stores";
-    import { reveal } from "$lib/ui/actions";
-    import MagneticButton from "$lib/ui/components/MagneticButton.svelte";
-    import { base } from "$app/paths";
+  import { page } from '$app/stores';
 </script>
 
-<svelte:head>
-    <title>Error {$page.status} | Progeta</title>
-</svelte:head>
-
-<div class="error-container">
-    <div class="content" use:reveal={{ delay: 100 }}>
-        <div class="status-code">{$page.status}</div>
-
-        <h1 class="title">
-            {#if $page.status === 404}
-                Page Not Found
-            {:else}
-                System Exception
-            {/if}
-        </h1>
-
-        <p class="description">
-            {#if $page.error?.message}
-                {$page.error.message}
-            {:else if $page.status === 404}
-                The resource you are looking for has been moved, deleted, or
-                does not exist.
-            {:else}
-                An unexpected error occurred during processing. Our team has
-                been notified.
-            {/if}
-        </p>
-
-        <div class="action">
-            <MagneticButton href="{base}/" variant="primary"
-                >Return Home</MagneticButton
-            >
-        </div>
-    </div>
+<div class="error-page">
+  <div class="error-page__inner">
+    <span class="error-page__status">ERROR // {$page.status}</span>
+    <h1 class="error-page__title">
+      {#if $page.status === 404}
+        Signal Lost.
+      {:else}
+        System Fault.
+      {/if}
+    </h1>
+    <p class="error-page__desc">
+      {#if $page.status === 404}
+        The requested coordinate does not exist within the current architecture.
+      {:else}
+        An unexpected structural fault occurred. The environment has been logged.
+      {/if}
+    </p>
+    <a href="/" class="error-page__back">Return to Index <span class="arrow">→</span></a>
+  </div>
 </div>
 
 <style>
-    .error-container {
-        min-height: 80vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 2rem;
-        text-align: center;
-        position: relative;
-    }
+  .error-page {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--sp-8);
+  }
 
-    .content {
-        max-width: 600px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 1.5rem;
-    }
+  .error-page__inner {
+    text-align: center;
+    max-width: 520px;
+  }
 
-    .status-code {
-        font-family: var(--font-mono, monospace);
-        font-size: clamp(4rem, 10vw, 8rem);
-        font-weight: 800;
-        line-height: 1;
-        color: var(--glass-border);
-        text-transform: uppercase;
-        letter-spacing: -0.05em;
-        margin-bottom: -1rem;
-        z-index: -1;
-    }
+  .error-page__status {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    color: var(--accent-launchpad);
+    margin-bottom: var(--sp-5);
+    display: block;
+  }
 
-    .title {
-        font-family: var(--font-display);
-        font-size: 2.5rem;
-        color: var(--text-primary);
-        letter-spacing: -0.02em;
-        font-weight: 700;
-    }
+  .error-page__title {
+    font-family: var(--font-display);
+    font-size: clamp(36px, 5vw, 56px);
+    color: var(--ink-1);
+    margin-bottom: var(--sp-4);
+    line-height: 1.1;
+  }
 
-    .description {
-        color: var(--text-secondary);
-        font-size: 1.15rem;
-        line-height: 1.7;
-        max-width: 450px;
-    }
+  .error-page__desc {
+    font-family: var(--font-body);
+    font-size: 16px;
+    color: var(--ink-3);
+    line-height: 1.6;
+    margin-bottom: var(--sp-8);
+    font-style: italic;
+  }
 
-    .action {
-        margin-top: 2rem;
-    }
+  .error-page__back {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-1);
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-2);
+  }
+
+  .error-page__back .arrow {
+    transition: transform 0.3s ease;
+  }
+
+  .error-page__back:hover .arrow {
+    transform: translateX(4px);
+  }
 </style>

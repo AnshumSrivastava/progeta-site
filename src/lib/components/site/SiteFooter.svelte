@@ -35,9 +35,9 @@
           <a href="/launchpad/events">Events</a>
         </div>
 
-        <!-- Col 2: Products & Community -->
+        <!-- Col 2: Initiatives & Community -->
         <div class="footer__col">
-          <span class="footer__label">Products & Community</span>
+          <span class="footer__label">Initiatives & Community</span>
           <a href="/selfos">SelfOS</a>
           <a href="/innercircle">InnerCircle</a>
           <span class="footer__ghost">More coming.</span>

@@ -20,7 +20,7 @@
       <ScrollReveal delay={100} distance={10}>
         <div class="hero__status">
           <span class="status-dot"></span>
-          <span class="status-text">SYSTEM {systemStatus.status} <span class="status-sep">/</span> {systemStatus.lastUpdate} <span class="status-sep">/</span> {systemStatus.location}</span>
+          <span class="status-text">SYSTEM OPERATIONAL · EST. 2024 · GLOBAL</span>
         </div>
       </ScrollReveal>
 
@@ -74,7 +74,7 @@
           <span>·</span>
           <span>INTENTION</span>
           <span>·</span>
-          <span>Sovereignty</span>
+          <span>SOVEREIGNTY</span>
         </div>
       </ScrollReveal>
     </div>
@@ -95,11 +95,9 @@
 <section class="vision">
   <div class="container--wide">
     <div class="vision__quote-wrap">
-      <ScrollReveal delay={100}>
-        <span class="vision__mark">“</span>
-      </ScrollReveal>
       <ScrollReveal delay={300} distance={20}>
         <blockquote class="vision__quote">
+          <span class="vision__mark">“</span>
           We believe every person carries something worth building.
           A dream unrealised is not a failure of the person — 
           it is a failure of the environment around them.
@@ -126,7 +124,7 @@
       <div class="vision__marker" style="--accent: var(--accent-innercircle)">
         <ScrollReveal delay={800} distance={10}>
           <span class="marker__number">03</span>
-          <h3 class="marker__heading" style="color: var(--accent-innercircle)">Sovereignty</h3>
+          <h3 class="marker__heading" style="color: var(--accent-innercircle)">SOVEREIGNTY</h3>
           <p class="marker__text">The goal is individual duty. We help you own your future — not depend on us for it.</p>
         </ScrollReveal>
       </div>
@@ -207,10 +205,7 @@
           <p>Progeta Technologies exists because we believe the current digital landscape is accidental. We build tools that require responsibility, because responsibility is the precursor to freedom.</p>
           <p>Our work is not for everyone. It is for the students in small towns who feel limited by their geography. It is for the builders who refuse to use tools that don't respect them.</p>
         </div>
-        <div class="company__signoff">
-          <span class="signoff__name">Founder</span>
-          <span class="signoff__title">Progeta Technologies</span>
-        </div>
+
       </ScrollReveal>
     </div>
 
@@ -329,47 +324,7 @@
           </div>
           <span class="brief-link">Read Brief <span class="arrow">→</span></span>
         </a>
-        <!-- Duplicate set for seamless loop -->
-        <a href="/intel/local-first" class="brief-card brief-card--featured" aria-hidden="true">
-          <span class="brief-meta">MARCH 2026 // INTEL</span>
-          <h3 class="brief-title">The State of Local-First Systems</h3>
-          <p class="brief-excerpt">An analysis of why shared responsibility is shifting toward individual sovereignty in the next decade of computing.</p>
-          <div class="brief-tags">
-            <span class="brief-tag">SOVEREIGNTY</span>
-            <span class="brief-tag">SYSTEMS</span>
-          </div>
-          <span class="brief-link">Read Brief <span class="arrow">→</span></span>
-        </a>
-        <a href="/intel/threat-actor-ecology" class="brief-card" aria-hidden="true">
-          <span class="brief-meta">FEB 2026 // CTI</span>
-          <h3 class="brief-title">Threat Actor Ecology in EdTech</h3>
-          <p class="brief-excerpt">Mapping the shift in tactical approaches toward educational infrastructure and the resulting skill gap.</p>
-          <div class="brief-tags">
-            <span class="brief-tag">CTI</span>
-            <span class="brief-tag">THREAT INTEL</span>
-          </div>
-          <span class="brief-link">Read Brief <span class="arrow">→</span></span>
-        </a>
-        <a href="/intel/certifications-alone" class="brief-card" aria-hidden="true">
-          <span class="brief-meta">JAN 2026 // EDUCATION</span>
-          <h3 class="brief-title">Why Certifications Alone Won't Save You</h3>
-          <p class="brief-excerpt">Credential inflation is real. What actually signals competence versus compliance.</p>
-          <div class="brief-tags">
-            <span class="brief-tag">EDUCATION</span>
-            <span class="brief-tag">CAREERS</span>
-          </div>
-          <span class="brief-link">Read Brief <span class="arrow">→</span></span>
-        </a>
-        <a href="/intel/digital-sovereignty" class="brief-card" aria-hidden="true">
-          <span class="brief-meta">DEC 2025 // PHILOSOPHY</span>
-          <h3 class="brief-title">Digital Sovereignty Is Not Optional</h3>
-          <p class="brief-excerpt">Why owning your data and your tools is not a luxury — it is a prerequisite for agency.</p>
-          <div class="brief-tags">
-            <span class="brief-tag">PRIVACY</span>
-            <span class="brief-tag">SOVEREIGNTY</span>
-          </div>
-          <span class="brief-link">Read Brief <span class="arrow">→</span></span>
-        </a>
+
       </div>
     </div>
   </div>
@@ -425,9 +380,10 @@
       </ScrollReveal>
     </div>
     
-    <div class="seeker-banner">
+    <div class="manifesto-wrap">
       <ScrollReveal delay={700}>
-        <p class="seeker-text">WE ARE LOOKING FOR THOSE WHO SEEK THE HARD TRUTH OVER THE EASY LIE.</p>
+        <span class="manifesto-label">THE MANDATE</span>
+        <h2 class="manifesto-text">We are looking for those who seek the hard truth over the easy lie<span class="manifesto-period">.</span></h2>
       </ScrollReveal>
     </div>
   </div>
@@ -437,15 +393,7 @@
   /* ═══════════════════════════════════════════════════
      GENERAL UTILS
      ═══════════════════════════════════════════════════ */
-  .section-label {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    letter-spacing: var(--tracking-widest);
-    color: var(--ink-4);
-    text-transform: uppercase;
-    display: block;
-    margin-bottom: var(--sp-4);
-  }
+
 
   /* ═══════════════════════════════════════════════════
      HERO
@@ -504,10 +452,11 @@
   }
 
   .status-text {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    color: var(--ink-3);
-    letter-spacing: 0.05em;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #424870;
   }
 
   .status-sep {
@@ -676,17 +625,20 @@
     font-family: var(--font-display);
     font-size: 120px;
     line-height: 1;
-    color: var(--accent-launchpad);
-    opacity: 0.2;
+    color: #424870;
+    opacity: 0.5;
     position: absolute;
-    top: -60px;
-    left: 50%;
-    transform: translateX(-50%);
+    top: -20px;
+    left: -40px;
   }
 
   .vision__quote {
+    border-left: 2px solid #EDF0FF;
+    padding-left: 32px;
+    margin-left: 16px;
+    position: relative;
     font-family: var(--font-display);
-    font-size: clamp(24px, 4vw, 40px);
+    font-size: clamp(20px, 3vw, 32px);
     line-height: var(--leading-tight);
     color: var(--ink-1);
     font-weight: 300;
@@ -745,37 +697,32 @@
 
   .initiative-grid {
     display: grid;
-    grid-template-columns: 50vw 50vw;
+    grid-template-columns: 1fr;
     width: 100vw;
     gap: 0;
   }
 
   /* Need this to pass height from ScrollReveal to card */
   :global(.init-card-wrapper) {
-    display: flex;
-    height: 100%;
+    display: block;
+    width: 100%;
   }
 
   .init-card {
     background: var(--surface-1);
-    border: 1px solid var(--border-2);
-    /* Prevent double borders on adjacent edges */
-    margin: -1px 0 0 -1px;
-    padding: var(--sp-12) var(--sp-8) var(--sp-12) 10vw; /* Push content inward to match general container feel */
-    display: flex;
-    flex-direction: column;
+    border-top: 1px solid var(--border-2);
+    border-bottom: 1px solid var(--border-2);
+    margin: -1px 0 0 0;
+    padding: var(--sp-8) max(24px, 10vw);
+    display: grid;
+    grid-template-columns: 180px 2fr 1fr auto;
+    align-items: center;
+    gap: var(--sp-6);
     text-decoration: none;
-    transition: transform 0.4s var(--ease-out-expo), border-color 0.4s;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     position: relative;
     overflow: hidden;
-    height: 100%;
-    min-height: 400px;
     width: 100%;
-  }
-
-  /* On even children (right side), pad left less and right more */
-  :global(.init-card-wrapper:nth-child(even)) .init-card {
-    padding: var(--sp-12) 10vw var(--sp-12) var(--sp-8);
   }
 
   .init-card::before {
@@ -783,16 +730,16 @@
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
+    width: 4px;
     height: 100%;
-    background: linear-gradient(to bottom right, color-mix(in srgb, var(--accent) 5%, transparent), transparent);
+    background: var(--accent);
     opacity: 0;
     transition: opacity 0.4s;
     pointer-events: none;
   }
 
   .init-card:hover {
-    transform: translateY(-8px);
+    transform: translateY(-4px);
     border-color: var(--accent);
   }
 
@@ -805,16 +752,15 @@
     font-size: 11px;
     color: var(--accent);
     letter-spacing: 0.2em;
-    margin-bottom: var(--sp-5);
     display: block;
   }
 
   .init-card__title {
     font-family: var(--font-display);
-    font-size: clamp(32px, 4vw, 48px);
+    font-size: clamp(28px, 3vw, 36px);
     font-weight: 700;
-    color: var(--accent); /* Colored headings per request */
-    margin-bottom: var(--sp-4);
+    color: var(--accent);
+    margin: 0;
   }
 
   .init-card__desc {
@@ -822,8 +768,7 @@
     font-size: 16px;
     color: var(--ink-3);
     line-height: var(--leading-relaxed);
-    margin-bottom: auto;
-    padding-bottom: var(--sp-8);
+    margin: 0;
   }
 
   .init-card__sublinks {
@@ -924,26 +869,6 @@
     margin-bottom: var(--sp-6);
   }
 
-  .company__signoff {
-    margin-top: var(--sp-9);
-    display: flex;
-    flex-direction: column;
-  }
-
-  .signoff__name {
-    font-family: var(--font-display);
-    font-size: 20px;
-    color: var(--ink-1);
-    font-style: italic;
-  }
-
-  .signoff__title {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    color: var(--ink-4);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-  }
 
   /* Truths Grid */
   .truths-row {
@@ -1296,10 +1221,9 @@
     position: absolute;
     top: 0;
     left: 0;
-    width: 0;
+    width: 100%;
     height: 2px;
     background: var(--accent);
-    transition: width 0.4s ease;
   }
 
   .pathway-card:hover {
@@ -1307,9 +1231,7 @@
     transform: translateY(-6px);
   }
 
-  .pathway-card:hover::before {
-    width: 100%;
-  }
+
 
   .pathway-label {
     font-family: var(--font-mono);
@@ -1356,19 +1278,33 @@
     transform: translateX(4px);
   }
 
-  .seeker-banner {
-    border-top: 1px solid var(--border-2);
-    padding-top: var(--sp-9);
+  .manifesto-wrap {
     text-align: center;
-    margin: 0 var(--sp-6);
+    padding: 80px 0;
+    border-top: 1px solid #1C2033;
+    border-bottom: 1px solid #1C2033;
+    margin: 120px 0;
   }
 
-  .seeker-text {
-    font-family: var(--font-mono);
-    font-size: clamp(10px, 1.5vw, 14px);
-    color: var(--ink-4);
-    letter-spacing: 0.4em;
-    font-weight: 400;
+  .manifesto-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    color: #424870;
+    display: block;
+    margin-bottom: 24px;
+  }
+
+  .manifesto-text {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    font-size: clamp(24px, 4vw, 42px);
+    color: #F5F7FA;
+    letter-spacing: -0.02em;
+  }
+
+  .manifesto-period {
+    color: #5D3FD3;
   }
 
   /* ═══════════════════════════════════════════════════
@@ -1385,7 +1321,21 @@
 
     .vision__markers { grid-template-columns: 1fr; gap: var(--sp-10); }
 
-    .initiative-grid { grid-template-columns: 1fr; width: 100%; }
+    .init-card {
+      grid-template-columns: 1fr;
+      text-align: center;
+      padding: var(--sp-8) var(--sp-6);
+      gap: var(--sp-4);
+    }
+    .init-card__sublinks {
+      flex-direction: row;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .init-card__link {
+      justify-content: center;
+      margin-top: var(--sp-4);
+    }
     .strips { margin-left: 0; width: 100%; }
     
     :global(.init-card-wrapper) .init-card,

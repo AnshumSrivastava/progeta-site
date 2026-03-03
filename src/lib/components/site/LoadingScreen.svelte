@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
+  import { onMount, onDestroy } from 'svelte';
   import { browser } from '$app/environment';
 
   interface Props {
@@ -7,18 +7,16 @@
   }
   let { onComplete }: Props = $props();
 
-  let container: HTMLElement;
+  let loadingScreen: HTMLElement;
   let lineEl: HTMLElement;
-  let lettersEl: HTMLElement;
-  let subVisible = $state(false);
-  let counterVisible = $state(false);
+  let subTextEl: HTMLElement;
   let counterEl: HTMLElement;
-  let overlayEl: HTMLElement;
-
+  
   const LETTERS = ['P', 'R', 'O', 'G', 'E', 'T', 'A'];
-  // Centre-outward reveal order: G(3) -> R(1)+E(4) -> P(0)+T(5) -> O(2)+A(6)
-  const REVEAL_GROUPS = [[3], [1, 4], [0, 5], [2, 6]];
   let letterEls: HTMLElement[] = [];
+  
+  let intervalId: ReturnType<typeof setInterval>;
+  let timeouts: ReturnType<typeof setTimeout>[] = [];
 
   function bindLetter(el: HTMLElement, idx: number) {
     if (el) letterEls[idx] = el;
@@ -27,219 +25,209 @@
   onMount(() => {
     if (!browser) return;
 
-    const isReturn = sessionStorage.getItem('pt_loaded') === '1';
+    const alreadyLoaded = sessionStorage.getItem('progeta_loaded');
 
-    if (isReturn) {
-      // Abbreviated: 500ms black → fade out
-      setTimeout(() => {
-        if (overlayEl) {
-          overlayEl.style.transition = 'opacity 300ms ease-out';
-          overlayEl.style.opacity = '0';
+    if (alreadyLoaded) {
+      // Skip full sequence — just briefly show the screen then hide it
+      timeouts.push(setTimeout(() => {
+        if (loadingScreen) {
+          loadingScreen.style.transition = 'opacity 0.3s ease';
+          loadingScreen.style.opacity = '0';
+          timeouts.push(setTimeout(() => {
+            if (loadingScreen) loadingScreen.style.display = 'none';
+            onComplete?.();
+          }, 300));
+        } else {
+          onComplete?.();
         }
-        setTimeout(() => onComplete?.(), 350);
-      }, 500);
+      }, 500));
       return;
     }
 
-    sessionStorage.setItem('pt_loaded', '1');
+    sessionStorage.setItem('progeta_loaded', 'true');
     runFullSequence();
+  });
+  
+  onDestroy(() => {
+    if (intervalId) clearInterval(intervalId);
+    timeouts.forEach(clearTimeout);
   });
 
   function runFullSequence() {
-    // 0ms: Pure black
+    // Phase 1: 0ms: Pure black (default)
 
-    // 200ms: Horizon line draws centre-outward
-    setTimeout(() => {
-      if (lineEl) lineEl.classList.add('drawing');
-    }, 200);
+    // Phase 2: 200ms: Horizon line draws centre-outward
+    timeouts.push(setTimeout(() => {
+      if (lineEl) lineEl.style.width = '100%';
+    }, 200));
 
-    // 750ms: Letters materialise centre-outward
-    let delay = 750;
-    for (const group of REVEAL_GROUPS) {
-      const d = delay;
-      setTimeout(() => {
-        for (const idx of group) {
-          if (letterEls[idx]) {
-            letterEls[idx].style.opacity = '1';
+    // Phase 3: 900ms: Letters materialise centre-outward
+    timeouts.push(setTimeout(() => { if (letterEls[3]) letterEls[3].style.opacity = '1'; }, 900));
+    timeouts.push(setTimeout(() => { 
+      if (letterEls[2]) letterEls[2].style.opacity = '1'; 
+      if (letterEls[4]) letterEls[4].style.opacity = '1'; 
+    }, 960));
+    timeouts.push(setTimeout(() => { 
+      if (letterEls[1]) letterEls[1].style.opacity = '1'; 
+      if (letterEls[5]) letterEls[5].style.opacity = '1'; 
+    }, 1020));
+    timeouts.push(setTimeout(() => { 
+      if (letterEls[0]) letterEls[0].style.opacity = '1'; 
+      if (letterEls[6]) letterEls[6].style.opacity = '1'; 
+    }, 1080));
+
+    // Phase 4: 1300ms: "Technologies" appears
+    timeouts.push(setTimeout(() => {
+      if (subTextEl) subTextEl.style.opacity = '1';
+    }, 1300));
+
+    // Phase 5: 1800ms: Counter runs
+    timeouts.push(setTimeout(() => {
+      if (counterEl) {
+        counterEl.style.opacity = '1';
+        let value = 0;
+        intervalId = setInterval(() => {
+          value += 3;
+          if (value >= 100) {
+            value = 100;
+            clearInterval(intervalId);
           }
-        }
-      }, d);
-      delay += 150; // ~150ms between pairs
-    }
+          if (counterEl) {
+            counterEl.textContent = String(value).padStart(3, '0');
+          }
+        }, 12);
+      }
+    }, 1800));
 
-    // 1300ms: "Technologies" fades in
-    setTimeout(() => {
-      subVisible = true;
-    }, 1300);
+    // Phase 6: Exit sequence
+    // Step A (2200ms)
+    timeouts.push(setTimeout(() => {
+      letterEls.forEach(el => {
+        if (el) el.style.opacity = '0';
+      });
+      if (subTextEl) subTextEl.style.opacity = '0';
+    }, 2200));
 
-    // 1700ms: Counter 000 → 100
-    setTimeout(() => {
-      counterVisible = true;
-      animateCounter();
-    }, 1700);
+    // Step B (2300ms)
+    timeouts.push(setTimeout(() => {
+      if (lineEl) lineEl.style.width = '0%';
+    }, 2300));
 
-    // 2300ms: Exit sequence
-    setTimeout(() => {
-      // Fade all text
-      if (lettersEl) lettersEl.style.opacity = '0';
-      subVisible = false;
-      counterVisible = false;
+    // Step C (2600ms)
+    timeouts.push(setTimeout(() => {
+      if (loadingScreen) {
+        loadingScreen.style.transition = 'opacity 0.3s ease';
+        loadingScreen.style.opacity = '0';
+      }
+    }, 2600));
 
-      // Contract horizon line
-      setTimeout(() => {
-        if (lineEl) lineEl.classList.add('contracting');
-      }, 50);
-
-      // Fade overlay to transparent
-      setTimeout(() => {
-        if (overlayEl) {
-          overlayEl.style.transition = 'opacity 300ms ease-out';
-          overlayEl.style.opacity = '0';
-        }
-        setTimeout(() => onComplete?.(), 350);
-      }, 330);
-    }, 2300);
-  }
-
-  function animateCounter() {
-    if (!counterEl) {
-      console.warn('counterEl not bound, skipping animation');
-      return;
-    }
-    let value = 0;
-    const start = performance.now();
-    const duration = 400;
-
-    function tick() {
-      const elapsed = performance.now() - start;
-      const progress = Math.min(elapsed / duration, 1);
-      // Decelerate toward end
-      const eased = 1 - Math.pow(1 - progress, 2.5);
-      value = Math.floor(eased * 100);
-      counterEl.textContent = String(value).padStart(3, '0');
-      if (progress < 1) requestAnimationFrame(tick);
-    }
-    requestAnimationFrame(tick);
+    // Step D (2900ms)
+    timeouts.push(setTimeout(() => {
+      if (loadingScreen) {
+        loadingScreen.style.display = 'none';
+      }
+      onComplete?.();
+    }, 2900));
   }
 </script>
 
-<div class="loading-screen" bind:this={overlayEl}>
-  <!-- Horizon line -->
-  <div class="horizon-line" bind:this={lineEl}></div>
+<div class="loading-screen" bind:this={loadingScreen}>
+  <!-- Horizon line wrapped for centre-outward contraction -->
+  <div class="horizon-wrapper">
+    <div class="horizon-line" bind:this={lineEl}></div>
+  </div>
 
   <!-- PROGETA letters -->
-  <div class="letters-wrap" bind:this={lettersEl}>
+  <div class="letters-wrap">
     {#each LETTERS as letter, i}
-      <span
-        class="letter"
-        style="opacity: 0; transition: opacity 80ms ease-out;"
-        use:bindLetter={i}
-      >{letter}</span>
+      <span class="letter" use:bindLetter={i}>{letter}</span>
     {/each}
   </div>
 
   <!-- Technologies sub-text -->
-  <div class="sub-text" class:visible={subVisible}>Technologies</div>
+  <div class="sub-text" bind:this={subTextEl}>Technologies</div>
 
   <!-- Counter -->
-  <div class="counter" class:visible={counterVisible} bind:this={counterEl}>000</div>
+  <div class="counter" bind:this={counterEl}>000</div>
 </div>
 
 <style>
   .loading-screen {
     position: fixed;
-    inset: 0;
-    z-index: 10000;
-    background: #000;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background-color: #020408;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
   }
 
-  /* ── HORIZON LINE ─────────────────────────── */
+  .horizon-wrapper {
+    position: absolute;
+    top: calc(50% + 52px);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 1px;
+  }
+
   .horizon-line {
     position: absolute;
-    top: 50%;
+    top: 0;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translateX(-50%);
     height: 1px;
-    width: 0;
-    background: var(--border-2, #2C3242);
+    width: 0%;
+    background-color: #222840;
+    transition: width 0.6s cubic-bezier(0.76, 0, 0.24, 1);
   }
 
-  .horizon-line.drawing {
-    animation: lineExpand 600ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
-  }
-
-  .horizon-line.contracting {
-    animation: lineContract 280ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
-  }
-
-  @keyframes lineExpand {
-    from { width: 0; }
-    to { width: 100vw; }
-  }
-
-  @keyframes lineContract {
-    from { width: 100vw; }
-    to { width: 0; }
-  }
-
-  /* ── LETTERS ──────────────────────────────── */
   .letters-wrap {
     position: relative;
     z-index: 2;
     display: flex;
     gap: 0;
-    transition: opacity 200ms ease-out;
   }
 
   .letter {
+    opacity: 0;
+    transition: opacity 0.3s ease;
     font-family: 'Cormorant Garamond', Georgia, serif;
     font-weight: 700;
-    font-size: clamp(48px, 10vw, 115px);
+    font-size: clamp(56px, 8vw, 96px);
     letter-spacing: -0.04em;
-    color: var(--ink-1, #F5F7FA);
+    color: #EDF0FF;
     line-height: 1;
     display: inline-block;
   }
 
-  /* ── SUB-TEXT ─────────────────────────────── */
   .sub-text {
-    position: relative;
-    z-index: 2;
+    opacity: 0;
+    transition: opacity 0.4s ease;
     font-family: 'DM Sans', system-ui, sans-serif;
     font-weight: 300;
-    font-size: clamp(14px, 3.8vw, 42px);
+    font-size: clamp(16px, 2.2vw, 28px);
     letter-spacing: 0.14em;
-    color: var(--ink-3, #4A5568);
+    color: #424870;
     text-transform: uppercase;
-    margin-top: var(--sp-3, 12px);
-    align-self: flex-start;
-    margin-left: calc(50% - clamp(24px, 5vw, 57.5px) * 7 / 2 + clamp(24px, 5vw, 57.5px) * 0.04);
-    opacity: 0;
-    transition: opacity 400ms ease-out;
+    position: absolute;
+    top: calc(50% + 64px); /* Positioned below the horizon line */
+    left: 50%;
+    transform: translateX(calc(-50% + 4px)); /* offset by letter-spacing to center visually */
   }
 
-  .sub-text.visible {
-    opacity: 1;
-  }
-
-  /* ── COUNTER ─────────────────────────────── */
   .counter {
-    position: fixed;
-    bottom: 40px;
-    right: 48px;
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    color: var(--ink-3, #4A5568);
-    letter-spacing: 0.05em;
     opacity: 0;
-    transition: opacity 200ms ease-out;
-  }
-
-  .counter.visible {
-    opacity: 1;
+    position: absolute;
+    bottom: 44px;
+    right: 52px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    color: #424870;
   }
 </style>

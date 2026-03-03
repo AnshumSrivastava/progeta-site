@@ -46,7 +46,7 @@
       ],
     },
     {
-      label: 'Products',
+      label: 'Initiatives',
       dropdown: 'products',
       items: [
         {
@@ -327,19 +327,19 @@
     font-family: var(--font-mono);
     font-size: 11px;
     text-transform: uppercase;
-    letter-spacing: var(--tracking-wide);
+    letter-spacing: 0.10em;
     color: var(--ink-3);
     background: none;
     border: none;
     cursor: none;
-    transition: color 0.2s;
+    transition: color 0.3s ease;
     padding: 0;
     text-decoration: none;
     position: relative;
   }
 
   .nav__link:hover, .nav__link--active {
-    color: var(--ink-1);
+    color: #FFFFFF;
   }
 
   .nav__link::after {
