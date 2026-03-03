@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progeta Technologies | Intel</title>
+    <meta name="description"
+        content="Research, strategy, and thinking published by Progeta Technologies from the front lines.">
+    <meta property="og:title" content="Progeta Technologies | Intel">
+    <meta property="og:description"
+        content="Research, strategy, and thinking published by Progeta Technologies from the front lines.">
+    <meta property="og:url" content="https://www.progeta.tech/intel/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Progeta Technologies">
+    <link rel="canonical" href="https://www.progeta.tech/intel/">
+    <link rel="icon" href="/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="/assets/css/tokens.css">
+    <link rel="stylesheet" href="/assets/css/global.css">
+    <link rel="stylesheet" href="/assets/css/components.css">
+    <link rel="stylesheet" href="/assets/css/layout.css">
+    <link rel="stylesheet" href="/assets/css/animations.css">
+    <style>
+        .intel-hero {
+            padding: var(--space-10) 0 var(--space-7);
+        }
+
+        .intel-hero h1 {
+            font-size: 52px;
+            margin-top: var(--space-5);
+            margin-bottom: var(--space-5);
+        }
+
+        .filter-bar {
+            padding: var(--space-2) 0 var(--space-7);
+            display: flex;
+            gap: var(--space-5);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .filter-btn {
+            font: 500 var(--text-xs)/1 var(--font-mono);
+            letter-spacing: var(--tracking-wider);
+            text-transform: uppercase;
+            color: var(--color-ink-tertiary);
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: var(--space-2) 0;
+            transition: color 0.15s ease;
+        }
+
+        .filter-btn.active,
+        .filter-btn:hover {
+            color: var(--color-ink-primary);
+        }
+
+        .intel-grid-section {
+            padding: var(--space-7) 0 var(--space-10);
+        }
+
+        .intel-grid {
+            display: grid;
+            grid-template-columns: 3fr 2fr;
+            gap: var(--space-5);
+        }
+
+        .intel-featured {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            padding: var(--space-7);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            min-height: 400px;
+            text-decoration: none;
+            color: inherit;
+            transition: border-color 0.2s ease;
+        }
+
+        .intel-featured:hover {
+            border-color: var(--color-border-strong);
+        }
+
+        .intel-featured h2 {
+            font-family: var(--font-display);
+            font-size: 28px;
+            margin: var(--space-4) 0 var(--space-3);
+        }
+
+        .intel-featured p {
+            font-size: 15px;
+            margin-bottom: var(--space-4);
+        }
+
+        .intel-featured-meta {
+            font: 400 var(--text-xs)/1 var(--font-mono);
+            color: var(--color-ink-tertiary);
+            margin-bottom: var(--space-4);
+        }
+
+        .intel-featured-cta {
+            font: 500 14px/1 var(--font-body);
+            letter-spacing: var(--tracking-wide);
+            text-transform: uppercase;
+            color: var(--color-ink-secondary);
+        }
+
+        .intel-stack {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-5);
+        }
+
+        .intel-small-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            padding: var(--space-5);
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-2);
+            flex: 1;
+            transition: border-color 0.2s ease;
+        }
+
+        .intel-small-card:hover {
+            border-color: var(--color-border-strong);
+        }
+
+        .intel-small-card h4 {
+            font: 600 18px/var(--leading-snug) var(--font-body);
+            color: var(--color-ink-primary);
+            margin-top: var(--space-2);
+        }
+
+        .intel-small-card p {
+            font-size: 14px;
+        }
+
+        .intel-small-meta {
+            font: 400 var(--text-xs)/1 var(--font-mono);
+            color: var(--color-ink-tertiary);
+            margin-top: auto;
+            padding-top: var(--space-3);
+        }
+
+        @media (max-width: 768px) {
+            .intel-hero h1 {
+                font-size: 34px;
+            }
+
+            .intel-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .intel-featured {
+                min-height: 260px;
+            }
+
+            .filter-bar {
+                flex-wrap: wrap;
+                gap: var(--space-3);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <a href="#main" class="skip-link">Skip to content</a>
+    <div id="site-nav"></div>
+
+    <main id="main">
+
+        <section class="intel-hero">
+            <div class="container">
+                <span class="tag animate-on-scroll">INTEL · FROM THE FRONT LINES</span>
+                <h1 class="animate-on-scroll">What we're<br>reading, learning,<br>and publishing.</h1>
+            </div>
+        </section>
+
+        <section class="intel-grid-section">
+            <div class="container">
+                <div class="filter-bar animate-on-scroll">
+                    <button class="filter-btn active">ALL</button>
+                    <button class="filter-btn">CYBERSECURITY</button>
+                    <button class="filter-btn">PRODUCTIVITY</button>
+                    <button class="filter-btn">TECHNOLOGY</button>
+                    <button class="filter-btn">LEADERSHIP</button>
+                </div>
+
+                <div class="intel-grid mt-7">
+                    <a href="#" class="intel-featured animate-on-scroll">
+                        <span class="tag tag--category">CYBERSECURITY</span>
+                        <h2>The Death of the Perimeter</h2>
+                        <p>Why traditional firewalls are failing against modern lateral movement tactics — and what
+                            replaces them.</p>
+                        <span class="intel-featured-meta">March 2026 · 8 min read</span>
+                        <span class="intel-featured-cta">Read Intel →</span>
+                    </a>
+
+                    <div class="intel-stack animate-stagger">
+                        <a href="#" class="intel-small-card animate-on-scroll">
+                            <span class="tag tag--category">TECHNOLOGY</span>
+                            <h4>Quantum Decryption: The 5-Year Horizon</h4>
+                            <p>The impact of Q-Day on current RSA-2048 encryption standards.</p>
+                            <span class="intel-small-meta">February 2026 · 6 min read</span>
+                        </a>
+                        <a href="#" class="intel-small-card animate-on-scroll">
+                            <span class="tag tag--category">PRODUCTIVITY</span>
+                            <h4>Systems Over Goals</h4>
+                            <p>Why the people who build systems outperform the people who set goals — and how SelfOS was
+                                designed around this.</p>
+                            <span class="intel-small-meta">January 2026 · 5 min read</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="site-footer"></div>
+    <script src="/assets/js/components.js" defer></script>
+    <script src="/assets/js/animations.js" defer></script>
+</body>
+
+</html>

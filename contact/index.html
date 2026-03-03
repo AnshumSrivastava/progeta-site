@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progeta Technologies | Contact</title>
+    <meta name="description" content="Write to Progeta Technologies about programmes, partnerships, or anything else.">
+    <meta property="og:title" content="Progeta Technologies | Contact">
+    <meta property="og:description"
+        content="Write to Progeta Technologies about programmes, partnerships, or anything else.">
+    <meta property="og:url" content="https://www.progeta.tech/contact/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Progeta Technologies">
+    <link rel="canonical" href="https://www.progeta.tech/contact/">
+    <link rel="icon" href="/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="/assets/css/tokens.css">
+    <link rel="stylesheet" href="/assets/css/global.css">
+    <link rel="stylesheet" href="/assets/css/components.css">
+    <link rel="stylesheet" href="/assets/css/layout.css">
+    <link rel="stylesheet" href="/assets/css/animations.css">
+    <style>
+        .contact-hero {
+            padding: var(--space-10) 0 var(--space-6);
+        }
+
+        .contact-hero h1 {
+            font-size: 52px;
+            margin-bottom: var(--space-5);
+        }
+
+        .contact-hero p {
+            font-size: 17px;
+            max-width: 520px;
+            line-height: 1.7;
+        }
+
+        .contact-email {
+            font: 400 var(--text-sm)/1 var(--font-mono);
+            color: var(--color-ink-tertiary);
+            margin-top: var(--space-2);
+            display: block;
+        }
+
+        .contact-form-section {
+            padding: 0 0 var(--space-10);
+        }
+
+        .role-selector {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0;
+            border: 1px solid var(--color-border);
+            margin-bottom: var(--space-7);
+            max-width: 640px;
+        }
+
+        .role-btn {
+            padding: var(--space-4) var(--space-3);
+            font: 500 14px/1 var(--font-body);
+            color: var(--color-ink-secondary);
+            background: transparent;
+            border: none;
+            border-right: 1px solid var(--color-border);
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.15s ease;
+        }
+
+        .role-btn:last-child {
+            border-right: none;
+        }
+
+        .role-btn.active {
+            background: var(--color-ink-primary);
+            color: var(--color-ground);
+        }
+
+        .contact-form {
+            max-width: 560px;
+        }
+
+        .form-panel {
+            display: none;
+        }
+
+        .form-panel.active {
+            display: block;
+        }
+
+        .contact-form select {
+            padding-right: 24px;
+        }
+
+        .contact-response {
+            font: 400 var(--text-sm)/1 var(--font-body);
+            color: var(--color-ink-tertiary);
+            margin-top: var(--space-4);
+        }
+
+        @media (max-width: 768px) {
+            .contact-hero h1 {
+                font-size: 34px;
+            }
+
+            .role-selector {
+                grid-template-columns: 1fr;
+            }
+
+            .role-btn {
+                border-right: none;
+                border-bottom: 1px solid var(--color-border);
+            }
+
+            .role-btn:last-child {
+                border-bottom: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <a href="#main" class="skip-link">Skip to content</a>
+    <div id="site-nav"></div>
+
+    <main id="main">
+
+        <section class="contact-hero">
+            <div class="container">
+                <h1 class="animate-on-scroll">Get in touch.</h1>
+                <p class="animate-on-scroll">
+                    Write to us about anything.
+                    If you're looking for the right field, use the form below.
+                </p>
+                <span class="contact-email animate-on-scroll">If you'd rather just email: operations@progeta.tech</span>
+            </div>
+        </section>
+
+        <section class="contact-form-section">
+            <div class="container">
+                <div class="role-selector animate-on-scroll">
+                    <button class="role-btn active" data-role="campus">I represent a campus</button>
+                    <button class="role-btn" data-role="student">I am a student</button>
+                    <button class="role-btn" data-role="other">Something else</button>
+                </div>
+
+                <div class="contact-form animate-on-scroll">
+
+                    <!-- CAMPUS FORM -->
+                    <form class="form-panel active" id="form-campus" action="https://formspree.io/f/YOUR_FORM_ID"
+                        method="POST">
+                        <input type="hidden" name="type" value="campus">
+                        <div class="form-group">
+                            <label for="c-name">Name *</label>
+                            <input type="text" id="c-name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="c-institution">Institution *</label>
+                            <input type="text" id="c-institution" name="institution" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="c-role">Your role</label>
+                            <select id="c-role" name="role">
+                                <option value="">Select role</option>
+                                <option value="T&P Officer">T&P Officer</option>
+                                <option value="Faculty">Faculty</option>
+                                <option value="Principal">Principal</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="c-city">City *</label>
+                            <input type="text" id="c-city" name="city" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="c-looking">What I'm looking to do</label>
+                            <select id="c-looking" name="looking_for">
+                                <option value="">Select an option</option>
+                                <option value="Book an Awareness Session">Book an Awareness Session</option>
+                                <option value="Start a Student Chapter">Start a Student Chapter</option>
+                                <option value="Enrol Students in a Track">Enrol Students in a Track</option>
+                                <option value="Request a Partnership">Request a Partnership</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="c-message">Message</label>
+                            <textarea id="c-message" name="message"
+                                placeholder="Tell us more about what you need."></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary">Send</button>
+                    </form>
+
+                    <!-- STUDENT FORM -->
+                    <form class="form-panel" id="form-student" action="https://formspree.io/f/YOUR_FORM_ID"
+                        method="POST">
+                        <input type="hidden" name="type" value="student">
+                        <div class="form-group">
+                            <label for="s-name">Name *</label>
+                            <input type="text" id="s-name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="s-email">Email *</label>
+                            <input type="email" id="s-email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="s-college">Current college/university</label>
+                            <input type="text" id="s-college" name="college">
+                        </div>
+                        <div class="form-group">
+                            <label for="s-track">Track interest</label>
+                            <select id="s-track" name="track_interest">
+                                <option value="">Select a track</option>
+                                <option value="CTI Specialist">Cyber Threat Intelligence (CTI) Specialist</option>
+                                <option value="SOC Operations">SOC Operations & Incident Response</option>
+                                <option value="DevSecOps">DevSecOps & Cloud Security</option>
+                                <option value="GRC">Enterprise GRC & Security Auditing</option>
+                                <option value="Penetration Testing">Advanced Penetration Testing & Red Teaming</option>
+                                <option value="Security Automation">Security Automation & Tool Development</option>
+                                <option value="Not sure yet">Not sure yet</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="s-message">Message</label>
+                            <textarea id="s-message" name="message"></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary">Send</button>
+                    </form>
+
+                    <!-- OTHER FORM -->
+                    <form class="form-panel" id="form-other" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                        <input type="hidden" name="type" value="other">
+                        <div class="form-group">
+                            <label for="o-name">Name *</label>
+                            <input type="text" id="o-name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="o-email">Email *</label>
+                            <input type="email" id="o-email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="o-subject">Subject</label>
+                            <input type="text" id="o-subject" name="subject">
+                        </div>
+                        <div class="form-group">
+                            <label for="o-message">Message</label>
+                            <textarea id="o-message" name="message"></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary">Send</button>
+                    </form>
+                </div>
+
+                <p class="contact-response animate-on-scroll">We read everything and respond within 48 hours.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="site-footer"></div>
+    <script src="/assets/js/components.js" defer></script>
+    <script src="/assets/js/animations.js" defer></script>
+    <script defer>
+        document.addEventListener('DOMContentLoaded', () => {
+            const roleBtns = document.querySelectorAll('.role-btn');
+            const formPanels = document.querySelectorAll('.form-panel');
+
+            roleBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    roleBtns.forEach(b => b.classList.remove('active'));
+                    formPanels.forEach(p => p.classList.remove('active'));
+                    btn.classList.add('active');
+                    document.getElementById('form-' + btn.dataset.role).classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

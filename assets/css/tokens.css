@@ -1,0 +1,79 @@
+/* ═══════════════════════════════════════════════════════════════
+   PROGETA TECHNOLOGIES — Design Tokens
+   Editorial Warmth meets Structural Authority
+   ═══════════════════════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=DM+Mono:wght@400;500&display=swap');
+
+:root {
+    /* ─── BASE ─────────────────────────────────────────────── */
+    --color-ground: #F5F2ED;
+    --color-surface: #FFFFFF;
+    --color-raised: #EDE9E3;
+
+    /* ─── INK ──────────────────────────────────────────────── */
+    --color-ink-primary: #1A1714;
+    --color-ink-secondary: #6B6560;
+    --color-ink-tertiary: #B0AAA3;
+
+    /* ─── STRUCTURE ────────────────────────────────────────── */
+    --color-border: #D9D4CC;
+    --color-border-strong: #B0AAA3;
+
+    /* ─── ACCENT — used SPARINGLY ──────────────────────────── */
+    --color-accent: #C8622A;
+    --color-accent-hover: #A84E20;
+    --color-accent-light: #F2E4DA;
+
+    /* ─── TYPOGRAPHY ───────────────────────────────────────── */
+    --font-display: 'Playfair Display', Georgia, serif;
+    --font-body: 'DM Sans', system-ui, sans-serif;
+    --font-mono: 'DM Mono', 'Courier New', monospace;
+
+    /* ─── TYPE SCALE ───────────────────────────────────────── */
+    --text-xs: 11px;
+    --text-sm: 13px;
+    --text-base: 16px;
+    --text-md: 19px;
+    --text-lg: 24px;
+    --text-xl: 36px;
+    --text-2xl: 52px;
+    --text-3xl: 72px;
+    --text-4xl: 96px;
+
+    /* ─── LINE HEIGHT ──────────────────────────────────────── */
+    --leading-tight: 1.1;
+    --leading-snug: 1.3;
+    --leading-normal: 1.6;
+    --leading-loose: 1.8;
+
+    /* ─── LETTER SPACING ───────────────────────────────────── */
+    --tracking-tight: -0.02em;
+    --tracking-normal: 0em;
+    --tracking-wide: 0.06em;
+    --tracking-wider: 0.12em;
+
+    /* ─── SPACING (mixed base) ─────────────────────────────── */
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 24px;
+    --space-6: 32px;
+    --space-7: 48px;
+    --space-8: 64px;
+    --space-9: 96px;
+    --space-10: 128px;
+    --space-11: 192px;
+    --space-12: 256px;
+
+    /* ─── LAYOUT WIDTHS ────────────────────────────────────── */
+    --width-content: 680px;
+    --width-wide: 960px;
+    --width-full: 1200px;
+    --width-edge: 1440px;
+
+    /* ─── NAV ──────────────────────────────────────────────── */
+    --nav-height: 72px;
+    --nav-height-mobile: 60px;
+}

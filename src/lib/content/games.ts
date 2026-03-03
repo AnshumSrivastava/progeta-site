@@ -3,7 +3,6 @@ export const games = [
         id: "cmdcross",
         title: "Cmd Hero",
         category: "Puzzle",
-        platform: "PC",
         tags: ["Terminal", "Hacking", "Linux"],
         description: "Navigate the digital labyrinth. Use real Linux commands (cd, ls, sudo, chmod) to manipulate the file system, unlock secure vaults, and defeat system defenses.",
         status: "Installed",

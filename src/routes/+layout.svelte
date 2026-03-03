@@ -1,81 +1,93 @@
 <script lang="ts">
-    import "../app.css";
-    import Navbar from "$lib/ui/components/Navbar.svelte";
-    import MobileNav from "$lib/ui/components/MobileNav.svelte";
-    import Footer from "$lib/ui/components/Footer.svelte";
-    import PageLoader from "$lib/ui/components/PageLoader.svelte";
-    import { onMount } from "svelte";
-    import { afterNavigate } from "$app/navigation"; // Import afterNavigate
+  import '../app.css';
+  import SiteNav from '$lib/components/site/SiteNav.svelte';
+  import SiteFooter from '$lib/components/site/SiteFooter.svelte';
+  import LoadingScreen from '$lib/components/site/LoadingScreen.svelte';
+  import CursorGlow from '$lib/components/site/CursorGlow.svelte';
+  import Universe from '$lib/components/animations/Universe.svelte';
+  import { afterNavigate, beforeNavigate } from '$app/navigation';
+  import { page } from '$app/stores';
 
-    // Mouse tracking for spotlight effect in cinematic mode
-    function handleMouseMove(e: MouseEvent) {
-        const cards = document.querySelectorAll(".bento-card");
-        cards.forEach((card) => {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            (card as HTMLElement).style.setProperty("--mouse-x", `${x}px`);
-            (card as HTMLElement).style.setProperty("--mouse-y", `${y}px`);
-        });
+  let { children } = $props();
+
+  let loading = $state(true);
+  let contentVisible = $state(false);
+  let transitioning = $state(false);
+
+  // Check if we're inside the SelfOS app (which has its own layout)
+  let isSelfOSApp = $derived($page.url.pathname.startsWith('/selfos/app'));
+
+  function handleLoadComplete() {
+    loading = false;
+    // Small delay before showing content — the breath after the loading screen
+    setTimeout(() => { contentVisible = true; }, 50);
+  }
+
+  // Page transitions: out-then-in
+  beforeNavigate(() => {
+    if (!loading) {
+      transitioning = true;
     }
+  });
 
-    onMount(() => {
-        window.addEventListener("mousemove", handleMouseMove);
-        return () => window.removeEventListener("mousemove", handleMouseMove);
-    });
-
-    // FIX: Force scroll unlock after navigation
-    afterNavigate(() => {
-        document.body.style.overflow = "auto";
-        document.documentElement.style.overflow = "auto";
-        window.scrollTo(0, 0);
-    });
+  afterNavigate(() => {
+    window.scrollTo(0, 0);
+    // After nav-out animation (180ms) + gap (50ms), trigger nav-in
+    if (transitioning) {
+      setTimeout(() => {
+        transitioning = false;
+      }, 50); // Gap between out and in
+    }
+  });
 </script>
 
 <svelte:head>
-    <title>Progeta Technologies</title>
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
-    />
+  <title>Progeta Technologies</title>
 </svelte:head>
 
-<div class="app-wrapper">
-    <PageLoader />
-    <div class="desktop-only">
-        <Navbar />
-    </div>
+{#if loading}
+  <LoadingScreen onComplete={handleLoadComplete} />
+{/if}
 
-    <MobileNav />
+<CursorGlow />
+<Universe />
 
-    <main>
-        <slot />
-    </main>
+{#if !isSelfOSApp}
+  <SiteNav />
+{/if}
 
-    <div class="desktop-only">
-        <Footer />
-    </div>
-</div>
+<main
+  class="page-content"
+  class:page-content--visible={contentVisible && !transitioning}
+  class:page-content--exiting={transitioning}
+>
+  {@render children?.()}
+</main>
+
+{#if !isSelfOSApp}
+  <SiteFooter />
+{/if}
 
 <style>
-    main {
-        min-height: 100vh;
-        padding-bottom: 0;
-    }
+  .page-content {
+    opacity: 0;
+    transform: translateY(10px);
+    transition:
+      opacity 280ms var(--ease-standard, cubic-bezier(0.16, 1, 0.3, 1)),
+      transform 280ms var(--ease-standard, cubic-bezier(0.16, 1, 0.3, 1));
+    min-height: 100vh;
+  }
 
-    @media (max-width: 900px) {
-        main {
-            padding-bottom: 100px; /* Space for MobileNav */
-        }
-    }
+  .page-content--visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
 
-    .desktop-only {
-        display: block;
-    }
-
-    @media (max-width: 900px) {
-        .desktop-only {
-            display: none;
-        }
-    }
+  .page-content--exiting {
+    opacity: 0;
+    transform: translateY(-10px);
+    transition:
+      opacity 180ms var(--ease-exit, cubic-bezier(0.4, 0, 1, 1)),
+      transform 180ms var(--ease-exit, cubic-bezier(0.4, 0, 1, 1));
+  }
 </style>

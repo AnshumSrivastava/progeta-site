@@ -1,8 +1,6 @@
 <script>
     import { workshops } from "$lib/content/workshops";
     import { reveal, tilt } from "$lib/ui/actions";
-    import { base } from "$app/paths";
-    import MagneticButton from "$lib/ui/components/MagneticButton.svelte";
 
     let searchTerm = "";
 
@@ -50,8 +48,7 @@
     <div class="container">
         <div class="workshops-grid">
             {#each filteredWorkshops as workshop, i (workshop.title)}
-                <a
-                    href="{base}/workshops/{i}"
+                <div
                     class="workshop-card"
                     use:tilt
                     use:reveal={{ delay: i * 50 }}
@@ -76,48 +73,13 @@
                             {/each}
                         </div>
                     {/if}
-                </a>
+                </div>
             {/each}
         </div>
     </div>
 </section>
 
-<!-- FINAL CTA -->
-<section
-    class="section-padding bg-glass"
-    style="position: relative; z-index: 2;"
->
-    <div class="container text-center">
-        <div use:reveal>
-            <h2>Ready to Deploy?</h2>
-            <p class="mt-4 mb-8">
-                Schedule a simulation or awareness program for your institution.
-            </p>
-            <MagneticButton href="{base}/contact" variant="primary"
-                >Schedule a Program &rarr;</MagneticButton
-            >
-        </div>
-    </div>
-</section>
-
 <style>
-    .section-padding {
-        padding: 100px 0;
-    }
-    .bg-glass {
-        background: var(--glass-surface);
-        border-top: 1px solid var(--glass-border);
-        border-bottom: 1px solid var(--glass-border);
-    }
-    .mb-8 {
-        margin-bottom: 2rem;
-    }
-    .mt-4 {
-        margin-top: 1rem;
-    }
-    .text-center {
-        text-align: center;
-    }
     .page-header {
         padding: 160px 0 60px;
         background: radial-gradient(
@@ -126,12 +88,6 @@
             transparent 70%
         );
         text-align: center;
-    }
-
-    @media (max-width: 900px) {
-        .page-header {
-            padding: 100px 0 40px;
-        }
     }
     .page-header h1 {
         margin-bottom: 1.5rem;
@@ -188,8 +144,6 @@
         flex-direction: column;
         height: 100%;
         transition: border-color 0.3s;
-        text-decoration: none;
-        color: inherit;
     }
     .workshop-card:hover {
         border-color: rgba(255, 255, 255, 0.2);

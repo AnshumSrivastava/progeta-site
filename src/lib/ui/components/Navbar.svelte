@@ -1,11 +1,10 @@
-<script>
+<script lang="ts">
     import { page } from "$app/stores";
     import { fly, fade } from "svelte/transition";
-    import { cubicOut } from "svelte/easing";
     import { base } from "$app/paths";
 
     let isMenuOpen = false;
-    let isResourcesOpen = false;
+    let ecosystemOpen = false;
 
     function toggleMenu() {
         isMenuOpen = !isMenuOpen;
@@ -21,129 +20,74 @@
         document.body.style.overflow = "";
     }
 
-    function toggleResources() {
-        isResourcesOpen = !isResourcesOpen;
+    function toggleEcosystem(e: MouseEvent) {
+        e.stopPropagation();
+        ecosystemOpen = !ecosystemOpen;
     }
 
-    function closeResources() {
-        isResourcesOpen = false;
+    function closeEcosystem() {
+        ecosystemOpen = false;
     }
 
-    // Resource pages — secondary items behind dropdown
-    const resourceLinks = [
-        { href: "/tracks", label: "Tracks" },
-        { href: "/modules", label: "Modules" },
-        { href: "/workshops", label: "Workshops" },
-        { href: "/events", label: "Events" },
-        { href: "/games", label: "Games" },
-        { href: "/articles", label: "Articles" },
-        { href: "/pricing", label: "Pricing" },
-    ];
+    $: currentPath = $page.url.pathname;
 </script>
 
-<svelte:window on:click={closeResources} />
+<svelte:window on:click={closeEcosystem} />
 
-<nav class="floating-nav">
+<!-- DESKTOP NAV -->
+<nav class="nav-bar">
     <div class="nav-content">
         <!-- Brand -->
-        <a href="{base}/" class="brand" on:click={closeMenu}>
-            <img
-                src="{base}/logo_icon.svg"
-                alt="Progeta Technologies"
-                style="height:28px;"
-            />
+        <a href="{base}/" class="brand">
+            <img src="{base}/logo_icon.svg" alt="Progeta Technologies" class="brand-logo" />
+            <span class="brand-name">Progeta Technologies</span>
         </a>
 
         <!-- Desktop Links -->
-        <div class="links desktop-only">
-            <a
-                href="{base}/programmes"
-                class:active={$page.url.pathname.startsWith(
-                    base + "/programmes",
-                )}>Programmes</a
-            >
-            <a
-                href="{base}/students"
-                class:active={$page.url.pathname.startsWith(base + "/students")}
-                >Students</a
-            >
-            <a
-                href="{base}/colleges"
-                class:active={$page.url.pathname.startsWith(base + "/colleges")}
-                >Colleges</a
-            >
-            <a
-                href="{base}/chapters"
-                class:active={$page.url.pathname.startsWith(base + "/chapters")}
-                >Chapters</a
-            >
-            <a
-                href="{base}/community"
-                class:active={$page.url.pathname.startsWith(
-                    base + "/community",
-                )}>Community</a
-            >
-
-            <!-- Resources Dropdown -->
-            <div
-                class="resources-dropdown"
-                on:click|stopPropagation
-                on:keydown|stopPropagation
-                role="menu"
-                tabindex="0"
-            >
+        <div class="nav-links">
+            <div class="dropdown-wrapper" on:click|stopPropagation on:keydown|stopPropagation role="menu" tabindex="0">
                 <button
-                    class="resources-trigger"
-                    class:active={isResourcesOpen}
-                    on:click={toggleResources}
+                    class="nav-link"
+                    class:active={ecosystemOpen}
+                    on:click={toggleEcosystem}
                 >
-                    Resources
-                    <svg
-                        class="chevron"
-                        class:open={isResourcesOpen}
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                        width="14"
-                        height="14"
-                    >
-                        <path
-                            fill-rule="evenodd"
-                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                            clip-rule="evenodd"
-                        />
+                    ECOSYSTEM
+                    <svg width="10" height="6" viewBox="0 0 10 6" fill="none" style="margin-left: 4px;">
+                        <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                 </button>
 
-                {#if isResourcesOpen}
-                    <div
-                        class="dropdown-panel"
-                        transition:fly={{ y: -10, duration: 200 }}
-                    >
-                        {#each resourceLinks as link}
-                            <a
-                                href="{base}{link.href}"
-                                class:active={$page.url.pathname.startsWith(
-                                    base + link.href,
-                                )}
-                                on:click={closeResources}>{link.label}</a
-                            >
-                        {/each}
+                {#if ecosystemOpen}
+                    <div class="dropdown-panel" transition:fly={{ y: -8, duration: 150 }}>
+                        <a href="{base}/launchpad" class="eco-card" on:click={closeEcosystem}>
+                            <span class="eco-name">LAUNCHPAD</span>
+                            <span class="eco-desc">Skills for students and campuses.</span>
+                            <span class="eco-cta">Explore →</span>
+                        </a>
+                        <a href="{base}/selfos" class="eco-card" on:click={closeEcosystem}>
+                            <span class="eco-name">SELFOS</span>
+                            <span class="eco-desc">Your personal operating system.</span>
+                            <span class="eco-cta">Explore →</span>
+                        </a>
+                        <a href="{base}/innercircle" class="eco-card" on:click={closeEcosystem}>
+                            <span class="eco-name">INNERCIRCLE</span>
+                            <span class="eco-desc">A vetted network for the driven.</span>
+                            <span class="eco-cta">Apply →</span>
+                        </a>
                     </div>
                 {/if}
             </div>
+
+            <a href="{base}/tracks" class="nav-link" class:active={currentPath.startsWith(base + '/tracks')}>TRACKS</a>
+            <a href="{base}/games" class="nav-link" class:active={currentPath.startsWith(base + '/games')}>GAMES</a>
+            <a href="{base}/about" class="nav-link" class:active={currentPath.startsWith(base + '/about')}>ABOUT</a>
         </div>
 
         <!-- Desktop CTA -->
-        <div class="cta-wrapper desktop-only">
-            <a href="{base}/contact" class="nav-cta">Contact</a>
-        </div>
+        <a href="{base}/contact" class="nav-cta">Get in Touch</a>
 
         <!-- Mobile Menu Toggle -->
-        <button
-            class="menu-toggle mobile-only"
-            on:click={toggleMenu}
-            aria-label="Toggle Menu"
-        >
+        <button class="menu-toggle" on:click={toggleMenu} aria-label="Toggle Menu">
             <div class="hamburger" class:open={isMenuOpen}>
                 <span></span>
                 <span></span>
@@ -152,394 +96,344 @@
     </div>
 </nav>
 
-<!-- Mobile Side Drawer & Backdrop -->
+<!-- MOBILE OVERLAY -->
 {#if isMenuOpen}
-    <!-- Backdrop -->
     <div
-        class="mobile-backdrop"
+        class="mobile-overlay"
         on:click={closeMenu}
         on:keydown={closeMenu}
         role="presentation"
-        transition:fade={{ duration: 200 }}
-    ></div>
-
-    <!-- Side Drawer -->
-    <div
-        class="mobile-drawer"
-        transition:fly={{ x: 300, duration: 300, easing: cubicOut }}
+        transition:fade={{ duration: 150 }}
     >
-        <!-- Close Button -->
-        <button class="close-btn" on:click={closeMenu} aria-label="Close Menu">
-            <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-            >
-                <line x1="18" y1="6" x2="6" y2="18"></line>
-                <line x1="6" y1="6" x2="18" y2="18"></line>
-            </svg>
-        </button>
+        <div
+            class="mobile-menu"
+            on:click|stopPropagation
+            on:keydown|stopPropagation
+            role="navigation"
+            transition:fly={{ x: 0, y: -20, duration: 200 }}
+        >
+            <button class="close-btn" on:click={closeMenu} aria-label="Close">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
 
-        <div class="mobile-links">
-            <a
-                href="{base}/"
-                on:click={closeMenu}
-                class:active={$page.url.pathname === base + "/"}>Home</a
-            >
-            <a
-                href="{base}/programmes"
-                on:click={closeMenu}
-                class:active={$page.url.pathname.startsWith(
-                    base + "/programmes",
-                )}>Programmes</a
-            >
-            <a
-                href="{base}/students"
-                on:click={closeMenu}
-                class:active={$page.url.pathname.startsWith(base + "/students")}
-                >Students</a
-            >
-            <a
-                href="{base}/colleges"
-                on:click={closeMenu}
-                class:active={$page.url.pathname.startsWith(base + "/colleges")}
-                >Colleges</a
-            >
-            <a
-                href="{base}/chapters"
-                on:click={closeMenu}
-                class:active={$page.url.pathname.startsWith(base + "/chapters")}
-                >Chapters</a
-            >
-            <a
-                href="{base}/community"
-                on:click={closeMenu}
-                class:active={$page.url.pathname.startsWith(
-                    base + "/community",
-                )}>Community</a
-            >
+            <div class="mobile-links">
+                <!-- Ecosystem links first, visually separated -->
+                <a href="{base}/launchpad" on:click={closeMenu} class="mobile-link mobile-link--eco">
+                    <span>LAUNCHPAD</span>
+                    <span class="mobile-arrow">→</span>
+                </a>
+                <a href="{base}/selfos" on:click={closeMenu} class="mobile-link mobile-link--eco">
+                    <span>SELFOS</span>
+                    <span class="mobile-arrow">→</span>
+                </a>
+                <a href="{base}/innercircle" on:click={closeMenu} class="mobile-link mobile-link--eco">
+                    <span>INNERCIRCLE</span>
+                    <span class="mobile-arrow">→</span>
+                </a>
 
-            <div class="mobile-divider"></div>
-            <span class="mobile-section-label">Resources</span>
-            {#each resourceLinks as link}
-                <a
-                    href="{base}{link.href}"
-                    on:click={closeMenu}
-                    class="mobile-resource-link"
-                    class:active={$page.url.pathname.startsWith(
-                        base + link.href,
-                    )}>{link.label}</a
-                >
-            {/each}
+                <div class="mobile-divider"></div>
 
-            <div class="mobile-divider"></div>
-            <a
-                href="{base}/contact"
-                on:click={closeMenu}
-                class="mobile-cta-link"
-                class:active={$page.url.pathname.startsWith(base + "/contact")}
-                >Contact Us</a
-            >
+                <a href="{base}/tracks" on:click={closeMenu} class="mobile-link">
+                    <span>TRACKS</span>
+                    <span class="mobile-arrow">→</span>
+                </a>
+                <a href="{base}/games" on:click={closeMenu} class="mobile-link">
+                    <span>GAMES</span>
+                    <span class="mobile-arrow">→</span>
+                </a>
+                <a href="{base}/about" on:click={closeMenu} class="mobile-link">
+                    <span>ABOUT</span>
+                    <span class="mobile-arrow">→</span>
+                </a>
+            </div>
+
+            <div class="mobile-bottom">
+                <a href="{base}/contact" class="btn-primary mobile-cta" on:click={closeMenu}>
+                    GET IN TOUCH
+                </a>
+
+                <div class="mobile-socials">
+                    <a href="https://linkedin.com/company/progetatechnologies" target="_blank" rel="noopener">LI</a>
+                    <span class="social-dot">·</span>
+                    <a href="https://instagram.com/progetatechnologies" target="_blank" rel="noopener">IG</a>
+                    <span class="social-dot">·</span>
+                    <a href="https://discord.gg/progetatechnologies" target="_blank" rel="noopener">DC</a>
+                    <span class="social-dot">·</span>
+                    <a href="https://github.com/progetatechnologies" target="_blank" rel="noopener">GH</a>
+                </div>
+            </div>
         </div>
     </div>
 {/if}
 
 <style>
-    .floating-nav {
+    /* ─── NAV BAR ─────────────────────────────────────────── */
+    .nav-bar {
         position: fixed;
-        top: 24px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 90%;
-        max-width: 950px;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 80px;
+        background: rgba(10, 10, 10, 0.9);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--color-border);
         z-index: 1000;
-        transition:
-            transform 0.3s ease-in-out,
-            opacity 0.3s;
     }
 
     .nav-content {
-        background: rgba(10, 10, 10, 0.6);
-        backdrop-filter: blur(16px);
-        -webkit-backdrop-filter: blur(16px);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        border-radius: 100px;
-        padding: 0.75rem 1.5rem;
+        max-width: var(--container-width);
+        margin: 0 auto;
+        padding: 0 80px;
+        height: 100%;
         display: flex;
-        justify-content: space-between;
         align-items: center;
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        justify-content: space-between;
     }
 
+    /* Brand */
     .brand {
         display: flex;
         align-items: center;
-        gap: 0.75rem;
-        font-weight: 700;
+        gap: 10px;
+        text-decoration: none;
+    }
+    .brand-logo {
+        height: 24px;
+        width: auto;
+    }
+    .brand-name {
         font-family: var(--font-display);
-        font-size: 1.1rem;
-        z-index: 1001;
-        position: relative;
+        font-weight: 800;
+        font-size: var(--text-sm);
+        letter-spacing: 0.12em;
+        color: var(--color-primary);
     }
 
-    .links {
-        display: flex;
-        gap: 1.5rem;
-        align-items: center;
-    }
-
-    .links a {
-        font-size: 0.85rem;
-        color: var(--text-secondary);
-        font-weight: 500;
-        transition: color 0.2s;
-    }
-
-    .links a:hover,
-    .links a.active {
-        color: var(--text-primary);
-    }
-
-    /* RESOURCES DROPDOWN */
-    .resources-dropdown {
-        position: relative;
-    }
-
-    .resources-trigger {
+    /* Nav Links */
+    .nav-links {
         display: flex;
         align-items: center;
-        gap: 0.35rem;
+        gap: var(--space-4);
+    }
+
+    .nav-link {
+        font: 500 var(--text-xs)/1 var(--font-mono);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--color-secondary);
         background: none;
         border: none;
-        font-size: 0.85rem;
-        color: var(--text-secondary);
-        font-weight: 500;
         cursor: pointer;
-        font-family: inherit;
-        padding: 0;
-        transition: color 0.2s;
+        padding: 8px 0;
+        transition: color 0.15s ease;
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+    }
+    .nav-link:hover,
+    .nav-link.active {
+        color: var(--color-primary);
     }
 
-    .resources-trigger:hover,
-    .resources-trigger.active {
-        color: var(--text-primary);
+    /* Ecosystem Dropdown */
+    .dropdown-wrapper {
+        position: relative;
     }
-
-    .chevron {
-        transition: transform 0.2s;
-    }
-    .chevron.open {
-        transform: rotate(180deg);
-    }
-
     .dropdown-panel {
         position: absolute;
-        top: calc(100% + 16px);
+        top: calc(100% + 12px);
         left: 50%;
         transform: translateX(-50%);
-        min-width: 180px;
-        background: rgba(15, 15, 20, 0.95);
-        backdrop-filter: blur(20px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 16px;
-        padding: 0.75rem;
+        display: flex;
+        gap: 1px;
+        background: var(--color-border);
+        border: 1px solid var(--color-border);
+        z-index: 100;
+        min-width: 480px;
+    }
+    .eco-card {
+        flex: 1;
+        padding: var(--space-3);
+        background: var(--color-surface);
+        text-decoration: none;
+        transition: background 0.15s ease;
         display: flex;
         flex-direction: column;
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        gap: 4px;
+    }
+    .eco-card:hover {
+        background: var(--color-muted);
+    }
+    .eco-name {
+        font: 800 var(--text-sm)/1 var(--font-display);
+        color: var(--color-primary);
+        letter-spacing: 0.04em;
+    }
+    .eco-desc {
+        font: 400 var(--text-xs)/1.4 var(--font-body);
+        color: var(--color-secondary);
+        margin-top: 4px;
+    }
+    .eco-cta {
+        font: 500 var(--text-xs)/1 var(--font-mono);
+        color: var(--color-signal);
+        margin-top: 8px;
+        letter-spacing: 0.04em;
     }
 
-    .dropdown-panel a {
-        padding: 0.6rem 1rem;
-        border-radius: 10px;
-        font-size: 0.85rem;
-        color: var(--text-secondary);
-        font-weight: 500;
-        transition: all 0.15s;
-        text-decoration: none;
-    }
-
-    .dropdown-panel a:hover,
-    .dropdown-panel a.active {
-        background: rgba(255, 255, 255, 0.06);
-        color: var(--text-primary);
-    }
-
+    /* CTA */
     .nav-cta {
-        background: var(--text-primary);
-        color: #000;
-        padding: 0.5rem 1.25rem;
-        border-radius: 100px;
-        font-size: 0.85rem;
-        font-weight: 600;
-        transition: transform 0.2s;
+        font: 600 var(--text-xs)/1 var(--font-mono);
+        letter-spacing: 0.08em;
+        color: var(--color-void);
+        background: var(--color-signal);
+        padding: 10px 20px;
         text-decoration: none;
+        transition: all 0.15s ease;
     }
     .nav-cta:hover {
-        transform: scale(1.05);
+        background: var(--color-primary);
     }
 
-    /* Mobile */
-    .mobile-only {
-        display: none !important;
-    }
-
+    /* Menu Toggle (mobile only) */
     .menu-toggle {
+        display: none;
         background: none;
         border: none;
         cursor: pointer;
-        width: 40px;
-        height: 40px;
-        align-items: center;
-        justify-content: center;
-        z-index: 1001;
-        position: relative;
+        padding: 8px;
     }
-
     .hamburger {
-        width: 24px;
+        width: 20px;
         height: 14px;
         position: relative;
     }
     .hamburger span {
         position: absolute;
-        height: 2px;
+        left: 0;
         width: 100%;
-        background: var(--text-primary);
-        transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+        height: 1.5px;
+        background: var(--color-primary);
+        transition: all 0.2s ease;
     }
-    .hamburger span:first-child {
-        top: 0;
-    }
-    .hamburger span:last-child {
-        bottom: 0;
-    }
+    .hamburger span:first-child { top: 0; }
+    .hamburger span:last-child { bottom: 0; }
     .hamburger.open span:first-child {
-        transform: rotate(45deg);
-        top: 6px;
+        top: 50%;
+        transform: translateY(-50%) rotate(45deg);
     }
     .hamburger.open span:last-child {
-        transform: rotate(-45deg);
-        bottom: 6px;
+        bottom: 50%;
+        transform: translateY(50%) rotate(-45deg);
     }
 
-    /* Mobile Drawer */
-    .mobile-backdrop {
+    /* ─── MOBILE OVERLAY ──────────────────────────────────── */
+    .mobile-overlay {
         position: fixed;
         inset: 0;
-        background: rgba(0, 0, 0, 0.6);
-        backdrop-filter: blur(4px);
+        background: rgba(10, 10, 10, 0.98);
         z-index: 2000;
-    }
-
-    .mobile-drawer {
-        position: fixed;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        width: 75%;
-        max-width: 320px;
-        background: #050505;
-        border-left: 1px solid rgba(255, 255, 255, 0.1);
-        z-index: 2001;
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        padding: 2rem;
-        box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
-        overflow-y: auto;
     }
-
+    .mobile-menu {
+        width: 100%;
+        height: 100%;
+        padding: 0 20px;
+        display: flex;
+        flex-direction: column;
+    }
     .close-btn {
-        position: absolute;
-        top: 2rem;
-        right: 2rem;
+        align-self: flex-end;
         background: none;
         border: none;
-        color: var(--text-secondary);
+        color: var(--color-primary);
         cursor: pointer;
-        width: 40px;
-        height: 40px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition:
-            color 0.2s,
-            transform 0.2s;
-    }
-    .close-btn:hover {
-        color: var(--text-primary);
-        transform: rotate(90deg);
-    }
-    .close-btn svg {
-        width: 32px;
-        height: 32px;
+        padding: 20px 0;
     }
 
     .mobile-links {
+        flex: 1;
         display: flex;
         flex-direction: column;
-        align-items: flex-start;
-        gap: 1.25rem;
-        width: 100%;
+        justify-content: center;
+        gap: 0;
     }
-
-    .mobile-links a {
-        font-family: var(--font-display);
-        font-size: 1.5rem;
-        font-weight: 500;
-        color: var(--text-secondary);
-        transition:
-            color 0.2s,
-            transform 0.2s;
-        letter-spacing: 0.02em;
-        width: 100%;
+    .mobile-link {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px 0;
+        font: 600 var(--text-md)/1 var(--font-display);
+        letter-spacing: 0.04em;
+        color: var(--color-primary);
         text-decoration: none;
+        border-bottom: 1px solid var(--color-border);
+        transition: color 0.15s ease;
+        min-height: 60px;
     }
-
-    .mobile-links a:hover,
-    .mobile-links a.active {
-        color: var(--text-primary);
-        transform: translateX(5px);
+    .mobile-link:hover {
+        color: var(--color-signal);
     }
-
-    .mobile-resource-link {
-        font-size: 1.15rem !important;
-        opacity: 0.8;
+    .mobile-arrow {
+        color: var(--color-tertiary);
+        font-size: var(--text-md);
     }
-
     .mobile-divider {
+        height: var(--space-3);
+    }
+
+    .mobile-bottom {
+        padding: var(--space-5) 0;
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-4);
+    }
+    .mobile-cta {
         width: 100%;
-        height: 1px;
-        background: rgba(255, 255, 255, 0.08);
-        margin: 0.5rem 0;
+        text-align: center;
+        padding: 16px;
+    }
+    .mobile-socials {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: var(--space-2);
+        font: 600 var(--text-sm)/1 var(--font-mono);
+    }
+    .mobile-socials a {
+        color: var(--color-secondary);
+        text-decoration: none;
+        letter-spacing: 0.06em;
+        transition: color 0.15s ease;
+    }
+    .mobile-socials a:hover {
+        color: var(--color-primary);
+    }
+    .social-dot {
+        color: var(--color-tertiary);
     }
 
-    .mobile-section-label {
-        font-size: 0.75rem;
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-        color: var(--text-tertiary);
-        font-weight: 600;
-    }
-
-    .mobile-cta-link {
-        color: var(--text-primary) !important;
-        font-weight: 600 !important;
+    /* ─── RESPONSIVE ──────────────────────────────────────── */
+    @media (max-width: 1024px) {
+        .nav-content {
+            padding: 0 40px;
+        }
     }
 
     @media (max-width: 900px) {
-        .desktop-only {
+        .nav-links,
+        .nav-cta {
             display: none;
         }
-        .mobile-only {
-            display: flex !important;
+        .menu-toggle {
+            display: block;
         }
-        .floating-nav {
-            top: 16px;
-            width: 95%;
+        .nav-content {
+            padding: 0 20px;
         }
     }
 </style>

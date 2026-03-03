@@ -1,0 +1,23 @@
+[
+    {
+        "id": "PGT-2026-CTI-0042",
+        "name": "Arjun Mehta",
+        "programme": "Cyber Threat Intelligence (CTI) Specialist",
+        "issued": "2026-03-01",
+        "status": "active"
+    },
+    {
+        "id": "PGT-2026-SOC-0018",
+        "name": "Priya Sharma",
+        "programme": "SOC Operations & Incident Response",
+        "issued": "2026-02-15",
+        "status": "active"
+    },
+    {
+        "id": "PGT-2026-DSO-0007",
+        "name": "Karan Desai",
+        "programme": "DevSecOps & Cloud Security",
+        "issued": "2026-01-20",
+        "status": "active"
+    }
+]

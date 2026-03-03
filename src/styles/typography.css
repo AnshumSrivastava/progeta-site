@@ -1,0 +1,141 @@
+/* ════════════════════════════════════════════════════
+   TYPOGRAPHY v4.0 — Font definitions & type scale
+   ════════════════════════════════════════════════════ */
+
+/*
+  Display: Cormorant Garamond
+  — Extreme thin-to-thick stroke contrast. At display sizes it looks carved.
+  — For hero headlines, mission statements, pull quotes.
+  — Never below 18-20px in marketing context.
+
+  Body: DM Sans
+  — Precise, readable, not cold, not friendly. The workhorse.
+  — For everything that is not display text.
+
+  Mono: DM Mono
+  — For labels, tags, status indicators, timestamps, cert IDs.
+  — Categorical or technical text only.
+*/
+
+:root {
+    --font-display: 'Cormorant Garamond', Georgia, serif;
+    --font-body: 'DM Sans', system-ui, sans-serif;
+    --font-mono: 'DM Mono', 'Courier New', monospace;
+
+    /* Legacy alias for components using --font-head */
+    --font-head: var(--font-display);
+
+    /* ── TYPE SCALE (fluid) ─────────────────────────── */
+    --text-2xs: clamp(9px, 1.1vw, 10px);
+    --text-xs: clamp(10px, 1.2vw, 11px);
+    --text-sm: clamp(12px, 1.3vw, 13px);
+    --text-base: clamp(14px, 1.5vw, 16px);
+    --text-md: clamp(16px, 1.8vw, 19px);
+    --text-lg: clamp(20px, 2.2vw, 26px);
+    --text-xl: clamp(28px, 3.5vw, 40px);
+    --text-2xl: clamp(38px, 5vw, 60px);
+    --text-3xl: clamp(52px, 7vw, 88px);
+    --text-4xl: clamp(72px, 10vw, 140px);
+
+    /* ── LINE HEIGHTS ──────────────────────────────── */
+    --leading-display: 0.93;
+    /* Headlines press together. Density = authority. */
+    --leading-tight: 0.95;
+    /* Alternate display leading */
+    --leading-snug: 1.2;
+    /* Subheadings */
+    --leading-normal: 1.65;
+    /* Standard body */
+    --leading-body: 1.75;
+    /* Reading should feel unhurried */
+    --leading-relaxed: 1.75;
+    /* Alias for body */
+    --leading-longform: 1.85;
+    /* Articles, about page */
+    --leading-mono: 1.5;
+    /* Monospace text */
+
+    /* ── LETTER SPACING ────────────────────────────── */
+    --tracking-compressed: -0.04em;
+    /* Large display text — architectural, weighty */
+    --tracking-tight: -0.02em;
+    --tracking-normal: 0;
+    --tracking-wide: 0.07em;
+    /* All-caps body text */
+    --tracking-widest: 0.14em;
+    /* Mono tags, status labels */
+}
+
+/* ── BASE TYPOGRAPHY RULES ──────────────────────────  */
+
+body {
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    line-height: var(--leading-body);
+    color: var(--ink-2);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--font-display);
+    color: var(--ink-1);
+    font-weight: 600;
+    line-height: var(--leading-display);
+    letter-spacing: var(--tracking-compressed);
+}
+
+h1 {
+    font-size: var(--text-3xl);
+}
+
+h2 {
+    font-size: var(--text-2xl);
+}
+
+h3 {
+    font-size: var(--text-xl);
+}
+
+h4 {
+    font-size: var(--text-lg);
+}
+
+p {
+    color: var(--ink-2);
+    font-size: var(--text-base);
+    font-weight: 400;
+    line-height: var(--leading-body);
+    max-width: 65ch;
+    margin-bottom: var(--sp-4);
+}
+
+.mono {
+    font-family: var(--font-mono);
+    letter-spacing: var(--tracking-normal);
+}
+
+.label {
+    font-family: var(--font-body);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-widest);
+    font-size: var(--text-2xs);
+    font-weight: 600;
+}
+
+.technical-label {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    letter-spacing: var(--tracking-normal);
+    color: var(--ink-3);
+}
+
+strong {
+    font-weight: 600;
+    color: var(--ink-1);
+}

@@ -1,1426 +1,1411 @@
-<script>
-    import { reveal, tilt } from "$lib/ui/actions";
-    import MagneticButton from "$lib/ui/components/MagneticButton.svelte";
-    import TrackGrid from "$lib/ui/components/TrackGrid.svelte";
-    import Card from "$lib/ui/components/Card.svelte";
-    import ContactForm from "$lib/ui/components/ContactForm.svelte";
-    import ImpactStats from "$lib/ui/components/ImpactStats.svelte";
-    import { onMount } from "svelte";
-    import { base } from "$app/paths";
-
-    // Data Imports
-    import { games } from "$lib/content/games";
-    import { articles } from "$lib/content/articles";
-
-    let mounted = false;
-    onMount(() => {
-        mounted = true;
-    });
-
-    // Data Slicing
-    const featureArticles = articles.slice(0, 2);
-
-    // Mouse tracking helper (Fog effect)
-    function trackMouse(e) {
-        const target = e.currentTarget;
-        const rect = target.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        target.style.setProperty("--local-x", `${x}px`);
-        target.style.setProperty("--local-y", `${y}px`);
-    }
+<script lang="ts">
+  import ScrollReveal from '$lib/components/animations/ScrollReveal.svelte';
+  import Button from '$lib/components/ui/Button.svelte';
+  import MorphingConstellation from '$lib/components/animations/MorphingConstellation.svelte';
+  import { highlights, systemStatus, rotatingFacts } from '$lib/content/highlights';
 </script>
 
 <svelte:head>
-    <title>Progeta Technologies | Elite Professional Mastery</title>
+  <title>Progeta Technologies — Realising Human Potential</title>
+  <meta name="description" content="Progeta Technologies is a mission expressed as a company: helping people realise and achieve their dreams and goals." />
 </svelte:head>
 
-<!-- BACKGROUND ELEMENTS -->
-<div class="cyber-grid-container">
-    <div class="cyber-grid"></div>
-</div>
-
-<div class="hero-bg-logo">
-    <svg viewBox="0 0 244.5 206.7" class="hero-logo-svg">
-        <g transform="translate(1521.307,-1417.5391)">
-            <path
-                class="logo-path"
-                d="m -1354.9492,1417.539 c -0.1016,0 6.7374,13.9017 6.3171,23.1104 -0.7399,16.2277 -2.8416,21.4958 -17.0461,31.6431 -14.7967,13.5407 -16.3574,15.0399 -17.1068,16.4376 -1.3018,2.4268 -1.7645,4.2785 -1.7383,6.9504 0.028,2.859 0.5813,4.8068 2.0633,7.2567 2.3527,3.8902 6.4284,6.2766 11.042,6.465 2.6044,0.1085 3.9706,-0.1385 6.3714,-1.1458 1.7815,-0.7476 2.421,-1.294 16.587,-14.18 l 14.7334,-13.4028 c 14.556,10.2777 26.2041,20.3461 28.7132,39.5838 0.3917,4.2168 -0.305,9.7463 -1.6745,13.2827 -3.4945,9.0247 -12.2676,15.9985 -21.5937,17.1647 -5.8421,0.7308 -10.7941,0.115 -15.7058,-1.9534 -4.131,-1.7393 -6.2548,-3.4864 -12.7345,-10.4766 -5.7602,-6.2142 -7.0186,-7.3136 -9.6719,-8.4507 -6.2604,-2.6826 -14.1663,0 -17.4287,5.9181 -3.1565,5.7251 -2.4631,11.3446 2.0705,16.7866 2.1334,2.5606 9.1728,10.031 11.58,12.2892 9.7358,9.1321 23.3088,14.3367 37.3675,14.3269 14.5458,-0.023 26.4314,-4.622 37.3823,-14.5075 9.4806,-8.5579 15.0606,-18.2614 17.5605,-30.532 0.6904,-3.3898 1.2139,-10.6902 1.0213,-14.2438 -0.5949,-10.962 -5.6907,-20.21 -10.694,-29.7731 -10.3149,-19.7145 -67.1803,-72.5385 -67.4152,-72.5495 z m -110.3542,45.1236 c -14.5454,0.025 -26.4309,4.6223 -37.3815,14.5076 -9.4803,8.5579 -15.0616,18.2606 -17.561,30.5312 -0.6902,3.3898 -1.2137,10.6914 -1.0206,14.2447 0.595,10.9621 5.6905,20.21 10.6938,29.7729 10.3148,19.7147 67.1803,72.5387 67.4155,72.5497 0.099,0 -6.7373,-13.9025 -6.3174,-23.1113 0.7397,-16.2273 2.8416,-21.4953 17.0459,-31.6424 14.7962,-13.5407 16.3577,-15.0405 17.1069,-16.4379 1.3016,-2.4268 1.7651,-4.278 1.7386,-6.9502 -0.028,-2.8589 -0.5821,-4.807 -2.0638,-7.2571 -2.3528,-3.8905 -6.4283,-6.2761 -11.0417,-6.4643 -2.6038,-0.1084 -3.9706,0.1386 -6.371,1.1461 -1.7823,0.7472 -2.4213,1.2934 -16.5871,14.1796 l -14.734,13.4027 c -14.5563,-10.2775 -26.2046,-20.3456 -28.7135,-39.5838 -0.3915,-4.2162 0.306,-9.746 1.6748,-13.2823 3.4949,-9.0248 12.2671,-15.9983 21.5935,-17.165 5.8424,-0.7308 10.7947,-0.1152 15.7058,1.9534 4.1315,1.7392 6.2554,3.4865 12.735,10.4764 5.7604,6.2143 7.0186,7.3138 9.6724,8.4507 6.26,2.6826 14.1656,0 17.4276,-5.9179 3.1567,-5.7251 2.4636,-11.3446 -2.0704,-16.7864 -2.1337,-2.5606 -9.1731,-10.0318 -11.5802,-12.2902 -9.7354,-9.1318 -23.3087,-14.3358 -37.3676,-14.3262 z m 65.8033,44.3665 a 13.289838,13.289838 0 0 0 -12.8356,13.7295 13.289838,13.289838 0 0 0 13.7292,12.8357 13.289838,13.289838 0 0 0 12.8352,-13.7297 13.289838,13.289838 0 0 0 -13.7288,-12.8355 z"
-            /></g
-        >
-    </svg>
-</div>
-
-<!-- 1. HERO -->
-<section
-    style="min-height: 100dvh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; position: relative; z-index: 2;"
->
-    <div class="container">
-        <div
-            use:reveal={{ delay: 0 }}
-            style="margin-bottom: 2rem; display: flex; justify-content: center;"
-        >
-            <div class="status-indicator">
-                <span class="bulb"></span>
-                <span>ECOSYSTEM ACTIVE</span>
-            </div>
+<!-- ═══════════════════════════════════════════════════
+     SECTION 1 — HERO
+     ═══════════════════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero__inner">
+    <div class="hero__left">
+      <!-- System Status -->
+      <ScrollReveal delay={100} distance={10}>
+        <div class="hero__status">
+          <span class="status-dot"></span>
+          <span class="status-text">SYSTEM {systemStatus.status} <span class="status-sep">/</span> {systemStatus.lastUpdate} <span class="status-sep">/</span> {systemStatus.location}</span>
         </div>
+      </ScrollReveal>
 
-        <h1 class="hero-h1 {mounted ? 'active' : ''}">
-            <div class="line line-1 glitch" data-text="TAKE BACK CONTROL">
-                TAKE BACK CONTROL
-            </div>
-            <div class="line line-2">TO RISE ABOVE</div>
-        </h1>
+      <!-- Headline -->
+      <h1 class="hero__headline">
+        <ScrollReveal delay={300} distance={20} stagger={0}>
+          <span class="hero__line">We exist</span>
+        </ScrollReveal>
+        <ScrollReveal delay={450} distance={20} stagger={0}>
+          <span class="hero__line">so you can <span class="hero__accent">build</span></span>
+        </ScrollReveal>
+        <ScrollReveal delay={600} distance={20} stagger={0}>
+          <span class="hero__line">the life</span>
+        </ScrollReveal>
+        <ScrollReveal delay={750} distance={20} stagger={0}>
+          <span class="hero__line">you mean to.</span>
+        </ScrollReveal>
+      </h1>
 
-        <p
-            use:reveal={{ delay: 600 }}
-            style="max-width: 700px; margin: 0 auto 1.5rem; font-size: 1.25rem; opacity: 0; animation: fadeUp 1s forwards 0.8s; text-shadow: 0 0 10px rgba(0,0,0,0.5);"
-        >
-            Progeta builds campus ecosystems that make students digitally aware,
-            technically skilled, leadership-ready, and execution-driven.
-        </p>
+      <!-- What's Happening -->
+      <ScrollReveal delay={1000} distance={15}>
+        <p class="hero__subline">A mission expressed as a company — helping people realise and achieve their dreams and goals.</p>
+      </ScrollReveal>
 
-        <p
-            use:reveal={{ delay: 700 }}
-            style="max-width: 650px; margin: 0 auto 3rem; font-size: 1rem; opacity: 0; animation: fadeUp 1s forwards 0.9s; color: var(--text-secondary);"
-        >
-            Through Awareness Sessions, Skill Tracks, Student Chapters,
-            Productivity Systems, and Certifications.
-        </p>
-
-        <div
-            use:reveal={{ delay: 800 }}
-            class="hero-cta-group"
-            style="display: flex; gap: 1.5rem; justify-content: center; opacity: 0; animation: fadeUp 1s forwards 1.0s;"
-        >
-            <MagneticButton href="{base}/students" variant="primary"
-                >I'm a Student</MagneticButton
-            >
-            <MagneticButton href="{base}/colleges" variant="outline"
-                >I'm from a College</MagneticButton
-            >
+      <ScrollReveal delay={1100} distance={10}>
+        <div class="hero__whats-new">
+          {#each highlights as item}
+            <a href={item.href} class="wn-pill">
+              <span class="wn-pill__dot" style={item.accent ? `background: ${item.accent}` : ''}></span>
+              <span class="wn-pill__text">{item.title}</span>
+              {#if item.label}
+                <span class="wn-pill__badge">{item.label}</span>
+              {/if}
+            </a>
+          {/each}
         </div>
+      </ScrollReveal>
+
+      <!-- Primary CTAs -->
+      <ScrollReveal delay={1200} distance={20}>
+        <div class="hero__ctas">
+          <Button variant="primary" href="/about">Explore the Mission</Button>
+          <a href="#initiatives" class="hero__secondary-cta">View Initiatives <span class="arrow">→</span></a>
+        </div>
+      </ScrollReveal>
+
+      <!-- Belief markers -->
+      <ScrollReveal delay={1400} distance={10}>
+        <div class="hero__belief-words">
+          <span>EQUALITY</span>
+          <span>·</span>
+          <span>INTENTION</span>
+          <span>·</span>
+          <span>Sovereignty</span>
+        </div>
+      </ScrollReveal>
     </div>
+
+    <div class="hero__right">
+      <ScrollReveal delay={400} scale={0.95} duration={1400} distance={0}>
+        <div class="hero__illustration">
+          <MorphingConstellation />
+        </div>
+      </ScrollReveal>
+    </div>
+  </div>
 </section>
 
-<!-- 1.5 HOW PROGETA WORKS -->
-<section class="section-padding" style="position: relative; z-index: 2;">
-    <div class="container">
-        <div class="section-header text-center" use:reveal>
-            <h2>How Progeta Works.</h2>
-            <p>
-                Our systematic approach to student growth and institutional
-                impact.
-            </p>
-        </div>
-
-        <div class="flow-diagram">
-            <div class="flow-step" use:reveal={{ delay: 100 }}>
-                <div class="step-num">01</div>
-                <h3>Awareness</h3>
-                <p>Campus drives and threat demonstrations.</p>
-            </div>
-            <div class="flow-connector"></div>
-            <div class="flow-step" use:reveal={{ delay: 200 }}>
-                <div class="step-num">02</div>
-                <h3>Skill Development</h3>
-                <p>Technical tracks and simulation labs.</p>
-            </div>
-            <div class="flow-connector"></div>
-            <div class="flow-step" use:reveal={{ delay: 300 }}>
-                <div class="step-num">03</div>
-                <h3>Student Leadership</h3>
-                <p>Campus Chapters and community drives.</p>
-            </div>
-            <div class="flow-connector"></div>
-            <div class="flow-step" use:reveal={{ delay: 400 }}>
-                <div class="step-num">04</div>
-                <h3>Career Readiness</h3>
-                <p>Elite certifications and professional roles.</p>
-            </div>
-        </div>
+<!-- ═══════════════════════════════════════════════════
+     SECTION 2 — WHAT WE STAND FOR
+     ═══════════════════════════════════════════════════ -->
+<section class="vision">
+  <div class="container--wide">
+    <div class="vision__quote-wrap">
+      <ScrollReveal delay={100}>
+        <span class="vision__mark">“</span>
+      </ScrollReveal>
+      <ScrollReveal delay={300} distance={20}>
+        <blockquote class="vision__quote">
+          We believe every person carries something worth building.
+          A dream unrealised is not a failure of the person — 
+          it is a failure of the environment around them.
+          <em class="vision__emphasis">Progeta Technologies is that environment, built differently.</em>
+        </blockquote>
+      </ScrollReveal>
     </div>
+
+    <div class="vision__markers">
+      <div class="vision__marker" style="--accent: var(--accent-launchpad)">
+        <ScrollReveal delay={500} distance={10}>
+          <span class="marker__number">01</span>
+          <h3 class="marker__heading" style="color: var(--accent-launchpad)">Equality</h3>
+          <p class="marker__text">The environment must be accessible to anyone with the drive to build — regardless of background, geography, or circumstance.</p>
+        </ScrollReveal>
+      </div>
+      <div class="vision__marker" style="--accent: var(--accent-selfos)">
+        <ScrollReveal delay={650} distance={10}>
+          <span class="marker__number">02</span>
+          <h3 class="marker__heading" style="color: var(--accent-selfos)">Intention</h3>
+          <p class="marker__text">Nothing is accidental. Every pixel and every programme has a purpose aligned to the singular mission of human potential.</p>
+        </ScrollReveal>
+      </div>
+      <div class="vision__marker" style="--accent: var(--accent-innercircle)">
+        <ScrollReveal delay={800} distance={10}>
+          <span class="marker__number">03</span>
+          <h3 class="marker__heading" style="color: var(--accent-innercircle)">Sovereignty</h3>
+          <p class="marker__text">The goal is individual duty. We help you own your future — not depend on us for it.</p>
+        </ScrollReveal>
+      </div>
+    </div>
+  </div>
 </section>
 
-<!-- 2. SOCIAL TRANSMISSION - INFINITE MARQUEE -->
-<div class="marquee-container">
-    <div class="marquee-content">
-        {#each Array(4) as _}
-            <div class="marquee-group">
-                <a href="https://linkedin.com" target="_blank"
-                    >LINKEDIN // PROFESSIONAL</a
-                >
-                <span class="separator">///</span>
-                <a href="https://instagram.com" target="_blank"
-                    >INSTAGRAM // VISUALS</a
-                >
-                <span class="separator">///</span>
-                <a href="https://discord.com" target="_blank"
-                    >DISCORD // COMMUNITY</a
-                >
-                <span class="separator">///</span>
-                <a href="https://github.com" target="_blank">GITHUB // SOURCE</a
-                >
-                <span class="separator">///</span>
-                <span>SYSTEM ONLINE</span>
-                <span class="separator">///</span>
+<section class="strips" id="initiatives">
+  <div class="initiative-grid">
+    <!-- LaunchPad -->
+    <ScrollReveal delay={100} distance={20} class="init-card-wrapper">
+      <a href="/launchpad" class="init-card" style="--accent: var(--accent-launchpad)">
+        <span class="init-card__label">INITIATIVE // 01</span>
+        <h3 class="init-card__title">LaunchPad</h3>
+        <p class="init-card__desc">Closing the skill gap between education and readiness through immersive certification tracks and campus programmes.</p>
+        <ul class="init-card__sublinks">
+          <li>Cybersecurity Track</li>
+          <li>Cloud Engineering</li>
+          <li>AI Systems</li>
+        </ul>
+        <span class="init-card__link">Enter the LaunchPad <span class="arrow">→</span></span>
+      </a>
+    </ScrollReveal>
+
+    <!-- SelfOS -->
+    <ScrollReveal delay={200} distance={20} class="init-card-wrapper">
+      <a href="/selfos" class="init-card" style="--accent: var(--accent-selfos)">
+        <span class="init-card__label">INITIATIVE // 02</span>
+        <h3 class="init-card__title">SelfOS</h3>
+        <p class="init-card__desc">A local-first personal operating system designed to help you run your life with complete intention and privacy.</p>
+        <ul class="init-card__sublinks">
+          <li>Local-First Architecture</li>
+          <li>End-to-End Encryption</li>
+        </ul>
+        <span class="init-card__link">Initialize SelfOS <span class="arrow">→</span></span>
+      </a>
+    </ScrollReveal>
+
+    <!-- InnerCircle -->
+    <ScrollReveal delay={300} distance={20} class="init-card-wrapper">
+      <a href="/innercircle" class="init-card" style="--accent: var(--accent-innercircle)">
+        <span class="init-card__label">INITIATIVE // 03</span>
+        <h3 class="init-card__title">InnerCircle</h3>
+        <p class="init-card__desc">A vetted network for builders who are actively creating something real and want to be surrounded by peers of similar drive.</p>
+        <ul class="init-card__sublinks">
+          <li>Builder Network</li>
+          <li>Invite-Only Events</li>
+        </ul>
+        <span class="init-card__link">Apply for Access <span class="arrow">→</span></span>
+      </a>
+    </ScrollReveal>
+
+    <!-- Ghost -->
+    <ScrollReveal delay={400} distance={20} class="init-card-wrapper">
+      <div class="init-card init-card--ghost">
+        <span class="init-card__label">INITIATIVE // 04</span>
+        <h3 class="init-card__title">Next Initiative</h3>
+        <p class="init-card__desc">Currently in architectural planning. Focused on digital sovereignty and open knowledge networks.</p>
+        <ul class="init-card__sublinks">
+          <li>In Development</li>
+          <li>Q4 2026 Target</li>
+        </ul>
+      </div>
+    </ScrollReveal>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     SECTION 4 — FROM THE COMPANY
+     ═══════════════════════════════════════════════════ -->
+<section class="company">
+  <div class="container--wide">
+    <div class="company__statement-block">
+      <ScrollReveal delay={100} distance={20}>
+        <span class="section-label">THE FOUNDER'S DIRECTIVE</span>
+        <h2 class="company__heading">Build with intention,<br/>or not at all.</h2>
+        <div class="company__body">
+          <p>Progeta Technologies exists because we believe the current digital landscape is accidental. We build tools that require responsibility, because responsibility is the precursor to freedom.</p>
+          <p>Our work is not for everyone. It is for the students in small towns who feel limited by their geography. It is for the builders who refuse to use tools that don't respect them.</p>
+        </div>
+        <div class="company__signoff">
+          <span class="signoff__name">Founder</span>
+          <span class="signoff__title">Progeta Technologies</span>
+        </div>
+      </ScrollReveal>
+    </div>
+
+    <!-- Rotating Truths — full-width row -->
+    <div class="truths-row">
+      <ScrollReveal delay={300} distance={15}>
+        <span class="section-label">THINGS WE BELIEVE</span>
+      </ScrollReveal>
+      <div class="truths-grid">
+        {#each rotatingFacts as fact, i}
+          <ScrollReveal delay={400 + i * 120} distance={15}>
+            <div class="truth-card">
+              <span class="truth-number">{String(i + 1).padStart(2, '0')}</span>
+              <p class="truth-text">{fact}</p>
             </div>
+          </ScrollReveal>
         {/each}
+      </div>
     </div>
-</div>
-
-<!-- 3. MISSION (Architecture) -->
-<section class="section-padding">
-    <div class="container">
-        <div class="section-header" use:reveal>
-            <h2>The Architecture.</h2>
-            <p>Three distinct pillars that define elite performance.</p>
-        </div>
-
-        <div class="grid-3">
-            <!-- CARD 01: PUZZLE FRACTURE -->
-            <div
-                class="bento-card puzzle-card"
-                use:reveal={{ delay: 0 }}
-                use:tilt
-            >
-                <!-- Shards -->
-                <div class="shard shard-tl"></div>
-                <div class="shard shard-tr"></div>
-                <div class="shard shard-bl"></div>
-                <div class="shard shard-br"></div>
-
-                <div class="card-content">
-                    <div class="card-icon">
-                        <svg
-                            viewBox="0 0 40 40"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="1.5"
-                        >
-                            <circle cx="20" cy="20" r="16" />
-                            <circle
-                                cx="20"
-                                cy="20"
-                                r="10"
-                                stroke-opacity="0.5"
-                            />
-                            <circle
-                                cx="20"
-                                cy="20"
-                                r="4"
-                                fill="currentColor"
-                                stroke="none"
-                            />
-                        </svg>
-                    </div>
-                    <div class="card-meta">01 / Foundation</div>
-                    <h3>Applied Mastery</h3>
-                    <p>
-                        Theory is insufficient. We utilize live-fire
-                        environments to verify your ability to execute under
-                        pressure.
-                    </p>
-                </div>
-            </div>
-
-            <!-- CARD 02: FOG OF WAR (FLASHLIGHT) -->
-            <div
-                class="bento-card fog-card"
-                use:reveal={{ delay: 100 }}
-                use:tilt
-                on:mousemove={trackMouse}
-            >
-                <div class="fog-layer"></div>
-                <div class="card-content">
-                    <div class="card-icon">
-                        <svg
-                            viewBox="0 0 40 40"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="1.5"
-                        >
-                            <rect
-                                x="4"
-                                y="4"
-                                width="14"
-                                height="14"
-                                rx="2"
-                                stroke-opacity="0.8"
-                            />
-                            <rect
-                                x="22"
-                                y="4"
-                                width="14"
-                                height="14"
-                                rx="2"
-                                stroke-opacity="0.5"
-                            />
-                            <rect
-                                x="4"
-                                y="22"
-                                width="14"
-                                height="14"
-                                rx="2"
-                                stroke-opacity="0.5"
-                            />
-                            <rect
-                                x="22"
-                                y="22"
-                                width="14"
-                                height="14"
-                                rx="2"
-                                fill="currentColor"
-                                stroke="none"
-                            />
-                        </svg>
-                    </div>
-                    <div class="card-meta">02 / Vision</div>
-                    <h3>Strategic Oversight</h3>
-                    <p>
-                        See the board. We train operators to understand
-                        variable-sum game theory and risk analysis.
-                    </p>
-                </div>
-            </div>
-
-            <!-- CARD 03: NODE DISPERSION -->
-            <div
-                class="bento-card node-card"
-                use:reveal={{ delay: 200 }}
-                use:tilt
-            >
-                <div class="nodes-container">
-                    {#each Array(15) as _, i}
-                        <div class="node" style="--i: {i};"></div>
-                    {/each}
-                </div>
-                <div class="card-content">
-                    <div class="card-icon">
-                        <svg
-                            viewBox="0 0 40 40"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="1.5"
-                        >
-                            <circle
-                                cx="10"
-                                cy="30"
-                                r="3"
-                                fill="currentColor"
-                                stroke="none"
-                            />
-                            <circle
-                                cx="30"
-                                cy="10"
-                                r="3"
-                                fill="currentColor"
-                                stroke="none"
-                            />
-                            <circle
-                                cx="30"
-                                cy="30"
-                                r="3"
-                                stroke-opacity="0.5"
-                            />
-                            <circle
-                                cx="10"
-                                cy="10"
-                                r="3"
-                                stroke-opacity="0.5"
-                            />
-                            <path d="M10 27 L 10 13" stroke-opacity="0.3" />
-                            <path d="M13 10 L 27 10" stroke-opacity="0.3" />
-                            <path d="M12 28 L 28 12" />
-                        </svg>
-                    </div>
-                    <div class="card-meta">03 / Scale</div>
-                    <h3>The Network</h3>
-                    <p>
-                        Join a vetted collective of 1,200+ high-performance
-                        leaders. Iron sharpens iron.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
+  </div>
 </section>
 
-<!-- 4. TRACKS (Career Tracks) -->
-<section
-    class="section-padding"
-    style="background: var(--glass-surface); border-top: 1px solid var(--glass-border); border-bottom: 1px solid var(--glass-border);"
->
-    <div class="container">
-        <div
-            class="section-header"
-            style="display: flex; justify-content: space-between; align-items: flex-end;"
-            use:reveal
-        >
-            <div>
-                <h2>Career Tracks.</h2>
-                <p>Simulate your career trajectory with full diploma tracks.</p>
+<!-- ═══════════════════════════════════════════════════
+     SECTION 6 — GAMES
+     ═══════════════════════════════════════════════════ -->
+<section class="games-teaser">
+  <div class="container--wide">
+    <div class="games-teaser__grid">
+      <div class="games-teaser__content">
+        <ScrollReveal delay={100} distance={20}>
+          <span class="section-label">INTERACTIVE LABS</span>
+          <h2 class="games-teaser__title">The Training Ground.</h2>
+          <p class="games-teaser__desc">Immersive simulations designed to bridge the gap between theory and tactical reality. From CTI scenarios to infrastructure defense.</p>
+          <div class="games-teaser__stats">
+            <div class="mini-stat">
+              <span class="mini-stat__val">03</span>
+              <span class="mini-stat__lab">Live Sims</span>
             </div>
-            <MagneticButton href="{base}/tracks" variant="outline"
-                >Compare All &rarr;</MagneticButton
-            >
-        </div>
-
-        <TrackGrid />
-    </div>
-</section>
-
-<!-- 5. INTEL (Articles/Blogs) -->
-<section class="section-padding">
-    <div class="container">
-        <div class="section-header" use:reveal>
-            <h2>Intelligence Briefs.</h2>
-            <p>Latest research and strategy from the front lines.</p>
-        </div>
-
-        <div class="grid-2">
-            {#each featureArticles as article}
-                <div class="bento-card" use:tilt>
-                    <span class="cat-pill">{article.category}</span>
-                    <h3 style="margin-top: 1rem;">{article.title}</h3>
-                    <p style="margin-bottom: 2rem;">{article.summary}</p>
-                    <a href="{base}/articles/{article.id}" class="play-link"
-                        >READ INTEL &rarr;</a
-                    >
-                </div>
-            {/each}
-        </div>
-    </div>
-</section>
-
-<!-- 6. GAMES (Simulations) -->
-<section
-    class="section-padding"
-    style="border-top: 1px solid var(--glass-border);"
->
-    <div class="container">
-        <div
-            class="section-header"
-            style="display: flex; flex-direction: column; align-items: flex-start; gap: 1.5rem;"
-            use:reveal
-        >
-            <div>
-                <h2>Games.</h2>
-                <p>Sharpen your skills in a consequence-free environment.</p>
+            <div class="mini-stat">
+              <span class="mini-stat__val">12</span>
+              <span class="mini-stat__lab">Modules</span>
             </div>
-            <MagneticButton href="{base}/games" variant="outline"
-                >Enter Game Library &rarr;</MagneticButton
-            >
+          </div>
+          <Button variant="primary" href="/games">Enter Games Lab</Button>
+        </ScrollReveal>
+      </div>
+      <div class="games-teaser__visual">
+        <!-- Abstract game visual placeholder -->
+        <div class="game-orb-wrap">
+          <div class="game-orb"></div>
+          <div class="game-orb-ring"></div>
         </div>
-
-        <div
-            style="display: flex; justify-content: flex-start; gap: 2rem; flex-wrap: wrap; width: 100%;"
-        >
-            {#each games as game}
-                <a
-                    href="{base}/games/{game.id}"
-                    class="bento-card game-card"
-                    style="max-width: 400px; width: 100%;"
-                    use:tilt
-                >
-                    <div
-                        class="game-cover"
-                        style="background-image: url('{base}{game.coverImage}');"
-                    >
-                        <div class="cover-overlay"></div>
-                        <span class="game-cat">{game.category}</span>
-                    </div>
-                    <div class="game-info">
-                        <h3>{game.title}</h3>
-                        <p>{game.description.substring(0, 80)}...</p>
-                        <span class="play-link">Deploy &rarr;</span>
-                    </div>
-                </a>
-            {/each}
-        </div>
+      </div>
     </div>
+  </div>
 </section>
 
-<!-- 6.5 PROGRAMME CARDS -->
-<section class="section-padding">
-    <div class="container">
-        <div class="section-header" use:reveal>
-            <h2>Our Programmes.</h2>
-            <p>
-                Six offerings designed to cover every stage of the student
-                lifecycle.
-            </p>
-        </div>
+<!-- ═══════════════════════════════════════════════════
+     SECTION 7 — INTELLIGENCE BRIEFS
+     ═══════════════════════════════════════════════════ -->
+<section class="briefs-teaser">
+  <div class="briefs-header-wrap">
+    <ScrollReveal delay={100}>
+      <span class="section-label">INTEL FEED</span>
+      <h2 class="briefs-title">Intelligence Briefs.</h2>
+    </ScrollReveal>
+    <ScrollReveal delay={200}>
+      <a href="/resources/articles" class="view-all">View All Briefs <span class="arrow">→</span></a>
+    </ScrollReveal>
+  </div>
 
-        <div class="prog-cards-grid">
-            <a
-                href="{base}/programmes"
-                class="prog-mini-card"
-                use:reveal={{ delay: 0 }}
-                use:tilt
-            >
-                <span class="pmc-tag">STAGE 01</span>
-                <h3>Awareness Sessions</h3>
-                <p>Campus-wide digital literacy drives.</p>
-                <span class="pmc-arrow">&rarr;</span>
-            </a>
-            <a
-                href="{base}/tracks"
-                class="prog-mini-card"
-                use:reveal={{ delay: 80 }}
-                use:tilt
-            >
-                <span class="pmc-tag">STAGE 02</span>
-                <h3>Skill Tracks</h3>
-                <p>Full diploma programmes for career specialization.</p>
-                <span class="pmc-arrow">&rarr;</span>
-            </a>
-            <a
-                href="{base}/workshops"
-                class="prog-mini-card"
-                use:reveal={{ delay: 160 }}
-                use:tilt
-            >
-                <span class="pmc-tag">STAGE 02</span>
-                <h3>Workshops</h3>
-                <p>Hands-on simulation labs and live-fire training.</p>
-                <span class="pmc-arrow">&rarr;</span>
-            </a>
-            <a
-                href="{base}/chapters"
-                class="prog-mini-card"
-                use:reveal={{ delay: 240 }}
-                use:tilt
-            >
-                <span class="pmc-tag">STAGE 03</span>
-                <h3>Student Chapters</h3>
-                <p>Leadership platform for campus ambassadors.</p>
-                <span class="pmc-arrow">&rarr;</span>
-            </a>
-            <a
-                href="{base}/certifications"
-                class="prog-mini-card"
-                use:reveal={{ delay: 320 }}
-                use:tilt
-            >
-                <span class="pmc-tag">STAGE 04</span>
-                <h3>Certifications</h3>
-                <p>Verifiable credentials for every achievement.</p>
-                <span class="pmc-arrow">&rarr;</span>
-            </a>
-            <a
-                href="{base}/programmes"
-                class="prog-mini-card"
-                use:reveal={{ delay: 400 }}
-                use:tilt
-            >
-                <span class="pmc-tag">STAGE 04</span>
-                <h3>Productivity Systems</h3>
-                <p>Execution frameworks for long-term performance.</p>
-                <span class="pmc-arrow">&rarr;</span>
-            </a>
-        </div>
-
-        <div style="text-align: center; margin-top: 3rem;" use:reveal>
-            <MagneticButton href="{base}/programmes" variant="outline"
-                >View All Programmes &rarr;</MagneticButton
-            >
-        </div>
+  <!-- Infinite scroll marquee -->
+  <div class="briefs-marquee-wrap">
+    <div class="briefs-fade briefs-fade--left"></div>
+    <div class="briefs-fade briefs-fade--right"></div>
+    <div class="briefs-marquee">
+      <div class="briefs-track">
+        <!-- First set -->
+        <a href="/intel/local-first" class="brief-card brief-card--featured">
+          <span class="brief-meta">MARCH 2026 // INTEL</span>
+          <h3 class="brief-title">The State of Local-First Systems</h3>
+          <p class="brief-excerpt">An analysis of why shared responsibility is shifting toward individual sovereignty in the next decade of computing.</p>
+          <div class="brief-tags">
+            <span class="brief-tag">SOVEREIGNTY</span>
+            <span class="brief-tag">SYSTEMS</span>
+          </div>
+          <span class="brief-link">Read Brief <span class="arrow">→</span></span>
+        </a>
+        <a href="/intel/threat-actor-ecology" class="brief-card">
+          <span class="brief-meta">FEB 2026 // CTI</span>
+          <h3 class="brief-title">Threat Actor Ecology in EdTech</h3>
+          <p class="brief-excerpt">Mapping the shift in tactical approaches toward educational infrastructure and the resulting skill gap.</p>
+          <div class="brief-tags">
+            <span class="brief-tag">CTI</span>
+            <span class="brief-tag">THREAT INTEL</span>
+          </div>
+          <span class="brief-link">Read Brief <span class="arrow">→</span></span>
+        </a>
+        <a href="/intel/certifications-alone" class="brief-card">
+          <span class="brief-meta">JAN 2026 // EDUCATION</span>
+          <h3 class="brief-title">Why Certifications Alone Won't Save You</h3>
+          <p class="brief-excerpt">Credential inflation is real. What actually signals competence versus compliance.</p>
+          <div class="brief-tags">
+            <span class="brief-tag">EDUCATION</span>
+            <span class="brief-tag">CAREERS</span>
+          </div>
+          <span class="brief-link">Read Brief <span class="arrow">→</span></span>
+        </a>
+        <a href="/intel/digital-sovereignty" class="brief-card">
+          <span class="brief-meta">DEC 2025 // PHILOSOPHY</span>
+          <h3 class="brief-title">Digital Sovereignty Is Not Optional</h3>
+          <p class="brief-excerpt">Why owning your data and your tools is not a luxury — it is a prerequisite for agency.</p>
+          <div class="brief-tags">
+            <span class="brief-tag">PRIVACY</span>
+            <span class="brief-tag">SOVEREIGNTY</span>
+          </div>
+          <span class="brief-link">Read Brief <span class="arrow">→</span></span>
+        </a>
+        <!-- Duplicate set for seamless loop -->
+        <a href="/intel/local-first" class="brief-card brief-card--featured" aria-hidden="true">
+          <span class="brief-meta">MARCH 2026 // INTEL</span>
+          <h3 class="brief-title">The State of Local-First Systems</h3>
+          <p class="brief-excerpt">An analysis of why shared responsibility is shifting toward individual sovereignty in the next decade of computing.</p>
+          <div class="brief-tags">
+            <span class="brief-tag">SOVEREIGNTY</span>
+            <span class="brief-tag">SYSTEMS</span>
+          </div>
+          <span class="brief-link">Read Brief <span class="arrow">→</span></span>
+        </a>
+        <a href="/intel/threat-actor-ecology" class="brief-card" aria-hidden="true">
+          <span class="brief-meta">FEB 2026 // CTI</span>
+          <h3 class="brief-title">Threat Actor Ecology in EdTech</h3>
+          <p class="brief-excerpt">Mapping the shift in tactical approaches toward educational infrastructure and the resulting skill gap.</p>
+          <div class="brief-tags">
+            <span class="brief-tag">CTI</span>
+            <span class="brief-tag">THREAT INTEL</span>
+          </div>
+          <span class="brief-link">Read Brief <span class="arrow">→</span></span>
+        </a>
+        <a href="/intel/certifications-alone" class="brief-card" aria-hidden="true">
+          <span class="brief-meta">JAN 2026 // EDUCATION</span>
+          <h3 class="brief-title">Why Certifications Alone Won't Save You</h3>
+          <p class="brief-excerpt">Credential inflation is real. What actually signals competence versus compliance.</p>
+          <div class="brief-tags">
+            <span class="brief-tag">EDUCATION</span>
+            <span class="brief-tag">CAREERS</span>
+          </div>
+          <span class="brief-link">Read Brief <span class="arrow">→</span></span>
+        </a>
+        <a href="/intel/digital-sovereignty" class="brief-card" aria-hidden="true">
+          <span class="brief-meta">DEC 2025 // PHILOSOPHY</span>
+          <h3 class="brief-title">Digital Sovereignty Is Not Optional</h3>
+          <p class="brief-excerpt">Why owning your data and your tools is not a luxury — it is a prerequisite for agency.</p>
+          <div class="brief-tags">
+            <span class="brief-tag">PRIVACY</span>
+            <span class="brief-tag">SOVEREIGNTY</span>
+          </div>
+          <span class="brief-link">Read Brief <span class="arrow">→</span></span>
+        </a>
+      </div>
     </div>
+  </div>
 </section>
 
-<!-- 6.7 IMPACT STATS -->
-<section
-    class="section-padding"
-    style="border-top: 1px solid var(--glass-border);"
->
-    <div class="container">
-        <div class="section-header text-center" use:reveal>
-            <h2>Measured Impact.</h2>
-            <p>Real outcomes across campuses and students.</p>
-        </div>
-        <ImpactStats />
+<!-- ═══════════════════════════════════════════════════
+     SECTION 8 — FINAL CTA
+     ═══════════════════════════════════════════════════ -->
+<section class="final-cta">
+  <div class="container--wide">
+    <div class="final-cta__content">
+      <ScrollReveal delay={100} distance={30}>
+        <h2 class="final-cta__title">Ready to start building?</h2>
+        <p class="final-cta__desc">Find where you fit. Every path leads to the same destination — becoming who you're meant to be.</p>
+      </ScrollReveal>
     </div>
-</section>
 
-<!-- 7. CONTACT -->
-<section
-    style="padding: 100px 0; background: var(--glass-surface); border-top: 1px solid var(--glass-border);"
->
-    <div class="container">
-        <div class="contact-layout">
-            <!-- Left Info -->
-            <div class="contact-info" use:reveal>
-                <div
-                    class="section-header"
-                    style="text-align: left; margin-bottom: 2rem;"
-                >
-                    <span class="pill-label">Get Started</span>
-                    <h2 style="font-size: 3rem; margin-top: 1rem;">
-                        Train 500+ students on cyber hygiene in 1 semester.
-                    </h2>
-                    <p>
-                        Book a campus awareness session, start a student
-                        chapter, or enroll in a skill track. Tell us what you
-                        need.
-                    </p>
-                </div>
+    <div class="pathway-grid">
+      <ScrollReveal delay={200} distance={20}>
+        <a href="/launchpad" class="pathway-card" style="--accent: var(--accent-launchpad)">
+          <span class="pathway-label">FOR STUDENTS</span>
+          <h3 class="pathway-title">Start a Track</h3>
+          <p class="pathway-desc">Explore certification tracks in Cybersecurity, AI, Cloud, and more. Built for learners who mean it.</p>
+          <span class="pathway-action">Explore Tracks <span class="arrow">→</span></span>
+        </a>
+      </ScrollReveal>
 
-                <div class="contact-details">
-                    <div class="detail-item">
-                        <div class="icon-box">✉️</div>
-                        <div class="detail-text">
-                            <span class="label">Email Us</span>
-                            <a
-                                href="mailto:operations@progeta.tech"
-                                class="value">operations@progeta.tech</a
-                            >
-                        </div>
-                    </div>
-                </div>
-            </div>
+      <ScrollReveal delay={320} distance={20}>
+        <a href="/launchpad/colleges" class="pathway-card" style="--accent: var(--accent-launchpad)">
+          <span class="pathway-label">FOR COLLEGES</span>
+          <h3 class="pathway-title">Partner with Us</h3>
+          <p class="pathway-desc">Bring LaunchPad to your campus. Student chapters, sessions, full certification programmes.</p>
+          <span class="pathway-action">Get in Touch <span class="arrow">→</span></span>
+        </a>
+      </ScrollReveal>
 
-            <!-- Right Form -->
-            <div use:reveal={{ delay: 200 }}>
-                <ContactForm />
-            </div>
-        </div>
+      <ScrollReveal delay={440} distance={20}>
+        <a href="/innercircle" class="pathway-card" style="--accent: var(--accent-innercircle)">
+          <span class="pathway-label">FOR BUILDERS</span>
+          <h3 class="pathway-title">Join InnerCircle</h3>
+          <p class="pathway-desc">A vetted community for those actively creating something real. Not for everyone — and that's the point.</p>
+          <span class="pathway-action">Apply for Access <span class="arrow">→</span></span>
+        </a>
+      </ScrollReveal>
+
+      <ScrollReveal delay={560} distance={20}>
+        <a href="/contact" class="pathway-card" style="--accent: var(--accent-selfos)">
+          <span class="pathway-label">FOR ORGANISATIONS</span>
+          <h3 class="pathway-title">Work With Progeta</h3>
+          <p class="pathway-desc">Custom training, consulting, or strategic partnerships. We work with institutions that share our values.</p>
+          <span class="pathway-action">Inquire <span class="arrow">→</span></span>
+        </a>
+      </ScrollReveal>
     </div>
+    
+    <div class="seeker-banner">
+      <ScrollReveal delay={700}>
+        <p class="seeker-text">WE ARE LOOKING FOR THOSE WHO SEEK THE HARD TRUTH OVER THE EASY LIE.</p>
+      </ScrollReveal>
+    </div>
+  </div>
 </section>
 
 <style>
-    @keyframes fadeUp {
-        from {
-            opacity: 0;
-            transform: translateY(10px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
+  /* ═══════════════════════════════════════════════════
+     GENERAL UTILS
+     ═══════════════════════════════════════════════════ */
+  .section-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: var(--tracking-widest);
+    color: var(--ink-4);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: var(--sp-4);
+  }
+
+  /* ═══════════════════════════════════════════════════
+     HERO
+     ═══════════════════════════════════════════════════ */
+  .hero {
+    min-height: 100dvh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding-top: 130px;
+    overflow: hidden;
+  }
+
+  .hero__inner {
+    max-width: var(--w-full);
+    margin: 0 auto;
+    padding: 0 var(--sp-6);
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+
+  .hero__left {
+    width: 60%;
+    z-index: 2;
+  }
+
+  .hero__right {
+    width: 40%;
+    display: flex;
+    justify-content: flex-end;
+    z-index: 1;
+  }
+
+  /* System Status */
+  .hero__status {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-3);
+    margin-bottom: var(--sp-7);
+  }
+
+  .status-dot {
+    width: 6px;
+    height: 6px;
+    background: #00ff88;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #00ff88;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(1.2); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+
+  .status-text {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--ink-3);
+    letter-spacing: 0.05em;
+  }
+
+  .status-sep {
+    color: var(--ink-4);
+    margin: 0 2px;
+  }
+
+  /* Headline */
+  .hero__headline {
+    margin-bottom: var(--sp-8);
+  }
+
+  .hero__line {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(48px, 8vw, 84px);
+    line-height: 0.95;
+    letter-spacing: var(--tracking-compressed);
+    color: var(--ink-1);
+  }
+
+  .hero__accent {
+    color: var(--accent-launchpad);
+    background: linear-gradient(to right, var(--accent-launchpad), #ffaa44);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* Subline */
+  .hero__subline {
+    font-family: var(--font-body);
+    font-size: 18px;
+    color: var(--ink-2);
+    line-height: 1.6;
+    max-width: 520px;
+    margin-bottom: var(--sp-7);
+    font-weight: 300;
+  }
+
+  /* What's New Pills */
+  .hero__whats-new {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-3);
+    margin-bottom: var(--sp-9);
+  }
+
+  .wn-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-3);
+    padding: var(--sp-2) var(--sp-5);
+    border: 1px solid var(--border-2);
+    border-radius: 100px;
+    text-decoration: none;
+    transition: border-color 0.2s, transform 0.2s;
+    background: rgba(255,255,255,0.02);
+  }
+
+  .wn-pill:hover {
+    border-color: var(--ink-4);
+    transform: translateY(-1px);
+  }
+
+  .wn-pill__dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--ink-4);
+    flex-shrink: 0;
+  }
+
+  .wn-pill__text {
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: var(--ink-1);
+  }
+
+  .wn-pill__badge {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    color: var(--accent-launchpad);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  /* CTAs */
+  .hero__ctas {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-7);
+  }
+
+  .hero__secondary-cta {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-widest);
+    color: var(--ink-2);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2);
+    transition: color 0.2s;
+  }
+
+  .hero__secondary-cta:hover {
+    color: var(--ink-1);
+  }
+
+  .hero__secondary-cta .arrow {
+    transition: transform 0.3s var(--ease-out-expo);
+  }
+
+  .hero__secondary-cta:hover .arrow {
+    transform: translateX(4px);
+  }
+
+  /* Belief words */
+  .hero__belief-words {
+    margin-top: var(--sp-10);
+    display: flex;
+    gap: var(--sp-5);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--ink-4);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.6;
+  }
+
+  /* Illustration / Logo */
+  .hero__illustration {
+    width: 100%;
+    max-width: 480px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .hero__logo {
+    width: 100%;
+    max-width: 320px;
+    height: auto;
+    opacity: 0.15;
+    filter: drop-shadow(0 0 40px rgba(255, 255, 255, 0.1));
+  }
+
+  /* ═══════════════════════════════════════════════════
+     VISION (WHAT WE STAND FOR)
+     ═══════════════════════════════════════════════════ */
+  .vision {
+    padding: var(--sp-12) 0;
+    background: var(--surface-1);
+  }
+
+  .vision__quote-wrap {
+    max-width: 1000px;
+    margin: 0 auto var(--sp-11);
+    position: relative;
+    text-align: center;
+  }
+
+  .vision__mark {
+    font-family: var(--font-display);
+    font-size: 120px;
+    line-height: 1;
+    color: var(--accent-launchpad);
+    opacity: 0.2;
+    position: absolute;
+    top: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .vision__quote {
+    font-family: var(--font-display);
+    font-size: clamp(24px, 4vw, 40px);
+    line-height: var(--leading-tight);
+    color: var(--ink-1);
+    font-weight: 300;
+  }
+
+  .vision__emphasis {
+    display: block;
+    margin-top: var(--sp-6);
+    font-style: italic;
+    color: var(--ink-3);
+  }
+
+  .vision__markers {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--sp-10);
+    margin-top: var(--sp-11);
+  }
+
+  .vision__marker {
+    border-top: 2px solid var(--accent, var(--border-2));
+    padding-top: var(--sp-7);
+  }
+
+  .marker__number {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-4);
+    display: block;
+    margin-bottom: var(--sp-3);
+  }
+
+  .marker__heading {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--ink-1);
+    margin-bottom: var(--sp-4);
+  }
+
+  .marker__text {
+    font-family: var(--font-body);
+    font-size: 16px;
+    color: var(--ink-2);
+    line-height: var(--leading-relaxed);
+  }
+
+  /* ═══════════════════════════════════════════════════
+     STRIPS (INITIATIVES) -> Full bleed 50/50 Grid
+     ═══════════════════════════════════════════════════ */
+  .strips {
+    width: 100vw;
+    margin-left: calc(-50vw + 50%); /* Full bleed trick */
+    padding-bottom: var(--sp-12);
+  }
+
+  .initiative-grid {
+    display: grid;
+    grid-template-columns: 50vw 50vw;
+    width: 100vw;
+    gap: 0;
+  }
+
+  /* Need this to pass height from ScrollReveal to card */
+  :global(.init-card-wrapper) {
+    display: flex;
+    height: 100%;
+  }
+
+  .init-card {
+    background: var(--surface-1);
+    border: 1px solid var(--border-2);
+    /* Prevent double borders on adjacent edges */
+    margin: -1px 0 0 -1px;
+    padding: var(--sp-12) var(--sp-8) var(--sp-12) 10vw; /* Push content inward to match general container feel */
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    transition: transform 0.4s var(--ease-out-expo), border-color 0.4s;
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+    min-height: 400px;
+    width: 100%;
+  }
+
+  /* On even children (right side), pad left less and right more */
+  :global(.init-card-wrapper:nth-child(even)) .init-card {
+    padding: var(--sp-12) 10vw var(--sp-12) var(--sp-8);
+  }
+
+  .init-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom right, color-mix(in srgb, var(--accent) 5%, transparent), transparent);
+    opacity: 0;
+    transition: opacity 0.4s;
+    pointer-events: none;
+  }
+
+  .init-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--accent);
+  }
+
+  .init-card:hover::before {
+    opacity: 1;
+  }
+
+  .init-card__label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.2em;
+    margin-bottom: var(--sp-5);
+    display: block;
+  }
+
+  .init-card__title {
+    font-family: var(--font-display);
+    font-size: clamp(32px, 4vw, 48px);
+    font-weight: 700;
+    color: var(--accent); /* Colored headings per request */
+    margin-bottom: var(--sp-4);
+  }
+
+  .init-card__desc {
+    font-family: var(--font-body);
+    font-size: 16px;
+    color: var(--ink-3);
+    line-height: var(--leading-relaxed);
+    margin-bottom: auto;
+    padding-bottom: var(--sp-8);
+  }
+
+  .init-card__sublinks {
+    list-style: none;
+    margin: 0 0 var(--sp-8) 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-2);
+  }
+
+  .init-card__sublinks li {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--ink-4);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: var(--sp-3);
+  }
+
+  .init-card__sublinks li::before {
+    content: '';
+    display: block;
+    width: 4px;
+    height: 4px;
+    background: var(--ink-5);
+    border-radius: 50%;
+  }
+
+  .init-card__link {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--ink-1);
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2);
+  }
+
+  .init-card__link .arrow {
+    transition: transform 0.3s var(--ease-out-expo);
+  }
+
+  .init-card:hover .init-card__link .arrow {
+    transform: translateX(5px);
+  }
+
+  /* Ghost card */
+  .init-card--ghost {
+    border-style: dashed;
+    pointer-events: none;
+  }
+
+  .init-card--ghost .init-card__title {
+    color: var(--ink-4);
+    font-weight: 300;
+  }
+
+  .init-card--ghost .init-card__desc,
+  .init-card--ghost .init-card__label {
+    color: var(--ink-4);
+  }
+
+  /* ═══════════════════════════════════════════════════
+     COMPANY (THE DIRECTIVE)
+     ═══════════════════════════════════════════════════ */
+  .company {
+    padding: var(--sp-12) 0;
+    background: var(--ground);
+  }
+
+  .company__statement-block {
+    max-width: 800px;
+    margin-bottom: var(--sp-12);
+  }
+
+  .company__heading {
+    font-family: var(--font-display);
+    font-size: clamp(36px, 5vw, 56px);
+    font-weight: 700;
+    color: var(--ink-1);
+    margin: var(--sp-5) 0 var(--sp-7);
+    line-height: 1.1;
+  }
+
+  .company__body {
+    font-family: var(--font-body);
+    font-size: 18px;
+    color: var(--ink-2);
+    line-height: 1.7;
+    max-width: 600px;
+  }
+
+  .company__body p {
+    margin-bottom: var(--sp-6);
+  }
+
+  .company__signoff {
+    margin-top: var(--sp-9);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .signoff__name {
+    font-family: var(--font-display);
+    font-size: 20px;
+    color: var(--ink-1);
+    font-style: italic;
+  }
+
+  .signoff__title {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--ink-4);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  /* Truths Grid */
+  .truths-row {
+    border-top: 1px solid var(--border-2);
+    padding-top: var(--sp-10);
+  }
+
+  .truths-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--sp-6);
+    margin-top: var(--sp-6);
+  }
+
+  .truth-card {
+    padding: var(--sp-8);
+    background: var(--surface-1);
+    border: 1px solid var(--border-2);
+    transition: border-color 0.3s;
+  }
+
+  .truth-card:hover {
+    border-color: var(--ink-4);
+  }
+
+  .truth-number {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--ink-4);
+    display: block;
+    margin-bottom: var(--sp-4);
+  }
+
+  .truth-text {
+    font-family: var(--font-body);
+    font-size: 16px;
+    color: var(--ink-2);
+    line-height: 1.6;
+    font-style: italic;
+  }
+
+
+
+  /* ═══════════════════════════════════════════════════
+     GAMES TEASER
+     ═══════════════════════════════════════════════════ */
+  .games-teaser {
+    padding: var(--sp-12) 0;
+    background: #050505;
+    overflow: hidden;
+  }
+
+  .games-teaser__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--sp-11);
+    align-items: center;
+  }
+
+  .games-teaser__title {
+    font-family: var(--font-display);
+    font-size: 56px;
+    color: #fff;
+    margin: var(--sp-5) 0 var(--sp-6);
+  }
+
+  .games-teaser__desc {
+    font-family: var(--font-body);
+    font-size: 18px;
+    color: #888;
+    line-height: 1.6;
+    max-width: 480px;
+    margin-bottom: var(--sp-8);
+  }
+
+  .games-teaser__stats {
+    display: flex;
+    gap: var(--sp-9);
+    margin-bottom: var(--sp-9);
+  }
+
+  .mini-stat__val {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 24px;
+    color: #fff;
+  }
+
+  .mini-stat__lab {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: #555;
+    text-transform: uppercase;
+  }
+
+  .games-teaser__visual {
+    display: flex;
+    justify-content: center;
+  }
+
+  .game-orb-wrap {
+    position: relative;
+    width: 300px;
+    height: 300px;
+  }
+
+  .game-orb {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #333, #000);
+    box-shadow: 0 0 50px rgba(255,100,0,0.2), inset 0 0 20px rgba(255,255,255,0.05);
+  }
+
+  .game-orb-ring {
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    right: -20px;
+    bottom: -20px;
+    border: 1px solid rgba(255,100,0,0.3);
+    border-radius: 50%;
+    animation: ringRotate 10s linear infinite;
+  }
+
+  @keyframes ringRotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  /* ═══════════════════════════════════════════════════
+     BRIEFS (MARQUEE)
+     ═══════════════════════════════════════════════════ */
+  .briefs-teaser {
+    padding: var(--sp-12) 0;
+    overflow: hidden;
+  }
+
+  .briefs-header-wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: var(--sp-10);
+    padding: 0 var(--sp-8);
+    max-width: var(--w-wide);
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .briefs-title {
+    font-family: var(--font-display);
+    font-size: 40px;
+    color: var(--ink-1);
+    margin-top: var(--sp-4);
+  }
+
+  .view-all {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2);
+  }
+
+  .briefs-marquee-wrap {
+    position: relative;
+    width: 100%;
+  }
+
+  .briefs-fade {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 120px;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .briefs-fade--left {
+    left: 0;
+    background: linear-gradient(to right, var(--ground), transparent);
+  }
+
+  .briefs-fade--right {
+    right: 0;
+    background: linear-gradient(to left, var(--ground), transparent);
+  }
+
+  .briefs-marquee {
+    overflow: hidden;
+    width: 100%;
+  }
+
+  .briefs-track {
+    display: flex;
+    gap: var(--sp-5);
+    animation: marqueeScroll 40s linear infinite;
+    width: max-content;
+  }
+
+  .briefs-track:hover {
+    animation-play-state: paused;
+  }
+
+  @keyframes marqueeScroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .brief-card {
+    min-width: 340px;
+    max-width: 380px;
+    padding: var(--sp-8);
+    background: var(--surface-1);
+    border: 1px solid var(--border-2);
+    transition: border-color 0.3s, transform 0.3s;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    text-decoration: none;
+  }
+
+  .brief-card:hover {
+    border-color: var(--ink-4);
+    transform: translateY(-4px);
+  }
+
+  .brief-card--featured {
+    border-color: var(--accent-launchpad);
+  }
+
+  .brief-meta {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--ink-4);
+    letter-spacing: 0.1em;
+    display: block;
+    margin-bottom: var(--sp-4);
+  }
+
+  .brief-title {
+    font-family: var(--font-display);
+    font-size: 20px;
+    color: var(--ink-1);
+    margin-bottom: var(--sp-3);
+    line-height: 1.3;
+  }
+
+  .brief-excerpt {
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: var(--ink-3);
+    line-height: 1.6;
+    margin-bottom: var(--sp-5);
+    flex-grow: 1;
+  }
+
+  .brief-tags {
+    display: flex;
+    gap: var(--sp-2);
+    margin-bottom: var(--sp-5);
+  }
+
+  .brief-tag {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    color: var(--ink-4);
+    border: 1px solid var(--border-2);
+    padding: 2px 8px;
+    letter-spacing: 0.08em;
+  }
+
+  .brief-link {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--accent-launchpad);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2);
+  }
+
+  .brief-link .arrow {
+    transition: transform 0.3s;
+  }
+
+  .brief-card:hover .brief-link .arrow {
+    transform: translateX(4px);
+  }
+
+  /* ═══════════════════════════════════════════════════
+     FINAL CTA
+     ═══════════════════════════════════════════════════ */
+  .final-cta {
+    padding: var(--sp-12) 0;
+    background: var(--surface-2);
+  }
+
+  .final-cta__content {
+    text-align: center;
+    margin-bottom: var(--sp-11);
+    padding: 0 var(--sp-6);
+  }
+
+  .final-cta__title {
+    font-family: var(--font-display);
+    font-size: clamp(40px, 6vw, 72px);
+    font-weight: 700;
+    color: var(--ink-1);
+    margin-bottom: var(--sp-5);
+    letter-spacing: var(--tracking-compressed);
+  }
+
+  .final-cta__desc {
+    font-family: var(--font-body);
+    font-size: 20px;
+    color: var(--ink-2);
+    max-width: 640px;
+    margin: 0 auto;
+    line-height: 1.5;
+  }
+
+  /* Pathway cards */
+  .pathway-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--sp-6);
+    margin-bottom: var(--sp-12);
+    padding: 0 var(--sp-6);
+  }
+
+  .pathway-card {
+    background: var(--surface-1);
+    border: 1px solid var(--border-2);
+    padding: var(--sp-8);
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    transition: border-color 0.3s, transform 0.3s;
+    position: relative;
+  }
+
+  .pathway-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+    transition: width 0.4s ease;
+  }
+
+  .pathway-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-6px);
+  }
+
+  .pathway-card:hover::before {
+    width: 100%;
+  }
+
+  .pathway-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--accent);
+    letter-spacing: var(--tracking-widest);
+    margin-bottom: var(--sp-4);
+    display: block;
+  }
+
+  .pathway-title {
+    font-family: var(--font-display);
+    font-size: 24px;
+    color: var(--ink-1);
+    margin-bottom: var(--sp-4);
+    letter-spacing: -0.01em;
+  }
+
+  .pathway-desc {
+    font-family: var(--font-body);
+    font-size: 15px;
+    color: var(--ink-3);
+    line-height: 1.6;
+    margin-bottom: auto;
+    padding-bottom: var(--sp-8);
+  }
+
+  .pathway-action {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--ink-1);
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2);
+  }
+
+  .pathway-action .arrow {
+    transition: transform 0.3s var(--ease-out-expo);
+  }
+
+  .pathway-card:hover .pathway-action .arrow {
+    transform: translateX(4px);
+  }
+
+  .seeker-banner {
+    border-top: 1px solid var(--border-2);
+    padding-top: var(--sp-9);
+    text-align: center;
+    margin: 0 var(--sp-6);
+  }
+
+  .seeker-text {
+    font-family: var(--font-mono);
+    font-size: clamp(10px, 1.5vw, 14px);
+    color: var(--ink-4);
+    letter-spacing: 0.4em;
+    font-weight: 400;
+  }
+
+  /* ═══════════════════════════════════════════════════
+     RESPONSIVE
+     ═══════════════════════════════════════════════════ */
+  @media (max-width: 1024px) {
+    .hero__inner { flex-direction: column; text-align: center; padding-top: 100px; }
+    .hero__left, .hero__right { width: 100%; }
+    .hero__right { justify-content: center; margin-top: var(--sp-9); }
+    .hero__ctas { justify-content: center; }
+    .hero__whats-new { justify-content: center; }
+    .hero__belief-words { justify-content: center; }
+    .hero__subline { margin-left: auto; margin-right: auto; text-align: center; }
+
+    .vision__markers { grid-template-columns: 1fr; gap: var(--sp-10); }
+
+    .initiative-grid { grid-template-columns: 1fr; width: 100%; }
+    .strips { margin-left: 0; width: 100%; }
+    
+    :global(.init-card-wrapper) .init-card,
+    :global(.init-card-wrapper:nth-child(even)) .init-card {
+      padding: var(--sp-10) var(--sp-6);
+      width: 100%;
     }
 
-    /* LAYOUT UTILS */
-    .grid-3 {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 2rem;
-    }
-    .grid-2 {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 2rem;
-    }
-    .section-header {
-        margin-bottom: 4rem;
-    }
-    .text-sm {
-        font-size: 0.95rem;
-        color: var(--text-secondary);
-    }
+    .company__heading { font-size: 36px; }
+    .truths-grid { grid-template-columns: 1fr; }
 
-    /* PUZZLE CARD */
-    .puzzle-card {
-        position: relative;
-    }
-    .shard {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: var(--glass-surface);
-        border: 1px solid var(--glass-border);
-        transition: transform 0.4s ease;
-        opacity: 0;
-        z-index: 0;
-        pointer-events: none;
-    }
-    .shard-tl {
-        clip-path: polygon(0 0, 50% 0, 60% 50%, 0 40%);
-        transform-origin: top left;
-    }
-    .shard-tr {
-        clip-path: polygon(50% 0, 100% 0, 100% 50%, 60% 50%);
-        transform-origin: top right;
-    }
-    .shard-bl {
-        clip-path: polygon(0 40%, 60% 50%, 40% 100%, 0 100%);
-        transform-origin: bottom left;
-    }
-    .shard-br {
-        clip-path: polygon(60% 50%, 100% 50%, 100% 100%, 40% 100%);
-        transform-origin: bottom right;
-    }
+    .games-teaser__grid { grid-template-columns: 1fr; text-align: center; }
+    .games-teaser__stats { justify-content: center; }
+    .games-teaser__visual { order: -1; margin-bottom: var(--sp-9); }
 
-    .puzzle-card:hover .shard {
-        opacity: 0.3;
-    }
-    .puzzle-card:hover .shard-tl {
-        transform: translate(-10px, -10px) rotate(-2deg);
-    }
-    .puzzle-card:hover .shard-tr {
-        transform: translate(10px, -5px) rotate(2deg);
-    }
-    .puzzle-card:hover .shard-bl {
-        transform: translate(-5px, 10px) rotate(1deg);
-    }
-    .puzzle-card:hover .shard-br {
-        transform: translate(10px, 10px) rotate(-3deg);
-    }
-    .puzzle-card .card-content {
-        z-index: 2;
-        position: relative;
-    }
+    .pathway-grid { grid-template-columns: 1fr; }
+  }
 
-    /* FOG CARD */
-    .fog-card {
-        position: relative;
-        --local-x: 50%;
-        --local-y: 50%;
-    }
-    .fog-layer {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        z-index: 5;
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        background: rgba(0, 0, 0, 0.4);
-        pointer-events: none;
-        opacity: 0;
-        transition: opacity 0.3s;
-        mask-image: radial-gradient(
-            circle 100px at var(--local-x) var(--local-y),
-            transparent 0%,
-            black 100%
-        );
-        -webkit-mask-image: radial-gradient(
-            circle 100px at var(--local-x) var(--local-y),
-            transparent 0%,
-            black 100%
-        );
-    }
-    .fog-card:hover .fog-layer {
-        opacity: 1;
-    }
-    .fog-card .card-content {
-        position: relative;
-        z-index: 1;
-    }
-
-    /* NODE CARD */
-    .node-card {
-        overflow: hidden;
-    }
-    .nodes-container {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
-        z-index: 0;
-    }
-    .node {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 6px;
-        height: 6px;
-        background: var(--text-tertiary);
-        border-radius: 50%;
-        opacity: 0;
-        transform: translate(-50%, -50%);
-        transition: all 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
-    }
-    .node-card:hover .node {
-        opacity: 0.5;
-        transform: translate(
-            calc(-50% + calc(cos(var(--i) * 24deg) * 100px)),
-            calc(-50% + calc(sin(var(--i) * 24deg) * 80px))
-        );
-    }
-    .node-card .card-content {
-        z-index: 2;
-        position: relative;
-    }
-
-    /* RESPONSIVE ADJUSTMENTS */
-    @media (max-width: 900px) {
-        .grid-3,
-        .grid-2 {
-            grid-template-columns: 1fr;
-            gap: 1.5rem;
-        }
-
-        .hero-h1 .line-1 {
-            font-size: 2.5rem; /* Smaller for mobile */
-        }
-
-        .hero-h1 .line-2 {
-            font-size: 1.5rem;
-        }
-
-        .hero-bg-logo {
-            width: 100%;
-            height: auto;
-            opacity: 0.05;
-        }
-
-        section.section-padding {
-            padding: 60px 0;
-        }
-
-        .hero-cta-group {
-            flex-direction: column;
-            width: 100%;
-            padding: 0 2rem;
-        }
-
-        .mobile-hide {
-            display: none;
-        }
-    }
-
-    /* CYBER GRID BACKGROUND */
-    .cyber-grid-container {
-        position: absolute;
-        width: 100%;
-        height: 100vh;
-        overflow: hidden;
-        top: 0;
-        left: 0;
-        z-index: 0;
-        mask-image: linear-gradient(
-            to bottom,
-            rgba(0, 0, 0, 1) 0%,
-            transparent 80%
-        );
-    }
-    .cyber-grid {
-        position: absolute;
-        width: 200%;
-        height: 200%;
-        top: -50%;
-        left: -50%;
-        background-image: linear-gradient(
-                rgba(255, 255, 255, 0.03) 1px,
-                transparent 1px
-            ),
-            linear-gradient(
-                90deg,
-                rgba(255, 255, 255, 0.03) 1px,
-                transparent 1px
-            );
-        background-size: 60px 60px;
-        transform: perspective(500px) rotateX(60deg);
-        animation: gridMove 20s linear infinite;
-    }
-    @keyframes gridMove {
-        0% {
-            transform: perspective(500px) rotateX(60deg) translateY(0);
-        }
-        100% {
-            transform: perspective(500px) rotateX(60deg) translateY(60px);
-        }
-    }
-
-    /* HERO */
-    .hero-bg-logo {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 800px;
-        height: 800px;
-        opacity: 0.1;
-        pointer-events: none;
-        z-index: 0;
-    }
-    .hero-logo-svg {
-        width: 100%;
-        height: 100%;
-        filter: drop-shadow(0 0 50px rgba(255, 255, 255, 0.2));
-    }
-    .logo-path {
-        fill: transparent;
-        stroke: white;
-        stroke-width: 1;
-        stroke-dasharray: 2000;
-        stroke-dashoffset: 2000;
-        animation: logoDrawLoop 4s ease-in-out infinite alternate;
-    }
-    @keyframes logoDrawLoop {
-        0% {
-            stroke-dashoffset: 2000;
-            fill-opacity: 0;
-        }
-        100% {
-            stroke-dashoffset: 0;
-            fill-opacity: 0.15;
-        }
-    }
-
-    .hero-h1 {
-        margin-bottom: 2rem;
-        perspective: 1000px;
-        position: relative;
-    }
-    .hero-h1 .line {
-        display: block;
-        opacity: 0;
-        transform: translateY(20px);
-        transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
-    }
-    .hero-h1 .line-1 {
-        font-weight: 800;
-        font-size: clamp(3.5rem, 6vw, 6rem);
-        letter-spacing: -0.03em;
-        position: relative;
-    }
-    .hero-h1 .line-2 {
-        font-weight: 300;
-        font-size: clamp(2rem, 4vw, 3.5rem);
-        color: var(--text-secondary);
-        filter: blur(10px);
-        transition-delay: 0.1s;
-        letter-spacing: 0.1em;
-    }
-    .hero-h1.active .line-1 {
-        opacity: 1;
-        transform: translateY(0);
-        transition-delay: 0.2s;
-    }
-    .hero-h1.active .line-2 {
-        opacity: 1;
-        transform: translateY(0);
-        filter: blur(0);
-        transition-delay: 0.6s;
-    }
-
-    /* GLITCH EFFECT */
-    .glitch::before,
-    .glitch::after {
-        content: attr(data-text);
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        opacity: 0.8;
-    }
-    .glitch::before {
-        color: #0ff;
-        z-index: -1;
-        animation: glitch-anim-1 2s infinite linear alternate-reverse;
-    }
-    .glitch::after {
-        color: #f0f;
-        z-index: -2;
-        animation: glitch-anim-2 3s infinite linear alternate-reverse;
-    }
-    @keyframes glitch-anim-1 {
-        0% {
-            clip-path: inset(20% 0 80% 0);
-            transform: translate(-2px, 1px);
-        }
-        20% {
-            clip-path: inset(60% 0 10% 0);
-            transform: translate(2px, -1px);
-        }
-        40% {
-            clip-path: inset(40% 0 50% 0);
-            transform: translate(-2px, 2px);
-        }
-        60% {
-            clip-path: inset(80% 0 5% 0);
-            transform: translate(2px, -2px);
-        }
-        80% {
-            clip-path: inset(10% 0 70% 0);
-            transform: translate(-1px, 1px);
-        }
-        100% {
-            clip-path: inset(30% 0 20% 0);
-            transform: translate(1px, -1px);
-        }
-    }
-    @keyframes glitch-anim-2 {
-        0% {
-            clip-path: inset(10% 0 60% 0);
-            transform: translate(2px, -1px);
-        }
-        20% {
-            clip-path: inset(80% 0 5% 0);
-            transform: translate(-2px, 2px);
-        }
-        40% {
-            clip-path: inset(30% 0 20% 0);
-            transform: translate(2px, 1px);
-        }
-        60% {
-            clip-path: inset(15% 0 80% 0);
-            transform: translate(-1px, -2px);
-        }
-        80% {
-            clip-path: inset(55% 0 10% 0);
-            transform: translate(1px, 2px);
-        }
-        100% {
-            clip-path: inset(40% 0 30% 0);
-            transform: translate(-2px, 1px);
-        }
-    }
-
-    .status-indicator {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        padding: 0.5rem 1rem;
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid var(--glass-border);
-        border-radius: 100px;
-        font-size: 0.8rem;
-        font-weight: 600;
-        letter-spacing: 0.05em;
-    }
-
-    /* --- MOBILE REDESIGN (SIMPLER & SPACIER) --- */
-    @media (max-width: 768px) {
-        /* Global Mobile Spacing */
-        .section-padding {
-            padding: 100px 0; /* More breathing room */
-        }
-
-        /* Hero Typography & Spacing */
-        .hero-h1 {
-            margin-bottom: 3rem; /* More space below headline */
-        }
-        .hero-h1 .line-1 {
-            font-size: clamp(2.5rem, 10vw, 3.5rem);
-            line-height: 1.1;
-        }
-        .hero-h1 .line-2 {
-            font-size: clamp(1.2rem, 5vw, 1.8rem);
-            margin-top: 0.5rem;
-        }
-
-        /* Stack Buttons in Hero with Gap */
-        section .container > div[use\:reveal] {
-            flex-direction: column;
-            width: 100%;
-            align-items: center;
-            gap: 1.5rem; /* Space between buttons */
-            margin-top: 2rem;
-        }
-
-        .mobile-hide {
-            display: none !important;
-        }
-
-        /* Grids to Single Column with LARGE Gaps */
-        .grid-3,
-        .grid-2 {
-            grid-template-columns: 1fr;
-            gap: 4rem; /* Much larger gap for "spacier" feel */
-        }
-
-        /* Simplify Cards on Mobile */
-        .bento-card {
-            padding: 2rem; /* Reduce padding slightly if needed, or keep generous */
-            background: rgba(255, 255, 255, 0.03); /* Simpler background */
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        /* Hide complex decorative elements on mobile to reduce noise */
-        .shard,
-        .nodes-container,
-        .fog-layer {
-            display: none !important;
-        }
-
-        /* Ensure card content is readable without effects */
-        .card-content {
-            z-index: 10;
-        }
-
-        /* Contact Section Spacing */
-        .contact-layout {
-            grid-template-columns: 1fr;
-            display: flex;
-            flex-direction: column;
-            gap: 5rem; /* Big separation between text and form */
-        }
-
-        /* Section Headers */
-        .section-header {
-            margin-bottom: 4rem;
-            text-align: left;
-        }
-        .section-header h2 {
-            font-size: 2.2rem;
-            margin-bottom: 1rem;
-        }
-
-        .status-indicator {
-            margin-bottom: 1rem;
-        }
-
-        /* Adjust Marquee */
-        .marquee-content {
-            animation-duration: 20s;
-        }
-    }
-    .bulb {
-        width: 6px;
-        height: 6px;
-        background: var(--text-primary);
-        border-radius: 50%;
-        opacity: 0.8;
-    }
-
-    /* MARQUEE */
-    .marquee-container {
-        border-top: 1px solid var(--glass-border);
-        border-bottom: 1px solid var(--glass-border);
-        background: rgba(0, 0, 0, 0.4);
-        overflow: hidden;
-        white-space: nowrap;
-        position: relative;
-        z-index: 5;
-    }
-    .marquee-content {
-        display: inline-block;
-        padding: 0.75rem 0;
-        animation: marquee 30s linear infinite;
-    }
-    .marquee-content:hover {
-        animation-play-state: paused;
-    }
-    .marquee-group {
-        display: inline-flex;
-        gap: 3rem;
-        margin-right: 3rem;
-    }
-
-    @keyframes marquee {
-        0% {
-            transform: translateX(0);
-        }
-        100% {
-            transform: translateX(-50%);
-        }
-    }
-
-    .marquee-group a {
-        color: var(--text-secondary);
-        font-size: 0.85rem;
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-        transition: color 0.2s;
-    }
-    .marquee-group a:hover {
-        color: var(--text-primary);
-        text-decoration: underline;
-    }
-    .separator {
-        color: var(--accent-blue);
-        opacity: 0.5;
-    }
-
-    /* CARD CONTENT UTILS */
-    .card-meta {
-        font-family: monospace;
-        font-size: 0.8rem;
-        color: var(--text-secondary);
-        margin-bottom: 0.5rem;
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-        opacity: 0.7;
-    }
-    .col-title {
-        font-size: 0.8rem;
-        letter-spacing: 0.1em;
-        color: var(--text-tertiary);
-        margin-bottom: 1.5rem;
-        border-bottom: 1px solid var(--glass-border);
-        padding-bottom: 0.5rem;
-        text-transform: uppercase;
-    }
-    .card-icon {
-        width: 48px;
-        height: 48px;
-        margin-bottom: 1.5rem;
-        color: var(--text-primary);
-    }
-
-    .ops-item {
-        display: flex;
-        gap: 1rem;
-        margin-bottom: 1.5rem;
-    }
-    .ops-date {
-        font-family: monospace;
-        color: var(--accent-primary);
-        opacity: 0.8;
-        font-size: 0.85rem;
-        padding-top: 2px;
-        min-width: 60px;
-    }
-    .tag-sm {
-        display: inline-block;
-        font-size: 0.7rem;
-        border: 1px solid var(--glass-border);
-        padding: 2px 6px;
-        border-radius: 100px;
-        color: var(--text-tertiary);
-        margin-top: 0.25rem;
-    }
-
-    /* GAMES SPECIFIC */
-    .game-card {
-        padding: 0 !important;
-        border-radius: 20px;
-        text-decoration: none;
-    }
-    .game-card:hover {
-        transform: translateY(-5px);
-        border-color: var(--text-secondary);
-    }
-    .game-cover {
-        height: 180px;
-        display: flex;
-        align-items: flex-end;
-        padding: 1.5rem;
-        position: relative;
-        overflow: hidden;
-        background-color: #000;
-        background-size: cover;
-        background-position: center;
-    }
-    .cover-overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: linear-gradient(
-            to top,
-            rgba(0, 0, 0, 0.9) 0%,
-            transparent 100%
-        );
-        pointer-events: none;
-    }
-    .game-cat {
-        background: rgba(0, 0, 0, 0.6);
-        color: #fff;
-        padding: 2px 8px;
-        font-size: 0.7rem;
-        border-radius: 4px;
-        text-transform: uppercase;
-        font-weight: 600;
-        position: relative;
-        z-index: 2;
-        backdrop-filter: blur(4px);
-    }
-    .game-info {
-        padding: 1.5rem;
-    }
-    .play-link {
-        font-size: 0.85rem;
-        font-weight: 700;
-        color: var(--accent-blue);
-    }
-
-    @media (max-width: 900px) {
-        .grid-3,
-        .grid-2 {
-            grid-template-columns: 1fr;
-            gap: 2rem;
-        }
-        .hero-bg-logo {
-            width: 400px;
-            height: 400px;
-        }
-        .contact-layout {
-            grid-template-columns: 1fr !important;
-            gap: 3rem;
-        }
-    }
-
-    /* CONTACT SECTION STYLES */
-    .contact-layout {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 4rem;
-        align-items: center;
-    }
-
-    /* FLOW DIAGRAM */
-    .flow-diagram {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        margin-top: 4rem;
-        position: relative;
-    }
-    .flow-step {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        z-index: 1;
-        padding: 0 1rem;
-    }
-    .step-num {
-        width: 50px;
-        height: 50px;
-        background: var(--glass-surface);
-        border: 1px solid var(--glass-border);
-        border-radius: 50%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-family: var(--font-mono);
-        font-weight: 700;
-        margin-bottom: 1.5rem;
-        transition: all 0.3s;
-    }
-    .flow-step:hover .step-num {
-        background: var(--text-primary);
-        color: #000;
-        box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
-    }
-    .flow-connector {
-        flex: 0.5;
-        height: 1px;
-        background: var(--glass-border);
-        margin-top: 25px;
-        opacity: 0.3;
-    }
-    @media (max-width: 900px) {
-        .flow-diagram {
-            flex-direction: column;
-            gap: 3rem;
-        }
-        .flow-connector {
-            display: none;
-        }
-    }
-
-    .pill-label {
-        background: rgba(255, 255, 255, 0.1);
-        color: var(--accent-blue);
-        padding: 6px 14px;
-        border-radius: 20px;
-        font-size: 0.8rem;
-        font-weight: 600;
-        letter-spacing: 0.5px;
-        text-transform: uppercase;
-        display: inline-block;
-    }
-    .contact-details {
-        display: flex;
-        flex-direction: column;
-        gap: 1.5rem;
-    }
-    .detail-item {
-        display: flex;
-        gap: 1rem;
-        align-items: center;
-    }
-    .icon-box {
-        width: 48px;
-        height: 48px;
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid var(--glass-border);
-        border-radius: 12px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 1.2rem;
-    }
-    .detail-text {
-        display: flex;
-        flex-direction: column;
-    }
-    .label {
-        font-size: 0.85rem;
-        color: var(--text-secondary);
-        font-weight: 500;
-    }
-    .value {
-        font-size: 1rem;
-        color: #fff;
-        font-weight: 600;
-        text-decoration: none;
-    }
-    .value:hover {
-        color: var(--accent-blue);
-    }
-
-    /* PROGRAMME MINI-CARDS */
-    .prog-cards-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1.5rem;
-    }
-    .prog-mini-card {
-        display: flex;
-        flex-direction: column;
-        padding: 2rem;
-        background: rgba(13, 13, 18, 0.6);
-        backdrop-filter: blur(12px);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        border-radius: 20px;
-        text-decoration: none;
-        color: inherit;
-        transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
-    }
-    .prog-mini-card:hover {
-        border-color: rgba(255, 255, 255, 0.2);
-        transform: translateY(-4px);
-    }
-    .prog-mini-card h3 {
-        margin-bottom: 0.5rem;
-        font-size: 1.2rem;
-    }
-    .prog-mini-card p {
-        color: var(--text-secondary);
-        font-size: 0.9rem;
-        flex-grow: 1;
-    }
-    .pmc-tag {
-        font-family: var(--font-mono);
-        font-size: 0.7rem;
-        color: var(--accent-blue, #3b82f6);
-        letter-spacing: 0.1em;
-        margin-bottom: 0.75rem;
-    }
-    .pmc-arrow {
-        margin-top: 1rem;
-        font-size: 1.2rem;
-        opacity: 0.5;
-        transition:
-            opacity 0.3s,
-            transform 0.3s;
-    }
-    .prog-mini-card:hover .pmc-arrow {
-        opacity: 1;
-        transform: translateX(4px);
-    }
-    .text-center {
-        text-align: center;
-    }
-
-    @media (max-width: 900px) {
-        .prog-cards-grid {
-            grid-template-columns: 1fr;
-        }
-    }
+  @media (max-width: 768px) {
+    .hero__ctas { flex-direction: column; gap: var(--sp-5); }
+    .final-cta__title { font-size: 40px; }
+  }
 </style>

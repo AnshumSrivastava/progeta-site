@@ -2,16 +2,8 @@
     import { events } from "$lib/content/events";
     import { reveal, tilt } from "$lib/ui/actions";
 
-    // Map events to include their original index for correct routing
-    const mappedEvents = events.map((e, i) => ({ ...e, originalIndex: i }));
-
-    const techEvents = mappedEvents.filter(
-        (e) => e.type === "Technical Events",
-    );
-    const careerEvents = mappedEvents.filter(
-        (e) => e.type !== "Technical Events",
-    );
-    import { base } from "$app/paths";
+    const techEvents = events.filter((e) => e.type === "Technical Events");
+    const careerEvents = events.filter((e) => e.type !== "Technical Events");
 </script>
 
 <svelte:head>
@@ -36,21 +28,18 @@
         </div>
         <div class="events-grid">
             {#each techEvents as event, i}
-                <a
-                    href="{base}/events/{event.originalIndex}"
-                    class="event-card"
-                    use:tilt
-                >
+                <div class="event-card" use:tilt>
                     <div class="card-meta">
                         <span class="type-badge dim">{event.description}</span>
                         <!-- Using desc as type flavor -->
                     </div>
                     <h3>{event.title}</h3>
                     <div class="card-footer">
-                        <span class="status">SCHEDULED</span>
-                        <span class="action">REGISTER &rarr;</span>
+                        <span class="status">{event.status || "SCHEDULED"}</span
+                        >
+                        <span class="action">COMING SOON</span>
                     </div>
-                </a>
+                </div>
             {/each}
         </div>
     </section>
@@ -63,20 +52,17 @@
         </div>
         <div class="events-grid">
             {#each careerEvents as event, i}
-                <a
-                    href="{base}/events/{event.originalIndex}"
-                    class="event-card"
-                    use:tilt
-                >
+                <div class="event-card" use:tilt>
                     <div class="card-meta">
                         <span class="type-badge">{event.description}</span>
                     </div>
                     <h3>{event.title}</h3>
                     <div class="card-footer">
-                        <span class="status">SCHEDULED</span>
-                        <span class="action">REGISTER &rarr;</span>
+                        <span class="status">{event.status || "SCHEDULED"}</span
+                        >
+                        <span class="action">COMING SOON</span>
                     </div>
-                </a>
+                </div>
             {/each}
         </div>
     </section>
@@ -141,8 +127,6 @@
         transition: all 0.3s;
         display: flex;
         flex-direction: column;
-        text-decoration: none;
-        color: inherit;
     }
     .event-card:hover {
         border-color: rgba(255, 255, 255, 0.2);
@@ -198,9 +182,6 @@
     }
 
     @media (max-width: 768px) {
-        .page-header {
-            padding: 100px 0 40px; /* Reduced padding */
-        }
         .events-grid {
             grid-template-columns: 1fr;
         }

@@ -1,0 +1,2194 @@
+{
+  "tracks": [
+    {
+      "id": 1,
+      "title": "Cyber Threat Intelligence (CTI) Specialist",
+      "phases": [
+        {
+          "name": "Phase 1: The Foundation (Month 1)",
+          "modules": [
+            {
+              "id": "1",
+              "title": "Cybersecurity Fundamentals (CIA Triad, Risk)",
+              "type": "Technical"
+            },
+            {
+              "id": "2",
+              "title": "Linux Operations & Command Line (The OS of the web)",
+              "type": "Technical"
+            },
+            {
+              "id": "3",
+              "title": "Computer Networking & TCP/IP (How data moves)",
+              "type": "Technical"
+            },
+            {
+              "id": "16",
+              "title": "Critical Thinking (Analyzing data without bias)",
+              "type": "Soft Skills"
+            }
+          ]
+        },
+        {
+          "name": "Phase 2: Intelligence Tradecraft (Months 2-3)",
+          "modules": [
+            {
+              "id": "14",
+              "title": "OSINT (Open Source Intelligence)",
+              "type": "Technical"
+            },
+            {
+              "id": "15",
+              "title": "Digital Footprinting & Reconnaissance",
+              "type": "Technical"
+            },
+            {
+              "id": "16",
+              "title": "Dark Web Operations (Tor, I2P)",
+              "type": "Technical"
+            },
+            {
+              "id": "17",
+              "title": "Operational Security (OpSec) & Anonymity",
+              "type": "Technical"
+            },
+            {
+              "id": "11",
+              "title": "Report Writing for Executives (Turning intel into value)",
+              "type": "Soft Skills"
+            }
+          ]
+        },
+        {
+          "name": "Phase 3: Advanced Analysis (Months 4-5)",
+          "modules": [
+            {
+              "id": "28",
+              "title": "Indicators of Compromise (IoC) Discovery",
+              "type": "Technical"
+            },
+            {
+              "id": "27",
+              "title": "Malware Analysis Fundamentals (Knowing the enemy)",
+              "type": "Technical"
+            },
+            {
+              "id": "46",
+              "title": "Geopolitical Risk Analysis (Nation-state actors)",
+              "type": "Technical"
+            },
+            {
+              "id": "17",
+              "title": "Analytical Problem Solving (Connecting the dots)",
+              "type": "Soft Skills"
+            }
+          ]
+        },
+        {
+          "name": "Phase 4: Career Launch (Month 6)",
+          "modules": [
+            {
+              "id": "45",
+              "title": "Cyber Warfare Tactics (Strategic view)",
+              "type": "Technical"
+            },
+            {
+              "id": "1",
+              "title": "Resume Building & Optimization",
+              "type": "Soft Skills"
+            },
+            {
+              "id": "2",
+              "title": "Interview Preparation & Mock Sessions",
+              "type": "Soft Skills"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "SOC Operations & Incident Response",
+      "phases": [
+        {
+          "name": "Phase 1: The Foundation (Month 1)",
+          "modules": [
+            {
+              "id": "1",
+              "title": "Cybersecurity Fundamentals",
+              "type": "Technical"
+            },
+            {
+              "id": "3",
+              "title": "Computer Networking & TCP/IP",
+              "type": "Technical"
+            },
+            {
+              "id": "4",
+              "title": "Virtualization & Lab Setup",
+              "type": "Technical"
+            },
+            {
+              "id": "33",
+              "title": "Stress Management & Resilience (Essential for SOC burnout)",
+              "type": "Soft Skills"
+            }
+          ]
+        },
+        {
+          "name": "Phase 2: Detection & Analysis (Months 2-3)",
+          "modules": [
+            {
+              "id": "5",
+              "title": "Network Traffic Analysis",
+              "type": "Technical"
+            },
+            {
+              "id": "6",
+              "title": "Packet Sniffing & Wireshark Mastery",
+              "type": "Technical"
+            },
+            {
+              "id": "7",
+              "title": "SIEM Architecture & Deployment (Splunk/Wazuh)",
+              "type": "Technical"
+            },
+            {
+              "id": "8",
+              "title": "Log Analysis & Management",
+              "type": "Technical"
+            },
+            {
+              "id": "22",
+              "title": "Time Management & Productivity (Handling alerts)",
+              "type": "Soft Skills"
+            }
+          ]
+        },
+        {
+          "name": "Phase 3: Incident Response (Months 4-5)",
+          "modules": [
+            {
+              "id": "9",
+              "title": "Incident Response Lifecycle",
+              "type": "Technical"
+            },
+            {
+              "id": "10",
+              "title": "Playbook Design & Automation",
+              "type": "Technical"
+            },
+            {
+              "id": "11",
+              "title": "Endpoint Detection & Response (EDR)",
+              "type": "Technical"
+            },
+            {
+              "id": "47",
+              "title": "AI for Defense (SOC Automation)",
+              "type": "Technical"
+            },
+            {
+              "id": "8",
+              "title": "Crisis Communication & Stakeholder Management",
+              "type": "Soft Skills"
+            }
+          ]
+        },
+        {
+          "name": "Phase 4: Career Launch (Month 6)",
+          "modules": [
+            {
+              "id": "12",
+              "title": "Digital Forensics (Post-mortem analysis)",
+              "type": "Technical"
+            },
+            {
+              "id": "1",
+              "title": "Resume Building & Optimization",
+              "type": "Soft Skills"
+            },
+            {
+              "id": "2",
+              "title": "Interview Preparation & Mock Sessions",
+              "type": "Soft Skills"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "DevSecOps & Cloud Security",
+      "phases": [
+        {
+          "name": "Phase 1: The Foundation (Month 1)",
+          "modules": [
+            {
+              "id": "2",
+              "title": "Linux Operations & Command Line",
+              "type": "Technical"
+            },
+            {
+              "id": "30",
+              "title": "Bash Scripting",
+              "type": "Technical"
+            },
+            {
+              "id": "29",
+              "title": "Python for Cybersecurity (Basics)",
+              "type": "Technical"
+            },
+            {
+              "id": "20",
+              "title": "Systems Thinking (Understanding the whole stack)",
+              "type": "Soft Skills"
+            }
+          ]
+        },
+        {
+          "name": "Phase 2: Cloud & Infrastructure (Months 2-3)",
+          "modules": [
+            {
+              "id": "33",
+              "title": "Cloud Computing Fundamentals",
+              "type": "Technical"
+            },
+            {
+              "id": "34",
+              "title": "Cloud Infrastructure Security (AWS/Azure)",
+              "type": "Technical"
+            },
+            {
+              "id": "35",
+              "title": "Container Security (Docker)",
+              "type": "Technical"
+            },
+            {
+              "id": "36",
+              "title": "Kubernetes Security & Orchestration",
+              "type": "Technical"
+            },
+            {
+              "id": "32",
+              "title": "Team Collaboration Dynamics (Working with Devs)",
+              "type": "Soft Skills"
+            }
+          ]
+        },
+        {
+          "name": "Phase 3: Pipeline & Code Security (Months 4-5)",
+          "modules": [
+            {
+              "id": "37",
+              "title": "CI/CD Pipeline Security",
+              "type": "Technical"
+            },
+            {
+              "id": "31",
+              "title": "Secure Coding Practices",
+              "type": "Technical"
+            },
+            {
+              "id": "32",
+              "title": "Code Review & Static Analysis (SAST)",
+              "type": "Technical"
+            },
+            {
+              "id": "38",
+              "title": "API Security Testing",
+              "type": "Technical"
+            },
+            {
+              "id": "23",
+              "title": "Agile Methodologies (Scrum/Kanban)",
+              "type": "Soft Skills"
+            }
+          ]
+        },
+        {
+          "name": "Phase 4: Career Launch (Month 6)",
+          "modules": [
+            {
+              "id": "49",
+              "title": "LLM Security (Securing AI apps)",
+              "type": "Technical"
+            },
+            {
+              "id": "5",
+              "title": "Portfolio Development (GitHub focus)",
+              "type": "Soft Skills"
+            },
+            {
+              "id": "2",
+              "title": "Interview Preparation & Mock Sessions",
+              "type": "Soft Skills"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Enterprise GRC & Security Auditing",
+      "phases": [
+        {
+          "name": "Phase 1: The Foundation (Month 1)",
+          "modules": [
+            {
+              "id": "1",
+              "title": "Cybersecurity Fundamentals",
+              "type": "Technical"
+            },
+            {
+              "id": "40",
+              "title": "NIST Cybersecurity Framework",
+              "type": "Technical"
+            },
+            {
+              "id": "3",
+              "title": "Computer Networking (Concept level)",
+              "type": "Technical"
+            },
+            {
+              "id": "36",
+              "title": "Workplace Ethics & Integrity",
+              "type": "Soft Skills"
+            }
+          ]
+        },
+        {
+          "name": "Phase 2: Risk & Compliance (Months 2-3)",
+          "modules": [
+            {
+              "id": "39",
+              "title": "ISO 27001 Standards & Implementation",
+              "type": "Technical"
+            },
+            {
+              "id": "41",
+              "title": "Risk Management Strategies",
+              "type": "Technical"
+            },
+            {
+              "id": "42",
+              "title": "Compliance Frameworks (GDPR/HIPAA/PCI)",
+              "type": "Technical"
+            },
+            {
+              "id": "43",
+              "title": "Internal Auditing Procedures",
+              "type": "Technical"
+            },
+            {
+              "id": "10",
+              "title": "Technical Writing (SOPs & Policies)",
+              "type": "Soft Skills"
+            }
+          ]
+        },
+        {
+          "name": "Phase 3: Strategy & Vendors (Months 4-5)",
+          "modules": [
+            {
+              "id": "44",
+              "title": "Third-Party Risk Management (TPRM)",
+              "type": "Technical"
+            },
+            {
+              "id": "25",
+              "title": "Business Acumen for Tech Pros",
+              "type": "Technical"
+            },
+            {
+              "id": "46",
+              "title": "Geopolitical Risk Analysis",
+              "type": "Technical"
+            },
+            {
+              "id": "14",
+              "title": "Negotiation Skills (Pushing back on stakeholders)",
+              "type": "Soft Skills"
+            },
+            {
+              "id": "7",
+              "title": "Public Speaking (Presenting audit results)",
+              "type": "Soft Skills"
+            }
+          ]
+        },
+        {
+          "name": "Phase 4: Career Launch (Month 6)",
+          "modules": [
+            {
+              "id": "24",
+              "title": "Project Management Basics",
+              "type": "Technical"
+            },
+            {
+              "id": "4",
+              "title": "LinkedIn Growth & Optimization",
+              "type": "Soft Skills"
+            },
+            {
+              "id": "2",
+              "title": "Interview Preparation & Mock Sessions",
+              "type": "Soft Skills"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Advanced Penetration Testing & Red Teaming",
+      "phases": [
+        {
+          "name": "Phase 1: The Foundation (Month 1)",
+          "modules": [
+            {
+              "id": "1",
+              "title": "Cybersecurity Fundamentals",
+              "type": "Technical"
+            },
+            {
+              "id": "2",
+              "title": "Linux Operations & Command Line",
+              "type": "Technical"
+            },
+            {
+              "id": "3",
+              "title": "Computer Networking & TCP/IP",
+              "type": "Technical"
+            },
+            {
+              "id": "19",
+              "title": "Cognitive Biases (Thinking like an attacker)",
+              "type": "Soft Skills"
+            }
+          ]
+        },
+        {
+          "name": "Phase 2: Network & Web Attacks (Months 2-3)",
+          "modules": [
+            {
+              "id": "18",
+              "title": "Network Scanning (Nmap)",
+              "type": "Technical"
+            },
+            {
+              "id": "19",
+              "title": "Vulnerability Assessment",
+              "type": "Technical"
+            },
+            {
+              "id": "20",
+              "title": "Web Application Security (OWASP Top 10)",
+              "type": "Technical"
+            },
+            {
+              "id": "21",
+              "title": "Burp Suite Professional",
+              "type": "Technical"
+            },
+            {
+              "id": "11",
+              "title": "Report Writing for Executives (The most important pentest skill)",
+              "type": "Soft Skills"
+            }
+          ]
+        },
+        {
+          "name": "Phase 3: Advanced Exploitation (Months 4-5)",
+          "modules": [
+            {
+              "id": "22",
+              "title": "System Hacking & Exploitation",
+              "type": "Technical"
+            },
+            {
+              "id": "23",
+              "title": "Privilege Escalation (Linux/Windows)",
+              "type": "Technical"
+            },
+            {
+              "id": "25",
+              "title": "Active Directory Attacks",
+              "type": "Technical"
+            },
+            {
+              "id": "24",
+              "title": "Lateral Movement Techniques",
+              "type": "Technical"
+            },
+            {
+              "id": "21",
+              "title": "Creative Innovation (Bypassing controls)",
+              "type": "Soft Skills"
+            }
+          ]
+        },
+        {
+          "name": "Phase 4: Career Launch (Month 6)",
+          "modules": [
+            {
+              "id": "26",
+              "title": "Social Engineering Tactics",
+              "type": "Technical"
+            },
+            {
+              "id": "3",
+              "title": "Personal Branding Strategy",
+              "type": "Soft Skills"
+            },
+            {
+              "id": "2",
+              "title": "Interview Preparation & Mock Sessions",
+              "type": "Soft Skills"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Security Automation & Tool Development",
+      "phases": [
+        {
+          "name": "Phase 1: The Foundation (Month 1)",
+          "modules": [
+            {
+              "id": "2",
+              "title": "Linux Operations & Command Line",
+              "type": "Technical"
+            },
+            {
+              "id": "29",
+              "title": "Python for Cybersecurity (Core Syntax)",
+              "type": "Technical"
+            },
+            {
+              "id": "1",
+              "title": "Cybersecurity Fundamentals",
+              "type": "Technical"
+            },
+            {
+              "id": "17",
+              "title": "Analytical Problem Solving",
+              "type": "Soft Skills"
+            }
+          ]
+        },
+        {
+          "name": "Phase 2: Scripting & Automation (Months 2-3)",
+          "modules": [
+            {
+              "id": "30",
+              "title": "Bash Scripting",
+              "type": "Technical"
+            },
+            {
+              "id": "18",
+              "title": "Network Scanning (Understanding what to automate)",
+              "type": "Technical"
+            },
+            {
+              "id": "47",
+              "title": "AI for Defense (Using AI APIs)",
+              "type": "Technical"
+            },
+            {
+              "id": "10",
+              "title": "Playbook Design & Automation",
+              "type": "Technical"
+            },
+            {
+              "id": "22",
+              "title": "Time Management & Productivity",
+              "type": "Soft Skills"
+            }
+          ]
+        },
+        {
+          "name": "Phase 3: Development & Integration (Months 4-5)",
+          "modules": [
+            {
+              "id": "15",
+              "title": "Developing Custom Security Tools",
+              "type": "Technical"
+            },
+            {
+              "id": "38",
+              "title": "API Security Testing (Building & Breaking)",
+              "type": "Technical"
+            },
+            {
+              "id": "31",
+              "title": "Secure Coding Practices",
+              "type": "Technical"
+            },
+            {
+              "id": "32",
+              "title": "Code Review & Static Analysis",
+              "type": "Technical"
+            },
+            {
+              "id": "32",
+              "title": "Team Collaboration Dynamics",
+              "type": "Soft Skills"
+            }
+          ]
+        },
+        {
+          "name": "Phase 4: Career Launch (Month 6)",
+          "modules": [
+            {
+              "id": "49",
+              "title": "LLM Security (Building secure AI agents)",
+              "type": "Technical"
+            },
+            {
+              "id": "5",
+              "title": "Portfolio Development (GitHub)",
+              "type": "Soft Skills"
+            },
+            {
+              "id": "2",
+              "title": "Interview Preparation & Mock Sessions",
+              "type": "Soft Skills"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "modules": {
+    "technical": [
+      {
+        "id": 1,
+        "title": "Cybersecurity Fundamentals",
+        "category": "Offensive Security",
+        "goal": "",
+        "concepts": "",
+        "tools": "",
+        "skills": ""
+      },
+      {
+        "id": 14,
+        "title": "OSINT (Open Source Intelligence)",
+        "category": "Offensive Security",
+        "goal": "",
+        "concepts": "",
+        "tools": "",
+        "skills": ""
+      },
+      {
+        "id": 2,
+        "title": "Linux Operations & Command Line",
+        "category": "Offensive Security",
+        "goal": "",
+        "concepts": "",
+        "tools": "",
+        "skills": ""
+      },
+      {
+        "id": 15,
+        "title": "Digital Footprinting & Reconnaissance",
+        "category": "Offensive Security",
+        "goal": "",
+        "concepts": "",
+        "tools": "",
+        "skills": ""
+      },
+      {
+        "id": 3,
+        "title": "Computer Networking & TCP/IP",
+        "category": "Offensive Security",
+        "goal": "",
+        "concepts": "",
+        "tools": "",
+        "skills": ""
+      },
+      {
+        "id": 16,
+        "title": "Dark Web Operations",
+        "category": "Offensive Security",
+        "goal": "",
+        "concepts": "",
+        "tools": "",
+        "skills": ""
+      },
+      {
+        "id": 4,
+        "title": "Virtualization & Lab Setup",
+        "category": "Offensive Security",
+        "goal": "",
+        "concepts": "",
+        "tools": "",
+        "skills": ""
+      },
+      {
+        "id": 17,
+        "title": "Operational Security (OpSec) & Anonymity",
+        "category": "Offensive Security",
+        "goal": "",
+        "concepts": "",
+        "tools": "",
+        "skills": ""
+      },
+      {
+        "id": 5,
+        "title": "Network Traffic Analysis",
+        "category": "Offensive Security",
+        "goal": "",
+        "concepts": "",
+        "tools": "",
+        "skills": ""
+      },
+      {
+        "id": 18,
+        "title": "Network Scanning (Nmap/Masscan)",
+        "category": "Offensive Security",
+        "goal": "",
+        "concepts": "",
+        "tools": "",
+        "skills": ""
+      },
+      {
+        "id": 6,
+        "title": "Packet Sniffing & Wireshark Mastery",
+        "category": "Offensive Security",
+        "goal": "",
+        "concepts": "",
+        "tools": "",
+        "skills": ""
+      },
+      {
+        "id": 19,
+        "title": "Vulnerability Assessment (Nessus/OpenVAS)",
+        "category": "Offensive Security",
+        "goal": "",
+        "concepts": "",
+        "tools": "",
+        "skills": ""
+      },
+      {
+        "id": 7,
+        "title": "SIEM Architecture & Deployment",
+        "category": "Offensive Security",
+        "goal": "",
+        "concepts": "",
+        "tools": "",
+        "skills": ""
+      },
+      {
+        "id": 20,
+        "title": "Web Application Security (OWASP Top 10)",
+        "category": "Offensive Security",
+        "goal": "",
+        "concepts": "",
+        "tools": "",
+        "skills": ""
+      },
+      {
+        "id": 8,
+        "title": "Log Analysis & Management",
+        "category": "Offensive Security",
+        "goal": "",
+        "concepts": "",
+        "tools": "",
+        "skills": ""
+      },
+      {
+        "id": 21,
+        "title": "Burp Suite Professional",
+        "category": "Offensive Security",
+        "goal": "",
+        "concepts": "",
+        "tools": "",
+        "skills": ""
+      },
+      {
+        "id": 9,
+        "title": "Incident Response Lifecycle",
+        "category": "Offensive Security",
+        "goal": "",
+        "concepts": "",
+        "tools": "",
+        "skills": ""
+      },
+      {
+        "id": 22,
+        "title": "System Hacking & Exploitation",
+        "category": "Offensive Security",
+        "goal": "",
+        "concepts": "",
+        "tools": "",
+        "skills": ""
+      },
+      {
+        "id": 10,
+        "title": "Playbook Design & Automation",
+        "category": "Offensive Security",
+        "goal": "",
+        "concepts": "",
+        "tools": "",
+        "skills": ""
+      },
+      {
+        "id": 23,
+        "title": "Privilege Escalation (Linux/Windows)",
+        "category": "Offensive Security",
+        "goal": "",
+        "concepts": "",
+        "tools": "",
+        "skills": ""
+      },
+      {
+        "id": 11,
+        "title": "Endpoint Detection & Response (EDR)",
+        "category": "Offensive Security",
+        "goal": "",
+        "concepts": "",
+        "tools": "",
+        "skills": ""
+      },
+      {
+        "id": 24,
+        "title": "Lateral Movement Techniques",
+        "category": "Offensive Security",
+        "goal": "",
+        "concepts": "",
+        "tools": "",
+        "skills": ""
+      },
+      {
+        "id": 12,
+        "title": "Digital Forensics",
+        "category": "Offensive Security",
+        "goal": "",
+        "concepts": "",
+        "tools": "",
+        "skills": ""
+      },
+      {
+        "id": 25,
+        "title": "Active Directory Attacks",
+        "category": "Offensive Security",
+        "goal": "",
+        "concepts": "",
+        "tools": "",
+        "skills": ""
+      },
+      {
+        "id": 13,
+        "title": "Evidence Handling & Chain of Custody",
+        "category": "Offensive Security",
+        "goal": "",
+        "concepts": "",
+        "tools": "",
+        "skills": ""
+      },
+      {
+        "id": 26,
+        "title": "Social Engineering Tactics",
+        "category": "Offensive Security",
+        "goal": "",
+        "concepts": "",
+        "tools": "",
+        "skills": ""
+      },
+      {
+        "id": 27,
+        "title": "Malware Analysis Fundamentals",
+        "category": "Offensive Security",
+        "goal": "",
+        "concepts": "",
+        "tools": "",
+        "skills": ""
+      },
+      {
+        "id": 28,
+        "title": "Indicators of Compromise (IoC) Discovery",
+        "category": "Offensive Security",
+        "goal": "",
+        "concepts": "",
+        "tools": "",
+        "skills": ""
+      },
+      {
+        "id": 29,
+        "title": "Python for Cybersecurity",
+        "category": "GRC & Strategy",
+        "goal": "",
+        "concepts": "",
+        "tools": "",
+        "skills": ""
+      },
+      {
+        "id": 39,
+        "title": "ISO 27001 Standards & Implementation",
+        "category": "GRC & Strategy",
+        "goal": "Understanding the global gold standard for InfoSec.",
+        "concepts": "ISMS (Information Security Management System). PDCA Cycle. Annex A Controls. Policy writing.",
+        "tools": "Documentation Templates, Compliance Tools.",
+        "skills": "Drafting security policies. Preparing for external certification audits."
+      },
+      {
+        "id": 30,
+        "title": "Bash Scripting",
+        "category": "GRC & Strategy",
+        "goal": "",
+        "concepts": "",
+        "tools": "",
+        "skills": ""
+      },
+      {
+        "id": 40,
+        "title": "NIST Cybersecurity Framework",
+        "category": "GRC & Strategy",
+        "goal": "Adopting the US standard for critical infrastructure protection.",
+        "concepts": "The 5 Functions (Identify, Protect, Detect, Respond, Recover). NIST SP 800-53. Tier levels.",
+        "tools": "NIST CSF Excel Tool, DHS CSET.",
+        "skills": "Mapping controls to risks. Performing a gap analysis against NIST."
+      },
+      {
+        "id": 31,
+        "title": "Secure Coding Practices",
+        "category": "GRC & Strategy",
+        "goal": "",
+        "concepts": "",
+        "tools": "",
+        "skills": ""
+      },
+      {
+        "id": 41,
+        "title": "Risk Management Strategies",
+        "category": "GRC & Strategy",
+        "goal": "Quantifying uncertainty and loss.",
+        "concepts": "Risk Appetite vs. Tolerance. Qualitative vs. Quantitative Analysis. SLE/ALE. Risk Registers.",
+        "tools": "Risk Heat Maps, Excel.",
+        "skills": "Calculating financial risk. Prioritizing security investments based on ROI."
+      },
+      {
+        "id": 32,
+        "title": "Code Review & Static Analysis (SAST)",
+        "category": "GRC & Strategy",
+        "goal": "",
+        "concepts": "",
+        "tools": "",
+        "skills": ""
+      },
+      {
+        "id": 42,
+        "title": "Compliance Frameworks (GDPR/HIPAA/PCI)",
+        "category": "GRC & Strategy",
+        "goal": "",
+        "concepts": "",
+        "tools": "",
+        "skills": ""
+      },
+      {
+        "id": 33,
+        "title": "Cloud Computing Fundamentals",
+        "category": "GRC & Strategy",
+        "goal": "",
+        "concepts": "",
+        "tools": "",
+        "skills": ""
+      },
+      {
+        "id": 43,
+        "title": "Internal Auditing Procedures",
+        "category": "GRC & Strategy",
+        "goal": "Verifying that controls are actually working.",
+        "concepts": "Audit Scope. Evidence Collection. Sampling. Reporting findings. Independence.",
+        "tools": "AuditScripts, Evidence Repositories.",
+        "skills": "Conducting stakeholder interviews. verifying technical controls. Writing audit reports."
+      },
+      {
+        "id": 34,
+        "title": "Cloud Infrastructure Security (AWS/Azure)",
+        "category": "GRC & Strategy",
+        "goal": "",
+        "concepts": "",
+        "tools": "",
+        "skills": ""
+      },
+      {
+        "id": 44,
+        "title": "Third-Party Risk Management (TPRM)",
+        "category": "GRC & Strategy",
+        "goal": "Managing the risk of vendors and supply chains.",
+        "concepts": "Vendor Due Diligence. SIG/CAIQ Questionnaires. SLAs. Right to Audit clauses.",
+        "tools": "Vendor Assessment Templates.",
+        "skills": "Evaluating vendor security posture. Negotiating security clauses in contracts."
+      },
+      {
+        "id": 35,
+        "title": "Container Security (Docker)",
+        "category": "GRC & Strategy",
+        "goal": "",
+        "concepts": "",
+        "tools": "",
+        "skills": ""
+      },
+      {
+        "id": 45,
+        "title": "Cyber Warfare Tactics",
+        "category": "GRC & Strategy",
+        "goal": "Understanding the strategic landscape of nation-state conflict.",
+        "concepts": "APTs (Advanced Persistent Threats). Critical Infrastructure targets. Disinformation. Cyber Espionage.",
+        "tools": "MITRE ATT&CK Framework.",
+        "skills": "Profiling nation-state actors. Understanding strategic cyber capabilities."
+      },
+      {
+        "id": 36,
+        "title": "Kubernetes Security & Orchestration",
+        "category": "GRC & Strategy",
+        "goal": "",
+        "concepts": "",
+        "tools": "",
+        "skills": ""
+      },
+      {
+        "id": 46,
+        "title": "Geopolitical Risk Analysis",
+        "category": "GRC & Strategy",
+        "goal": "analyzing how global events impact cyber threat levels.",
+        "concepts": "Regional threat actors (Russia, China, etc.). Attribution problems. Sanctions and cyber response.",
+        "tools": "Feedly (Intel Aggregation), Recorded Future (Concepts).",
+        "skills": "Producing strategic threat briefings. Anticipating attacks based on world news."
+      },
+      {
+        "id": 37,
+        "title": "CI/CD Pipeline Security",
+        "category": "GRC & Strategy",
+        "goal": "Integrating security into the DevOps lifecycle (Shift Left).",
+        "concepts": "The DevOps Loop. Automated Security Gates. Supply Chain Security. Artifact integrity.",
+        "tools": "Jenkins, GitLab CI, OWASP Dependency Check.",
+        "skills": "Building secure pipelines. Automating vulnerability scans on commit."
+      },
+      {
+        "id": 38,
+        "title": "API Security Testing",
+        "category": "GRC & Strategy",
+        "goal": "Securing the connective tissue of modern apps.",
+        "concepts": "REST vs GraphQL. OWASP API Top 10. BOLA/IDOR. Rate Limiting. JWT Attacks.",
+        "tools": "Postman, Burp Suite, KiteRunner.",
+        "skills": "Testing API endpoints. Manipulating JSON tokens. Identifying logic flaws in APIs."
+      },
+      {
+        "id": 47,
+        "title": "AI for Defense (SOC Automation)",
+        "category": "Future Tech & AI",
+        "goal": "Leveraging AI to fight scale with scale.",
+        "concepts": "Anomaly Detection. UEBA (User Entity Behavior Analytics). Supervised vs. Unsupervised Learning.",
+        "tools": "Darktrace (Concepts), Splunk ML Toolkit.",
+        "skills": "Configuring AI-driven alerts. Reducing false positives using ML."
+      },
+      {
+        "id": 51,
+        "title": "Blockchain Security",
+        "category": "Future Tech & AI",
+        "goal": "Securing Web3 and distributed ledgers.",
+        "concepts": "Consensus (PoW/PoS). 51% Attacks. Private Keys/Wallets.",
+        "tools": "MetaMask, Etherscan, Geth.",
+        "skills": "analyzing blockchain transactions. Securing digital wallets."
+      },
+      {
+        "id": 48,
+        "title": "Adversarial AI (Attacking Models)",
+        "category": "Future Tech & AI",
+        "goal": "Understanding how to trick Artificial Intelligence.",
+        "concepts": "Data Poisoning. Model Inversion. Evasion Attacks. Black Box vs White Box attacks.",
+        "tools": "Adversarial Robustness Toolbox (ART), Counterfit.",
+        "skills": "Testing AI models for robustness. Understanding model vulnerabilities."
+      },
+      {
+        "id": 52,
+        "title": "Smart Contract Auditing",
+        "category": "Future Tech & AI",
+        "goal": "Finding money-losing bugs in decentralized code.",
+        "concepts": "Reentrancy Attacks. Integer Overflows. Flash Loans. Gas Optimization.",
+        "tools": "Remix IDE, Slither, MythX.",
+        "skills": "Auditing Solidity code. Identifying logic flaws in contracts."
+      },
+      {
+        "id": 49,
+        "title": "LLM Security (Prompt Injection Defense)",
+        "category": "Future Tech & AI",
+        "goal": "Securing the new wave of Generative AI applications.",
+        "concepts": "Prompt Injection (Jailbreaking). Data Leakage. OWASP Top 10 for LLMs.",
+        "tools": "Garak, LangChain Security.",
+        "skills": "Auditing LLM prompts. Preventing sensitive data exfiltration via AI."
+      },
+      {
+        "id": 53,
+        "title": "IoT Security Fundamentals",
+        "category": "Future Tech & AI",
+        "goal": "Securing the Internet of Things.",
+        "concepts": "Edge Computing. MQTT/CoAP. Firmware security. Botnets (Mirai).",
+        "tools": "Binwalk, Shodan, Wireshark.",
+        "skills": "Extracting firmware. analyzing IoT network traffic."
+      },
+      {
+        "id": 50,
+        "title": "Quantum Cryptography Basics",
+        "category": "Future Tech & AI",
+        "goal": "Preparing for the \"Q-Day\" apocalypse.",
+        "concepts": "Qubits. Shor\u2019s Algorithm. Post-Quantum Cryptography (PQC). QKD.",
+        "tools": "Qiskit (IBM), OpenQuantumSafe.",
+        "skills": "Understanding the threat to RSA/ECC. Identifying crypto-agility needs."
+      },
+      {
+        "id": 54,
+        "title": "OT & SCADA Security",
+        "category": "Future Tech & AI",
+        "goal": "Protecting industrial control systems.",
+        "concepts": "Purdue Model. PLCs & HMIs. Air Gapping. Modbus/DNP3.",
+        "tools": "ScadaBR, GRFICS.",
+        "skills": "Understanding industrial protocols. Recognizing safety system risks."
+      }
+    ],
+    "soft_skills": [
+      {
+        "id": 1,
+        "title": "Resume Building & Optimization",
+        "category": "Communication",
+        "goal": "Creating a CV that passes the robots (ATS) and impresses humans.",
+        "concepts": "ATS Logic. Keyword optimization. Action Verbs. Result-oriented bullets.",
+        "tools": "Canva, Jobscan, LaTeX.",
+        "skills": "Writing an ATS-compliant resume. Structuring technical experience effectively."
+      },
+      {
+        "id": 7,
+        "title": "Public Speaking",
+        "category": "Communication",
+        "goal": "Delivering technical ideas with confidence.",
+        "concepts": "Body language. Voice modulation. Story arcs. Handling Q&A.",
+        "tools": "TED Talks, Toastmasters.",
+        "skills": "Overcoming stage fright. Presenting to groups."
+      },
+      {
+        "id": 2,
+        "title": "Interview Preparation & Mock Sessions",
+        "category": "Communication",
+        "goal": "Mastering the art of the interview.",
+        "concepts": "STAR Method (Behavioral). Whiteboard coding logic. Salary negotiation basics.",
+        "tools": "Pramp, Glassdoor, Voice Recorder.",
+        "skills": "Answering \"Tell me about yourself\" confidently. Handling technical grilling."
+      },
+      {
+        "id": 8,
+        "title": "Presentation Design (PowerPoint/Canva)",
+        "category": "Communication",
+        "goal": "Creating slides that inform, not bore.",
+        "concepts": "Visual Hierarchy. Data Viz best practices. \"Death by PowerPoint\" avoidance.",
+        "tools": "PowerPoint, Canva, Prezi.",
+        "skills": "Designing clean, professional decks. Summarizing complex data."
+      },
+      {
+        "id": 3,
+        "title": "Personal Branding Strategy",
+        "category": "Communication",
+        "goal": "Establishing a professional reputation in the industry.",
+        "concepts": "Niche definition. Content strategy. Authority building. Consistency.",
+        "tools": "Medium, Twitter/X, Personal Blog.",
+        "skills": "creating technical content. Building an audience."
+      },
+      {
+        "id": 9,
+        "title": "Storytelling with Data",
+        "category": "Communication",
+        "goal": "Making numbers emotional and memorable.",
+        "concepts": "Narrative structure. Choosing correct charts. Guiding attention.",
+        "tools": "Tableau Public, Google Data Studio.",
+        "skills": "Creating compelling data narratives."
+      },
+      {
+        "id": 4,
+        "title": "LinkedIn Growth & Optimization",
+        "category": "Communication",
+        "goal": "Turning a profile into an inbound lead generator.",
+        "concepts": "SEO for Profiles. Headline engineering. Social Selling Index (SSI).",
+        "tools": "LinkedIn Analytics.",
+        "skills": "Creating an \"All-Star\" profile. Networking with recruiters."
+      },
+      {
+        "id": 10,
+        "title": "Technical Writing (SOPs/Documentation)",
+        "category": "Communication",
+        "goal": "Writing clear, usable documentation.",
+        "concepts": "Audience analysis. SOP structure. Conciseness. API Docs.",
+        "tools": "Markdown, Confluence, Word.",
+        "skills": "Writing Standard Operating Procedures. Documenting code."
+      },
+      {
+        "id": 5,
+        "title": "Portfolio Development",
+        "category": "Communication",
+        "goal": "Proving skills through tangible work.",
+        "concepts": "Documentation standards. GitHub structure. CTF Write-ups.",
+        "tools": "GitHub, GitBook, WordPress.",
+        "skills": "Showcasing code and projects. Writing technical guides."
+      },
+      {
+        "id": 11,
+        "title": "Report Writing for Executives",
+        "category": "Communication",
+        "goal": "Translating tech risk into business language.",
+        "concepts": "BLUF (Bottom Line Up Front). Executive Summaries. Risk Impact Matrices.",
+        "tools": "Report Templates.",
+        "skills": "Writing pentest executive summaries. Justifying budgets."
+      },
+      {
+        "id": 6,
+        "title": "Professional Networking Strategies",
+        "category": "Communication",
+        "goal": "Accessing the hidden job market.",
+        "concepts": "Weak Ties theory. Informational Interviews. Cold outreach etiquette.",
+        "tools": "Hunter.io, LinkedIn Sales Nav.",
+        "skills": "expanding professional network. Getting referrals."
+      },
+      {
+        "id": 12,
+        "title": "Email Etiquette & Corporate Messaging",
+        "category": "Communication",
+        "goal": "Professional written communication.",
+        "concepts": "Tone. Clarity. Call to Action. Reply All etiquette.",
+        "tools": "Grammarly.",
+        "skills": "Writing effective business emails."
+      },
+      {
+        "id": 13,
+        "title": "Cross-Cultural Communication",
+        "category": "Communication",
+        "goal": "Working effectively in global teams.",
+        "concepts": "High vs. Low Context. Feedback styles. Time perception.",
+        "tools": "The Culture Map.",
+        "skills": "Navigating cultural differences in remote teams."
+      },
+      {
+        "id": 14,
+        "title": "Negotiation Skills",
+        "category": "Communication",
+        "goal": "Getting what you want without burning bridges.",
+        "concepts": "BATNA. Win-Win strategies. Anchoring.",
+        "tools": "Levels.fyi (Salary data).",
+        "skills": "Negotiating salaries. Securing budget approvals."
+      },
+      {
+        "id": 15,
+        "title": "Persuasion & Influence",
+        "category": "Communication",
+        "goal": "Influencing without authority.",
+        "concepts": "Cialdini\u2019s 6 Principles. Stakeholder Management.",
+        "tools": "Stakeholder Maps.",
+        "skills": "Getting buy-in for security initiatives."
+      },
+      {
+        "id": 16,
+        "title": "Critical Thinking",
+        "category": "Management & Business",
+        "goal": "Analyzing information objectively.",
+        "concepts": "First Principles. Socratic Method. Correlation vs. Causation.",
+        "tools": "Mind Mapping.",
+        "skills": "Questioning assumptions. Validating evidence."
+      },
+      {
+        "id": 22,
+        "title": "Time Management & Productivity",
+        "category": "Management & Business",
+        "goal": "Maximizing output and focus.",
+        "concepts": "Pomodoro. Eisenhower Matrix. Deep Work.",
+        "tools": "Trello/Notion, Focus Timers.",
+        "skills": "Prioritizing tasks. Managing interruptions."
+      },
+      {
+        "id": 17,
+        "title": "Analytical Problem Solving",
+        "category": "Management & Business",
+        "goal": "Systematically solving complex issues.",
+        "concepts": "Root Cause Analysis. 5 Whys. Fishbone Diagrams.",
+        "tools": "SWOT Analysis.",
+        "skills": "Debugging complex failures. finding root causes."
+      },
+      {
+        "id": 23,
+        "title": "Agile Methodologies (Scrum/Kanban)",
+        "category": "Management & Business",
+        "goal": "Working at the speed of modern dev.",
+        "concepts": "Scrum. Kanban. Sprints. User Stories.",
+        "tools": "Jira, Kanban Boards.",
+        "skills": "Participating in stand-ups. Working in sprints."
+      },
+      {
+        "id": 18,
+        "title": "Strategic Decision Making",
+        "category": "Management & Business",
+        "goal": "Making choices under uncertainty.",
+        "concepts": "OODA Loop. Decision Trees. Risk-based choices.",
+        "tools": "Decision Matrices.",
+        "skills": "Making fast, accurate decisions in a crisis."
+      },
+      {
+        "id": 24,
+        "title": "Project Management Basics",
+        "category": "Management & Business",
+        "goal": "Delivering projects on time and budget.",
+        "concepts": "Scope. Timeline. Critical Path. Gantt Charts.",
+        "tools": "Asana, MS Project.",
+        "skills": "Managing security projects. Tracking progress."
+      },
+      {
+        "id": 19,
+        "title": "Cognitive Biases & Fallacies",
+        "category": "Management & Business",
+        "goal": "Identifying flaws in reasoning.",
+        "concepts": "Confirmation Bias. Sunk Cost. Availability Heuristic. Dunning-Kruger.",
+        "tools": "Bias Cheat Sheets.",
+        "skills": "Avoiding mental traps during investigations."
+      },
+      {
+        "id": 25,
+        "title": "Business Acumen for Tech Pros",
+        "category": "Management & Business",
+        "goal": "Understanding the business engine.",
+        "concepts": "ROI. EBITDA. Profit & Loss. Strategic alignment.",
+        "tools": "Annual Reports.",
+        "skills": "Speaking the language of business."
+      },
+      {
+        "id": 20,
+        "title": "Systems Thinking",
+        "category": "Management & Business",
+        "goal": "Seeing the big picture.",
+        "concepts": "Feedback loops. Second-order effects. Holistic views.",
+        "tools": "Causal Loop Diagrams.",
+        "skills": "Understanding how changes affect the whole ecosystem."
+      },
+      {
+        "id": 26,
+        "title": "Financial Literacy (Budgets/ROI)",
+        "category": "Management & Business",
+        "goal": "Managing money and budgets.",
+        "concepts": "CAPEX vs OPEX. ROSI (Return on Security Investment).",
+        "tools": "Budget Templates.",
+        "skills": "Creating security budgets. Calculating ROI."
+      },
+      {
+        "id": 21,
+        "title": "Creative Innovation",
+        "category": "Management & Business",
+        "goal": "Solving problems in novel ways.",
+        "concepts": "Lateral Thinking. SCAMPER. Divergent thinking.",
+        "tools": "Whiteboarding.",
+        "skills": "Bypassing security controls creatively."
+      },
+      {
+        "id": 27,
+        "title": "Change Management",
+        "category": "Management & Business",
+        "goal": "Guiding organizations through transition.",
+        "concepts": "ADKAR Model. Resistance management. Communication planning.",
+        "tools": "Impact Assessments.",
+        "skills": "Implementing new policies smoothly."
+      },
+      {
+        "id": 28,
+        "title": "Crisis Management",
+        "category": "Management & Business",
+        "goal": "Leading through disaster.",
+        "concepts": "Incident Command System (ICS). Reputation management.",
+        "tools": "Tabletop Exercises.",
+        "skills": "Managing communication during a breach."
+      },
+      {
+        "id": 29,
+        "title": "Emotional Intelligence (EQ)",
+        "category": "EQ & Leadership",
+        "goal": "Managing self and others emotionally.",
+        "concepts": "Self-Awareness. Self-Regulation. Empathy. Social Skills.",
+        "tools": "EQ Assessments.",
+        "skills": "Handling high-stress emotions."
+      },
+      {
+        "id": 33,
+        "title": "Stress Management & Resilience",
+        "category": "EQ & Leadership",
+        "goal": "Preventing burnout.",
+        "concepts": "Burnout recognition. Detachment. Boundaries.",
+        "tools": "Mindfulness apps.",
+        "skills": "Maintaining mental health in Ops."
+      },
+      {
+        "id": 30,
+        "title": "Empathy in the Workplace",
+        "category": "EQ & Leadership",
+        "goal": "Understanding user and team needs.",
+        "concepts": "Cognitive vs Emotional Empathy. Psychological Safety.",
+        "tools": "Empathy Maps.",
+        "skills": "Building trust with teams."
+      },
+      {
+        "id": 34,
+        "title": "Leadership Fundamentals",
+        "category": "EQ & Leadership",
+        "goal": "Inspiring and guiding others.",
+        "concepts": "Servant Leadership. Delegation. Feedback loops.",
+        "tools": "360 Feedback.",
+        "skills": "Leading small teams."
+      },
+      {
+        "id": 31,
+        "title": "Conflict Resolution",
+        "category": "EQ & Leadership",
+        "goal": "Resolving disputes constructively.",
+        "concepts": "Active Listening. De-escalation. Mediation.",
+        "tools": "TKI Model.",
+        "skills": "Mediating team conflicts."
+      },
+      {
+        "id": 35,
+        "title": "Mentorship Skills",
+        "category": "EQ & Leadership",
+        "goal": "Growing the next generation.",
+        "concepts": "Mentor-Mentee lifecycle. Socratic questioning.",
+        "tools": "GROW Model.",
+        "skills": "Mentoring juniors effectively."
+      },
+      {
+        "id": 32,
+        "title": "Team Collaboration Dynamics",
+        "category": "EQ & Leadership",
+        "goal": "Working well with others.",
+        "concepts": "Psychological Safety. Remote etiquette.",
+        "tools": "Slack/Teams.",
+        "skills": "Collaborating cross-functionally."
+      },
+      {
+        "id": 36,
+        "title": "Workplace Ethics & Integrity",
+        "category": "EQ & Leadership",
+        "goal": "Maintaining professional standards.",
+        "concepts": "Code of Conduct. Whistleblowing. Grey areas.",
+        "tools": "Case Studies.",
+        "skills": "Navigating ethical dilemmas."
+      }
+    ]
+  },
+  "workshops": [
+    {
+      "title": "The Bug Bounty Hunter",
+      "role": "Freelance Security Researcher",
+      "mission": "Find and report valid vulnerabilities in a practice banking application.",
+      "tech_mods": [
+        {
+          "id": "20",
+          "title": "Web Application Security (OWASP Top 10)"
+        },
+        {
+          "id": "21",
+          "title": "Burp Suite Professional"
+        },
+        {
+          "id": "19",
+          "title": "Vulnerability Assessment"
+        }
+      ],
+      "soft_mods": [
+        {
+          "id": "10",
+          "title": "Technical Writing (Writing professional bug reports)"
+        },
+        {
+          "id": "36",
+          "title": "Workplace Ethics & Integrity (Rules of Engagement)"
+        }
+      ],
+      "outcome": "A submitted vulnerability report and a \"Hall of Fame\" entry."
+    },
+    {
+      "title": "The SOC War Room",
+      "role": "Tier 1 SOC Analyst",
+      "mission": "Survive a \"Hell Week\" simulation of continuous alerts, separating false positives from real attacks.",
+      "tech_mods": [
+        {
+          "id": "7",
+          "title": "SIEM Architecture & Deployment"
+        },
+        {
+          "id": "8",
+          "title": "Log Analysis & Management"
+        },
+        {
+          "id": "5",
+          "title": "Network Traffic Analysis"
+        }
+      ],
+      "soft_mods": [
+        {
+          "id": "33",
+          "title": "Stress Management & Resilience"
+        },
+        {
+          "id": "16",
+          "title": "Critical Thinking (Triage decision making)"
+        }
+      ],
+      "outcome": "Handing over a shift report and successfully blocking an active intrusion."
+    },
+    {
+      "title": "Cloud Sentinel Bootcamp",
+      "role": "Cloud Security Engineer",
+      "mission": "Secure a leaky AWS/Azure environment that has been misconfigured.",
+      "tech_mods": [
+        {
+          "id": "34",
+          "title": "Cloud Infrastructure Security"
+        },
+        {
+          "id": "35",
+          "title": "Container Security (Docker)"
+        },
+        {
+          "id": "39",
+          "title": "ISO 27001 (Applying standards to cloud)"
+        }
+      ],
+      "soft_mods": [
+        {
+          "id": "20",
+          "title": "Systems Thinking"
+        },
+        {
+          "id": "23",
+          "title": "Agile Methodologies (Working in Sprints)"
+        }
+      ],
+      "outcome": "A hardened cloud architecture with automated security alerts."
+    },
+    {
+      "title": "The OSINT Detective",
+      "role": "Intelligence Analyst / Private Investigator",
+      "mission": "Track a \"missing person\" (fictional target) across the clear and dark web.",
+      "tech_mods": [
+        {
+          "id": "14",
+          "title": "OSINT (Open Source Intelligence)"
+        },
+        {
+          "id": "15",
+          "title": "Digital Footprinting & Reconnaissance"
+        },
+        {
+          "id": "16",
+          "title": "Dark Web Operations"
+        }
+      ],
+      "soft_mods": [
+        {
+          "id": "17",
+          "title": "Analytical Problem Solving"
+        },
+        {
+          "id": "19",
+          "title": "Cognitive Biases (Avoiding rabbit holes)"
+        }
+      ],
+      "outcome": "A comprehensive Intelligence Dossier on the target."
+    },
+    {
+      "title": "Python for Cyber Automation",
+      "role": "Security Automation Engineer",
+      "mission": "\"Stop doing it manually.\" Write scripts to automate boring reconnaissance tasks.",
+      "tech_mods": [
+        {
+          "id": "29",
+          "title": "Python for Cybersecurity"
+        },
+        {
+          "id": "30",
+          "title": "Bash Scripting"
+        },
+        {
+          "id": "18",
+          "title": "Developing Custom Security Tools"
+        }
+      ],
+      "soft_mods": [
+        {
+          "id": "21",
+          "title": "Creative Innovation"
+        },
+        {
+          "id": "22",
+          "title": "Time Management (ROI of automation)"
+        }
+      ],
+      "outcome": "A custom-built, working Port Scanner or Brute-force tool hosted on GitHub."
+    },
+    {
+      "title": "GRC & Audit Masterclass",
+      "role": "Junior IT Auditor",
+      "mission": "Audit a fictional company that is failing compliance and fix their mess.",
+      "tech_mods": [
+        {
+          "id": "41",
+          "title": "Risk Management Strategies"
+        },
+        {
+          "id": "42",
+          "title": "Compliance Frameworks (GDPR/PCI-DSS)"
+        },
+        {
+          "id": "43",
+          "title": "Internal Auditing Procedures"
+        }
+      ],
+      "soft_mods": [
+        {
+          "id": "25",
+          "title": "Business Acumen for Tech Pros"
+        },
+        {
+          "id": "14",
+          "title": "Negotiation Skills (Convincing management to spend money)"
+        }
+      ],
+      "outcome": "An Audit Finding Report and a Remediation Roadmap."
+    },
+    {
+      "title": "Red Team Operator",
+      "role": "Adversary Simulator",
+      "mission": "Breach a corporate network starting from a phishing email to Domain Admin.",
+      "tech_mods": [
+        {
+          "id": "26",
+          "title": "Social Engineering Tactics"
+        },
+        {
+          "id": "25",
+          "title": "Active Directory Attacks"
+        },
+        {
+          "id": "24",
+          "title": "Lateral Movement Techniques"
+        }
+      ],
+      "soft_mods": [
+        {
+          "id": "18",
+          "title": "Strategic Decision Making"
+        },
+        {
+          "id": "15",
+          "title": "Persuasion & Influence"
+        }
+      ],
+      "outcome": "A complete \"Kill Chain\" execution and debrief presentation."
+    },
+    {
+      "title": "The Career Launchpad",
+      "role": "Job Candidate",
+      "mission": "Get hired. (This is a non-technical, pure career-focused workshop).",
+      "tech_mods": [],
+      "soft_mods": [
+        {
+          "id": "1",
+          "title": "Resume Building & Optimization"
+        },
+        {
+          "id": "2",
+          "title": "Interview Preparation & Mock Sessions"
+        },
+        {
+          "id": "4",
+          "title": "LinkedIn Growth & Optimization"
+        },
+        {
+          "id": "6",
+          "title": "Professional Networking Strategies"
+        }
+      ],
+      "outcome": "A finalized Resume, Cover Letter, LinkedIn Profile, and Mock Interview recording."
+    },
+    {
+      "title": "Digital Forensics Investigator",
+      "role": "Cyber Crime Investigator",
+      "mission": "Analyze a seized hard drive to find evidence of corporate espionage.",
+      "tech_mods": [
+        {
+          "id": "12",
+          "title": "Digital Forensics"
+        },
+        {
+          "id": "13",
+          "title": "Evidence Handling & Chain of Custody"
+        },
+        {
+          "id": "27",
+          "title": "Malware Analysis Fundamentals"
+        }
+      ],
+      "soft_mods": [
+        {
+          "id": "36",
+          "title": "Workplace Ethics (Legal admissibility)"
+        },
+        {
+          "id": "11",
+          "title": "Report Writing for Executives"
+        }
+      ],
+      "outcome": "A Forensic Investigation Report admissible in \"court.\""
+    },
+    {
+      "title": "AI-Powered Security",
+      "role": "AI Security Specialist",
+      "mission": "Build a defense system using AI and then try to trick it.",
+      "tech_mods": [
+        {
+          "id": "47",
+          "title": "AI for Defense (SOC Automation)"
+        },
+        {
+          "id": "48",
+          "title": "Adversarial AI (Attacking Models)"
+        },
+        {
+          "id": "49",
+          "title": "LLM Security"
+        }
+      ],
+      "soft_mods": [
+        {
+          "id": "27",
+          "title": "Change Management (Adapting to AI)"
+        },
+        {
+          "id": "16",
+          "title": "Critical Thinking"
+        }
+      ],
+      "outcome": "A functioning \"AI Defense Agent\" and a report on its blind spots."
+    },
+    {
+      "title": "API & AppSec Defender",
+      "role": "Application Security Engineer",
+      "mission": "Take a broken, vulnerable API and rewrite the code to make it secure.",
+      "tech_mods": [
+        {
+          "id": "38",
+          "title": "API Security Testing"
+        },
+        {
+          "id": "31",
+          "title": "Secure Coding Practices"
+        },
+        {
+          "id": "32",
+          "title": "Code Review"
+        }
+      ],
+      "soft_mods": [
+        {
+          "id": "32",
+          "title": "Team Collaboration Dynamics (Dev vs. Sec)"
+        },
+        {
+          "id": "31",
+          "title": "Conflict Resolution"
+        }
+      ],
+      "outcome": "A \"Before & After\" code review showing fixed vulnerabilities."
+    },
+    {
+      "title": "The CISO Simulation",
+      "role": "Chief Information Security Officer (CISO)",
+      "mission": "Manage a massive cyber crisis while handling the Board of Directors and budget cuts.",
+      "tech_mods": [
+        {
+          "id": "45",
+          "title": "Cyber Warfare Tactics"
+        },
+        {
+          "id": "44",
+          "title": "Third-Party Risk Management"
+        }
+      ],
+      "soft_mods": [
+        {
+          "id": "34",
+          "title": "Leadership Fundamentals"
+        },
+        {
+          "id": "28",
+          "title": "Crisis Management"
+        },
+        {
+          "id": "26",
+          "title": "Financial Literacy (Budgeting)"
+        }
+      ],
+      "outcome": "A Strategic Crisis Response Plan and a Board Presentation."
+    }
+  ],
+  "events": [
+    {
+      "title": "Professional Role & Operational Scope",
+      "type": "Soft Skill & Career Events"
+    },
+    {
+      "title": "Core Competency Requirements",
+      "type": "Soft Skill & Career Events"
+    },
+    {
+      "title": "Tangible Outputs & Deliverables",
+      "type": "Soft Skill & Career Events"
+    },
+    {
+      "title": "Market Analysis",
+      "type": "Soft Skill & Career Events"
+    },
+    {
+      "title": "Professional Role & Operational Scope",
+      "type": "Soft Skill & Career Events"
+    },
+    {
+      "title": "Core Competency Requirements",
+      "type": "Soft Skill & Career Events"
+    },
+    {
+      "title": "Tangible Outputs & Deliverables",
+      "type": "Soft Skill & Career Events"
+    },
+    {
+      "title": "Market Analysis",
+      "type": "Soft Skill & Career Events"
+    },
+    {
+      "title": "Professional Role & Operational Scope",
+      "type": "Soft Skill & Career Events"
+    },
+    {
+      "title": "Core Competency Requirements",
+      "type": "Soft Skill & Career Events"
+    },
+    {
+      "title": "Tangible Outputs & Deliverables",
+      "type": "Soft Skill & Career Events"
+    },
+    {
+      "title": "Market Analysis",
+      "type": "Soft Skill & Career Events"
+    },
+    {
+      "title": "Professional Role & Operational Scope",
+      "type": "Soft Skill & Career Events"
+    },
+    {
+      "title": "Core Competency Requirements",
+      "type": "Soft Skill & Career Events"
+    },
+    {
+      "title": "Tangible Outputs & Deliverables",
+      "type": "Soft Skill & Career Events"
+    },
+    {
+      "title": "Market Analysis",
+      "type": "Soft Skill & Career Events"
+    },
+    {
+      "title": "Professional Role & Operational Scope",
+      "type": "Soft Skill & Career Events"
+    },
+    {
+      "title": "Core Competency Requirements",
+      "type": "Soft Skill & Career Events"
+    },
+    {
+      "title": "Tangible Outputs & Deliverables",
+      "type": "Soft Skill & Career Events"
+    },
+    {
+      "title": "Market Analysis",
+      "type": "Soft Skill & Career Events"
+    },
+    {
+      "title": "Professional Role & Operational Scope",
+      "type": "Soft Skill & Career Events"
+    },
+    {
+      "title": "Core Competency Requirements",
+      "type": "Soft Skill & Career Events"
+    },
+    {
+      "title": "Tangible Outputs & Deliverables",
+      "type": "Soft Skill & Career Events"
+    },
+    {
+      "title": "Market Analysis",
+      "type": "Soft Skill & Career Events"
+    }
+  ],
+  "benefits": [
+    {
+      "title": "Industry Recognition",
+      "description": "Certification from multiple partner companies."
+    },
+    {
+      "title": "Progeta Accreditation",
+      "description": "Official Certificate of Completion from Progeta Technologies."
+    },
+    {
+      "title": "Digital Credentials",
+      "description": "A verified Badge of Completion."
+    },
+    {
+      "title": "Career Boost",
+      "description": "Opportunity to receive a Letter of Recommendation (LoR) directly from the company (merit-based)."
+    },
+    {
+      "title": "The Live Hack",
+      "description": "\"Breaking the Bank\" (Demo)"
+    },
+    {
+      "title": "Future Tech Summit",
+      "description": "AI & Quantum (Panel)"
+    },
+    {
+      "title": "Forensics Deep Dive",
+      "description": "The Murder Mystery (Gamified)"
+    },
+    {
+      "title": "The Crisis Simulation",
+      "description": "The Press Conference (Public Relations)"
+    },
+    {
+      "title": "The Great Debate",
+      "description": "Privacy vs. Security (Critical Thinking)"
+    },
+    {
+      "title": "Speed Networking",
+      "description": "Industry Connect (Relationship Building)"
+    },
+    {
+      "title": "Track 1",
+      "description": "Cyber Threat Intelligence (CTI) Specialist"
+    },
+    {
+      "title": "Technical Proficiency",
+      "description": "Open Source Intelligence (OSINT) Frameworks, STIX/TAXII Standards, Malware Analysis, Dark Web Operations."
+    },
+    {
+      "title": "Professional Skills",
+      "description": "Strategic Analysis (Connecting disparately sourced data), Executive Reporting (Synthesizing technical threats into business risk)."
+    },
+    {
+      "title": "Capstone Artifact",
+      "description": "A comprehensive Threat Landscape Report documenting a full deep-web investigation on a specific threat actor."
+    },
+    {
+      "title": "Credentials",
+      "description": "Progeta Specialist Diploma in CTI."
+    },
+    {
+      "title": "Certification Readiness",
+      "description": "Curriculum aligns with CompTIA CySA+ and EC-Council CTIA standards."
+    },
+    {
+      "title": "Compensation Potential",
+      "description": "High (Specialized Niche)"
+    },
+    {
+      "title": "Industry Demand",
+      "description": "Rising (Shift towards proactive defense)"
+    },
+    {
+      "title": "Barrier to Entry",
+      "description": "Medium-High (Requires strong analytical logic)"
+    },
+    {
+      "title": "Track 2",
+      "description": "SOC Operations & Incident Response"
+    },
+    {
+      "title": "Technical Proficiency",
+      "description": "SIEM Architecture (Splunk/Wazuh), Network Traffic Analysis, Log Management, Incident Response Lifecycle."
+    },
+    {
+      "title": "Professional Skills",
+      "description": "Crisis Management (Operational calmness under pressure), Process Adherence (Strict following of Standard Operating Procedures)."
+    },
+    {
+      "title": "Capstone Artifact",
+      "description": "A custom Incident Response Playbook and a Live Fire Defense Report detailing the mitigation of a simulated ransomware attack."
+    },
+    {
+      "title": "Credentials",
+      "description": "Progeta Diploma in SOC Operations."
+    },
+    {
+      "title": "Certification Readiness",
+      "description": "Curriculum aligns with CompTIA Security+ and Cisco CyberOps Associate standards."
+    },
+    {
+      "title": "Compensation Potential",
+      "description": "Competitive Average (Standard entry-point)"
+    },
+    {
+      "title": "Industry Demand",
+      "description": "Very High (Universal requirement for enterprises)"
+    },
+    {
+      "title": "Barrier to Entry",
+      "description": "Low-Medium (Primary entry route for graduates)"
+    },
+    {
+      "title": "Track 3",
+      "description": "DevSecOps & Cloud Security"
+    },
+    {
+      "title": "Technical Proficiency",
+      "description": "Cloud Infrastructure (AWS/Azure), Containerization (Docker/Kubernetes), CI/CD Automation, Python Scripting."
+    },
+    {
+      "title": "Professional Skills",
+      "description": "Cross-Functional Collaboration (Aligning security goals with development speed), Systems Thinking."
+    },
+    {
+      "title": "Capstone Artifact",
+      "description": "A Secure Pipeline Implementation hosted on GitHub, demonstrating automated scanning and cloud hardening."
+    },
+    {
+      "title": "Credentials",
+      "description": "Progeta Diploma in Cloud Security & DevSecOps."
+    },
+    {
+      "title": "Certification Readiness",
+      "description": "Curriculum aligns with AWS Certified Security \u2013 Specialty."
+    },
+    {
+      "title": "Compensation Potential",
+      "description": "Very High (Premium on dual-skill professionals)"
+    },
+    {
+      "title": "Industry Demand",
+      "description": "High (Critical for modern cloud-native firms)"
+    },
+    {
+      "title": "Barrier to Entry",
+      "description": "High (Requires both coding and infrastructure knowledge)"
+    },
+    {
+      "title": "Track 4",
+      "description": "Enterprise GRC & Security Auditing"
+    },
+    {
+      "title": "Technical Proficiency",
+      "description": "ISO 27001 Implementation, NIST Framework, Risk Assessment Methodologies, Compliance Auditing."
+    },
+    {
+      "title": "Professional Skills",
+      "description": "Business Acumen (Balancing security costs vs. business risk), Stakeholder Negotiation."
+    },
+    {
+      "title": "Capstone Artifact",
+      "description": "A Corporate Risk Assessment Report and Audit Findings Document based on a complex enterprise case study."
+    },
+    {
+      "title": "Credentials",
+      "description": "Progeta Diploma in GRC & Strategy."
+    },
+    {
+      "title": "Certification Readiness",
+      "description": "Curriculum aligns with ISACA CISA and CRISC standards."
+    },
+    {
+      "title": "Compensation Potential",
+      "description": "High (Consultancy-tier rates)"
+    },
+    {
+      "title": "Industry Demand",
+      "description": "Stable/High (Driven by regulatory mandates)"
+    },
+    {
+      "title": "Barrier to Entry",
+      "description": "Medium (Requires strong conceptual and legal understanding)"
+    },
+    {
+      "title": "Track 5",
+      "description": "Advanced Penetration Testing & Red Teaming"
+    },
+    {
+      "title": "Technical Proficiency",
+      "description": "Network & Web Exploitation, Burp Suite Professional, Privilege Escalation, Active Directory Attacks."
+    },
+    {
+      "title": "Professional Skills",
+      "description": "Technical Writing (Structuring professional remediation reports), Ethics & Integrity (Strict adherence to Rules of Engagement)."
+    },
+    {
+      "title": "Capstone Artifact",
+      "description": "A professional Penetration Test Report covering Executive Summary, Technical Findings, and Remediation Strategy."
+    },
+    {
+      "title": "Credentials",
+      "description": "Progeta Diploma in Offensive Security."
+    },
+    {
+      "title": "Certification Readiness",
+      "description": "Curriculum aligns with OffSec OSCP and EC-Council CEH standards."
+    },
+    {
+      "title": "Compensation Potential",
+      "description": "High (Merit-based scaling)"
+    },
+    {
+      "title": "Industry Demand",
+      "description": "Medium-High (High demand for skilled practitioners)"
+    },
+    {
+      "title": "Barrier to Entry",
+      "description": "High (Requires extensive technical depth)"
+    },
+    {
+      "title": "Track 6",
+      "description": "Security Automation & Tool Development"
+    },
+    {
+      "title": "Technical Proficiency",
+      "description": "Python/Go Programming, API Development, Secure Coding Practices, Software Engineering Principles."
+    },
+    {
+      "title": "Professional Skills",
+      "description": "Algorithmic Problem Solving, Engineering Adaptability."
+    },
+    {
+      "title": "Capstone Artifact",
+      "description": "A Custom Security Tool (e.g., Vulnerability Scanner or Automated Response Bot) published as an open-source repository."
+    },
+    {
+      "title": "Credentials",
+      "description": "Progeta Diploma in Security Engineering."
+    },
+    {
+      "title": "Certification Readiness",
+      "description": "Curriculum aligns with PCAP (Python) and CSSLP standards."
+    },
+    {
+      "title": "Compensation Potential",
+      "description": "Very High (Developer + Security Premium)"
+    },
+    {
+      "title": "Industry Demand",
+      "description": "High (Niche, focused on mature security teams)"
+    },
+    {
+      "title": "Barrier to Entry",
+      "description": "Very High (Requires proficiency in Software Engineering and Security)"
+    }
+  ]
+}

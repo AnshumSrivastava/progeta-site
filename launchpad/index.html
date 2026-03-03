@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progeta Technologies | LaunchPad</title>
+    <meta name="description"
+        content="Cybersecurity education for students and campuses. Six diploma tracks, live simulation, verified credentials.">
+    <meta property="og:title" content="Progeta Technologies | LaunchPad">
+    <meta property="og:description"
+        content="Cybersecurity education for students and campuses. Six diploma tracks, live simulation, verified credentials.">
+    <meta property="og:url" content="https://www.progeta.tech/launchpad/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Progeta Technologies">
+    <link rel="canonical" href="https://www.progeta.tech/launchpad/">
+    <link rel="icon" href="/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="/assets/css/tokens.css">
+    <link rel="stylesheet" href="/assets/css/global.css">
+    <link rel="stylesheet" href="/assets/css/components.css">
+    <link rel="stylesheet" href="/assets/css/layout.css">
+    <link rel="stylesheet" href="/assets/css/animations.css">
+    <style>
+        .lp-hero {
+            padding: var(--space-10) 0 var(--space-8);
+        }
+
+        .lp-hero h1 {
+            font-size: 60px;
+            margin-top: var(--space-5);
+            margin-bottom: var(--space-5);
+        }
+
+        .lp-hero p {
+            font-size: 18px;
+            max-width: 580px;
+            line-height: 1.7;
+            margin-bottom: var(--space-6);
+        }
+
+        .lp-hero-note {
+            font: 400 var(--text-sm)/1 var(--font-mono);
+            color: var(--color-ink-tertiary);
+            margin-top: var(--space-2);
+            display: block;
+        }
+
+        .lp-hero-ctas {
+            display: flex;
+            gap: var(--space-4);
+            flex-wrap: wrap;
+        }
+
+        /* Tabs */
+        .tab-section {
+            padding: var(--space-10) 0;
+            background: var(--color-raised);
+        }
+
+        .tab-bar {
+            display: flex;
+            gap: 0;
+            border-bottom: 1px solid var(--color-border);
+            margin-bottom: var(--space-7);
+        }
+
+        .tab-btn {
+            font: 600 var(--text-sm)/1 var(--font-mono);
+            letter-spacing: var(--tracking-wide);
+            text-transform: uppercase;
+            background: none;
+            border: none;
+            color: var(--color-ink-tertiary);
+            padding: var(--space-4) var(--space-5);
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -1px;
+            transition: all 0.15s ease;
+        }
+
+        .tab-btn.active {
+            color: var(--color-ink-primary);
+            border-bottom-color: var(--color-accent);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Steps */
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-6);
+            margin-top: var(--space-6);
+        }
+
+        .step {
+            padding-top: var(--space-5);
+            border-top: 1px solid var(--color-border);
+        }
+
+        .step-num {
+            font: 700 64px/1 var(--font-display);
+            color: var(--color-border);
+            margin-bottom: var(--space-3);
+        }
+
+        .step h4 {
+            margin-bottom: var(--space-3);
+        }
+
+        .step p {
+            font-size: 15px;
+            line-height: var(--leading-loose);
+        }
+
+        /* Tracks */
+        .tracks-section {
+            padding: var(--space-10) 0;
+        }
+
+        .tracks-intro {
+            font-size: var(--text-base);
+            max-width: 540px;
+            margin: var(--space-4) 0 var(--space-7);
+        }
+
+        .tracks-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-5);
+        }
+
+        .track-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            padding: var(--space-6);
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-3);
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .track-card:hover {
+            border-color: var(--color-border-strong);
+            box-shadow: 0 4px 24px rgba(26, 23, 20, 0.06);
+        }
+
+        .track-num {
+            font: 500 var(--text-xs)/1 var(--font-mono);
+            color: var(--color-ink-tertiary);
+            letter-spacing: var(--tracking-wider);
+        }
+
+        .track-card h4 {
+            font: 600 20px/var(--leading-snug) var(--font-body);
+        }
+
+        .track-card p {
+            font-size: 15px;
+        }
+
+        .track-skills {
+            list-style: none;
+            padding: 0;
+        }
+
+        .track-skills li {
+            font-size: var(--text-sm);
+            color: var(--color-ink-secondary);
+            padding: 2px 0;
+        }
+
+        .track-skills li::before {
+            content: '· ';
+            color: var(--color-ink-tertiary);
+        }
+
+        .track-meta {
+            margin-top: auto;
+            padding-top: var(--space-4);
+            border-top: 1px solid var(--color-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font: 400 var(--text-xs)/1 var(--font-mono);
+            color: var(--color-ink-tertiary);
+        }
+
+        .track-enrolling {
+            color: var(--color-accent);
+        }
+
+        .track-card-link {
+            font: 500 var(--text-sm)/1 var(--font-body);
+            color: var(--color-ink-secondary);
+            margin-top: var(--space-3);
+            display: block;
+            transition: color 0.15s;
+        }
+
+        .track-card:hover .track-card-link {
+            color: var(--color-ink-primary);
+        }
+
+        /* Students tab */
+        .students-content {
+            max-width: 600px;
+        }
+
+        .students-content p {
+            margin-bottom: var(--space-5);
+            line-height: var(--leading-loose);
+        }
+
+        .students-ctas {
+            display: flex;
+            gap: var(--space-4);
+            flex-wrap: wrap;
+        }
+
+        /* Stats + CTA */
+        .lp-stats-section {
+            padding: var(--space-10) 0;
+            background: var(--color-raised);
+        }
+
+        .lp-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--space-6);
+            margin-bottom: var(--space-8);
+        }
+
+        .lp-stat-num {
+            font: 700 48px/1 var(--font-display);
+            color: var(--color-ink-primary);
+            display: block;
+        }
+
+        .lp-stat-label {
+            font: 400 var(--text-sm)/1.4 var(--font-body);
+            color: var(--color-ink-secondary);
+            margin-top: var(--space-2);
+            display: block;
+        }
+
+        .lp-cta-block {
+            max-width: 560px;
+        }
+
+        .lp-cta-block h2 {
+            font-size: 32px;
+            margin-bottom: var(--space-4);
+        }
+
+        .lp-cta-block p {
+            margin-bottom: var(--space-5);
+            line-height: var(--leading-normal);
+        }
+
+        @media (max-width: 768px) {
+            .lp-hero h1 {
+                font-size: 34px;
+            }
+
+            .steps-grid,
+            .tracks-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .lp-stats {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .lp-stat-num {
+                font-size: 36px;
+            }
+
+            .lp-hero-ctas {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <a href="#main" class="skip-link">Skip to content</a>
+    <div id="site-nav"></div>
+
+    <main id="main">
+
+        <!-- HERO -->
+        <section class="lp-hero">
+            <div class="container">
+                <span class="tag animate-on-scroll"><span class="pulse-dot"></span>&ensp;LAUNCHPAD · EDUCATION
+                    INITIATIVE</span>
+                <h1 class="animate-on-scroll">The gap between<br>education and readiness<br>is real.<br><span
+                        class="text-accent">We close it.</span></h1>
+                <p class="animate-on-scroll">
+                    LaunchPad is Progeta Technologies' education initiative.
+                    We work with colleges, campuses, and individual students
+                    to build the technical skills, credentials, and leadership
+                    that the next decade requires.
+                </p>
+                <span class="lp-hero-note animate-on-scroll">Currently focused on cybersecurity. Expanding to AI and
+                    quantum computing.</span>
+                <div class="lp-hero-ctas animate-on-scroll mt-6">
+                    <a href="#campuses" class="btn-primary">For Campuses</a>
+                    <a href="#students" class="btn-secondary">For Students →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- TABS: CAMPUSES / STUDENTS -->
+        <section class="tab-section" id="campuses">
+            <div class="container">
+                <div class="tab-bar">
+                    <button class="tab-btn active" data-tab="campuses">For Campuses</button>
+                    <button class="tab-btn" data-tab="students" id="students">For Students</button>
+                </div>
+
+                <!-- CAMPUSES TAB -->
+                <div class="tab-content active" id="tab-campuses">
+                    <h2 class="animate-on-scroll" style="font-size:36px;">What happens when a campus<br>partners with
+                        LaunchPad.</h2>
+                    <div class="steps-grid animate-stagger">
+                        <div class="step animate-on-scroll">
+                            <div class="step-num">01</div>
+                            <h4>Awareness Session</h4>
+                            <p>We run a campus-wide session that shows students what they do not know they do not know.
+                                Live demonstrations of real attack scenarios. No jargon. No slides filled with
+                                statistics. Students leave with a changed understanding of how exposed they already are
+                                — and what it means to fix that.</p>
+                        </div>
+                        <div class="step animate-on-scroll">
+                            <div class="step-num">02</div>
+                            <h4>Skill Tracks</h4>
+                            <p>Six 6-month diploma programmes, each covering a distinct cybersecurity role. Students
+                                work in simulated environments, not textbooks. Assessment is performance-based. Every
+                                graduate holds a verifiable Progeta Technologies credential — not a participation
+                                certificate, a proof of capability.</p>
+                        </div>
+                        <div class="step animate-on-scroll">
+                            <div class="step-num">03</div>
+                            <h4>Student Chapter</h4>
+                            <p>The most engaged students don't just graduate from LaunchPad — they lead it. Student
+                                Chapters give high performers a campus leadership role: running sessions, mentoring
+                                juniors, and building the institution's security culture. It is how the programme
+                                sustains itself.</p>
+                        </div>
+                        <div class="step animate-on-scroll">
+                            <div class="step-num">04</div>
+                            <h4>Verified Outcomes</h4>
+                            <p>Every programme graduate's credential is publicly verifiable via progeta.tech/verify. We
+                                track where students go after LaunchPad. The programme is judged by outcomes, not
+                                attendance.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STUDENTS TAB -->
+                <div class="tab-content" id="tab-students">
+                    <div class="students-content">
+                        <h2 class="animate-on-scroll" style="font-size:36px;">Find your track.</h2>
+                        <p class="animate-on-scroll">
+                            LaunchPad is available to individual students, not just campuses.
+                            You do not need your college to be a partner to enrol.
+                            Find the track that matches where you want to go, and begin.
+                        </p>
+                        <div class="students-ctas animate-on-scroll">
+                            <a href="/tracks/" class="btn-primary">View All Tracks</a>
+                            <a href="/contact/" class="btn-secondary">Contact for Pricing →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- THE SIX TRACKS -->
+        <section class="tracks-section">
+            <div class="container">
+                <h2 class="animate-on-scroll" style="font-size:40px;">Six paths. All active.</h2>
+                <p class="tracks-intro animate-on-scroll">
+                    Each track is a 6-month diploma programme with live-fire
+                    simulation and a verifiable credential on completion.
+                </p>
+
+                <div class="tracks-grid animate-stagger">
+                    <div class="track-card animate-on-scroll">
+                        <span class="track-num">TRACK 01</span>
+                        <h4>Cyber Threat Intelligence (CTI) Specialist</h4>
+                        <p>Monitor the dark web and analyze hacker trends to predict attacks before they happen.</p>
+                        <ul class="track-skills">
+                            <li>Threat landscape analysis</li>
+                            <li>Dark web monitoring</li>
+                            <li>Intelligence reporting</li>
+                        </ul>
+                        <div class="track-meta">
+                            <span class="track-enrolling">● ENROLLING</span>
+                            <span>6 months</span>
+                        </div>
+                        <a href="/tracks/" class="track-card-link">Learn More →</a>
+                    </div>
+
+                    <div class="track-card animate-on-scroll">
+                        <span class="track-num">TRACK 02</span>
+                        <h4>SOC Operations &amp; Incident Response</h4>
+                        <p>Detect and respond to live security incidents in real-time, managing alerts and
+                            investigations under pressure.</p>
+                        <ul class="track-skills">
+                            <li>SIEM and log analysis</li>
+                            <li>Incident triage</li>
+                            <li>Forensics fundamentals</li>
+                        </ul>
+                        <div class="track-meta">
+                            <span class="track-enrolling">● ENROLLING</span>
+                            <span>6 months</span>
+                        </div>
+                        <a href="/tracks/" class="track-card-link">Learn More →</a>
+                    </div>
+
+                    <div class="track-card animate-on-scroll">
+                        <span class="track-num">TRACK 03</span>
+                        <h4>DevSecOps &amp; Cloud Security</h4>
+                        <p>Build security into the development pipeline. CI/CD hardening, container security,
+                            infrastructure as code.</p>
+                        <ul class="track-skills">
+                            <li>CI/CD pipeline security</li>
+                            <li>Container and cloud hardening</li>
+                            <li>Infrastructure as Code</li>
+                        </ul>
+                        <div class="track-meta">
+                            <span class="track-enrolling">● ENROLLING</span>
+                            <span>6 months</span>
+                        </div>
+                        <a href="/tracks/" class="track-card-link">Learn More →</a>
+                    </div>
+
+                    <div class="track-card animate-on-scroll">
+                        <span class="track-num">TRACK 04</span>
+                        <h4>Enterprise GRC &amp; Security Auditing</h4>
+                        <p>Navigate compliance frameworks, manage risk, and lead security audits for organisations of
+                            any size.</p>
+                        <ul class="track-skills">
+                            <li>Compliance frameworks (ISO, NIST, SOC2)</li>
+                            <li>Risk assessment and management</li>
+                            <li>Audit methodology</li>
+                        </ul>
+                        <div class="track-meta">
+                            <span class="track-enrolling">● ENROLLING</span>
+                            <span>6 months</span>
+                        </div>
+                        <a href="/tracks/" class="track-card-link">Learn More →</a>
+                    </div>
+
+                    <div class="track-card animate-on-scroll">
+                        <span class="track-num">TRACK 05</span>
+                        <h4>Advanced Penetration Testing &amp; Red Teaming</h4>
+                        <p>Find vulnerabilities before adversaries do. Ethical hacking, social engineering, and security
+                            assessment.</p>
+                        <ul class="track-skills">
+                            <li>Network and application pentesting</li>
+                            <li>Social engineering</li>
+                            <li>Vulnerability research</li>
+                        </ul>
+                        <div class="track-meta">
+                            <span class="track-enrolling">● ENROLLING</span>
+                            <span>6 months</span>
+                        </div>
+                        <a href="/tracks/" class="track-card-link">Learn More →</a>
+                    </div>
+
+                    <div class="track-card animate-on-scroll">
+                        <span class="track-num">TRACK 06</span>
+                        <h4>Security Automation &amp; Tool Development</h4>
+                        <p>Build the tools that security teams use. Scripting, automation, and custom security
+                            solutions.</p>
+                        <ul class="track-skills">
+                            <li>Python for security</li>
+                            <li>Tool development</li>
+                            <li>Automation frameworks</li>
+                        </ul>
+                        <div class="track-meta">
+                            <span class="track-enrolling">● ENROLLING</span>
+                            <span>6 months</span>
+                        </div>
+                        <a href="/tracks/" class="track-card-link">Learn More →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- STATS + CAMPUS CTA -->
+        <section class="lp-stats-section">
+            <div class="container">
+                <div class="lp-stats animate-stagger">
+                    <div class="animate-on-scroll">
+                        <span class="lp-stat-num">15+</span>
+                        <span class="lp-stat-label">Colleges</span>
+                    </div>
+                    <div class="animate-on-scroll">
+                        <span class="lp-stat-num">2,500+</span>
+                        <span class="lp-stat-label">Students</span>
+                    </div>
+                    <div class="animate-on-scroll">
+                        <span class="lp-stat-num">50+</span>
+                        <span class="lp-stat-label">Sessions</span>
+                    </div>
+                    <div class="animate-on-scroll">
+                        <span class="lp-stat-num">96%</span>
+                        <span class="lp-stat-label">Satisfaction</span>
+                    </div>
+                </div>
+
+                <div class="lp-cta-block animate-on-scroll">
+                    <h2>Bring LaunchPad to your campus.</h2>
+                    <p>We will work with you to design a programme that fits your institution's needs and calendar.
+                        Write to us and we will respond within 48 hours.</p>
+                    <a href="/contact/" class="btn-primary">Get in Touch</a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="site-footer"></div>
+    <script src="/assets/js/components.js" defer></script>
+    <script src="/assets/js/animations.js" defer></script>
+    <script defer>
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabs = document.querySelectorAll('.tab-btn');
+            tabs.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                    btn.classList.add('active');
+                    document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

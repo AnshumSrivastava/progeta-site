@@ -1,152 +1,157 @@
 <script>
-    import { page } from "$app/stores";
     import { base } from "$app/paths";
 </script>
 
-{#if !$page.url.pathname.startsWith(base + "/community")}
-    <footer class="site-footer">
-        <div class="container">
-            <div class="footer-top">
-                <div class="footer-brand">
-                    <div
-                        style="font-size:1.5rem; font-weight:700; margin-bottom:1rem; font-family:var(--font-heading);"
-                    >
-                        Progeta Technologies.
-                    </div>
-                    <p style="font-size:0.9rem;">
-                        Take back control to rise above.
-                    </p>
-                </div>
-
-                <div class="footer-links">
-                    <div class="col">
-                        <h4>Programmes</h4>
-                        <a href="{base}/programmes">All Programmes</a>
-                        <a href="{base}/tracks">Tracks</a>
-                        <a href="{base}/workshops">Workshops</a>
-                        <a href="{base}/chapters">Chapters</a>
-                        <a href="{base}/certifications">Certifications</a>
-                    </div>
-                    <div class="col">
-                        <h4>For You</h4>
-                        <a href="{base}/students">Students</a>
-                        <a href="{base}/colleges">Colleges</a>
-                        <a href="{base}/community">Community</a>
-                        <a href="{base}/events">Events</a>
-                    </div>
-                    <div class="col">
-                        <h4>Company</h4>
-                        <a href="{base}/about">Mission</a>
-                        <a href="{base}/pricing">Pricing</a>
-                        <a href="{base}/contact">Contact</a>
-                    </div>
+<footer class="site-footer">
+    <div class="container">
+        <div class="footer-top">
+            <!-- Column 1: Brand -->
+            <div class="col col-brand">
+                <div class="brand-name">Progeta Technologies</div>
+                <p>Take back control to rise above.</p>
+                <div class="social-links">
+                    <a href="https://linkedin.com/company/progetatechnologies" target="_blank" rel="noopener">LinkedIn</a>
+                    <a href="https://instagram.com/progetatechnologies" target="_blank" rel="noopener">Instagram</a>
+                    <a href="https://discord.gg/progetatechnologies" target="_blank" rel="noopener">Discord</a>
+                    <a href="https://github.com/progetatechnologies" target="_blank" rel="noopener">GitHub</a>
                 </div>
             </div>
 
-            <div class="footer-bottom">
-                <span>&copy; 2026 Progeta Technologies Inc.</span>
-                <div class="legal-links">
-                    <a href="{base}/privacy">Privacy</a>
-                    <a href="{base}/terms">Terms</a>
-                </div>
+            <!-- Column 2: LaunchPad -->
+            <div class="col">
+                <h4>LAUNCHPAD</h4>
+                <a href="{base}/launchpad">All Programmes</a>
+                <a href="{base}/tracks">Tracks</a>
+                <a href="{base}/workshops">Workshops</a>
+                <a href="{base}/chapters">Student Chapters</a>
+                <a href="{base}/certifications">Certifications</a>
+            </div>
+
+            <!-- Column 3: Products & Community -->
+            <div class="col">
+                <h4>PRODUCTS & COMMUNITY</h4>
+                <a href="{base}/selfos">SelfOS</a>
+                <a href="{base}/innercircle">InnerCircle</a>
+                <a href="{base}/innercircle#apply">Apply to InnerCircle</a>
+                <a href="{base}/verify">Verify Certificate</a>
+            </div>
+
+            <!-- Column 4: Company -->
+            <div class="col">
+                <h4>COMPANY</h4>
+                <a href="{base}/about">About</a>
+                <a href="{base}/pricing">Pricing</a>
+                <a href="{base}/contact">Contact</a>
+                <a href="{base}/privacy">Privacy</a>
+                <a href="{base}/terms">Terms</a>
             </div>
         </div>
-    </footer>
-{/if}
+
+        <div class="footer-bottom">
+            <span>&copy; 2026 Progeta Technologies &middot; All rights reserved</span>
+        </div>
+    </div>
+</footer>
 
 <style>
     .site-footer {
-        border-top: 1px solid var(--border-light);
-        padding: 80px 0 40px;
-        margin-top: 120px;
-        background: var(--bg-secondary);
+        border-top: 1px solid var(--color-border);
+        padding: var(--space-7) 0 var(--space-5);
+        margin-top: var(--space-8);
+        background: var(--color-void);
     }
 
     .footer-top {
+        display: grid;
+        grid-template-columns: 1.4fr 1fr 1fr 1fr;
+        gap: var(--space-6);
+        margin-bottom: var(--space-6);
+    }
+
+    /* Brand column */
+    .col-brand {
         display: flex;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        gap: 4rem;
-        margin-bottom: 60px;
+        flex-direction: column;
+        gap: var(--space-3);
     }
 
-    .footer-brand {
-        max-width: 300px;
+    .brand-name {
+        font-family: var(--font-display);
+        font-weight: 800;
+        font-size: var(--text-md);
+        color: var(--color-primary);
     }
 
-    .footer-links {
+    .col-brand p {
+        font-size: var(--text-sm);
+        color: var(--color-secondary);
+        line-height: 1.5;
+    }
+
+    .social-links {
         display: flex;
-        gap: 4rem;
         flex-wrap: wrap;
+        gap: var(--space-2);
     }
 
+    .social-links a {
+        font: 500 var(--text-xs)/1 var(--font-mono);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--color-secondary);
+        transition: color 0.15s ease;
+    }
+
+    .social-links a:hover {
+        color: var(--color-signal);
+    }
+
+    /* Link columns */
     .col {
         display: flex;
         flex-direction: column;
-        gap: 0.75rem;
+        gap: 10px;
     }
 
     .col h4 {
-        margin-bottom: 0.5rem;
-        font-size: 0.9rem;
-        color: var(--text-primary);
+        font: 600 var(--text-xs)/1 var(--font-mono);
+        letter-spacing: 0.12em;
+        color: var(--color-primary);
+        margin-bottom: var(--space-1);
     }
 
     .col a {
-        font-size: 0.9rem;
-        color: var(--text-secondary);
+        font-size: var(--text-sm);
+        color: var(--color-secondary);
+        transition: color 0.15s ease;
     }
 
     .col a:hover {
-        color: var(--accent-primary);
+        color: var(--color-primary);
     }
 
+    /* Bottom */
     .footer-bottom {
-        border-top: 1px solid var(--border-light);
-        padding-top: 2rem;
-        display: flex;
-        justify-content: space-between;
-        color: var(--text-tertiary);
-        font-size: 0.85rem;
-    }
-
-    .legal-links {
-        display: flex;
-        gap: 1.5rem;
+        padding-top: var(--space-4);
+        border-top: 1px solid var(--color-border);
+        color: var(--color-tertiary);
+        font-size: var(--text-xs);
     }
 
     @media (max-width: 768px) {
         .footer-top {
-            flex-direction: column;
-            gap: 4rem; /* Spacier */
-            text-align: center;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-5);
         }
 
-        .footer-brand,
-        .col {
-            align-items: center; /* Center flex items */
-            width: 100%;
-            max-width: none;
+        .col-brand {
+            grid-column: 1 / -1;
         }
+    }
 
-        /* Add more space for brand on mobile */
-        .footer-brand {
-            margin-bottom: 2rem;
-        }
-
-        .footer-links {
-            justify-content: center;
-            gap: 3.5rem; /* More space between link columns */
-            width: 100%;
-            flex-direction: column; /* Stack link columns too for cleaner look? Or keep row? Let's keep flex-wrap but wide gap */
-        }
-
-        .footer-bottom {
-            flex-direction: column;
-            gap: 2rem;
-            align-items: center;
-            text-align: center;
-            margin-top: 2rem;
+    @media (max-width: 480px) {
+        .footer-top {
+            grid-template-columns: 1fr;
         }
     }
 </style>

@@ -44,7 +44,7 @@ export const LEVELS: Level[] = [
         allowedCommands: ['cd', 'ls', 'mv'],
         entities: [
             { id: "player", type: "player", r: 6, c: 1, symbol: "@", description: "user" },
-            { id: "cache", type: "box", r: 4, c: 4, symbol: "📦", color: "#60a5fa", description: "cache.tmp" },
+            { id: "cache", type: "box", r: 4, c: 4, symbol: "[X]", color: "#60a5fa", description: "cache.tmp" },
             { id: "exit", type: "goal", r: 2, c: 6, symbol: "⚑", color: "#4ade80", description: "Process Exit" },
             { id: "w1", type: "wall", r: 3, c: 3, symbol: "#", description: "" },
             { id: "w2", type: "wall", r: 3, c: 4, symbol: "#", description: "" },
@@ -61,8 +61,8 @@ export const LEVELS: Level[] = [
         allowedCommands: ['cd', 'ls', 'mv', 'rm'],
         entities: [
             { id: "player", type: "player", r: 4, c: 1, symbol: "@", description: "admin" },
-            { id: "rule", type: "box", r: 4, c: 3, symbol: "⛔", color: "#f87171", description: "rule_block.conf" },
-            { id: "gateway", type: "goal", r: 4, c: 6, symbol: "🌐", color: "#4ade80", description: "Gateway" },
+            { id: "rule", type: "box", r: 4, c: 3, symbol: "[X]", color: "#f87171", description: "rule_block.conf" },
+            { id: "gateway", type: "goal", r: 4, c: 6, symbol: "[X]", color: "#4ade80", description: "Gateway" },
             // Walls funneling player to the rule
             { id: "w1", type: "wall", r: 3, c: 3, symbol: "#", description: "" },
             { id: "w2", type: "wall", r: 5, c: 3, symbol: "#", description: "" }
@@ -77,8 +77,8 @@ export const LEVELS: Level[] = [
         allowedCommands: ['cd', 'ls', 'mv', 'rm', 'chmod', 'sudo'],
         entities: [
             { id: "player", type: "player", r: 6, c: 3, symbol: "@", description: "root" },
-            { id: "door", type: "key", r: 3, c: 3, symbol: "🔒", color: "#fbbf24", description: "secure_door (000)" },
-            { id: "root", type: "goal", r: 1, c: 3, symbol: "👑", color: "#facc15", description: "/root" },
+            { id: "door", type: "key", r: 3, c: 3, symbol: "[X]", color: "#fbbf24", description: "secure_door (000)" },
+            { id: "root", type: "goal", r: 1, c: 3, symbol: "[X]", color: "#facc15", description: "/root" },
             { id: "w1", type: "wall", r: 3, c: 2, symbol: "#", description: "" },
             { id: "w2", type: "wall", r: 3, c: 4, symbol: "#", description: "" }
         ]
@@ -92,7 +92,7 @@ export const LEVELS: Level[] = [
         allowedCommands: ['cd', 'ls', 'sudo', 'rm'],
         entities: [
             { id: "player", type: "player", r: 5, c: 2, symbol: "@", description: "admin" },
-            { id: "panic", type: "enemy", r: 4, c: 4, symbol: "☠", color: "#ef4444", description: "kernel_panic" },
+            { id: "panic", type: "enemy", r: 4, c: 4, symbol: "[X]", color: "#ef4444", description: "kernel_panic" },
             { id: "logs", type: "goal", r: 4, c: 6, symbol: "≡", color: "#4ade80", description: "System Logs" },
             { id: "w1", type: "wall", r: 3, c: 4, symbol: "#", description: "" },
             { id: "w2", type: "wall", r: 5, c: 4, symbol: "#", description: "" }
@@ -107,12 +107,12 @@ export const LEVELS: Level[] = [
         allowedCommands: ['cd', 'ls', 'mv', 'chmod'],
         entities: [
             { id: "player", type: "player", r: 8, c: 1, symbol: "@", description: "sys" },
-            { id: "sda1", type: "goal", r: 1, c: 8, symbol: "🖴", color: "#4ade80", description: "/boot" },
+            { id: "sda1", type: "goal", r: 1, c: 8, symbol: "[X]", color: "#4ade80", description: "/boot" },
             // Gates
-            { id: "gate_a", type: "key", r: 6, c: 3, symbol: "🔒", color: "#fbbf24", description: "Encrypted vol" },
-            { id: "gate_b", type: "key", r: 4, c: 6, symbol: "🔒", color: "#fbbf24", description: "Encrypted vol" },
+            { id: "gate_a", type: "key", r: 6, c: 3, symbol: "[X]", color: "#fbbf24", description: "Encrypted vol" },
+            { id: "gate_b", type: "key", r: 4, c: 6, symbol: "[X]", color: "#fbbf24", description: "Encrypted vol" },
             // Junk to move
-            { id: "tmp", type: "box", r: 6, c: 4, symbol: "🗑", color: "#9ca3af", description: "temp files" },
+            { id: "tmp", type: "box", r: 6, c: 4, symbol: "[X]", color: "#9ca3af", description: "temp files" },
             // Walls
             { id: "w1", type: "wall", r: 6, c: 2, symbol: "#", description: "" },
             { id: "w2", type: "wall", r: 6, c: 7, symbol: "#", description: "" },
@@ -129,8 +129,8 @@ export const LEVELS: Level[] = [
         xpReward: 350,
         entities: [
             { id: "player", type: "player", r: 1, c: 1, symbol: "@", description: "www-data" },
-            { id: "index", type: "box", r: 3, c: 3, symbol: "📄", color: "#60a5fa", description: "index.html" },
-            { id: "public", type: "goal", r: 8, c: 8, symbol: "🌐", color: "#4ade80", description: "public_html" },
+            { id: "index", type: "box", r: 3, c: 3, symbol: "[X]", color: "#60a5fa", description: "index.html" },
+            { id: "public", type: "goal", r: 8, c: 8, symbol: "[X]", color: "#4ade80", description: "public_html" },
             // Maze of configs
             { id: "w1", type: "wall", r: 2, c: 2, symbol: "#", description: "config" },
             { id: "w2", type: "wall", r: 2, c: 3, symbol: "#", description: "config" },
@@ -150,9 +150,9 @@ export const LEVELS: Level[] = [
         xpReward: 500,
         entities: [
             { id: "player", type: "player", r: 9, c: 5, symbol: "@", description: "dba" },
-            { id: "db", type: "box", r: 5, c: 5, symbol: "🗄️", color: "#fbbf24", description: "db.sql" },
+            { id: "db", type: "box", r: 5, c: 5, symbol: "[X]️", color: "#fbbf24", description: "db.sql" },
             { id: "slot", type: "goal", r: 1, c: 5, symbol: "📥", color: "#4ade80", description: "Migration Slot" },
-            { id: "old", type: "box", r: 3, c: 5, symbol: "🕸", color: "#9ca3af", description: "legacy_data" },
+            { id: "old", type: "box", r: 3, c: 5, symbol: "[X]", color: "#9ca3af", description: "legacy_data" },
             // Walls
             { id: "w1", type: "wall", r: 4, c: 4, symbol: "#", description: "" },
             { id: "w2", type: "wall", r: 4, c: 6, symbol: "#", description: "" },
@@ -170,8 +170,8 @@ export const LEVELS: Level[] = [
         xpReward: 800,
         entities: [
             { id: "player", type: "player", r: 11, c: 6, symbol: "@", description: "hacker" },
-            { id: "lock", type: "enemy", r: 6, c: 6, symbol: "🔑", color: "#ef4444", description: "hash_lock" },
-            { id: "root", type: "goal", r: 1, c: 6, symbol: "💀", color: "#facc15", description: "root_access" },
+            { id: "lock", type: "enemy", r: 6, c: 6, symbol: "[X]", color: "#ef4444", description: "hash_lock" },
+            { id: "root", type: "goal", r: 1, c: 6, symbol: "[X]", color: "#facc15", description: "root_access" },
             // Walls
             { id: "w1", type: "wall", r: 10, c: 4, symbol: "#", description: "" },
             { id: "w2", type: "wall", r: 10, c: 8, symbol: "#", description: "" },
@@ -192,8 +192,8 @@ export const LEVELS: Level[] = [
             { id: "core", type: "goal", r: 6, c: 6, symbol: "⚛", color: "#60a5fa", description: "KERNEL_CORE" },
             // Defenses
             { id: "firewall", type: "enemy", r: 8, c: 8, symbol: "🔥", color: "#ef4444", description: "firewall" },
-            { id: "gate", type: "key", r: 4, c: 4, symbol: "🔒", color: "#fbbf24", description: "boot_loader" },
-            { id: "module", type: "box", r: 9, c: 3, symbol: "📦", color: "#a78bfa", description: "driver_pkg" }
+            { id: "gate", type: "key", r: 4, c: 4, symbol: "[X]", color: "#fbbf24", description: "boot_loader" },
+            { id: "module", type: "box", r: 9, c: 3, symbol: "[X]", color: "#a78bfa", description: "driver_pkg" }
         ]
     }
 ];

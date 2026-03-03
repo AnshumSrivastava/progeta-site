@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progeta Technologies | Games</title>
+    <meta name="description"
+        content="Free games that teach real technical skills. No stakes. Real environments. Part of the LaunchPad initiative.">
+    <meta property="og:title" content="Progeta Technologies | Games">
+    <meta property="og:description"
+        content="Free games that teach real technical skills. No stakes. Real environments. Part of the LaunchPad initiative.">
+    <meta property="og:url" content="https://www.progeta.tech/games/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Progeta Technologies">
+    <link rel="canonical" href="https://www.progeta.tech/games/">
+    <link rel="icon" href="/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="/assets/css/tokens.css">
+    <link rel="stylesheet" href="/assets/css/global.css">
+    <link rel="stylesheet" href="/assets/css/components.css">
+    <link rel="stylesheet" href="/assets/css/layout.css">
+    <link rel="stylesheet" href="/assets/css/animations.css">
+    <style>
+        .games-hero {
+            padding: var(--space-10) 0 var(--space-8);
+        }
+
+        .games-hero h1 {
+            font-size: 52px;
+            margin-top: var(--space-5);
+            margin-bottom: var(--space-5);
+        }
+
+        .games-hero p {
+            font-size: 17px;
+            max-width: 560px;
+            line-height: 1.7;
+        }
+
+        .games-grid-section {
+            padding: var(--space-5) 0 var(--space-10);
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-5);
+        }
+
+        .game-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            padding: var(--space-6);
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-3);
+            min-height: 280px;
+            text-decoration: none;
+            color: inherit;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .game-card--active:hover {
+            border-color: var(--color-border-strong);
+            box-shadow: 0 4px 24px rgba(26, 23, 20, 0.06);
+        }
+
+        .game-card--locked {
+            opacity: 0.5;
+        }
+
+        .game-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .game-card h4 {
+            font: 600 20px/1 var(--font-body);
+        }
+
+        .game-card p {
+            font-size: 15px;
+            flex: 1;
+        }
+
+        .game-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: var(--space-3);
+            border-top: 1px solid var(--color-border);
+            font: 400 var(--text-xs)/1 var(--font-mono);
+        }
+
+        .game-difficulty {
+            color: var(--color-accent);
+        }
+
+        .game-cta {
+            font: 600 var(--text-sm)/1 var(--font-body);
+            letter-spacing: var(--tracking-wide);
+            text-transform: uppercase;
+            color: var(--color-accent);
+        }
+
+        .game-locked-label {
+            font: 500 var(--text-xs)/1 var(--font-mono);
+            color: var(--color-ink-tertiary);
+            letter-spacing: var(--tracking-wider);
+        }
+
+        @media (max-width: 768px) {
+            .games-hero h1 {
+                font-size: 34px;
+            }
+
+            .games-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <a href="#main" class="skip-link">Skip to content</a>
+    <div id="site-nav"></div>
+
+    <main id="main">
+
+        <section class="games-hero">
+            <div class="container">
+                <span class="tag animate-on-scroll">GAMES · FREE TO PLAY</span>
+                <h1 class="animate-on-scroll">Test your skills.<br>No stakes.</h1>
+                <p class="animate-on-scroll">
+                    Games built by Progeta Technologies to teach real technical skills
+                    through experience rather than instruction.
+                    All free. All open.
+                    Part of the LaunchPad initiative.
+                </p>
+            </div>
+        </section>
+
+        <section class="games-grid-section">
+            <div class="container">
+                <div class="games-grid animate-stagger">
+
+                    <a href="/games/cmd-hero/" class="game-card game-card--active animate-on-scroll">
+                        <div class="game-card-header">
+                            <span class="tag tag--active">LINUX · PUZZLE</span>
+                        </div>
+                        <h4>Cmd Hero</h4>
+                        <p>Navigate a terminal labyrinth using real Linux commands. cd, ls, sudo, chmod.</p>
+                        <div class="game-meta">
+                            <span class="game-difficulty">● Beginner · ~20 min</span>
+                            <span class="game-cta">Play Now →</span>
+                        </div>
+                    </a>
+
+                    <div class="game-card game-card--locked animate-on-scroll">
+                        <div class="game-card-header">
+                            <span class="tag">SOC · SIMULATION</span>
+                        </div>
+                        <h4>SOC Simulator</h4>
+                        <p>Detect and respond to live incidents in a simulated security operations centre.</p>
+                        <div class="game-meta">
+                            <span class="game-locked-label">○ Coming Soon</span>
+                        </div>
+                    </div>
+
+                    <div class="game-card game-card--locked animate-on-scroll">
+                        <div class="game-card-header">
+                            <span class="tag">PHISHING · CHALLENGE</span>
+                        </div>
+                        <h4>Phishing Detector</h4>
+                        <p>Spot the fake. Analyze emails, links, and attachments before time runs out.</p>
+                        <div class="game-meta">
+                            <span class="game-locked-label">○ Coming Soon</span>
+                        </div>
+                    </div>
+
+                    <div class="game-card game-card--locked animate-on-scroll">
+                        <div class="game-card-header">
+                            <span class="tag">COMPLIANCE · CASE STUDY</span>
+                        </div>
+                        <h4>GRC Scenario</h4>
+                        <p>Navigate compliance decisions. Balance risk, regulation, and business objectives.</p>
+                        <div class="game-meta">
+                            <span class="game-locked-label">○ Coming Soon</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="site-footer"></div>
+    <script src="/assets/js/components.js" defer></script>
+    <script src="/assets/js/animations.js" defer></script>
+</body>
+
+</html>

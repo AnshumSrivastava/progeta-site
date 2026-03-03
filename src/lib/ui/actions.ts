@@ -1,14 +1,14 @@
 /**
  * Svelte Action for Scroll Reveal Animation
- * Usage: <div use:reveal={{ delay: 200, duration: 800 }}>
+ * Blueprint: Elements slide up 24px + fade in, 0.4s ease-out, 0.08s stagger
+ * Usage: <div use:reveal={{ delay: 200 }}>
  */
-export function reveal(node: HTMLElement, options: { delay?: number, duration?: number, y?: number } = {}) {
-    const { delay = 0, duration = 800, y = 30 } = options;
+export function reveal(node: HTMLElement, options: { delay?: number, key?: string } = {}) {
+    const { delay = 0 } = options;
 
-    // Initial State
     node.style.opacity = '0';
-    node.style.transform = `translateY(${y}px)`;
-    node.style.transition = `opacity ${duration}ms cubic-bezier(0.2, 0.8, 0.2, 1), transform ${duration}ms cubic-bezier(0.2, 0.8, 0.2, 1)`;
+    node.style.transform = 'translateY(24px)';
+    node.style.transition = 'opacity 0.4s ease-out, transform 0.4s ease-out';
     node.style.transitionDelay = `${delay}ms`;
     node.style.willChange = 'opacity, transform';
 
@@ -17,6 +17,57 @@ export function reveal(node: HTMLElement, options: { delay?: number, duration?: 
             if (entry.isIntersecting) {
                 node.style.opacity = '1';
                 node.style.transform = 'translateY(0)';
+                observer.unobserve(node);
+            }
+        });
+    }, {
+        threshold: 0.2,
+        rootMargin: '0px 0px -50px 0px'
+    });
+
+    observer.observe(node);
+
+    return {
+        update(newOptions: { delay?: number, key?: string }) {
+            // Re-trigger animation on key change
+            node.style.opacity = '0';
+            node.style.transform = 'translateY(24px)';
+            node.style.transitionDelay = `${newOptions.delay || 0}ms`;
+            requestAnimationFrame(() => {
+                node.style.opacity = '1';
+                node.style.transform = 'translateY(0)';
+            });
+        },
+        destroy() {
+            observer.disconnect();
+        }
+    };
+}
+
+/**
+ * Stagger reveal — applies staggered reveal to child elements
+ * Usage: <div use:staggerReveal={{ stagger: 80 }}>
+ */
+export function staggerReveal(node: HTMLElement, options: { stagger?: number, selector?: string } = {}) {
+    const { stagger = 80, selector = ':scope > *' } = options;
+    const children = node.querySelectorAll(selector);
+
+    children.forEach((child, i) => {
+        const el = child as HTMLElement;
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(24px)';
+        el.style.transition = 'opacity 0.4s ease-out, transform 0.4s ease-out';
+        el.style.transitionDelay = `${i * stagger}ms`;
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                children.forEach((child) => {
+                    const el = child as HTMLElement;
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                });
                 observer.unobserve(node);
             }
         });
@@ -35,40 +86,17 @@ export function reveal(node: HTMLElement, options: { delay?: number, duration?: 
 }
 
 /**
- * 3D Tilt Effect on Hover
- * Usage: <div use:tilt>
+ * Legacy stubs — these actions were removed in the design rebuild.
+ * Kept as no-ops so existing unrebuilt pages don't crash on import.
  */
-export function tilt(node: HTMLElement, options: { max?: number, scale?: number, speed?: number } = {}) {
-    const { max = 15, scale = 1.05, speed = 400 } = options;
+export function hoverLift(node: HTMLElement, _options: any = {}) {
+    return { destroy() { } };
+}
 
-    node.style.transition = `transform ${speed}ms cubic-bezier(0.23, 1, 0.32, 1)`;
-    node.style.transformStyle = 'preserve-3d';
+export function tilt(node: HTMLElement, _options: any = {}) {
+    return { destroy() { } };
+}
 
-    function handleMouseMove(e: MouseEvent) {
-        const rect = node.getBoundingClientRect();
-        const x = e.clientX - rect.left; // x position within the element.
-        const y = e.clientY - rect.top;  // y position within the element.
-        
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-        
-        const rotateX = ((y - centerY) / centerY) * -max;
-        const rotateY = ((x - centerX) / centerX) * max;
-
-        node.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(${scale}, ${scale}, ${scale})`;
-    }
-
-    function handleMouseLeave() {
-        node.style.transform = `perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)`;
-    }
-
-    node.addEventListener('mousemove', handleMouseMove);
-    node.addEventListener('mouseleave', handleMouseLeave);
-
-    return {
-        destroy() {
-            node.removeEventListener('mousemove', handleMouseMove);
-            node.removeEventListener('mouseleave', handleMouseLeave);
-        }
-    };
+export function shimmer(node: HTMLElement) {
+    return { destroy() { } };
 }

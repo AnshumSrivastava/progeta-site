@@ -1,33 +1,93 @@
-<script>
+<script lang="ts">
     import { page } from "$app/stores";
+    import { reveal } from "$lib/ui/actions";
+    import MagneticButton from "$lib/ui/components/MagneticButton.svelte";
     import { base } from "$app/paths";
 </script>
 
 <svelte:head>
-    <title>Progeta Technologies | SYSTEM ERROR</title>
+    <title>Error {$page.status} | Progeta</title>
 </svelte:head>
 
-<div
-    class="dashboard-container"
-    style="padding:4rem; text-align:center; min-height:60vh; display:flex; flex-direction:column; justify-content:center; align-items:center;"
->
-    <h1
-        style="font-size: 5rem; color: var(--accent-primary); margin-bottom: 0;"
-    >
-        404
-    </h1>
-    <span
-        class="sys-code"
-        style="font-size:1.2rem; display:block; margin-bottom:2rem;"
-        >DATA_FRAGMENT_MISSING // PATH: {$page.url.pathname}</span
-    >
+<div class="error-container">
+    <div class="content" use:reveal={{ delay: 100 }}>
+        <div class="status-code">{$page.status}</div>
 
-    <p
-        style="max-width:500px; margin:0 auto 3rem; color:var(--text-secondary);"
-    >
-        The requested resource could not be located in the current sector. It
-        may have been redacted, moved to a secure archive, or never existed.
-    </p>
+        <h1 class="title">
+            {#if $page.status === 404}
+                Page Not Found
+            {:else}
+                System Exception
+            {/if}
+        </h1>
 
-    <a href="{base}/" class="cta-btn">RETURN TO DASHBOARD</a>
+        <p class="description">
+            {#if $page.error?.message}
+                {$page.error.message}
+            {:else if $page.status === 404}
+                The resource you are looking for has been moved, deleted, or
+                does not exist.
+            {:else}
+                An unexpected error occurred during processing. Our team has
+                been notified.
+            {/if}
+        </p>
+
+        <div class="action">
+            <MagneticButton href="{base}/" variant="primary"
+                >Return Home</MagneticButton
+            >
+        </div>
+    </div>
 </div>
+
+<style>
+    .error-container {
+        min-height: 80vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+        text-align: center;
+        position: relative;
+    }
+
+    .content {
+        max-width: 600px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+    }
+
+    .status-code {
+        font-family: var(--font-mono, monospace);
+        font-size: clamp(4rem, 10vw, 8rem);
+        font-weight: 800;
+        line-height: 1;
+        color: var(--glass-border);
+        text-transform: uppercase;
+        letter-spacing: -0.05em;
+        margin-bottom: -1rem;
+        z-index: -1;
+    }
+
+    .title {
+        font-family: var(--font-display);
+        font-size: 2.5rem;
+        color: var(--text-primary);
+        letter-spacing: -0.02em;
+        font-weight: 700;
+    }
+
+    .description {
+        color: var(--text-secondary);
+        font-size: 1.15rem;
+        line-height: 1.7;
+        max-width: 450px;
+    }
+
+    .action {
+        margin-top: 2rem;
+    }
+</style>

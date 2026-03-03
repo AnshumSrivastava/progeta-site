@@ -1,7 +1,6 @@
 <script>
     import { allModules } from "$lib/content/modules";
     import { fade, fly } from "svelte/transition";
-    import { base } from "$app/paths";
 
     let searchQuery = "";
     let currentFilter = "all";
@@ -21,7 +20,7 @@
 
     function getLink(mod) {
         const typePath = mod.type === "Technical" ? "technical" : "soft_skills";
-        return `${base}/modules/${typePath}/${mod.id}`;
+        return `/modules/${typePath}/${mod.id}`;
     }
 </script>
 
@@ -160,12 +159,6 @@
         width: 100%;
         padding-top: 120px; /* Space for Fixed Nav */
         padding-bottom: 80px;
-    }
-
-    @media (max-width: 900px) {
-        .zen-page {
-            padding-top: 80px;
-        }
     }
 
     .zen-container {
@@ -325,7 +318,6 @@
         margin-bottom: 24px;
         display: -webkit-box;
         -webkit-line-clamp: 3;
-        line-clamp: 3;
         -webkit-box-orient: vertical;
         overflow: hidden;
         flex-grow: 1;

@@ -1,6 +1,5 @@
 <script>
     import { onMount } from "svelte";
-    import { base } from "$app/paths";
 
     /** @type {Array<{id: number, x: number, y: number, size: number, duration: number, delay: number, opacity: number, blur: number}>} */
     let particles = [];
@@ -49,14 +48,9 @@
         <h1 class="glitch" data-text="COMING SOON">COMING SOON</h1>
         <p class="sub-void">The extraction protocol is under maintenance.</p>
 
-        <div style="display: flex; gap: 1rem; justify-content: center;">
-            <a href="{base}/contact" class="btn-void primary">
-                JOIN COMMUNITY
-            </a>
-            <a href="{base}/" class="btn-void">
-                <span class="icon">←</span> GO BACK
-            </a>
-        </div>
+        <a href="/" class="btn-void">
+            <span class="icon">←</span> GO BACK
+        </a>
     </div>
 </div>
 
@@ -154,15 +148,6 @@
         background: #fff;
         color: #000;
         box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
-    }
-    .btn-void.primary {
-        background: #fff;
-        color: #000;
-        border-color: #fff;
-    }
-    .btn-void.primary:hover {
-        background: rgba(255, 255, 255, 0.9);
-        box-shadow: 0 0 40px rgba(255, 255, 255, 0.5);
     }
     .icon {
         font-size: 1.1rem;

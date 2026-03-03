@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progeta Technologies | SelfOS</title>
+    <meta name="description"
+        content="A local-first personal operating system. Tasks, habits, goals, finance, and more — your data, your device.">
+    <meta property="og:title" content="Progeta Technologies | SelfOS">
+    <meta property="og:description"
+        content="A local-first personal operating system. Tasks, habits, goals, finance, and more — your data, your device.">
+    <meta property="og:url" content="https://www.progeta.tech/selfos/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Progeta Technologies">
+    <link rel="canonical" href="https://www.progeta.tech/selfos/">
+    <link rel="icon" href="/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="/assets/css/tokens.css">
+    <link rel="stylesheet" href="/assets/css/global.css">
+    <link rel="stylesheet" href="/assets/css/components.css">
+    <link rel="stylesheet" href="/assets/css/layout.css">
+    <link rel="stylesheet" href="/assets/css/animations.css">
+    <style>
+        .so-hero {
+            padding: var(--space-10) 0 var(--space-8);
+        }
+
+        .so-hero h1 {
+            font-size: 60px;
+            margin-top: var(--space-5);
+            margin-bottom: var(--space-5);
+        }
+
+        .so-hero p {
+            font-size: 18px;
+            max-width: 560px;
+            line-height: 1.7;
+        }
+
+        .so-hero-note {
+            font: 500 var(--text-sm)/1 var(--font-body);
+            color: var(--color-ink-primary);
+            margin-top: var(--space-4);
+            display: block;
+        }
+
+        .so-hero-ctas {
+            display: flex;
+            gap: var(--space-4);
+            flex-wrap: wrap;
+            margin-top: var(--space-6);
+        }
+
+        .so-preview {
+            padding: var(--space-6) 0;
+        }
+
+        .preview-placeholder {
+            width: 100%;
+            height: 480px;
+            background: var(--color-raised);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: var(--space-2);
+        }
+
+        .preview-placeholder span:first-child {
+            font: 500 var(--text-xs)/1 var(--font-mono);
+            letter-spacing: var(--tracking-wider);
+            color: var(--color-ink-tertiary);
+        }
+
+        .preview-caption {
+            font: 400 12px/1 var(--font-body);
+            color: var(--color-ink-tertiary);
+            text-align: center;
+            margin-top: var(--space-3);
+        }
+
+        .so-features {
+            padding: var(--space-10) 0;
+            background: var(--color-raised);
+        }
+
+        .so-features h2 {
+            margin-bottom: var(--space-7);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-5);
+        }
+
+        .feature-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            padding: var(--space-6);
+            transition: border-color 0.2s ease;
+        }
+
+        .feature-card:hover {
+            border-color: var(--color-border-strong);
+        }
+
+        .feature-card h4 {
+            font: 600 18px/1 var(--font-body);
+            margin-bottom: var(--space-2);
+        }
+
+        .feature-desc {
+            font: 500 15px/1.4 var(--font-body);
+            color: var(--color-ink-primary);
+            margin-bottom: var(--space-3);
+        }
+
+        .feature-subs {
+            list-style: none;
+        }
+
+        .feature-subs li {
+            font-size: var(--text-sm);
+            color: var(--color-ink-tertiary);
+            padding: 2px 0;
+        }
+
+        .feature-subs li::before {
+            content: '· ';
+        }
+
+        .so-privacy {
+            padding: var(--space-10) 0;
+        }
+
+        .so-privacy .privacy-text {
+            max-width: 600px;
+        }
+
+        .so-privacy .privacy-text p {
+            line-height: var(--leading-loose);
+            margin-bottom: var(--space-4);
+        }
+
+        .so-privacy .privacy-coda {
+            font: 500 var(--text-base)/1.4 var(--font-body);
+            color: var(--color-ink-primary);
+            margin-top: var(--space-5);
+        }
+
+        .so-roadmap {
+            padding: var(--space-10) 0;
+            background: var(--color-raised);
+        }
+
+        .roadmap-items {
+            max-width: 640px;
+            margin-top: var(--space-6);
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-6);
+        }
+
+        .roadmap-item h4 {
+            font: 600 18px/1 var(--font-body);
+            margin-bottom: var(--space-3);
+        }
+
+        .roadmap-item p {
+            font-size: 15px;
+            line-height: var(--leading-normal);
+            max-width: 560px;
+        }
+
+        .roadmap-note {
+            font: 400 var(--text-sm)/1 var(--font-body);
+            color: var(--color-ink-tertiary);
+            margin-top: var(--space-5);
+        }
+
+        .so-final-cta {
+            padding: var(--space-10) 0;
+        }
+
+        .so-final-cta h2 {
+            font-size: 36px;
+            margin-bottom: var(--space-5);
+        }
+
+        .so-final-ctas {
+            display: flex;
+            gap: var(--space-4);
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 768px) {
+            .so-hero h1 {
+                font-size: 34px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .preview-placeholder {
+                height: 280px;
+            }
+
+            .so-hero-ctas,
+            .so-final-ctas {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <a href="#main" class="skip-link">Skip to content</a>
+    <div id="site-nav"></div>
+
+    <main id="main">
+
+        <!-- HERO -->
+        <section class="so-hero">
+            <div class="container">
+                <span class="tag animate-on-scroll">SELFOS · PRODUCT</span>
+                <h1 class="animate-on-scroll">You don't have<br>a productivity problem.<br><span class="text-accent">You
+                        have a<br>system problem.</span></h1>
+                <p class="animate-on-scroll">
+                    SelfOS is a personal operating system that lives in your browser.
+                    Tasks, habits, goals, finance, fitness, notes, journal —
+                    unified in one place, with your data on your device.
+                </p>
+                <span class="so-hero-note animate-on-scroll">Local-first. Private by default. Yours.</span>
+                <div class="so-hero-ctas animate-on-scroll">
+                    <a href="#access" class="btn-primary">Try SelfOS</a>
+                    <a href="#features" class="btn-secondary">See How It Works →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- APP PREVIEW -->
+        <section class="so-preview">
+            <div class="container">
+                <div class="preview-placeholder animate-on-scroll">
+                    <span>DASHBOARD PREVIEW</span>
+                    <span style="font-size:14px;color:var(--color-ink-tertiary);">Dashboard preview coming soon</span>
+                </div>
+                <p class="preview-caption animate-on-scroll">The SelfOS dashboard — everything in one place, nothing
+                    shared without your permission.</p>
+            </div>
+        </section>
+
+        <!-- FEATURES -->
+        <section class="so-features" id="features">
+            <div class="container">
+                <h2 class="animate-on-scroll" style="font-size:36px;">One system for<br>the whole person.</h2>
+
+                <div class="features-grid animate-stagger">
+                    <div class="feature-card animate-on-scroll">
+                        <h4>Tasks &amp; Goals</h4>
+                        <p class="feature-desc">Plan what matters. Execute with clarity.</p>
+                        <ul class="feature-subs">
+                            <li>Capture anything, route intelligently</li>
+                            <li>Goals linked to daily tasks</li>
+                            <li>Priority and area filters</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card animate-on-scroll">
+                        <h4>Habits</h4>
+                        <p class="feature-desc">Daily rituals that compound over time.</p>
+                        <ul class="feature-subs">
+                            <li>Streak and consistency tracking</li>
+                            <li>Calendar heatmap view</li>
+                            <li>Morning, evening, and custom routines</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card animate-on-scroll">
+                        <h4>Finance</h4>
+                        <p class="feature-desc">Finally see your numbers.</p>
+                        <ul class="feature-subs">
+                            <li>Expense and income tracking</li>
+                            <li>Monthly budget view by category</li>
+                            <li>Multi-currency support</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card animate-on-scroll">
+                        <h4>Notes &amp; Journal</h4>
+                        <p class="feature-desc">Your knowledge base and your private voice.</p>
+                        <ul class="feature-subs">
+                            <li>Markdown notes with full-text search</li>
+                            <li>Daily journal with mood and energy</li>
+                            <li>PARA organisation system</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card animate-on-scroll">
+                        <h4>Fitness &amp; Nutrition</h4>
+                        <p class="feature-desc">Track what you put in and how you move.</p>
+                        <ul class="feature-subs">
+                            <li>Workout logs with custom exercises</li>
+                            <li>Food lookup via public nutrition databases</li>
+                            <li>Body metrics over time</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRIVACY -->
+        <section class="so-privacy">
+            <div class="container">
+                <h2 class="animate-on-scroll" style="font-size:32px;">Your data<br>stays yours.</h2>
+                <div class="privacy-text animate-on-scroll">
+                    <p>
+                        SelfOS is local-first. Your data lives on your device.
+                        Not on a server. Not in a data centre.
+                        You — not Progeta Technologies — own your personal information.
+                    </p>
+                    <p>
+                        Optional cloud sync exists for people who want multi-device access.
+                        It is always opt-in. It can always be turned off.
+                        Export everything at any time, in open formats.
+                    </p>
+                    <p class="privacy-coda">
+                        This is not a privacy policy. It is a design philosophy.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ROADMAP -->
+        <section class="so-roadmap">
+            <div class="container">
+                <span class="tag animate-on-scroll">COMING</span>
+                <h2 class="animate-on-scroll mt-5" style="font-size:28px;">What's next for SelfOS.</h2>
+                <div class="roadmap-items animate-stagger">
+                    <div class="roadmap-item animate-on-scroll">
+                        <h4>AI Integration</h4>
+                        <p>A voice agent that reads your OS, answers questions about your own data, and updates your
+                            system on your behalf. Not connected to external services. Your data, your agent.</p>
+                    </div>
+                    <div class="roadmap-item animate-on-scroll">
+                        <h4>Quantum-aware encryption</h4>
+                        <p>As quantum computing matures, so does SelfOS's approach to keeping your data secure.</p>
+                    </div>
+                </div>
+                <p class="roadmap-note animate-on-scroll">Updates will be posted to the Intel section as they ship.</p>
+            </div>
+        </section>
+
+        <!-- FINAL CTA -->
+        <section class="so-final-cta" id="access">
+            <div class="container">
+                <h2 class="animate-on-scroll">Start building<br>your system.</h2>
+                <div class="so-final-ctas animate-on-scroll">
+                    <a href="#" class="btn-primary">Access SelfOS</a>
+                    <a href="#" class="btn-secondary">Read the documentation →</a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="site-footer"></div>
+    <script src="/assets/js/components.js" defer></script>
+    <script src="/assets/js/animations.js" defer></script>
+</body>
+
+</html>

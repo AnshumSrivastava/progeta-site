@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progeta Technologies | InnerCircle</title>
+    <meta name="description"
+        content="A vetted community for people who are building something real. Apply to join InnerCircle.">
+    <meta property="og:title" content="Progeta Technologies | InnerCircle">
+    <meta property="og:description"
+        content="A vetted community for people who are building something real. Apply to join InnerCircle.">
+    <meta property="og:url" content="https://www.progeta.tech/innercircle/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Progeta Technologies">
+    <link rel="canonical" href="https://www.progeta.tech/innercircle/">
+    <link rel="icon" href="/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="/assets/css/tokens.css">
+    <link rel="stylesheet" href="/assets/css/global.css">
+    <link rel="stylesheet" href="/assets/css/components.css">
+    <link rel="stylesheet" href="/assets/css/layout.css">
+    <link rel="stylesheet" href="/assets/css/animations.css">
+    <style>
+        .ic-hero {
+            padding: var(--space-10) 0 var(--space-8);
+        }
+
+        .ic-hero h1 {
+            font-size: 60px;
+            margin-top: var(--space-5);
+            margin-bottom: var(--space-5);
+        }
+
+        .ic-hero p {
+            font-size: 18px;
+            max-width: 520px;
+            line-height: 1.7;
+            margin-bottom: var(--space-4);
+        }
+
+        .ic-hero-ctas {
+            margin-top: var(--space-5);
+        }
+
+        .ic-what {
+            padding: var(--space-10) 0;
+            background: var(--color-raised);
+        }
+
+        .ic-what-text {
+            max-width: 640px;
+        }
+
+        .ic-what-text p {
+            line-height: var(--leading-loose);
+            margin-bottom: var(--space-4);
+        }
+
+        .ic-steps {
+            padding: var(--space-10) 0;
+        }
+
+        .ic-steps-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-6);
+            margin-top: var(--space-7);
+        }
+
+        .ic-step {
+            padding-top: var(--space-5);
+            border-top: 1px solid var(--color-border);
+        }
+
+        .ic-step-num {
+            font: 700 64px/1 var(--font-display);
+            color: var(--color-border);
+            margin-bottom: var(--space-3);
+        }
+
+        .ic-step h4 {
+            margin-bottom: var(--space-3);
+        }
+
+        .ic-step p {
+            font-size: 15px;
+            line-height: var(--leading-loose);
+        }
+
+        .ic-spotlight {
+            padding: var(--space-10) 0;
+            background: var(--color-raised);
+        }
+
+        .spotlight-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-5);
+            margin-top: var(--space-6);
+        }
+
+        .spotlight-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            padding: var(--space-6);
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-3);
+        }
+
+        .spotlight-card h4 {
+            font: 600 18px/1 var(--font-body);
+        }
+
+        .spotlight-building {
+            font: 400 var(--text-sm)/1.4 var(--font-body);
+            color: var(--color-ink-secondary);
+        }
+
+        .spotlight-quote {
+            font: 400 italic 16px/var(--leading-normal) var(--font-display);
+            color: var(--color-ink-primary);
+            margin-top: auto;
+        }
+
+        .ic-apply {
+            padding: var(--space-10) 0;
+        }
+
+        .ic-apply h2 {
+            font-size: 32px;
+            margin-bottom: var(--space-6);
+        }
+
+        .ic-form {
+            max-width: 560px;
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-5);
+        }
+
+        .ic-form .form-hint {
+            margin-top: 4px;
+        }
+
+        .ic-response {
+            font: 400 var(--text-sm)/var(--leading-normal) var(--font-body);
+            color: var(--color-ink-secondary);
+            margin-top: var(--space-4);
+            max-width: 500px;
+        }
+
+        @media (max-width: 768px) {
+            .ic-hero h1 {
+                font-size: 36px;
+            }
+
+            .ic-steps-grid,
+            .spotlight-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <a href="#main" class="skip-link">Skip to content</a>
+    <div id="site-nav"></div>
+
+    <main id="main">
+
+        <!-- HERO -->
+        <section class="ic-hero">
+            <div class="container">
+                <span class="tag animate-on-scroll">INNERCIRCLE · COMMUNITY</span>
+                <h1 class="animate-on-scroll">Some communities<br>let anyone in.<br><br><span class="text-accent">We
+                        don't.</span></h1>
+                <p class="animate-on-scroll">
+                    InnerCircle is a vetted network of people who are building
+                    something real — and held to it.
+                </p>
+                <p class="animate-on-scroll" style="font-size:16px;">
+                    Not a group chat. Not a Discord server.
+                    A circle of people who take their work and their lives seriously,
+                    and want to be surrounded by others doing the same.
+                </p>
+                <div class="ic-hero-ctas animate-on-scroll">
+                    <a href="#apply" class="btn-primary">Apply Now</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- WHAT THIS IS -->
+        <section class="ic-what">
+            <div class="container">
+                <h2 class="animate-on-scroll" style="font-size:36px;">What being in<br>InnerCircle means.</h2>
+                <div class="ic-what-text animate-on-scroll mt-5">
+                    <p>Membership is free. Access is not automatic.</p>
+                    <p>
+                        Inside InnerCircle you will find people from different fields,
+                        different cities, different starting points — all with one thing
+                        in common: they are actively building something they care about.
+                    </p>
+                    <p>
+                        Events happen. Some are free for members. Some have a cost,
+                        but members attend at a steep discount. The events are designed
+                        for people who want to go deeper, not just network.
+                    </p>
+                    <p>
+                        We do not promise you connections or contracts or success.
+                        We promise you the right company.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- HOW YOU GET IN -->
+        <section class="ic-steps">
+            <div class="container">
+                <h2 class="animate-on-scroll" style="font-size:36px;">Three steps.<br>No shortcuts.</h2>
+
+                <div class="ic-steps-grid animate-stagger">
+                    <div class="ic-step animate-on-scroll">
+                        <div class="ic-step-num">01</div>
+                        <h4>Record a video.</h4>
+                        <p>
+                            One video. Tell us who you are and what you're building.
+                            No script. No production value. No pitch deck.
+                            Just you, talking honestly about what you're working on
+                            and why it matters to you.
+                        </p>
+                    </div>
+                    <div class="ic-step animate-on-scroll">
+                        <div class="ic-step-num">02</div>
+                        <h4>Send it to us.</h4>
+                        <p>
+                            Post it publicly and tag Progeta Technologies,
+                            or send it directly. Either is fine.
+                            We watch every one.
+                        </p>
+                    </div>
+                    <div class="ic-step animate-on-scroll">
+                        <div class="ic-step-num">03</div>
+                        <h4>A conversation.</h4>
+                        <p>
+                            A short call. We want to know if you belong in InnerCircle.
+                            You will know if we do too.
+                            It goes both ways.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MEMBER SPOTLIGHT -->
+        <section class="ic-spotlight">
+            <div class="container">
+                <h2 class="animate-on-scroll" style="font-size:32px;">Who's already here.</h2>
+
+                <div class="spotlight-grid animate-stagger">
+                    <!-- TODO: Add real member spotlights when available -->
+                    <div class="spotlight-card animate-on-scroll">
+                        <h4>Riya Sharma</h4>
+                        <p class="spotlight-building">Building a campus cybersecurity awareness programme</p>
+                        <p class="spotlight-quote">"InnerCircle gave me access to people who were three steps ahead. Not
+                            mentors — peers who challenged me to move faster."</p>
+                    </div>
+                    <div class="spotlight-card animate-on-scroll">
+                        <h4>Karan Desai</h4>
+                        <p class="spotlight-building">Running a security automation startup</p>
+                        <p class="spotlight-quote">"The accountability changed everything. When everyone around you is
+                            shipping, you stop making excuses."</p>
+                    </div>
+                    <div class="spotlight-card animate-on-scroll">
+                        <h4>Meera Iyer</h4>
+                        <p class="spotlight-building">SOC Analyst at a Fortune 500</p>
+                        <p class="spotlight-quote">"I went from LaunchPad student to InnerCircle member in eight months.
+                            The pipeline is real."</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- APPLICATION FORM -->
+        <section class="ic-apply" id="apply">
+            <div class="container">
+                <h2 class="animate-on-scroll">Tell us about yourself.</h2>
+
+                <form class="ic-form animate-on-scroll" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                    <div class="form-group">
+                        <label for="ic-name">Name</label>
+                        <input type="text" id="ic-name" name="name" required placeholder="Your full name">
+                    </div>
+                    <div class="form-group">
+                        <label for="ic-email">Email</label>
+                        <input type="email" id="ic-email" name="email" required placeholder="you@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="ic-building">What are you building?</label>
+                        <textarea id="ic-building" name="building" required
+                            placeholder="Tell us what you're working on and why it matters to you."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="ic-video">Video link</label>
+                        <input type="url" id="ic-video" name="video_link"
+                            placeholder="YouTube, Loom, Google Drive link">
+                        <span class="form-hint">Or send to operations@progeta.tech with subject: InnerCircle
+                            Application</span>
+                    </div>
+
+                    <button type="submit" class="btn-primary">Apply to InnerCircle</button>
+                </form>
+
+                <p class="ic-response animate-on-scroll">
+                    We respond to every application within 72 hours.
+                    If you don't hear from us, check your spam folder
+                    or write to operations@progeta.tech directly.
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="site-footer"></div>
+    <script src="/assets/js/components.js" defer></script>
+    <script src="/assets/js/animations.js" defer></script>
+</body>
+
+</html>

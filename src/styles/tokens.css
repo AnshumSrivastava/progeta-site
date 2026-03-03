@@ -1,0 +1,113 @@
+/* ════════════════════════════════════════════════════
+   PROGETA TECHNOLOGIES — DESIGN TOKENS v4.0
+   Single source of truth. No hardcoded values elsewhere.
+   ════════════════════════════════════════════════════ */
+
+:root {
+    /* ── BASE ─────────────────────────────────────────
+     The void: near-black with faint blue-grey undertone.
+     Deep space between stars.                        */
+    --ground: #0A0B10;
+    --surface-1: #12141C;
+    --surface-2: #1A1D26;
+    --surface-3: #222632;
+
+    /* ── BORDERS ──────────────────────────────────────
+     Three levels: felt → seen → active              */
+    --border-1: #1E222D;
+    --border-2: #2C3242;
+    --border-3: #3A4257;
+
+    /* ── INK ──────────────────────────────────────────
+     Primary: cool near-white (distant blue-white star)
+     Ghost: edge of perception                        */
+    --ink-1: #F5F7FA;
+    --ink-2: #A0AEC0;
+    --ink-3: #4A5568;
+    --ink-4: #2D3748;
+
+    /* ── ACCENTS ──────────────────────────────────────
+     Colour is information, not decoration.
+     LaunchPad: Deep Ember — the moment before ignition
+     SelfOS: Signal Blue — instruments and precision
+     InnerCircle: Growth Green — alive in shade        */
+    --accent-launchpad: #D35400;
+    --accent-selfos: #2980B9;
+    --accent-innercircle: #1B5E20;
+
+    /* Accent hover states */
+    --accent-launchpad-h: #E67E22;
+    --accent-selfos-h: #3498DB;
+    --accent-innercircle-h: #27AE60;
+
+    /* Accent backgrounds (low opacity) */
+    --accent-launchpad-bg: rgba(211, 84, 0, 0.08);
+    --accent-selfos-bg: rgba(41, 128, 185, 0.08);
+    --accent-innercircle-bg: rgba(27, 94, 32, 0.08);
+
+    /* Legacy aliases */
+    --accent-red: var(--accent-launchpad);
+    --accent-blue: var(--accent-selfos);
+    --accent-green: var(--accent-innercircle);
+
+    /* ── GLOW ─────────────────────────────────────────
+     For cursor aura, particle glow, hover auras     */
+    --glow-6: rgba(245, 247, 250, 0.06);
+    --glow-12: rgba(245, 247, 250, 0.12);
+    --glow-18: rgba(245, 247, 250, 0.18);
+    --glow-launchpad: rgba(211, 84, 0, 0.12);
+    --glow-selfos: rgba(41, 128, 185, 0.12);
+    --glow-innercircle: rgba(27, 94, 32, 0.12);
+
+    /* ── SPACING ──────────────────────────────────────
+     Base unit: 8px                                   */
+    --sp-1: 4px;
+    --sp-2: 8px;
+    --sp-3: 12px;
+    --sp-4: 16px;
+    --sp-5: 24px;
+    --sp-6: 32px;
+    --sp-7: 48px;
+    --sp-8: 64px;
+    --sp-9: 96px;
+    --sp-10: 128px;
+    --sp-11: 192px;
+    --sp-12: 256px;
+
+    /* Section vertical rhythm (fluid) */
+    --section-pad: clamp(80px, 10vw, 160px);
+
+    /* Container widths */
+    --w-text: 640px;
+    --w-wide: 1000px;
+    --w-full: 1280px;
+    --w-bleed: 100%;
+
+    /* Container horizontal padding */
+    --container-pad: clamp(16px, 4vw, 64px);
+
+    /* ── MOTION ────────────────────────────────────────
+     Physics-based. Nothing bounces, springs, or wiggles.
+     Things arrive. Things recede. Things find their place. */
+
+    /* Easing functions */
+    --ease-standard: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-enter: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-exit: cubic-bezier(0.4, 0, 1, 1);
+    --ease-precise: linear;
+
+    /* Duration tokens */
+    --dur-instant: 80ms;
+    --dur-micro: 180ms;
+    --dur-short: 350ms;
+    --dur-medium: 600ms;
+    --dur-long: 1000ms;
+    --dur-extended: 1400ms;
+
+    /* Stagger timing */
+    --stagger-siblings: 110ms;
+    --stagger-grid: 70ms;
+
+    /* Legacy alias */
+    --ease-out: var(--ease-standard);
+}
