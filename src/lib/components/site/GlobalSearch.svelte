@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { onMount, onDestroy } from 'svelte';
-  import { fade, fly } from 'svelte/transition';
-  import { browser } from '$app/environment';
-  import { goto } from '$app/navigation';
+  import { onMount, onDestroy } from "svelte";
+  import { fade, fly } from "svelte/transition";
+  import { browser } from "$app/environment";
+  import { goto } from "$app/navigation";
 
   interface SearchResult {
     title: string;
@@ -17,24 +17,184 @@
   }
   let { isOpen, onClose }: Props = $props();
 
-  let query = $state('');
+  let query = $state("");
   let results = $state<SearchResult[]>([]);
   let selectedIndex = $state(0);
   let inputEl: HTMLInputElement;
 
-  // Mock index for now — will be replaced by Phase 9 content operations
+  // Expanded index incorporating all LaunchPad directives and site features
   const mockIndex: SearchResult[] = [
-    { title: 'CTI Specialist', type: 'Track', href: '/launchpad/tracks/cti', description: 'Master Cyber Threat Intelligence.' },
-    { title: 'SOC Analyst', type: 'Track', href: '/launchpad/tracks/soc', description: 'Be the first line of defense.' },
-    { title: 'SelfOS', type: 'Product', href: '/selfos', description: 'Personal Operating System.' },
-    { title: 'InnerCircle', type: 'Community', href: '/innercircle', description: 'Vetted network for builders.' },
-    { title: 'Intelligence Briefs', type: 'Resources', href: '/resources/articles', description: 'Deep tech analysis.' }
+    // Products & Core
+    {
+      title: "SelfOS",
+      type: "Product",
+      href: "/selfos",
+      description: "Local-first personal operating system.",
+    },
+    {
+      title: "InnerCircle",
+      type: "Community",
+      href: "/innercircle",
+      description: "Vetted network for builders.",
+    },
+    {
+      title: "LaunchPad",
+      type: "Initiative",
+      href: "/launchpad",
+      description: "Cybersecurity training and operations hub.",
+    },
+    {
+      title: "Progeta Mission",
+      type: "Company",
+      href: "/about",
+      description: "To help people realise and achieve their dreams and goals.",
+    },
+    {
+      title: "Contact",
+      type: "Support",
+      href: "/contact",
+      description: "Get in touch with Progeta Technologies.",
+    },
+    {
+      title: "Certificate Verification",
+      type: "Tool",
+      href: "/verify",
+      description: "Verify credential authenticity.",
+    },
+
+    // LaunchPad Track Detail Pages
+    {
+      title: "CTI Specialist",
+      type: "Track",
+      href: "/launchpad/tracks/cti",
+      description:
+        "Master Cyber Threat Intelligence. Analyze adversaries and TTPs.",
+    },
+    {
+      title: "SOC Analyst",
+      type: "Track",
+      href: "/launchpad/tracks/soc",
+      description:
+        "Be the first line of defense. Detect and respond to live threats.",
+    },
+    {
+      title: "DevSecOps Engineer",
+      type: "Track",
+      href: "/launchpad/tracks/devsecops",
+      description: "Build secure pipelines. Automate security in CI/CD.",
+    },
+    {
+      title: "GRC Analyst",
+      type: "Track",
+      href: "/launchpad/tracks/grc",
+      description:
+        "Govern, risk, and compliance. Ensure organizational resilience.",
+    },
+    {
+      title: "Penetration Tester",
+      type: "Track",
+      href: "/launchpad/tracks/pentest",
+      description: "Break things to fix them. Offensive security operations.",
+    },
+    {
+      title: "Automation Engineer",
+      type: "Track",
+      href: "/launchpad/tracks/automation",
+      description: "Automate response capability and build scalable defenses.",
+    },
+
+    // LaunchPad Hub Pages
+    {
+      title: "All Programmes",
+      type: "LaunchPad",
+      href: "/launchpad/programmes",
+      description: "Explore all operational programmes and stages.",
+    },
+    {
+      title: "Student Chapters",
+      type: "LaunchPad",
+      href: "/launchpad/chapters",
+      description: "Start a Progeta chapter at your institution.",
+    },
+    {
+      title: "Certifications",
+      type: "LaunchPad",
+      href: "/launchpad/certifications",
+      description: "Verifiable credentials for operational competence.",
+    },
+    {
+      title: "All Tracks",
+      type: "LaunchPad",
+      href: "/tracks",
+      description: "Explore the six operational cybersecurity tracks.",
+    },
+    {
+      title: "Training Modules",
+      type: "LaunchPad",
+      href: "/modules",
+      description: "Individual technical and operational training units.",
+    },
+    {
+      title: "Workshops",
+      type: "Learn",
+      href: "/launchpad/workshops",
+      description: "Deep-dive tactical sessions and hands-on operational labs.",
+    },
+    {
+      title: "Events",
+      type: "Community",
+      href: "/launchpad/events",
+      description: "Meetups, captured flags, and live ops.",
+    },
+    {
+      title: "For Students",
+      type: "Audience",
+      href: "/launchpad/students",
+      description: "Your pathway into the cybersecurity industry.",
+    },
+    {
+      title: "For Colleges",
+      type: "Audience",
+      href: "/launchpad/colleges",
+      description: "Bring Progeta operational training to your campus.",
+    },
+
+    // Resources
+    {
+      title: "Intelligence Briefs",
+      type: "Articles",
+      href: "/resources/articles",
+      description: "Deep tech analysis and operations briefings.",
+    },
+    {
+      title: "Cyber Games",
+      type: "Resources",
+      href: "/resources/games",
+      description: "Interactive operational learning experiences.",
+    },
+    {
+      title: "Event Gallery",
+      type: "Resources",
+      href: "/resources/gallery",
+      description: "Sessions, events, and campus moments.",
+    },
+    {
+      title: "Glossary",
+      type: "Resources",
+      href: "/resources/glossary",
+      description: "Technical and operational terms explained clearly.",
+    },
   ];
 
-  const featuredItem = { title: 'CTI Specialisation Enrolment', type: 'Live', href: '/launchpad/tracks/cti', description: 'Batch starts March 2026.' };
+  const featuredItem = {
+    title: "LaunchPad Programmes",
+    type: "Live",
+    href: "/launchpad/programmes",
+    description: "Bridge the education-readiness gap today.",
+  };
   const hotItems = [
-    { title: 'SelfOS v2.1 Update', type: 'Product', href: '/selfos' },
-    { title: 'Student Chapters', type: 'LaunchPad', href: '/launchpad/chapters' }
+    { title: "SelfOS v2.1 Alpha", type: "Product", href: "/selfos" },
+    { title: "Training Modules", type: "LaunchPad", href: "/modules" },
   ];
 
   $effect(() => {
@@ -49,25 +209,27 @@
       return;
     }
     const q = query.toLowerCase();
-    results = mockIndex.filter(item => 
-      item.title.toLowerCase().includes(q) || 
-      item.type.toLowerCase().includes(q) ||
-      (item.description && item.description.toLowerCase().includes(q))
+    results = mockIndex.filter(
+      (item) =>
+        item.title.toLowerCase().includes(q) ||
+        item.type.toLowerCase().includes(q) ||
+        (item.description && item.description.toLowerCase().includes(q)),
     );
     selectedIndex = 0;
   }
 
   function handleKeydown(e: KeyboardEvent) {
-    if (e.key === 'Escape') onClose();
-    if (e.key === 'ArrowDown') {
+    if (e.key === "Escape") onClose();
+    if (e.key === "ArrowDown") {
       e.preventDefault();
       selectedIndex = (selectedIndex + 1) % (results.length || 1);
     }
-    if (e.key === 'ArrowUp') {
+    if (e.key === "ArrowUp") {
       e.preventDefault();
-      selectedIndex = (selectedIndex - 1 + (results.length || 1)) % (results.length || 1);
+      selectedIndex =
+        (selectedIndex - 1 + (results.length || 1)) % (results.length || 1);
     }
-    if (e.key === 'Enter') {
+    if (e.key === "Enter") {
       if (results[selectedIndex]) {
         navigate(results[selectedIndex].href);
       }
@@ -77,11 +239,11 @@
   function navigate(href: string) {
     goto(href);
     onClose();
-    query = '';
+    query = "";
   }
 
   function handleGlobalKeydown(e: KeyboardEvent) {
-    if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+    if ((e.metaKey || e.ctrlKey) && e.key === "k") {
       e.preventDefault();
       if (isOpen) onClose();
       else {
@@ -92,21 +254,41 @@
   }
 
   onMount(() => {
-    window.addEventListener('keydown', handleGlobalKeydown);
+    window.addEventListener("keydown", handleGlobalKeydown);
   });
 
   onDestroy(() => {
-    if (browser) window.removeEventListener('keydown', handleGlobalKeydown);
+    if (browser) window.removeEventListener("keydown", handleGlobalKeydown);
   });
 </script>
 
 {#if isOpen}
   <!-- svelte-ignore a11y_click_events_have_key_events -->
   <!-- svelte-ignore a11y_no_static_element_interactions -->
-  <div class="search-overlay" transition:fade={{ duration: 200 }} onclick={onClose}>
-    <div class="search-panel" transition:fly={{ y: -20, duration: 300, easing: t => t === 1 ? 1 : 1 - Math.pow(1 - t, 4) }} onclick={(e) => e.stopPropagation()}>
+  <div
+    class="search-overlay"
+    transition:fade={{ duration: 200 }}
+    onclick={onClose}
+  >
+    <div
+      class="search-panel"
+      transition:fly={{
+        y: -20,
+        duration: 300,
+        easing: (t) => (t === 1 ? 1 : 1 - Math.pow(1 - t, 4)),
+      }}
+      onclick={(e) => e.stopPropagation()}
+    >
       <div class="search-input-wrap">
-        <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <svg
+          class="search-icon"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
           <circle cx="11" cy="11" r="8" />
           <path d="M21 21l-4.35-4.35" />
         </svg>
@@ -126,8 +308,14 @@
         {#if !query}
           <div class="search-pre">
             <div class="search-section-label">Featured Right Now</div>
-            <a href={featuredItem.href} class="featured-card" onclick={() => navigate(featuredItem.href)}>
-              <div class="result-type result-type--featured">{featuredItem.type}</div>
+            <a
+              href={featuredItem.href}
+              class="featured-card"
+              onclick={() => navigate(featuredItem.href)}
+            >
+              <div class="result-type result-type--featured">
+                {featuredItem.type}
+              </div>
               <div class="result-title">{featuredItem.title}</div>
               <div class="result-desc">{featuredItem.description}</div>
             </a>
@@ -135,7 +323,11 @@
             <div class="search-section-label">Current Highlights</div>
             <div class="hot-grid">
               {#each hotItems as item}
-                <a href={item.href} class="hot-card" onclick={() => navigate(item.href)}>
+                <a
+                  href={item.href}
+                  class="hot-card"
+                  onclick={() => navigate(item.href)}
+                >
                   <div class="result-type">{item.type}</div>
                   <div class="result-title">{item.title}</div>
                 </a>
@@ -145,12 +337,12 @@
         {:else if results.length > 0}
           <div class="search-results">
             {#each results as result, i}
-              <a 
-                href={result.href} 
-                class="result-item" 
+              <a
+                href={result.href}
+                class="result-item"
                 class:active={i === selectedIndex}
                 onclick={() => navigate(result.href)}
-                onmouseenter={() => selectedIndex = i}
+                onmouseenter={() => (selectedIndex = i)}
               >
                 <div class="result-meta">
                   <span class="result-title">{result.title}</span>
@@ -242,7 +434,9 @@
     margin: var(--sp-6) 0 var(--sp-4);
   }
 
-  .search-section-label:first-child { margin-top: 0; }
+  .search-section-label:first-child {
+    margin-top: 0;
+  }
 
   /* Cards */
   .featured-card {
@@ -254,7 +448,9 @@
     transition: border-color 0.2s;
   }
 
-  .featured-card:hover { border-color: var(--border-2); }
+  .featured-card:hover {
+    border-color: var(--border-2);
+  }
 
   .hot-grid {
     display: grid;
@@ -271,7 +467,9 @@
     transition: border-color 0.2s;
   }
 
-  .hot-card:hover { border-color: var(--border-2); }
+  .hot-card:hover {
+    border-color: var(--border-2);
+  }
 
   /* Results */
   .result-item {
@@ -333,8 +531,16 @@
   }
 
   @media (max-width: 768px) {
-    .search-overlay { padding-top: 0; }
-    .search-panel { height: 100vh; max-height: 100vh; border: none; }
-    .hot-grid { grid-template-columns: 1fr; }
+    .search-overlay {
+      padding-top: 0;
+    }
+    .search-panel {
+      height: 100vh;
+      max-height: 100vh;
+      border: none;
+    }
+    .hot-grid {
+      grid-template-columns: 1fr;
+    }
   }
 </style>

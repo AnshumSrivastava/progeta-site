@@ -562,7 +562,11 @@
     align-items: flex-end;
     background: #020408;
     overflow: hidden;
-    padding-bottom: clamp(60px, 8vw, 100px);
+    padding-bottom: clamp(
+      120px,
+      15vw,
+      180px
+    ); /* Increased from 60px/100px to move text up */
   }
   .hero-container {
     position: relative;
@@ -879,6 +883,7 @@
     position: relative;
     overflow: hidden;
     transition: background 0.2s ease;
+    height: 100%;
   }
   .module-card:hover {
     background: #07090f;

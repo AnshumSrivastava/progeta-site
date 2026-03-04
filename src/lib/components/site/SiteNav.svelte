@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { page } from '$app/stores';
-  import { onMount, onDestroy } from 'svelte';
-  import BrandMark from './BrandMark.svelte';
-  import GlobalSearch from './GlobalSearch.svelte';
+  import { page } from "$app/stores";
+  import { onMount, onDestroy } from "svelte";
+  import BrandMark from "./BrandMark.svelte";
+  import GlobalSearch from "./GlobalSearch.svelte";
 
   let scrolled = $state(false);
   let mobileOpen = $state(false);
@@ -11,78 +11,113 @@
 
   /* ── NAV STRUCTURE (v4.0: 5 groups) ──────── */
   const navGroups = [
-    { label: 'Mission', href: '/about' },
+    { label: "Mission", href: "/about" },
     {
-      label: 'LaunchPad',
-      dropdown: 'launchpad',
-      description: 'Bridging the skill gap between education and readiness through immersive programmes, tracks, and certifications.',
+      label: "LaunchPad",
+      dropdown: "launchpad",
+      description:
+        "Bridging the skill gap between education and readiness through immersive programmes, tracks, and certifications.",
       columns: [
         {
-          heading: 'Programmes',
+          heading: "Programmes",
           links: [
-            { label: 'All Programmes', href: '/launchpad/programmes' },
-            { label: 'Student Chapters', href: '/launchpad/chapters' },
-            { label: 'Certifications', href: '/launchpad/certifications' },
+            { label: "All Programmes", href: "/launchpad/programmes" },
+            { label: "Student Chapters", href: "/launchpad/chapters" },
+            { label: "Certifications", href: "/launchpad/certifications" },
           ],
         },
         {
-          heading: 'Tracks',
+          heading: "Tracks",
           links: [
-            { label: 'CTI Specialist', href: '/launchpad/tracks/cti' },
-            { label: 'SOC Analyst', href: '/launchpad/tracks/soc' },
-            { label: 'DevSecOps Engineer', href: '/launchpad/tracks/devsecops' },
-            { label: 'GRC Analyst', href: '/launchpad/tracks/grc' },
-            { label: 'Penetration Tester', href: '/launchpad/tracks/pentest' },
-            { label: 'Automation Engineer', href: '/launchpad/tracks/automation' },
+            { label: "CTI Specialist", href: "/launchpad/tracks/cti" },
+            { label: "SOC Analyst", href: "/launchpad/tracks/soc" },
+            {
+              label: "DevSecOps Engineer",
+              href: "/launchpad/tracks/devsecops",
+            },
+            { label: "GRC Analyst", href: "/launchpad/tracks/grc" },
+            { label: "Penetration Tester", href: "/launchpad/tracks/pentest" },
+            {
+              label: "Automation Engineer",
+              href: "/launchpad/tracks/automation",
+            },
           ],
         },
         {
-          heading: 'Learn',
+          heading: "Pathways",
           links: [
-            { label: 'Workshops', href: '/launchpad/workshops' },
-            { label: 'Events', href: '/launchpad/events' },
+            { label: "For Students", href: "/launchpad/students" },
+            { label: "For Colleges", href: "/launchpad/colleges" },
+          ],
+        },
+        {
+          heading: "Learn",
+          links: [
+            { label: "Modules", href: "/modules" },
+            { label: "Workshops", href: "/launchpad/workshops" },
+            { label: "Events", href: "/launchpad/events" },
           ],
         },
       ],
     },
     {
-      label: 'Initiatives',
-      dropdown: 'products',
+      label: "Initiatives",
+      dropdown: "products",
       items: [
         {
-          name: 'SelfOS',
-          desc: 'A local-first personal operating system for your life.',
-          href: '/selfos',
-          accent: 'var(--accent-selfos)',
+          name: "SelfOS",
+          desc: "A local-first personal operating system for your life.",
+          href: "/selfos",
+          accent: "var(--accent-selfos)",
         },
       ],
     },
     {
-      label: 'Community',
-      dropdown: 'community',
+      label: "Community",
+      dropdown: "community",
       items: [
         {
-          name: 'InnerCircle',
-          desc: 'A vetted network for builders creating something real.',
-          href: '/innercircle',
-          accent: 'var(--accent-innercircle)',
+          name: "InnerCircle",
+          desc: "A vetted network for builders creating something real.",
+          href: "/innercircle",
+          accent: "var(--accent-innercircle)",
         },
         {
-          name: 'Events',
-          desc: 'Live sessions, workshops, and gatherings.',
-          href: '/launchpad/events',
-          accent: '',
+          name: "Events",
+          desc: "Live sessions, workshops, and gatherings.",
+          href: "/launchpad/events",
+          accent: "",
         },
       ],
     },
     {
-      label: 'Resources',
-      dropdown: 'resources',
+      label: "Resources",
+      dropdown: "resources",
       items: [
-        { name: 'Articles', desc: 'Intelligence Briefs on tech, security, and leadership.', href: '/resources/articles', accent: '' },
-        { name: 'Games', desc: 'Interactive learning experiences.', href: '/resources/games', accent: '' },
-        { name: 'Gallery', desc: 'Sessions, events, and campus moments.', href: '/resources/gallery', accent: '' },
-        { name: 'Glossary', desc: 'Technical terms explained clearly.', href: '/resources/glossary', accent: '' },
+        {
+          name: "Articles",
+          desc: "Intelligence Briefs on tech, security, and leadership.",
+          href: "/resources/articles",
+          accent: "",
+        },
+        {
+          name: "Games",
+          desc: "Interactive learning experiences.",
+          href: "/resources/games",
+          accent: "",
+        },
+        {
+          name: "Gallery",
+          desc: "Sessions, events, and campus moments.",
+          href: "/resources/gallery",
+          accent: "",
+        },
+        {
+          name: "Glossary",
+          desc: "Technical terms explained clearly.",
+          href: "/resources/glossary",
+          accent: "",
+        },
       ],
     },
   ];
@@ -92,37 +127,40 @@
   }
 
   onMount(() => {
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
   });
 
   onDestroy(() => {
-    if (typeof window !== 'undefined') {
-      window.removeEventListener('scroll', handleScroll);
+    if (typeof window !== "undefined") {
+      window.removeEventListener("scroll", handleScroll);
     }
   });
 
   function toggleMobile() {
     mobileOpen = !mobileOpen;
-    document.body.style.overflow = mobileOpen ? 'hidden' : '';
+    document.body.style.overflow = mobileOpen ? "hidden" : "";
   }
 
   function closeMobile() {
     mobileOpen = false;
-    document.body.style.overflow = '';
+    document.body.style.overflow = "";
   }
 
   function isActive(href: string, pathname: string): boolean {
-    if (href === '/') return pathname === '/';
+    if (href === "/") return pathname === "/";
     return pathname.startsWith(href);
   }
 
   function isGroupActive(group: any, pathname: string): boolean {
     if (group.href) return isActive(group.href, pathname);
-    if (group.dropdown === 'launchpad') return pathname.startsWith('/launchpad');
-    if (group.dropdown === 'products') return pathname.startsWith('/selfos');
-    if (group.dropdown === 'community') return pathname.startsWith('/innercircle');
-    if (group.dropdown === 'resources') return pathname.startsWith('/resources');
+    if (group.dropdown === "launchpad")
+      return pathname.startsWith("/launchpad");
+    if (group.dropdown === "products") return pathname.startsWith("/selfos");
+    if (group.dropdown === "community")
+      return pathname.startsWith("/innercircle");
+    if (group.dropdown === "resources")
+      return pathname.startsWith("/resources");
     return false;
   }
 
@@ -143,8 +181,8 @@
         {#if group.dropdown}
           <div
             class="nav__dropdown-wrap"
-            onmouseenter={() => activeDropdown = group.dropdown ?? null}
-            onmouseleave={() => activeDropdown = null}
+            onmouseenter={() => (activeDropdown = group.dropdown ?? null)}
+            onmouseleave={() => (activeDropdown = null)}
           >
             <button
               class="nav__link"
@@ -157,12 +195,16 @@
             {#if activeDropdown === group.dropdown}
               <div class="mega">
                 <div class="mega__inner">
-                  {#if group.dropdown === 'launchpad' && group.columns}
+                  {#if group.dropdown === "launchpad" && group.columns}
                     <!-- LaunchPad: description + columns layout -->
                     <div class="mega__launchpad">
                       <div class="mega__desc-col">
                         <p class="mega__desc-text">{group.description}</p>
-                        <a href="/launchpad" class="mega__hub-link" onclick={() => activeDropdown = null}>
+                        <a
+                          href="/launchpad"
+                          class="mega__hub-link"
+                          onclick={() => (activeDropdown = null)}
+                        >
                           LaunchPad Hub →
                         </a>
                       </div>
@@ -170,7 +212,11 @@
                         <div class="mega__col">
                           <span class="mega__col-heading">{col.heading}</span>
                           {#each col.links as link}
-                            <a href={link.href} class="mega__col-link" onclick={() => activeDropdown = null}>
+                            <a
+                              href={link.href}
+                              class="mega__col-link"
+                              onclick={() => (activeDropdown = null)}
+                            >
                               {link.label}
                             </a>
                           {/each}
@@ -179,17 +225,30 @@
                     </div>
                   {:else if group.items}
                     <!-- Products / Community / Resources: item cards -->
-                    <div class="mega__items" style="grid-template-columns: repeat({Math.min(group.items.length, 4)}, 1fr);">
+                    <div
+                      class="mega__items"
+                      style="grid-template-columns: repeat({Math.min(
+                        group.items.length,
+                        4,
+                      )}, 1fr);"
+                    >
                       {#each group.items as item}
-                        <a href={item.href} class="mega__item" onclick={() => activeDropdown = null}>
+                        <a
+                          href={item.href}
+                          class="mega__item"
+                          onclick={() => (activeDropdown = null)}
+                        >
                           {#if item.accent}
-                            <span class="mega__accent" style="background: {item.accent}"></span>
+                            <span
+                              class="mega__accent"
+                              style="background: {item.accent}"
+                            ></span>
                           {/if}
                           <span class="mega__name">{item.name}</span>
                           <span class="mega__item-desc">{item.desc}</span>
                         </a>
                       {/each}
-                      {#if group.dropdown === 'products'}
+                      {#if group.dropdown === "products"}
                         <div class="mega__ghost">
                           <span class="mega__ghost-text">More coming.</span>
                         </div>
@@ -204,7 +263,10 @@
           <a
             href={group.href}
             class="nav__link"
-            class:nav__link--active={isActive(group.href ?? '', $page.url.pathname)}
+            class:nav__link--active={isActive(
+              group.href ?? "",
+              $page.url.pathname,
+            )}
           >
             {group.label}
           </a>
@@ -212,8 +274,19 @@
       {/each}
 
       <!-- Search icon -->
-      <button class="nav__search" aria-label="Search (Ctrl+K)" onclick={() => searchOpen = true}>
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <button
+        class="nav__search"
+        aria-label="Search (Ctrl+K)"
+        onclick={() => (searchOpen = true)}
+      >
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
           <circle cx="11" cy="11" r="8" />
           <path d="M21 21l-4.35-4.35" />
         </svg>
@@ -232,7 +305,7 @@
   </div>
 </nav>
 
-<GlobalSearch isOpen={searchOpen} onClose={() => searchOpen = false} />
+<GlobalSearch isOpen={searchOpen} onClose={() => (searchOpen = false)} />
 
 <!-- Mobile drawer -->
 {#if mobileOpen}
@@ -242,29 +315,52 @@
       {#each navGroups as group}
         {#if group.dropdown}
           <div class="drawer__group">
-            <button class="drawer__label" onclick={() => toggleMobileSection(group.dropdown ?? '')}>
+            <button
+              class="drawer__label"
+              onclick={() => toggleMobileSection(group.dropdown ?? "")}
+            >
               {group.label}
-              <span class="drawer__chevron" class:drawer__chevron--open={mobileExpanded === group.dropdown}>▾</span>
+              <span
+                class="drawer__chevron"
+                class:drawer__chevron--open={mobileExpanded === group.dropdown}
+                >▾</span
+              >
             </button>
             {#if mobileExpanded === group.dropdown}
               <div class="drawer__sub">
-                {#if group.dropdown === 'launchpad' && group.columns}
-                  <a href="/launchpad" class="drawer__item" onclick={closeMobile}>Hub</a>
+                {#if group.dropdown === "launchpad" && group.columns}
+                  <a
+                    href="/launchpad"
+                    class="drawer__item"
+                    onclick={closeMobile}>Hub</a
+                  >
                   {#each group.columns as col}
                     {#each col.links as link}
-                      <a href={link.href} class="drawer__item" onclick={closeMobile}>{link.label}</a>
+                      <a
+                        href={link.href}
+                        class="drawer__item"
+                        onclick={closeMobile}>{link.label}</a
+                      >
                     {/each}
                   {/each}
                 {:else if group.items}
                   {#each group.items as item}
-                    <a href={item.href} class="drawer__item" onclick={closeMobile}>{item.name}</a>
+                    <a
+                      href={item.href}
+                      class="drawer__item"
+                      onclick={closeMobile}>{item.name}</a
+                    >
                   {/each}
                 {/if}
               </div>
             {/if}
           </div>
         {:else}
-          <a href={group.href} class="drawer__item drawer__item--top" onclick={closeMobile}>{group.label}</a>
+          <a
+            href={group.href}
+            class="drawer__item drawer__item--top"
+            onclick={closeMobile}>{group.label}</a
+          >
         {/if}
       {/each}
     </div>
@@ -327,7 +423,7 @@
     font-family: var(--font-mono);
     font-size: 11px;
     text-transform: uppercase;
-    letter-spacing: 0.10em;
+    letter-spacing: 0.1em;
     color: var(--ink-3);
     background: none;
     border: none;
@@ -338,12 +434,13 @@
     position: relative;
   }
 
-  .nav__link:hover, .nav__link--active {
-    color: #FFFFFF;
+  .nav__link:hover,
+  .nav__link--active {
+    color: #ffffff;
   }
 
   .nav__link::after {
-    content: '';
+    content: "";
     position: absolute;
     bottom: -4px;
     left: 0;
@@ -353,7 +450,8 @@
     transition: width 0.3s ease;
   }
 
-  .nav__link:hover::after, .nav__link--active::after {
+  .nav__link:hover::after,
+  .nav__link--active::after {
     width: 100%;
   }
 
@@ -407,8 +505,14 @@
   }
 
   @keyframes megaIn {
-    from { opacity: 0; transform: translate(-50%, -8px); }
-    to { opacity: 1; transform: translate(-50%, 0); }
+    from {
+      opacity: 0;
+      transform: translate(-50%, -8px);
+    }
+    to {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
   }
 
   .mega__inner {
@@ -560,12 +664,20 @@
     width: 100%;
     height: 1px;
     background: var(--ink-1);
-    transition: transform 0.3s, opacity 0.3s;
+    transition:
+      transform 0.3s,
+      opacity 0.3s;
   }
 
-  .hamburger-icon.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
-  .hamburger-icon.open span:nth-child(2) { opacity: 0; }
-  .hamburger-icon.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+  .hamburger-icon.open span:nth-child(1) {
+    transform: translateY(6.5px) rotate(45deg);
+  }
+  .hamburger-icon.open span:nth-child(2) {
+    opacity: 0;
+  }
+  .hamburger-icon.open span:nth-child(3) {
+    transform: translateY(-6.5px) rotate(-45deg);
+  }
 
   /* ── MOBILE DRAWER ───────────────────────── */
   .drawer {
@@ -585,8 +697,12 @@
   }
 
   @keyframes drawerIn {
-    from { transform: translateX(100%); }
-    to { transform: translateX(0); }
+    from {
+      transform: translateX(100%);
+    }
+    to {
+      transform: translateX(0);
+    }
   }
 
   .overlay {
@@ -682,8 +798,14 @@
   }
 
   @media (max-width: 1024px) {
-    .nav { height: 60px; }
-    .nav__links { display: none; }
-    .nav__hamburger { display: block; }
+    .nav {
+      height: 60px;
+    }
+    .nav__links {
+      display: none;
+    }
+    .nav__hamburger {
+      display: block;
+    }
   }
 </style>
