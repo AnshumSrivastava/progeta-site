@@ -1,17 +1,24 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
-  import ScrollReveal from '$lib/components/animations/ScrollReveal.svelte';
-  import Button from '$lib/components/ui/Button.svelte';
-  import MorphingConstellation from '$lib/components/animations/MorphingConstellation.svelte';
-  import { highlights, systemStatus, rotatingFacts } from '$lib/content/highlights';
+  import { onMount } from "svelte";
+  import ScrollReveal from "$lib/components/animations/ScrollReveal.svelte";
+  import Button from "$lib/components/ui/Button.svelte";
+  import MorphingConstellation from "$lib/components/animations/MorphingConstellation.svelte";
+  import {
+    highlights,
+    systemStatus,
+    rotatingFacts,
+  } from "$lib/content/highlights";
 
   onMount(() => {
     // Intel feed: clone cards for infinite scroll
-    const track = document.querySelector('.briefs-track');
-    if (track && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      Array.from(track.children).forEach(child => {
+    const track = document.querySelector(".briefs-track");
+    if (
+      track &&
+      !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      Array.from(track.children).forEach((child) => {
         const clone = child.cloneNode(true) as HTMLElement;
-        clone.setAttribute('aria-hidden', 'true');
+        clone.setAttribute("aria-hidden", "true");
         track.appendChild(clone);
       });
     }
@@ -20,7 +27,10 @@
 
 <svelte:head>
   <title>Progeta Technologies — Realising Human Potential</title>
-  <meta name="description" content="Progeta Technologies is a mission expressed as a company: helping people realise and achieve their dreams and goals." />
+  <meta
+    name="description"
+    content="Progeta Technologies is a mission expressed as a company: helping people realise and achieve their dreams and goals."
+  />
 </svelte:head>
 
 <!-- ═══════════════════════════════════════════════════
@@ -33,7 +43,9 @@
       <ScrollReveal delay={100} distance={10}>
         <div class="hero__status">
           <span class="status-dot"></span>
-          <span class="status-text">SYSTEM OPERATIONAL · EST. 2024 · GLOBAL</span>
+          <span class="status-text"
+            >SYSTEM OPERATIONAL · EST. 2024 · GLOBAL</span
+          >
         </div>
       </ScrollReveal>
 
@@ -43,7 +55,9 @@
           <span class="hero__line">We exist</span>
         </ScrollReveal>
         <ScrollReveal delay={450} distance={20} stagger={0}>
-          <span class="hero__line">so you can <span class="hero__accent">build</span></span>
+          <span class="hero__line"
+            >so you can <span class="hero__accent">build</span></span
+          >
         </ScrollReveal>
         <ScrollReveal delay={600} distance={20} stagger={0}>
           <span class="hero__line">the life</span>
@@ -55,14 +69,20 @@
 
       <!-- What's Happening -->
       <ScrollReveal delay={1000} distance={15}>
-        <p class="hero__subline">A mission expressed as a company — helping people realise and achieve their dreams and goals.</p>
+        <p class="hero__subline">
+          A mission expressed as a company — helping people realise and achieve
+          their dreams and goals.
+        </p>
       </ScrollReveal>
 
       <ScrollReveal delay={1100} distance={10}>
         <div class="hero__whats-new">
           {#each highlights as item}
             <a href={item.href} class="wn-pill">
-              <span class="wn-pill__dot" style={item.accent ? `background: ${item.accent}` : ''}></span>
+              <span
+                class="wn-pill__dot"
+                style={item.accent ? `background: ${item.accent}` : ""}
+              ></span>
               <span class="wn-pill__text">{item.title}</span>
               {#if item.label}
                 <span class="wn-pill__badge">{item.label}</span>
@@ -76,7 +96,9 @@
       <ScrollReveal delay={1200} distance={20}>
         <div class="hero__ctas">
           <Button variant="primary" href="/about">Explore the Mission</Button>
-          <a href="#initiatives" class="hero__secondary-cta">View Initiatives <span class="arrow">→</span></a>
+          <a href="#initiatives" class="hero__secondary-cta"
+            >View Initiatives <span class="arrow">→</span></a
+          >
         </div>
       </ScrollReveal>
 
@@ -111,13 +133,19 @@
       <span class="manifesto-deco" aria-hidden="true">"</span>
       <blockquote class="manifesto-quote">
         <p>We believe every person carries something worth building.</p>
-        <p>A dream unrealised is not a failure of the person —<br>
-           it is a failure of the environment around them.</p>
+        <p>
+          A dream unrealised is not a failure of the person —<br />
+          it is a failure of the environment around them.
+        </p>
         <p class="manifesto-close">
-          Progeta Technologies is that environment, <strong>built differently.</strong>
+          Progeta Technologies is that environment, <strong
+            >built differently.</strong
+          >
         </p>
       </blockquote>
-      <div style="width: 48px; height: 1px; background: #222840; margin: 32px auto 0;"></div>
+      <div
+        style="width: 48px; height: 1px; background: #222840; margin: 32px auto 0;"
+      ></div>
     </ScrollReveal>
   </div>
 </section>
@@ -131,22 +159,37 @@
       <div class="vision__marker" style="--accent: var(--accent-launchpad)">
         <ScrollReveal delay={500} distance={10}>
           <span class="marker__number">01</span>
-          <h3 class="marker__heading" style="color: var(--accent-launchpad)">Equality</h3>
-          <p class="marker__text">The environment must be accessible to anyone with the drive to build — regardless of background, geography, or circumstance.</p>
+          <h3 class="marker__heading" style="color: var(--accent-launchpad)">
+            Equality
+          </h3>
+          <p class="marker__text">
+            The environment must be accessible to anyone with the drive to build
+            — regardless of background, geography, or circumstance.
+          </p>
         </ScrollReveal>
       </div>
       <div class="vision__marker" style="--accent: var(--accent-selfos)">
         <ScrollReveal delay={650} distance={10}>
           <span class="marker__number">02</span>
-          <h3 class="marker__heading" style="color: var(--accent-selfos)">Intention</h3>
-          <p class="marker__text">Nothing is accidental. Every pixel and every programme has a purpose aligned to the singular mission of human potential.</p>
+          <h3 class="marker__heading" style="color: var(--accent-selfos)">
+            Intention
+          </h3>
+          <p class="marker__text">
+            Nothing is accidental. Every pixel and every programme has a purpose
+            aligned to the singular mission of human potential.
+          </p>
         </ScrollReveal>
       </div>
       <div class="vision__marker" style="--accent: var(--accent-innercircle)">
         <ScrollReveal delay={800} distance={10}>
           <span class="marker__number">03</span>
-          <h3 class="marker__heading" style="color: var(--accent-innercircle)">SOVEREIGNTY</h3>
-          <p class="marker__text">The goal is individual duty. We help you own your future — not depend on us for it.</p>
+          <h3 class="marker__heading" style="color: var(--accent-innercircle)">
+            SOVEREIGNTY
+          </h3>
+          <p class="marker__text">
+            The goal is individual duty. We help you own your future — not
+            depend on us for it.
+          </p>
         </ScrollReveal>
       </div>
     </div>
@@ -157,44 +200,71 @@
   <div class="initiative-grid">
     <!-- LaunchPad -->
     <ScrollReveal delay={100} distance={20} class="init-card-wrapper">
-      <a href="/launchpad" class="init-card" style="--accent: var(--accent-launchpad)">
+      <a
+        href="/launchpad"
+        class="init-card"
+        style="--accent: var(--accent-launchpad)"
+      >
         <span class="init-card__label">INITIATIVE // 01</span>
         <h3 class="init-card__title">LaunchPad</h3>
-        <p class="init-card__desc">Closing the skill gap between education and readiness through immersive certification tracks and campus programmes.</p>
+        <p class="init-card__desc">
+          Closing the skill gap between education and readiness through
+          immersive certification tracks and campus programmes.
+        </p>
         <ul class="init-card__sublinks">
           <li>Cybersecurity Track</li>
           <li>Cloud Engineering</li>
           <li>AI Systems</li>
         </ul>
-        <span class="init-card__link">Enter the LaunchPad <span class="arrow">→</span></span>
+        <span class="init-card__link"
+          >Enter the LaunchPad <span class="arrow">→</span></span
+        >
       </a>
     </ScrollReveal>
 
     <!-- SelfOS -->
     <ScrollReveal delay={200} distance={20} class="init-card-wrapper">
-      <a href="/selfos" class="init-card" style="--accent: var(--accent-selfos)">
+      <a
+        href="/selfos"
+        class="init-card"
+        style="--accent: var(--accent-selfos)"
+      >
         <span class="init-card__label">INITIATIVE // 02</span>
         <h3 class="init-card__title">SelfOS</h3>
-        <p class="init-card__desc">A local-first personal operating system designed to help you run your life with complete intention and privacy.</p>
+        <p class="init-card__desc">
+          A local-first personal operating system designed to help you run your
+          life with complete intention and privacy.
+        </p>
         <ul class="init-card__sublinks">
           <li>Local-First Architecture</li>
           <li>End-to-End Encryption</li>
         </ul>
-        <span class="init-card__link">Initialize SelfOS <span class="arrow">→</span></span>
+        <span class="init-card__link"
+          >Initialize SelfOS <span class="arrow">→</span></span
+        >
       </a>
     </ScrollReveal>
 
     <!-- InnerCircle -->
     <ScrollReveal delay={300} distance={20} class="init-card-wrapper">
-      <a href="/innercircle" class="init-card" style="--accent: var(--accent-innercircle)">
+      <a
+        href="/innercircle"
+        class="init-card"
+        style="--accent: var(--accent-innercircle)"
+      >
         <span class="init-card__label">INITIATIVE // 03</span>
         <h3 class="init-card__title">InnerCircle</h3>
-        <p class="init-card__desc">A vetted network for builders who are actively creating something real and want to be surrounded by peers of similar drive.</p>
+        <p class="init-card__desc">
+          A vetted network for builders who are actively creating something real
+          and want to be surrounded by peers of similar drive.
+        </p>
         <ul class="init-card__sublinks">
           <li>Builder Network</li>
           <li>Invite-Only Events</li>
         </ul>
-        <span class="init-card__link">Apply for Access <span class="arrow">→</span></span>
+        <span class="init-card__link"
+          >Apply for Access <span class="arrow">→</span></span
+        >
       </a>
     </ScrollReveal>
 
@@ -203,7 +273,10 @@
       <div class="init-card init-card--ghost">
         <span class="init-card__label">INITIATIVE // 04</span>
         <h3 class="init-card__title">Next Initiative</h3>
-        <p class="init-card__desc">Currently in architectural planning. Focused on digital sovereignty and open knowledge networks.</p>
+        <p class="init-card__desc">
+          Currently in architectural planning. Focused on digital sovereignty
+          and open knowledge networks.
+        </p>
         <ul class="init-card__sublinks">
           <li>In Development</li>
           <li>Q4 2026 Target</li>
@@ -221,12 +294,21 @@
     <div class="company__statement-block">
       <ScrollReveal delay={100} distance={20}>
         <span class="section-label">THE FOUNDER'S DIRECTIVE</span>
-        <h2 class="company__heading">Build with intention,<br/>or not at all.</h2>
+        <h2 class="company__heading">
+          Build with intention,<br />or not at all.
+        </h2>
         <div class="company__body">
-          <p>Progeta Technologies exists because we believe the current digital landscape is accidental. We build tools that require responsibility, because responsibility is the precursor to freedom.</p>
-          <p>Our work is not for everyone. It is for the students in small towns who feel limited by their geography. It is for the builders who refuse to use tools that don't respect them.</p>
+          <p>
+            Progeta Technologies exists because we believe the current digital
+            landscape is accidental. We build tools that require responsibility,
+            because responsibility is the precursor to freedom.
+          </p>
+          <p>
+            Our work is not for everyone. It is for the students in small towns
+            who feel limited by their geography. It is for the builders who
+            refuse to use tools that don't respect them.
+          </p>
         </div>
-
       </ScrollReveal>
     </div>
 
@@ -239,7 +321,7 @@
         {#each rotatingFacts as fact, i}
           <ScrollReveal delay={400 + i * 120} distance={15}>
             <div class="truth-card">
-              <span class="truth-number">{String(i + 1).padStart(2, '0')}</span>
+              <span class="truth-number">{String(i + 1).padStart(2, "0")}</span>
               <p class="truth-text">{fact}</p>
             </div>
           </ScrollReveal>
@@ -259,7 +341,10 @@
         <ScrollReveal delay={100} distance={20}>
           <span class="section-label">INTERACTIVE LABS</span>
           <h2 class="games-teaser__title">The Training Ground.</h2>
-          <p class="games-teaser__desc">Immersive simulations designed to bridge the gap between theory and tactical reality. From CTI scenarios to infrastructure defense.</p>
+          <p class="games-teaser__desc">
+            Immersive simulations designed to bridge the gap between theory and
+            tactical reality. From CTI scenarios to infrastructure defense.
+          </p>
           <div class="games-teaser__stats">
             <div class="mini-stat">
               <span class="mini-stat__val">03</span>
@@ -294,7 +379,9 @@
       <h2 class="briefs-title">Intelligence Briefs.</h2>
     </ScrollReveal>
     <ScrollReveal delay={200}>
-      <a href="/resources/articles" class="view-all">View All Briefs <span class="arrow">→</span></a>
+      <a href="/resources/articles" class="view-all"
+        >View All Briefs <span class="arrow">→</span></a
+      >
     </ScrollReveal>
   </div>
 
@@ -308,44 +395,59 @@
         <a href="/intel/local-first" class="brief-card brief-card--featured">
           <span class="brief-meta">MARCH 2026 // INTEL</span>
           <h3 class="brief-title">The State of Local-First Systems</h3>
-          <p class="brief-excerpt">An analysis of why shared responsibility is shifting toward individual sovereignty in the next decade of computing.</p>
+          <p class="brief-excerpt">
+            An analysis of why shared responsibility is shifting toward
+            individual sovereignty in the next decade of computing.
+          </p>
           <div class="brief-tags">
             <span class="brief-tag">SOVEREIGNTY</span>
             <span class="brief-tag">SYSTEMS</span>
           </div>
-          <span class="brief-link">Read Brief <span class="arrow">→</span></span>
+          <span class="brief-link">Read Brief <span class="arrow">→</span></span
+          >
         </a>
         <a href="/intel/threat-actor-ecology" class="brief-card">
           <span class="brief-meta">FEB 2026 // CTI</span>
           <h3 class="brief-title">Threat Actor Ecology in EdTech</h3>
-          <p class="brief-excerpt">Mapping the shift in tactical approaches toward educational infrastructure and the resulting skill gap.</p>
+          <p class="brief-excerpt">
+            Mapping the shift in tactical approaches toward educational
+            infrastructure and the resulting skill gap.
+          </p>
           <div class="brief-tags">
             <span class="brief-tag">CTI</span>
             <span class="brief-tag">THREAT INTEL</span>
           </div>
-          <span class="brief-link">Read Brief <span class="arrow">→</span></span>
+          <span class="brief-link">Read Brief <span class="arrow">→</span></span
+          >
         </a>
         <a href="/intel/certifications-alone" class="brief-card">
           <span class="brief-meta">JAN 2026 // EDUCATION</span>
           <h3 class="brief-title">Why Certifications Alone Won't Save You</h3>
-          <p class="brief-excerpt">Credential inflation is real. What actually signals competence versus compliance.</p>
+          <p class="brief-excerpt">
+            Credential inflation is real. What actually signals competence
+            versus compliance.
+          </p>
           <div class="brief-tags">
             <span class="brief-tag">EDUCATION</span>
             <span class="brief-tag">CAREERS</span>
           </div>
-          <span class="brief-link">Read Brief <span class="arrow">→</span></span>
+          <span class="brief-link">Read Brief <span class="arrow">→</span></span
+          >
         </a>
         <a href="/intel/digital-sovereignty" class="brief-card">
           <span class="brief-meta">DEC 2025 // PHILOSOPHY</span>
           <h3 class="brief-title">Digital Sovereignty Is Not Optional</h3>
-          <p class="brief-excerpt">Why owning your data and your tools is not a luxury — it is a prerequisite for agency.</p>
+          <p class="brief-excerpt">
+            Why owning your data and your tools is not a luxury — it is a
+            prerequisite for agency.
+          </p>
           <div class="brief-tags">
             <span class="brief-tag">PRIVACY</span>
             <span class="brief-tag">SOVEREIGNTY</span>
           </div>
-          <span class="brief-link">Read Brief <span class="arrow">→</span></span>
+          <span class="brief-link">Read Brief <span class="arrow">→</span></span
+          >
         </a>
-
       </div>
     </div>
   </div>
@@ -359,48 +461,87 @@
     <div class="final-cta__content">
       <ScrollReveal delay={100} distance={30}>
         <h2 class="final-cta__title">Ready to start building?</h2>
-        <p class="final-cta__desc">Find where you fit. Every path leads to the same destination — becoming who you're meant to be.</p>
+        <p class="final-cta__desc">
+          Find where you fit. Every path leads to the same destination —
+          becoming who you're meant to be.
+        </p>
       </ScrollReveal>
     </div>
 
     <div class="pathway-grid">
       <ScrollReveal delay={200} distance={20}>
-        <a href="/launchpad" class="pathway-card" style="--accent: var(--accent-launchpad)">
+        <a
+          href="/launchpad"
+          class="pathway-card"
+          style="--accent: var(--accent-launchpad)"
+        >
           <span class="pathway-label">FOR STUDENTS</span>
           <h3 class="pathway-title">Start a Track</h3>
-          <p class="pathway-desc">Explore certification tracks in Cybersecurity, AI, Cloud, and more. Built for learners who mean it.</p>
-          <span class="pathway-action">Explore Tracks <span class="arrow">→</span></span>
+          <p class="pathway-desc">
+            Explore certification tracks in Cybersecurity, AI, Cloud, and more.
+            Built for learners who mean it.
+          </p>
+          <span class="pathway-action"
+            >Explore Tracks <span class="arrow">→</span></span
+          >
         </a>
       </ScrollReveal>
 
       <ScrollReveal delay={320} distance={20}>
-        <a href="/launchpad/colleges" class="pathway-card" style="--accent: var(--accent-launchpad)">
+        <a
+          href="/launchpad/colleges"
+          class="pathway-card"
+          style="--accent: var(--accent-launchpad)"
+        >
           <span class="pathway-label">FOR COLLEGES</span>
           <h3 class="pathway-title">Partner with Us</h3>
-          <p class="pathway-desc">Bring LaunchPad to your campus. Student chapters, sessions, full certification programmes.</p>
-          <span class="pathway-action">Get in Touch <span class="arrow">→</span></span>
+          <p class="pathway-desc">
+            Bring LaunchPad to your campus. Student chapters, sessions, full
+            certification programmes.
+          </p>
+          <span class="pathway-action"
+            >Get in Touch <span class="arrow">→</span></span
+          >
         </a>
       </ScrollReveal>
 
       <ScrollReveal delay={440} distance={20}>
-        <a href="/innercircle" class="pathway-card" style="--accent: var(--accent-innercircle)">
+        <a
+          href="/innercircle"
+          class="pathway-card"
+          style="--accent: var(--accent-innercircle)"
+        >
           <span class="pathway-label">FOR BUILDERS</span>
           <h3 class="pathway-title">Join InnerCircle</h3>
-          <p class="pathway-desc">A vetted community for those actively creating something real. Not for everyone — and that's the point.</p>
-          <span class="pathway-action">Apply for Access <span class="arrow">→</span></span>
+          <p class="pathway-desc">
+            A vetted community for those actively creating something real. Not
+            for everyone — and that's the point.
+          </p>
+          <span class="pathway-action"
+            >Apply for Access <span class="arrow">→</span></span
+          >
         </a>
       </ScrollReveal>
 
       <ScrollReveal delay={560} distance={20}>
-        <a href="/contact" class="pathway-card" style="--accent: var(--accent-selfos)">
+        <a
+          href="/contact"
+          class="pathway-card"
+          style="--accent: var(--accent-selfos)"
+        >
           <span class="pathway-label">FOR ORGANISATIONS</span>
           <h3 class="pathway-title">Work With Progeta</h3>
-          <p class="pathway-desc">Custom training, consulting, or strategic partnerships. We work with institutions that share our values.</p>
-          <span class="pathway-action">Inquire <span class="arrow">→</span></span>
+          <p class="pathway-desc">
+            Custom training, consulting, or strategic partnerships. We work with
+            institutions that share our values.
+          </p>
+          <span class="pathway-action"
+            >Inquire <span class="arrow">→</span></span
+          >
         </a>
       </ScrollReveal>
     </div>
-    
+
     <div class="truth-section-wrap">
       <ScrollReveal delay={700}>
         <div class="truth-container">
@@ -418,7 +559,6 @@
   /* ═══════════════════════════════════════════════════
      GENERAL UTILS
      ═══════════════════════════════════════════════════ */
-
 
   /* ═══════════════════════════════════════════════════
      HERO
@@ -471,22 +611,26 @@
   }
 
   @keyframes pulse {
-    0% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.4; transform: scale(1.2); }
-    100% { opacity: 1; transform: scale(1); }
+    0% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.4;
+      transform: scale(1.2);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
   }
 
   .status-text {
-    font-family: 'DM Mono', monospace;
+    font-family: "DM Mono", monospace;
     font-size: 10px;
     letter-spacing: 0.16em;
     text-transform: uppercase;
     color: #424870;
-  }
-
-  .status-sep {
-    color: var(--ink-4);
-    margin: 0 2px;
   }
 
   /* Headline */
@@ -508,6 +652,7 @@
     color: var(--accent-launchpad);
     background: linear-gradient(to right, var(--accent-launchpad), #ffaa44);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 
@@ -538,8 +683,10 @@
     border: 1px solid var(--border-2);
     border-radius: 100px;
     text-decoration: none;
-    transition: border-color 0.2s, transform 0.2s;
-    background: rgba(255,255,255,0.02);
+    transition:
+      border-color 0.2s,
+      transform 0.2s;
+    background: rgba(255, 255, 255, 0.02);
   }
 
   .wn-pill:hover {
@@ -614,7 +761,6 @@
     opacity: 0.6;
   }
 
-  /* Illustration / Logo */
   .hero__illustration {
     width: 100%;
     max-width: 480px;
@@ -623,19 +769,11 @@
     align-items: center;
   }
 
-  .hero__logo {
-    width: 100%;
-    max-width: 320px;
-    height: auto;
-    opacity: 0.15;
-    filter: drop-shadow(0 0 40px rgba(255, 255, 255, 0.1));
-  }
-
   /* ═══════════════════════════════════════════════════
      MANIFESTO SECTION
      ═══════════════════════════════════════════════════ */
   .manifesto-section {
-    background: #07090F;
+    background: #07090f;
     padding: clamp(88px, 11vw, 148px) clamp(24px, 5vw, 72px);
   }
   .manifesto-container {
@@ -648,11 +786,11 @@
     position: absolute;
     top: -20px;
     left: -8px;
-    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-family: "Cormorant Garamond", Georgia, serif;
     font-size: 200px;
     font-weight: 700;
     line-height: 1;
-    color: #0C0E18;
+    color: #0c0e18;
     pointer-events: none;
     user-select: none;
     z-index: 0;
@@ -660,20 +798,28 @@
   .manifesto-quote {
     position: relative;
     z-index: 1;
-    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-family: "Cormorant Garamond", Georgia, serif;
     font-style: italic;
     font-weight: 300;
     font-size: clamp(19px, 2.3vw, 26px);
     line-height: 1.85;
-    color: #EDF0FF;
+    color: #edf0ff;
     margin: 0;
     padding: 0;
     border: none;
   }
-  .manifesto-quote p { margin-bottom: 1.3em; }
-  .manifesto-quote p:last-child { margin-bottom: 0; }
-  .manifesto-close { font-style: normal; }
-  .manifesto-close strong { font-weight: 600; }
+  .manifesto-quote p {
+    margin-bottom: 1.3em;
+  }
+  .manifesto-quote p:last-child {
+    margin-bottom: 0;
+  }
+  .manifesto-close {
+    font-style: normal;
+  }
+  .manifesto-close strong {
+    font-weight: 600;
+  }
 
   /* ═══════════════════════════════════════════════════
      VISION (BELIEF MARKERS)
@@ -751,14 +897,16 @@
     align-items: center;
     gap: var(--sp-6);
     text-decoration: none;
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transition:
+      transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+      border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     position: relative;
     overflow: hidden;
     width: 100%;
   }
 
   .init-card::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
@@ -824,7 +972,7 @@
   }
 
   .init-card__sublinks li::before {
-    content: '';
+    content: "";
     display: block;
     width: 4px;
     height: 4px;
@@ -901,7 +1049,6 @@
     margin-bottom: var(--sp-6);
   }
 
-
   /* Truths Grid */
   .truths-row {
     border-top: 1px solid var(--border-2);
@@ -941,8 +1088,6 @@
     line-height: 1.6;
     font-style: italic;
   }
-
-
 
   /* ═══════════════════════════════════════════════════
      GAMES TEASER
@@ -1012,7 +1157,9 @@
     height: 100%;
     border-radius: 50%;
     background: radial-gradient(circle at 30% 30%, #333, #000);
-    box-shadow: 0 0 50px rgba(255,100,0,0.2), inset 0 0 20px rgba(255,255,255,0.05);
+    box-shadow:
+      0 0 50px rgba(255, 100, 0, 0.2),
+      inset 0 0 20px rgba(255, 255, 255, 0.05);
   }
 
   .game-orb-ring {
@@ -1021,14 +1168,18 @@
     left: -20px;
     right: -20px;
     bottom: -20px;
-    border: 1px solid rgba(255,100,0,0.3);
+    border: 1px solid rgba(255, 100, 0, 0.3);
     border-radius: 50%;
     animation: ringRotate 10s linear infinite;
   }
 
   @keyframes ringRotate {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
   }
 
   /* ═══════════════════════════════════════════════════
@@ -1110,8 +1261,12 @@
   }
 
   @keyframes marqueeScroll {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
   }
 
   .brief-card {
@@ -1120,7 +1275,9 @@
     padding: var(--sp-8);
     background: var(--surface-1);
     border: 1px solid var(--border-2);
-    transition: border-color 0.3s, transform 0.3s;
+    transition:
+      border-color 0.3s,
+      transform 0.3s;
     display: flex;
     flex-direction: column;
     flex-shrink: 0;
@@ -1244,12 +1401,14 @@
     text-decoration: none;
     display: flex;
     flex-direction: column;
-    transition: border-color 0.3s, transform 0.3s;
+    transition:
+      border-color 0.3s,
+      transform 0.3s;
     position: relative;
   }
 
   .pathway-card::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
@@ -1262,8 +1421,6 @@
     border-color: var(--accent);
     transform: translateY(-6px);
   }
-
-
 
   .pathway-label {
     font-family: var(--font-mono);
@@ -1321,12 +1478,12 @@
     text-align: center;
   }
   .truth-text-main {
-    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-family: "Cormorant Garamond", Georgia, serif;
     font-weight: 700;
     font-size: clamp(28px, 4.5vw, 58px);
     line-height: 1.1;
     letter-spacing: -0.02em;
-    color: #EDF0FF;
+    color: #edf0ff;
     margin: 0;
   }
   .truth-rule {
@@ -1340,15 +1497,38 @@
      RESPONSIVE
      ═══════════════════════════════════════════════════ */
   @media (max-width: 1024px) {
-    .hero__inner { flex-direction: column; text-align: center; padding-top: 100px; }
-    .hero__left, .hero__right { width: 100%; }
-    .hero__right { justify-content: center; margin-top: var(--sp-9); }
-    .hero__ctas { justify-content: center; }
-    .hero__whats-new { justify-content: center; }
-    .hero__belief-words { justify-content: center; }
-    .hero__subline { margin-left: auto; margin-right: auto; text-align: center; }
+    .hero__inner {
+      flex-direction: column;
+      text-align: center;
+      padding-top: 100px;
+    }
+    .hero__left,
+    .hero__right {
+      width: 100%;
+    }
+    .hero__right {
+      justify-content: center;
+      margin-top: var(--sp-9);
+    }
+    .hero__ctas {
+      justify-content: center;
+    }
+    .hero__whats-new {
+      justify-content: center;
+    }
+    .hero__belief-words {
+      justify-content: center;
+    }
+    .hero__subline {
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+    }
 
-    .vision__markers { grid-template-columns: 1fr; gap: var(--sp-10); }
+    .vision__markers {
+      grid-template-columns: 1fr;
+      gap: var(--sp-10);
+    }
 
     .init-card {
       grid-template-columns: 1fr;
@@ -1365,26 +1545,48 @@
       justify-content: center;
       margin-top: var(--sp-4);
     }
-    .strips { margin-left: 0; width: 100%; }
-    
+    .strips {
+      margin-left: 0;
+      width: 100%;
+    }
+
     :global(.init-card-wrapper) .init-card,
     :global(.init-card-wrapper:nth-child(even)) .init-card {
       padding: var(--sp-10) var(--sp-6);
       width: 100%;
     }
 
-    .company__heading { font-size: 36px; }
-    .truths-grid { grid-template-columns: 1fr; }
+    .company__heading {
+      font-size: 36px;
+    }
+    .truths-grid {
+      grid-template-columns: 1fr;
+    }
 
-    .games-teaser__grid { grid-template-columns: 1fr; text-align: center; }
-    .games-teaser__stats { justify-content: center; }
-    .games-teaser__visual { order: -1; margin-bottom: var(--sp-9); }
+    .games-teaser__grid {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+    .games-teaser__stats {
+      justify-content: center;
+    }
+    .games-teaser__visual {
+      order: -1;
+      margin-bottom: var(--sp-9);
+    }
 
-    .pathway-grid { grid-template-columns: 1fr; }
+    .pathway-grid {
+      grid-template-columns: 1fr;
+    }
   }
 
   @media (max-width: 768px) {
-    .hero__ctas { flex-direction: column; gap: var(--sp-5); }
-    .final-cta__title { font-size: 40px; }
+    .hero__ctas {
+      flex-direction: column;
+      gap: var(--sp-5);
+    }
+    .final-cta__title {
+      font-size: 40px;
+    }
   }
 </style>

@@ -13,7 +13,7 @@
         "definition": "A path or means by which a hacker can gain access to a computer or network server in order to deliver a payload or malicious outcome.",
         "related": [
             "Threat Actor",
-            "IoC"
+            "Indicator of Compromise (IoC)"
         ]
     },
     {
@@ -22,7 +22,7 @@
         "definition": "Cyber Threat Intelligence. Evidence-based knowledge, including context, mechanisms, indicators, implications, and actionable advice, about an existing or emerging menace or hazard to assets.",
         "related": [
             "Threat Actor",
-            "IoC"
+            "Indicator of Compromise (IoC)"
         ]
     },
     {
