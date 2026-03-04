@@ -1,12 +1,12 @@
 <script lang="ts">
-  import '../app.css';
-  import SiteNav from '$lib/components/site/SiteNav.svelte';
-  import SiteFooter from '$lib/components/site/SiteFooter.svelte';
-  import LoadingScreen from '$lib/components/site/LoadingScreen.svelte';
-  import CursorGlow from '$lib/components/site/CursorGlow.svelte';
-  import Universe from '$lib/components/animations/Universe.svelte';
-  import { afterNavigate, beforeNavigate } from '$app/navigation';
-  import { page } from '$app/stores';
+  import "../app.css";
+  import SiteNav from "$lib/components/site/SiteNav.svelte";
+  import SiteFooter from "$lib/components/site/SiteFooter.svelte";
+  import LoadingScreen from "$lib/components/site/LoadingScreen.svelte";
+  import CursorGlow from "$lib/components/site/CursorGlow.svelte";
+  import Universe from "$lib/components/animations/Universe.svelte";
+  import { afterNavigate, beforeNavigate } from "$app/navigation";
+  import { page } from "$app/stores";
 
   let { children } = $props();
 
@@ -15,12 +15,14 @@
   let transitioning = $state(false);
 
   // Check if we're inside the SelfOS app (which has its own layout)
-  let isSelfOSApp = $derived($page.url.pathname.startsWith('/selfos/app'));
+  let isSelfOSApp = $derived($page.url.pathname.startsWith("/selfos/app"));
 
   function handleLoadComplete() {
     loading = false;
     // Small delay before showing content — the breath after the loading screen
-    setTimeout(() => { contentVisible = true; }, 50);
+    setTimeout(() => {
+      contentVisible = true;
+    }, 50);
   }
 
   // Page transitions: out-then-in
@@ -80,7 +82,7 @@
 
   .page-content--visible {
     opacity: 1;
-    transform: translateY(0);
+    transform: none;
   }
 
   .page-content--exiting {

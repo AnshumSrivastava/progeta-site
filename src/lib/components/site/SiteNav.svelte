@@ -172,9 +172,9 @@
 
 <nav class="nav" class:nav--scrolled={scrolled}>
   <div class="nav__inner">
-    <a href="/" class="nav__brand">
-      <BrandMark size="sm" />
-    </a>
+    <div class="nav__brand">
+      <BrandMark size="sm" href="/" />
+    </div>
 
     <div class="nav__links">
       {#each navGroups as group}

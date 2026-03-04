@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { onMount, onDestroy } from 'svelte';
+  import { onMount, onDestroy } from "svelte";
 
   let ring = $state<HTMLElement>();
   let dot = $state<HTMLElement>();
@@ -11,63 +11,102 @@
   let isTouch = $state(false);
   let isHoveringLink = $state(false);
   let isMouseDown = $state(false);
-  let accentColor = $state('');
+  let accentColor = $state("");
+
+  let currentTarget: EventTarget | null = null;
 
   function handleMove(e: MouseEvent) {
     mouseX = e.clientX;
     mouseY = e.clientY;
 
-    const target = e.target as HTMLElement;
-    isHoveringLink = target?.closest('a, button, [role="button"], [tabindex]') !== null;
+    if (e.target !== currentTarget) {
+      currentTarget = e.target;
+      const target = e.target as HTMLElement;
 
-    // Detect accent section context
-    const accentEl = target?.closest('[data-accent]') as HTMLElement | null;
-    accentColor = accentEl?.dataset.accent || '';
+      if (target && target.closest) {
+        // Only run .closest() when the actual DOM node under the cursor changes
+        isHoveringLink =
+          target.closest(
+            'a, button, [role="button"], [tabindex], input, textarea, select',
+          ) !== null;
+
+        // Detect accent section context
+        const accentEl = target.closest("[data-accent]") as HTMLElement | null;
+        accentColor = accentEl?.dataset.accent || "";
+      }
+    }
   }
 
-  function handleDown() { isMouseDown = true; }
-  function handleUp() { isMouseDown = false; }
-
-  function lerp(a: number, b: number, t: number): number {
-    return a + (b - a) * t;
+  function handleDown() {
+    isMouseDown = true;
   }
+  function handleUp() {
+    isMouseDown = false;
+  }
+
+  let lastDotX = -1;
+  let lastDotY = -1;
 
   function animate() {
-    ringX = lerp(ringX, mouseX, 0.12);
-    ringY = lerp(ringY, mouseY, 0.12);
-
-    if (ring) {
-      ring.style.transform = `translate(${ringX}px, ${ringY}px)`;
+    // Only update dot transform if coordinates changed
+    if (dot && (mouseX !== lastDotX || mouseY !== lastDotY)) {
+      dot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`;
+      lastDotX = mouseX;
+      lastDotY = mouseY;
     }
-    if (dot) {
-      dot.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
+
+    const dx = mouseX - ringX;
+    const dy = mouseY - ringY;
+
+    // Only update ring if distance is visually significant (>0.05px)
+    if (Math.abs(dx) > 0.05 || Math.abs(dy) > 0.05) {
+      ringX += dx * 0.15; // Sped up lerp from 0.12 to 0.15 for better responsiveness
+      ringY += dy * 0.15;
+
+      if (ring) {
+        // Round to 2 decimal places to prevent minute sub-pixel repaints
+        const rx = Math.round(ringX * 100) / 100;
+        const ry = Math.round(ringY * 100) / 100;
+        ring.style.transform = `translate3d(${rx}px, ${ry}px, 0)`;
+      }
+    } else if (
+      Math.abs(dx) <= 0.05 &&
+      Math.abs(dy) <= 0.05 &&
+      ringX !== mouseX
+    ) {
+      // Snap exactly to target to settle completely
+      ringX = mouseX;
+      ringY = mouseY;
+      if (ring) {
+        ring.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`;
+      }
     }
 
     rafId = requestAnimationFrame(animate);
   }
 
   onMount(() => {
-    isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    isTouch = "ontouchstart" in window || navigator.maxTouchPoints > 0;
     if (isTouch) return;
 
     // Hide default cursor
-    document.documentElement.style.cursor = 'none';
-    document.body.style.cursor = 'none';
+    document.documentElement.style.cursor = "none";
+    document.body.style.cursor = "none";
 
-    window.addEventListener('mousemove', handleMove, { passive: true });
-    window.addEventListener('mousedown', handleDown);
-    window.addEventListener('mouseup', handleUp);
+    window.addEventListener("mousemove", handleMove, { passive: true });
+    window.addEventListener("mousedown", handleDown);
+    window.addEventListener("mouseup", handleUp);
     rafId = requestAnimationFrame(animate);
   });
 
   onDestroy(() => {
-    if (typeof window !== 'undefined') {
-      window.removeEventListener('mousemove', handleMove);
-      window.removeEventListener('mousedown', handleDown);
-      window.removeEventListener('mouseup', handleUp);
+    if (typeof window !== "undefined") {
+      window.removeEventListener("mousemove", handleMove);
+      window.removeEventListener("mousedown", handleDown);
+      window.removeEventListener("mouseup", handleUp);
       cancelAnimationFrame(rafId);
-      document.documentElement.style.cursor = '';
-      document.body.style.cursor = '';
+      document.documentElement.style.cursor = "";
+      document.body.style.cursor = "";
     }
   });
 </script>
@@ -77,14 +116,12 @@
     class="cursor-ring"
     class:hover={isHoveringLink}
     class:pressing={isMouseDown}
-    style={accentColor ? `border-color: color-mix(in srgb, var(--ink-1) 75%, ${accentColor} 25%)` : ''}
+    style={accentColor
+      ? `border-color: color-mix(in srgb, var(--ink-1) 75%, ${accentColor} 25%)`
+      : ""}
     bind:this={ring}
   ></div>
-  <div
-    class="cursor-dot"
-    class:hover={isHoveringLink}
-    bind:this={dot}
-  ></div>
+  <div class="cursor-dot" class:hover={isHoveringLink} bind:this={dot}></div>
 {/if}
 
 <style>
@@ -142,7 +179,10 @@
     will-change: transform;
     margin-top: -2px;
     margin-left: -2px;
-    transition: width 200ms ease, height 200ms ease, margin 200ms ease;
+    transition:
+      width 200ms ease,
+      height 200ms ease,
+      margin 200ms ease;
   }
 
   .cursor-dot.hover {

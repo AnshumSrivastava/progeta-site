@@ -1,0 +1,188 @@
+[
+    {
+        "term": "Air-Gapped",
+        "category": "NETWORK",
+        "definition": "A security measure where a secure computer network is physically isolated from unsecured networks, such as the public Internet or an unsecured local area network.",
+        "related": [
+            "Lateral Movement"
+        ]
+    },
+    {
+        "term": "Attack Vector",
+        "category": "THREAT INTEL",
+        "definition": "A path or means by which a hacker can gain access to a computer or network server in order to deliver a payload or malicious outcome.",
+        "related": [
+            "Threat Actor",
+            "IoC"
+        ]
+    },
+    {
+        "term": "CTI",
+        "category": "THREAT INTEL",
+        "definition": "Cyber Threat Intelligence. Evidence-based knowledge, including context, mechanisms, indicators, implications, and actionable advice, about an existing or emerging menace or hazard to assets.",
+        "related": [
+            "Threat Actor",
+            "IoC"
+        ]
+    },
+    {
+        "term": "Digital Sovereignty",
+        "category": "PRIVACY",
+        "definition": "The principle that an individual, organization, or state has complete control over its own digital data and the infrastructure that processes it, free from external control or platform lock-in.",
+        "related": [
+            "Local-First",
+            "SelfOS"
+        ]
+    },
+    {
+        "term": "Encryption (E2EE)",
+        "category": "PRIVACY",
+        "definition": "End-to-End Encryption. A system of communication where only the communicating users can read the messages. In principle, it prevents potential eavesdroppers — including telecom providers, Internet providers, and even the provider of the communication service — from being able to access the cryptographic keys needed to decrypt the conversation.",
+        "related": [
+            "Zero-Knowledge"
+        ]
+    },
+    {
+        "term": "GRC",
+        "category": "COMPLIANCE",
+        "definition": "Governance, Risk, and Compliance. The integrated collection of capabilities that enable an organization to reliably achieve objectives, address uncertainty, and act with integrity.",
+        "related": [
+            "Risk Appetite"
+        ]
+    },
+    {
+        "term": "Incident Response (IR)",
+        "category": "SOC",
+        "definition": "An organized approach to addressing and managing the aftermath of a security breach or cyberattack, also known as an IT incident, computer incident, or security event.",
+        "related": [
+            "Triage",
+            "Playbook"
+        ]
+    },
+    {
+        "term": "Indicator of Compromise (IoC)",
+        "category": "THREAT INTEL",
+        "definition": "An artifact observed on a network or in an operating system that, with high confidence, indicates a computer intrusion.",
+        "related": [
+            "CTI"
+        ]
+    },
+    {
+        "term": "InnerCircle",
+        "category": "LAUNCHPAD",
+        "definition": "A vetted, invite-only community operated by Progeta Technologies for builders and practitioners who are actively creating infrastructure and systems.",
+        "related": [
+            "LaunchPad"
+        ]
+    },
+    {
+        "term": "Lateral Movement",
+        "category": "NETWORK",
+        "definition": "Techniques that adversaries use to enter and control systems on a network. Adversaries might install their own remote access tools or use legitimate credentials and native network tools to move from system to system.",
+        "related": [
+            "Zero Trust",
+            "Air-Gapped"
+        ]
+    },
+    {
+        "term": "LaunchPad",
+        "category": "LAUNCHPAD",
+        "definition": "The educational and operational training division of Progeta Technologies, providing tracks, modules, and certifications for specific cybersecurity roles.",
+        "related": [
+            "InnerCircle"
+        ]
+    },
+    {
+        "term": "Local-First",
+        "category": "ARCHITECTURE",
+        "definition": "A software architecture paradigm where the primary copy of the data is stored locally on the user's device, with synchronization to other devices or cloud servers occurring asynchronously.",
+        "related": [
+            "Digital Sovereignty",
+            "SelfOS"
+        ]
+    },
+    {
+        "term": "MITRE ATT&CK",
+        "category": "THREAT INTEL",
+        "definition": "A globally-accessible knowledge base of adversary tactics and techniques based on real-world observations. It is used as a foundation for the development of specific threat models and methodologies.",
+        "related": [
+            "CTI",
+            "Threat Actor"
+        ]
+    },
+    {
+        "term": "OSINT",
+        "category": "THREAT INTEL",
+        "definition": "Open-Source Intelligence. Data collected from publicly available sources to be used in an intelligence context.",
+        "related": [
+            "Threat Actor"
+        ]
+    },
+    {
+        "term": "Playbook",
+        "category": "SOC",
+        "definition": "A detailed, step-by-step guide outlining how an incident response team or SOC analyst should handle a specific type of security incident.",
+        "related": [
+            "Incident Response (IR)"
+        ]
+    },
+    {
+        "term": "Risk Appetite",
+        "category": "COMPLIANCE",
+        "definition": "The amount and type of risk that an organization is willing to take in order to meet their strategic objectives.",
+        "related": [
+            "GRC"
+        ]
+    },
+    {
+        "term": "SelfOS",
+        "category": "PRODUCT",
+        "definition": "A local-first personal operating system built by Progeta Technologies designed to manage tasks, knowledge, and goals without relying on centralized cloud storage.",
+        "related": [
+            "Local-First",
+            "Digital Sovereignty"
+        ]
+    },
+    {
+        "term": "SIEM",
+        "category": "SOC",
+        "definition": "Security Information and Event Management. A technology that provides real-time analysis of security alerts generated by applications and network hardware.",
+        "related": [
+            "SOC"
+        ]
+    },
+    {
+        "term": "SOC",
+        "category": "SOC",
+        "definition": "Security Operations Center. A centralized unit that deals with security issues on an organizational and technical level.",
+        "related": [
+            "SIEM",
+            "Incident Response (IR)"
+        ]
+    },
+    {
+        "term": "Threat Actor",
+        "category": "THREAT INTEL",
+        "definition": "A person or entity that is responsible for an event or incident that impacts, or has the potential to impact, the safety or security of another entity.",
+        "related": [
+            "Attack Vector",
+            "OSINT"
+        ]
+    },
+    {
+        "term": "Triage",
+        "category": "SOC",
+        "definition": "The process of analyzing an alarm or an incident to determine its severity, scope, and the necessary urgency of response.",
+        "related": [
+            "Incident Response (IR)"
+        ]
+    },
+    {
+        "term": "Zero Trust",
+        "category": "ARCHITECTURE",
+        "definition": "A security concept centered on the belief that organizations should not automatically trust anything inside or outside their perimeters and must verify anything trying to connect to its systems.",
+        "related": [
+            "Lateral Movement"
+        ]
+    }
+]
