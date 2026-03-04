@@ -117,7 +117,10 @@
 
             <div class="glos-list">
                 {#each filteredTerms as entry (entry.term)}
-                    <div class="glos-entry">
+                    <div
+                        class="glos-entry"
+                        id={entry.term.replace(/\s+/g, "-")}
+                    >
                         <div class="glos-entry-header">
                             <h2 class="glos-term">
                                 <!-- eslint-disable-next-line svelte/no-at-html-tags -->
@@ -139,7 +142,7 @@
                                 >
                                 {#each entry.related as rel}
                                     <a
-                                        href="#{rel}"
+                                        href="#{rel.replace(/\s+/g, '-')}"
                                         class="glos-related-link"
                                         onclick={(e) =>
                                             handleRelatedClick(e, rel)}
