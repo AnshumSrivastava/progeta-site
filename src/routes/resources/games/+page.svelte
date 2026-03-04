@@ -304,16 +304,14 @@
      ═══════════════════════════════════════════════════ */
     .hero-bar {
         background: #020408;
-        padding: clamp(100px, 14vw, 160px) clamp(20px, 4vw, 64px)
-            clamp(40px, 5vw, 60px);
+        padding: clamp(100px, 14vw, 160px) 0 clamp(40px, 5vw, 60px);
         border-bottom: 1px solid #0f1220;
     }
     .hero-bar__inner {
-        max-width: 1200px;
-        margin: 0 auto;
         display: flex;
         align-items: center;
         gap: 48px;
+        padding: 0 32px;
     }
     .hero-bar__left {
         flex-shrink: 0;
@@ -404,8 +402,6 @@
     .split-layout {
         display: grid;
         grid-template-columns: 240px 1fr;
-        max-width: 1400px;
-        margin: 0 auto;
         min-height: 80vh;
         background: #020408;
     }
@@ -587,7 +583,7 @@
      GAME PANEL (RIGHT)
      ═══════════════════════════════════════════════════ */
     .game-panel {
-        padding: 24px clamp(20px, 3vw, 40px) 60px;
+        padding: 24px 0 60px;
         background: #03040a;
     }
 
