@@ -428,10 +428,10 @@
     }
     .sidebar-label {
         font-family: "DM Mono", monospace;
-        font-size: 9px;
+        font-size: 10px;
         letter-spacing: 0.16em;
         text-transform: uppercase;
-        color: #1e2440;
+        color: #424870;
         display: block;
         margin-bottom: 10px;
     }
@@ -455,7 +455,7 @@
         box-sizing: border-box;
     }
     .search-input::placeholder {
-        color: #1e2440;
+        color: #424870;
     }
     .search-input:focus {
         border-color: #424870;
@@ -488,7 +488,7 @@
         padding: 6px 8px;
         border-radius: 3px;
         font-family: "DM Mono", monospace;
-        font-size: 9px;
+        font-size: 10px;
         letter-spacing: 0.12em;
         text-transform: uppercase;
         color: #424870;
@@ -542,9 +542,9 @@
     }
     .sidebar-stat-lbl {
         font-family: "DM Mono", monospace;
-        font-size: 8px;
+        font-size: 10px;
         letter-spacing: 0.12em;
-        color: #1e2440;
+        color: #424870;
         display: block;
         margin-top: 2px;
     }
@@ -557,7 +557,7 @@
     }
     .domain-pill {
         font-family: "DM Mono", monospace;
-        font-size: 8px;
+        font-size: 10px;
         letter-spacing: 0.1em;
         text-transform: uppercase;
         color: var(--d);
@@ -573,9 +573,9 @@
     }
     .notice-text {
         font-family: "DM Mono", monospace;
-        font-size: 8px;
+        font-size: 10px;
         letter-spacing: 0.08em;
-        color: #1e2440;
+        color: #424870;
         line-height: 1.5;
     }
 
@@ -658,9 +658,9 @@
     }
     .card-index {
         font-family: "DM Mono", monospace;
-        font-size: 9px;
+        font-size: 10px;
         letter-spacing: 0.14em;
-        color: #1e2440;
+        color: #424870;
     }
     .card-status {
         display: flex;
@@ -702,7 +702,7 @@
 
     .status-label {
         font-family: "DM Mono", monospace;
-        font-size: 8px;
+        font-size: 10px;
         letter-spacing: 0.12em;
         color: #424870;
     }
@@ -716,7 +716,7 @@
     /* Daily badge */
     .daily-badge {
         font-family: "DM Mono", monospace;
-        font-size: 8px;
+        font-size: 10px;
         letter-spacing: 0.14em;
         text-transform: uppercase;
         color: #1a8fe3;
@@ -760,7 +760,7 @@
     }
     .card-tag {
         font-family: "DM Mono", monospace;
-        font-size: 7px;
+        font-size: 10px;
         letter-spacing: 0.1em;
         text-transform: uppercase;
         padding: 2px 5px;
@@ -804,7 +804,7 @@
         font-size: 10px;
     }
     .user-icon {
-        color: #1e2440;
+        color: #424870;
         font-size: 6px;
     }
     .card-meta {
@@ -814,19 +814,19 @@
     }
     .meta-item {
         font-family: "DM Mono", monospace;
-        font-size: 8px;
+        font-size: 10px;
         letter-spacing: 0.1em;
         text-transform: uppercase;
-        color: #1e2440;
+        color: #424870;
     }
 
     /* CTA */
     .card-cta {
         font-family: "DM Mono", monospace;
-        font-size: 9px;
+        font-size: 11px;
         letter-spacing: 0.14em;
         text-transform: uppercase;
-        color: #1e2440;
+        color: #424870;
         transition: color 0.2s ease;
         margin-top: auto;
     }
@@ -844,7 +844,7 @@
     }
     .export-btn {
         font-family: "DM Mono", monospace;
-        font-size: 9px;
+        font-size: 11px;
         letter-spacing: 0.12em;
         text-transform: uppercase;
         color: #424870;

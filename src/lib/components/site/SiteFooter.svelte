@@ -216,7 +216,7 @@
   .footer__copyright,
   .footer__beliefs {
     font-family: var(--font-mono);
-    font-size: 9px;
+    font-size: 11px;
     color: var(--ink-4);
     letter-spacing: var(--tracking-wide);
     text-transform: uppercase;
