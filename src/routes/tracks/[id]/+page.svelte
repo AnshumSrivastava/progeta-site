@@ -1,21 +1,18 @@
 <script>
     import { page } from "$app/stores";
-    import { slide } from "svelte/transition";
     import { careerTracks } from "$lib/content/jobs";
     import { technicalModules, softSkillsModules } from "$lib/content/modules";
+    import { tracksMeta, getLevelLabel } from "$lib/content/launchpad-data";
+    import ScrollReveal from "$lib/components/animations/ScrollReveal.svelte";
 
     $: id = parseInt($page.params.id);
     $: track = careerTracks.find((t) => t.id === id);
+    $: meta = tracksMeta.find((t) => t.id === id);
 
-    // STATE
+    /* Module accordion */
     let expandedModuleId = null;
-
     function toggleModule(modId) {
-        if (expandedModuleId === modId) {
-            expandedModuleId = null;
-        } else {
-            expandedModuleId = modId;
-        }
+        expandedModuleId = expandedModuleId === modId ? null : modId;
     }
 
     function getModuleDetails(mod) {
@@ -24,47 +21,25 @@
         return list.find((m) => String(m.id) === String(mod.id)) || mod;
     }
 
-    // HYDRATED PHASES
+    /* Hydrated phases */
     let phases = [];
     $: if (track && track.phases) {
         phases = track.phases.map((p) => ({
             ...p,
             modules: p.modules.map((m) => {
-                const details = getModuleDetails(m);
-                return {
-                    ...m,
-                    goal: details.goal, // Hydrated Goal
-                    tools: details.tools, // Hydrated Tools
-                    dbId: details.id,
-                };
+                const d = getModuleDetails(m);
+                return { ...m, goal: d.goal, tools: d.tools, dbId: d.id };
             }),
         }));
     }
 
-    // DATA LOGIC FOR SIDEBAR
-    let techSkills = [];
-    let softSkills = [];
+    /* Total module count */
     let totalModules = 0;
-
     $: if (track && track.phases) {
-        const uniqueTech = new Set();
-        const uniqueSoft = new Set();
-        let modCount = 0;
-
-        track.phases.forEach((phase) => {
-            modCount += phase.modules.length;
-            phase.modules.forEach((m) => {
-                let label = m.title.replace(/\(.*\)/, "").trim();
-                if (label.includes(" & ")) label = label.split(" & ")[0];
-
-                if (m.type === "Technical") uniqueTech.add(label);
-                else uniqueSoft.add(label);
-            });
-        });
-
-        techSkills = Array.from(uniqueTech).slice(0, 8);
-        softSkills = Array.from(uniqueSoft).slice(0, 4);
-        totalModules = modCount;
+        totalModules = track.phases.reduce(
+            (sum, p) => sum + p.modules.length,
+            0,
+        );
     }
 
     function getModuleLink(cat, modId) {
@@ -73,595 +48,643 @@
 </script>
 
 <svelte:head>
-    <title>{track ? track.title : "Details"} | Progeta</title>
+    <title>{track ? track.title : "Track Detail"} | Progeta Technologies</title>
 </svelte:head>
 
-{#if track}
-    <!-- MARK XV: ZEN PROFESSIONAL LAYOUT -->
-    <div class="zen-layout">
-        <div class="grid-container">
-            <!-- LEFT COLUMN: CONTEXT -->
-            <aside class="col-left">
-                <!-- HERO CARD -->
-                <div class="card-soft hero-card">
-                    <div class="card-header">
-                        <span class="pill-label"
-                            >Professional Track 0{track.id}</span
-                        >
-                        <div class="status-badge">
-                            <span class="dot"></span> Open
-                        </div>
-                    </div>
-
-                    <h1>{track.title}</h1>
-                    <p class="desc">{track.description}</p>
-
-                    <div class="metrics-row">
-                        <div class="metric">
-                            <span class="m-val">24</span>
-                            <span class="m-lbl">Weeks</span>
-                        </div>
-                        <div class="sep"></div>
-                        <div class="metric">
-                            <span class="m-val">{totalModules}</span>
-                            <span class="m-lbl">Units</span>
-                        </div>
-                        <div class="sep"></div>
-                        <div class="metric">
-                            <span class="m-val">Pro</span>
-                            <span class="m-lbl">Level</span>
-                        </div>
-                    </div>
-
-                    <button class="btn-primary">
-                        Start Role Preparation
-                    </button>
-                </div>
-
-                <!-- SKILL MATRIX -->
-                <div class="card-soft">
-                    <h3 class="card-title">Core Capabilities</h3>
-                    <div class="zen-tags">
-                        {#each techSkills as skill}
-                            <span class="z-tag">{skill}</span>
-                        {/each}
-                    </div>
-                </div>
-
-                <!-- DELIVERABLES -->
-                <div class="card-soft">
-                    <h3 class="card-title">What You'll Deliver</h3>
-                    <ul class="zen-list">
-                        {#if track.deliverables}
-                            {#each track.deliverables as item}
-                                <li>
-                                    <div class="icon-box">✓</div>
-                                    <div class="li-content">
-                                        <strong>{item.title}</strong>
-                                        <span>{item.desc}</span>
-                                    </div>
-                                </li>
-                            {/each}
-                        {/if}
-                    </ul>
-                </div>
-            </aside>
-
-            <!-- RIGHT COLUMN: ROADMAP -->
-            <section class="col-right">
-                <div class="card-soft roadmap-card">
-                    <div class="card-header-lg">
-                        <h2>Execution Roadmap</h2>
-                        <span class="sub-text">Detailed Syllabus Preview</span>
-                    </div>
-
-                    <div class="roadmap-flow">
-                        {#each phases as phase, i}
-                            <div class="phase-group">
-                                <div class="phase-title">
-                                    <span class="p-num">0{i + 1}</span>
-                                    <h3>{phase.name}</h3>
-                                </div>
-
-                                <div class="module-stack">
-                                    {#each phase.modules as m, j}
-                                        <!-- ZEN ACCORDION -->
-                                        <!-- svelte-ignore a11y-click-events-have-key-events -->
-                                        <!-- svelte-ignore a11y-no-static-element-interactions -->
-                                        <div
-                                            class="z-item {expandedModuleId ===
-                                            m.id
-                                                ? 'active'
-                                                : ''}"
-                                        >
-                                            <div
-                                                class="z-header"
-                                                on:click={() =>
-                                                    toggleModule(m.id)}
-                                            >
-                                                <div class="zh-left">
-                                                    <span class="zh-num"
-                                                        >{j + 1}</span
-                                                    >
-                                                    <span class="zh-title"
-                                                        >{m.title}</span
-                                                    >
-                                                </div>
-                                                <div class="zh-right">
-                                                    <span
-                                                        class="zh-icon"
-                                                        class:rotated={expandedModuleId ===
-                                                            m.id}
-                                                    >
-                                                        <svg
-                                                            width="12"
-                                                            height="12"
-                                                            viewBox="0 0 24 24"
-                                                            fill="none"
-                                                            stroke="currentColor"
-                                                            stroke-width="2"
-                                                        >
-                                                            <path
-                                                                d="M6 9l6 6 6-6"
-                                                            />
-                                                        </svg>
-                                                    </span>
-                                                </div>
-                                            </div>
-
-                                            {#if expandedModuleId === m.id}
-                                                <div
-                                                    class="z-body"
-                                                    transition:slide={{
-                                                        duration: 250,
-                                                        axis: "y",
-                                                    }}
-                                                >
-                                                    <div class="zb-inner">
-                                                        {#if m.goal}
-                                                            <div
-                                                                class="zb-block"
-                                                            >
-                                                                <span
-                                                                    class="zb-label"
-                                                                    >Mission
-                                                                    Goal</span
-                                                                >
-                                                                <p>{m.goal}</p>
-                                                            </div>
-                                                        {/if}
-                                                        {#if m.tools}
-                                                            <div
-                                                                class="zb-block"
-                                                            >
-                                                                <span
-                                                                    class="zb-label"
-                                                                    >Tools &
-                                                                    Stack</span
-                                                                >
-                                                                <div
-                                                                    class="tool-pills"
-                                                                >
-                                                                    {#each m.tools.split(", ") as t}
-                                                                        <span
-                                                                            class="tp"
-                                                                            >{t}</span
-                                                                        >
-                                                                    {/each}
-                                                                </div>
-                                                            </div>
-                                                        {/if}
-
-                                                        <div class="zb-action">
-                                                            <a
-                                                                href={getModuleLink(
-                                                                    m.type ===
-                                                                        "Technical"
-                                                                        ? "technical"
-                                                                        : "soft_skills",
-                                                                    m.dbId,
-                                                                )}
-                                                                class="btn-link-zen"
-                                                            >
-                                                                View Full
-                                                                Briefing →
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            {/if}
-                                        </div>
-                                    {/each}
-                                </div>
+{#if track && meta}
+    <!-- ═══ HERO ═══ -->
+    <section class="td-hero">
+        <div class="td-hero__grid container--wide">
+            <div class="td-hero__left">
+                <ScrollReveal>
+                    <span class="breadcrumb"
+                        >LAUNCHPAD → TRACKS → {meta.num}</span
+                    >
+                    <span class="track-tag">{meta.num}</span>
+                    <h1 class="td-hero__title">{track.title}</h1>
+                    <p class="td-hero__tagline">{meta.tagline}</p>
+                    <p class="td-hero__body">{meta.description}</p>
+                </ScrollReveal>
+            </div>
+            <div class="td-hero__right">
+                <ScrollReveal delay={200}>
+                    <div class="track-meta-card">
+                        {#each [{ label: "DURATION", value: "6 Months", cls: "" }, { label: "LEVEL", value: getLevelLabel(meta.level), cls: "" }, { label: "FORMAT", value: "Hybrid (Campus + Self-Directed)", cls: "" }, { label: "MODULES", value: `${meta.moduleCount.tech} Technical + ${meta.moduleCount.prof} Professional`, cls: "" }, { label: "CREDENTIAL", value: meta.credentialName, cls: "" }, { label: "STATUS", value: "● Enrolling Now", cls: "green" }] as row}
+                            <div class="meta-row">
+                                <span class="meta-label">{row.label}</span>
+                                <span
+                                    class="meta-value"
+                                    class:ember={row.cls === "ember"}
+                                    class:green={row.cls === "green"}
+                                    >{row.value}</span
+                                >
                             </div>
                         {/each}
                     </div>
-                </div>
-            </section>
+                    <a
+                        href="mailto:operations@progeta.tech?subject=Enrollment - {track.title}"
+                        class="track-enroll-btn">ENROLL IN THIS TRACK →</a
+                    >
+                </ScrollReveal>
+            </div>
         </div>
-    </div>
+    </section>
+
+    <!-- ═══ COMPETENCIES ═══ -->
+    <section class="td-competencies">
+        <div class="container">
+            <ScrollReveal>
+                <span class="eyebrow">WHAT YOU WILL LEARN</span>
+                <h2 class="section-heading">Competencies you will build.</h2>
+            </ScrollReveal>
+            <div class="competency-grid">
+                {#each meta.competencies as comp, i}
+                    <ScrollReveal delay={i * 60}>
+                        <div class="competency-item">
+                            <div class="competency-bullet"></div>
+                            <div class="competency-text">
+                                <strong>{comp.title}</strong>
+                                {comp.body}
+                            </div>
+                        </div>
+                    </ScrollReveal>
+                {/each}
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ MODULE BREAKDOWN ═══ -->
+    <section class="td-modules">
+        <div class="container">
+            <ScrollReveal>
+                <span class="eyebrow">WHAT'S INSIDE</span>
+                <h2 class="section-heading">Modules in this track.</h2>
+                <p class="section-body">
+                    This track draws from the following modules in the LaunchPad
+                    catalog. Each module is a focused unit of instruction with
+                    practical exercises.
+                </p>
+            </ScrollReveal>
+
+            <div class="module-list">
+                {#each phases as phase, pi}
+                    <div class="phase-header">
+                        <span class="phase-num">PHASE 0{pi + 1}</span>
+                        <span class="phase-name">{phase.name}</span>
+                    </div>
+                    {#each phase.modules as m, mi}
+                        <!-- svelte-ignore a11y-click-events-have-key-events -->
+                        <!-- svelte-ignore a11y-no-static-element-interactions -->
+                        <div
+                            class="module-row"
+                            class:open={expandedModuleId === m.id}
+                        >
+                            <div
+                                class="module-row-header"
+                                on:click={() => toggleModule(m.id)}
+                            >
+                                <span class="module-seq"
+                                    >M{String(mi + 1).padStart(2, "0")}</span
+                                >
+                                <span class="module-name">{m.title}</span>
+                                <span class="module-type-tag"
+                                    >{m.type === "Technical"
+                                        ? "TECHNICAL"
+                                        : "PROFESSIONAL"}</span
+                                >
+                                <span
+                                    class="module-expand-icon"
+                                    class:rotated={expandedModuleId === m.id}
+                                >
+                                    <svg
+                                        width="12"
+                                        height="12"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        ><path d="M6 9l6 6 6-6" /></svg
+                                    >
+                                </span>
+                            </div>
+                            {#if expandedModuleId === m.id}
+                                <div class="module-body">
+                                    <div class="module-body-inner">
+                                        {#if m.goal}<p>{m.goal}</p>{/if}
+                                        <a
+                                            href={getModuleLink(
+                                                m.type === "Technical"
+                                                    ? "technical"
+                                                    : "soft_skills",
+                                                m.dbId,
+                                            )}
+                                            class="module-detail-link"
+                                            >View full module →</a
+                                        >
+                                    </div>
+                                </div>
+                            {/if}
+                        </div>
+                    {/each}
+                {/each}
+            </div>
+            <a href="/modules" class="catalog-link"
+                >View all modules in the catalog →</a
+            >
+        </div>
+    </section>
+
+    <!-- ═══ PREREQUISITES & WHO FOR ═══ -->
+    <section class="td-prereq">
+        <div class="container">
+            <div class="prereq-grid">
+                <div class="prereq-col">
+                    <ScrollReveal>
+                        <span class="eyebrow">PREREQUISITES</span>
+                        <h2 class="section-heading">
+                            What you need before you start.
+                        </h2>
+                        <ul class="dash-list">
+                            {#each meta.prerequisites as item}
+                                <li><span class="dash">—</span> {item}</li>
+                            {/each}
+                        </ul>
+                    </ScrollReveal>
+                </div>
+                <div class="prereq-col">
+                    <ScrollReveal delay={100}>
+                        <span class="eyebrow">WHO THIS IS FOR</span>
+                        <h2 class="section-heading">
+                            This track is right for you if...
+                        </h2>
+                        <ul class="dash-list">
+                            {#each meta.whoFor as item}
+                                <li><span class="dash">—</span> {item}</li>
+                            {/each}
+                        </ul>
+                    </ScrollReveal>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ ENROLL CTA ═══ -->
+    <section class="td-enroll">
+        <div class="container">
+            <ScrollReveal>
+                <div class="td-enroll__inner">
+                    <h2 class="section-heading">Ready to start?</h2>
+                    <p class="section-body">
+                        Enrollment is done through direct contact. We will
+                        confirm availability and walk you through the first
+                        steps.
+                    </p>
+                    <div class="td-enroll__ctas">
+                        <a
+                            href="mailto:operations@progeta.tech?subject=Enrollment - {track.title}"
+                            class="btn-ember">ENROLL NOW →</a
+                        >
+                        <a
+                            href="mailto:operations@progeta.tech?subject=Question - {track.title}"
+                            class="btn-ghost-ember">ASK A QUESTION →</a
+                        >
+                    </div>
+                </div>
+            </ScrollReveal>
+        </div>
+    </section>
 {:else}
-    <div class="layout-error">
-        <h1>Solution Not Found</h1>
-        <a href="/tracks">Return to Base</a>
+    <div class="td-404">
+        <h1>Track not found.</h1>
+        <a href="/tracks">← Back to all tracks</a>
     </div>
 {/if}
 
 <style>
-    /* --- MARK XV: ZEN PROFESSIONAL --- */
-    :root {
-        --z-bg: #0f1115; /* Soft Charcoal */
-        --z-card: #16181d; /* Surface L1 */
-        --z-card-h: #1c1e24; /* Surface L2 */
-        --z-text: #f3f4f6;
-        --z-text-dim: #9ca3af;
-        --z-accent: #3a3f4b;
-        --z-border: rgba(255, 255, 255, 0.06);
-
-        --font-body: "Inter", sans-serif;
-        --font-head: "Manrope", sans-serif;
-
-        --radius: 16px;
-    }
-
-    /* GLOBAL RESET */
-    .zen-layout {
-        background-color: var(--z-bg);
-        color: var(--z-text);
-        font-family: var(--font-body);
-        min-height: 100vh;
-        width: 100%;
-        padding-top: 100px;
-        padding-bottom: 80px;
-    }
-
-    .grid-container {
-        max-width: 1400px; /* Slightly tighter for focus */
+    .container {
+        max-width: 1200px;
         margin: 0 auto;
-        padding: 0 40px;
+        padding: 0 clamp(20px, 4vw, 64px);
+    }
+    .container--wide {
+        max-width: 1320px;
+        margin: 0 auto;
+        padding: 0 clamp(20px, 4vw, 48px);
+    }
+    .eyebrow {
+        font-family: "DM Mono", monospace;
+        font-size: 10px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: #424870;
+        display: block;
+        margin-bottom: 16px;
+    }
+    .section-heading {
+        font-family: "Cormorant Garamond", serif;
+        font-weight: 700;
+        font-size: clamp(28px, 3.5vw, 40px);
+        color: #edf0ff;
+        margin-bottom: 14px;
+    }
+    .section-body {
+        font-family: "DM Sans", sans-serif;
+        font-weight: 300;
+        font-size: 14px;
+        color: #8890bb;
+        line-height: 1.7;
+        max-width: 520px;
+    }
+    .ember {
+        color: #e05c20;
+    }
+    .green {
+        color: #18c96a;
+    }
+
+    /* ── HERO ── */
+    .td-hero {
+        min-height: 60vh;
+        display: flex;
+        align-items: center;
+        background: #020408;
+        padding: clamp(120px, 14vw, 180px) 0 clamp(60px, 8vw, 100px);
+    }
+    .td-hero__grid {
         display: grid;
-        grid-template-columns: 1fr 1.2fr; /* Right col slightly wider for content */
-        gap: 40px;
+        grid-template-columns: 60% 40%;
+        gap: clamp(32px, 4vw, 64px);
         align-items: start;
     }
-
-    /* CARDS */
-    .card-soft {
-        background: var(--z-card);
-        border: 1px solid var(--z-border);
-        border-radius: var(--radius);
-        padding: 32px;
-        margin-bottom: 24px;
-        /* Subtle shadow for depth */
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-    }
-
-    /* LEFT COL */
-    .col-left {
-        display: flex;
-        flex-direction: column;
-        position: sticky;
-        top: 110px;
-        height: fit-content;
-    }
-
-    /* HERO */
-    .card-header {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 24px;
-    }
-    .pill-label {
-        font-size: 0.75rem;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        color: var(--z-text-dim);
-        background: var(--z-accent);
-        padding: 4px 10px;
-        border-radius: 100px;
-    }
-    .status-badge {
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        font-size: 0.8rem;
-        color: #10b981;
-    }
-    .dot {
-        width: 6px;
-        height: 6px;
-        background: #10b981;
-        border-radius: 50%;
-        box-shadow: 0 0 8px rgba(16, 185, 129, 0.4);
-    }
-
-    h1 {
-        font-family: var(--font-head);
-        font-size: 2.5rem;
-        font-weight: 700;
-        line-height: 1.1;
-        margin-bottom: 16px;
-        letter-spacing: -0.02em;
-    }
-    .desc {
-        color: var(--z-text-dim);
-        font-size: 1rem;
-        line-height: 1.6;
-        margin-bottom: 32px;
-    }
-
-    .metrics-row {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding-bottom: 32px;
-        border-bottom: 1px solid var(--z-border);
-        margin-bottom: 32px;
-    }
-    .sep {
-        width: 1px;
-        height: 30px;
-        background: var(--z-border);
-    }
-    .metric {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-    .m-val {
-        font-family: var(--font-head);
-        font-size: 1.25rem;
-        font-weight: 700;
-        color: #fff;
-    }
-    .m-lbl {
-        font-size: 0.75rem;
-        color: var(--z-text-dim);
-        text-transform: uppercase;
-        margin-top: 4px;
-    }
-
-    .btn-primary {
-        width: 100%;
-        background: #fff;
-        color: #000;
-        font-weight: 600;
-        padding: 16px;
-        border-radius: 12px;
-        border: none;
-        cursor: pointer;
-        transition:
-            transform 0.2s,
-            box-shadow 0.2s;
-        font-family: var(--font-body);
-        font-size: 1rem;
-    }
-    .btn-primary:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1);
-    }
-
-    /* TAGS */
-    .card-title {
-        font-family: var(--font-head);
-        font-size: 1.1rem;
-        margin-bottom: 20px;
-        color: #fff;
-    }
-    .zen-tags {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-    }
-    .z-tag {
-        font-size: 0.8rem;
-        padding: 6px 12px;
-        background: rgba(255, 255, 255, 0.03);
-        border: 1px solid var(--z-border);
-        border-radius: 8px;
-        color: var(--z-text-dim);
-    }
-
-    /* LIST */
-    .zen-list {
-        list-style: none;
-        padding: 0;
-    }
-    .zen-list li {
-        display: flex;
-        gap: 16px;
-        margin-bottom: 20px;
-        align-items: flex-start;
-    }
-    .icon-box {
-        min-width: 24px;
-        height: 24px;
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 0.7rem;
-        color: #fff;
-    }
-    .li-content {
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
-    }
-    .li-content strong {
-        font-size: 0.95rem;
-        color: #fff;
-    }
-    .li-content span {
-        font-size: 0.85rem;
-        color: var(--z-text-dim);
-        line-height: 1.4;
-    }
-
-    /* ROADMAP */
-    .card-header-lg {
-        margin-bottom: 40px;
-    }
-    .card-header-lg h2 {
-        font-family: var(--font-head);
-        font-size: 1.5rem;
-        margin-bottom: 8px;
-    }
-    .sub-text {
-        color: var(--z-text-dim);
-        font-size: 0.95rem;
-    }
-
-    .roadmap-flow {
-        display: flex;
-        flex-direction: column;
-        gap: 48px;
-    }
-    .phase-group {
-    }
-    .phase-title {
-        display: flex;
-        align-items: center;
-        gap: 16px;
-        margin-bottom: 24px;
-    }
-    .p-num {
-        font-family: var(--font-head);
-        font-size: 2rem;
-        font-weight: 800;
-        color: rgba(255, 255, 255, 0.1);
-    }
-    .phase-title h3 {
-        font-size: 1.25rem;
-        font-weight: 600;
-        color: #fff;
-    }
-
-    .module-stack {
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-    }
-
-    /* ACCORDION */
-    .z-item {
-        background: rgba(255, 255, 255, 0.02);
-        border: 1px solid transparent;
-        border-radius: 12px;
-        transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
-        overflow: hidden;
-    }
-    .z-item:hover {
-        background: rgba(255, 255, 255, 0.04);
-    }
-    .z-item.active {
-        background: var(--z-card-h);
-        border-color: rgba(255, 255, 255, 0.1);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    }
-
-    .z-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 18px 24px;
-        cursor: pointer;
-    }
-    .zh-left {
-        display: flex;
-        align-items: center;
-        gap: 16px;
-    }
-    .zh-num {
-        font-size: 0.8rem;
-        color: var(--z-text-dim);
-        width: 20px;
-    }
-    .zh-title {
-        font-weight: 500;
-        color: var(--z-text);
-        font-size: 1rem;
-    }
-    .zh-icon {
-        color: var(--z-text-dim);
-        transition: transform 0.3s;
-        display: flex;
-        align-items: center;
-    }
-    .zh-icon.rotated {
-        transform: rotate(180deg);
-        color: #fff;
-    }
-
-    /* EXPANDED CONTENT */
-    .z-body {
-        background: rgba(0, 0, 0, 0.2);
-        border-top: 1px solid rgba(255, 255, 255, 0.05);
-    }
-    .zb-inner {
-        padding: 24px 24px 24px 60px; /* Indent to align with title */
-    }
-
-    .zb-block {
-        margin-bottom: 20px;
-    }
-    .zb-label {
-        display: block;
-        font-size: 0.75rem;
-        color: #6b7280;
-        text-transform: uppercase;
-        margin-bottom: 8px;
-        letter-spacing: 0.05em;
-    }
-    .zb-block p {
-        font-size: 0.95rem;
-        line-height: 1.6;
-        color: #d1d5db;
-        margin: 0;
-        max-width: 600px;
-    }
-
-    .tool-pills {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-    }
-    .tp {
-        font-size: 0.75rem;
-        padding: 4px 10px;
-        background: rgba(255, 255, 255, 0.05);
-        border-radius: 6px;
-        color: #d1d5db;
-    }
-
-    .btn-link-zen {
-        display: inline-flex;
-        align-items: center;
-        font-size: 0.9rem;
-        color: #fff;
-        text-decoration: none;
-        font-weight: 500;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-        padding-bottom: 2px;
-        transition: border-color 0.2s;
-    }
-    .btn-link-zen:hover {
-        border-color: #fff;
-    }
-
-    /* RESPONSIVE */
-    @media (max-width: 1000px) {
-        .grid-container {
+    @media (max-width: 900px) {
+        .td-hero__grid {
             grid-template-columns: 1fr;
         }
-        .col-left {
-            position: static;
-            margin-bottom: 40px;
+    }
+
+    .breadcrumb {
+        font-family: "DM Mono", monospace;
+        font-size: 10px;
+        color: #1e2440;
+        letter-spacing: 0.12em;
+        display: block;
+        margin-bottom: 14px;
+    }
+    .track-tag {
+        font-family: "DM Mono", monospace;
+        font-size: 10px;
+        color: #e05c20;
+        border: 1px solid #e05c20;
+        padding: 2px 8px;
+        border-radius: 2px;
+        display: inline-block;
+        margin-bottom: 14px;
+    }
+    .td-hero__title {
+        font-family: "Cormorant Garamond", serif;
+        font-weight: 700;
+        font-size: clamp(36px, 5vw, 60px);
+        line-height: 0.93;
+        color: #edf0ff;
+        letter-spacing: -0.03em;
+        margin-bottom: 14px;
+    }
+    .td-hero__tagline {
+        font-family: "DM Sans", sans-serif;
+        font-weight: 400;
+        font-size: clamp(16px, 2vw, 20px);
+        color: #edf0ff;
+        margin-bottom: 16px;
+    }
+    .td-hero__body {
+        font-family: "DM Sans", sans-serif;
+        font-weight: 300;
+        font-size: 15px;
+        color: #8890bb;
+        max-width: 480px;
+        line-height: 1.75;
+    }
+
+    /* Metadata card */
+    .track-meta-card {
+        padding: clamp(28px, 4vw, 44px);
+        background: #07090f;
+        border-left: 2px solid #e05c20;
+    }
+    .meta-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        padding: 12px 0;
+        border-bottom: 1px solid #0f1220;
+    }
+    .meta-row:last-child {
+        border-bottom: none;
+    }
+    .meta-label {
+        font-family: "DM Mono", monospace;
+        font-size: 10px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: #424870;
+    }
+    .meta-value {
+        font-family: "DM Sans", sans-serif;
+        font-weight: 400;
+        font-size: 14px;
+        color: #edf0ff;
+        text-align: right;
+        max-width: 240px;
+    }
+
+    .track-enroll-btn {
+        display: block;
+        width: 100%;
+        margin-top: 20px;
+        padding: 16px;
+        background: #e05c20;
+        color: #edf0ff;
+        border: none;
+        font-family: "DM Mono", monospace;
+        font-size: 12px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        text-align: center;
+        text-decoration: none;
+        border-radius: 4px;
+        transition: background 0.2s;
+    }
+    .track-enroll-btn:hover {
+        background: #c44e14;
+    }
+
+    /* ── COMPETENCIES ── */
+    .td-competencies {
+        background: #07090f;
+        padding: clamp(80px, 11vw, 144px) 0;
+    }
+    .competency-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1px;
+        background: #0f1220;
+        margin-top: 40px;
+    }
+    @media (max-width: 640px) {
+        .competency-grid {
+            grid-template-columns: 1fr;
         }
-        .zb-inner {
-            padding: 20px;
+    }
+    .competency-item {
+        background: #07090f;
+        padding: 24px 28px;
+        display: flex;
+        gap: 16px;
+        align-items: flex-start;
+    }
+    .competency-bullet {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #e05c20;
+        flex-shrink: 0;
+        margin-top: 7px;
+    }
+    .competency-text {
+        font-family: "DM Sans", sans-serif;
+        font-weight: 300;
+        font-size: 14px;
+        line-height: 1.65;
+        color: #8890bb;
+    }
+    .competency-text strong {
+        color: #edf0ff;
+        font-weight: 500;
+        display: block;
+        margin-bottom: 4px;
+        font-size: 15px;
+    }
+
+    /* ── MODULES ── */
+    .td-modules {
+        background: #020408;
+        padding: clamp(80px, 11vw, 144px) 0;
+    }
+    .module-list {
+        margin-top: 36px;
+        border-top: 1px solid #0f1220;
+    }
+    .phase-header {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 24px 0 12px;
+    }
+    .phase-num {
+        font-family: "DM Mono", monospace;
+        font-size: 10px;
+        color: #1e2440;
+        letter-spacing: 0.12em;
+    }
+    .phase-name {
+        font-family: "DM Sans", sans-serif;
+        font-weight: 500;
+        font-size: 15px;
+        color: #edf0ff;
+    }
+
+    .module-row {
+        border-bottom: 1px solid #0f1220;
+    }
+    .module-row-header {
+        display: grid;
+        grid-template-columns: 56px 1fr auto auto;
+        gap: 0 16px;
+        padding: 18px 0;
+        cursor: pointer;
+        align-items: center;
+        transition: background 0.15s;
+        border-radius: 4px;
+    }
+    .module-row-header:hover {
+        background: rgba(7, 9, 15, 0.5);
+    }
+    .module-seq {
+        font-family: "DM Mono", monospace;
+        font-size: 10px;
+        letter-spacing: 0.12em;
+        color: #1e2440;
+    }
+    .module-name {
+        font-family: "DM Sans", sans-serif;
+        font-weight: 400;
+        font-size: 15px;
+        color: #edf0ff;
+    }
+    .module-type-tag {
+        font-family: "DM Mono", monospace;
+        font-size: 9px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: #424870;
+        padding: 2px 7px;
+        border: 1px solid #171b30;
+        border-radius: 3px;
+    }
+    .module-expand-icon {
+        font-size: 14px;
+        color: #424870;
+        transition: transform 0.2s;
+        display: flex;
+        align-items: center;
+    }
+    .module-expand-icon.rotated {
+        transform: rotate(180deg);
+    }
+
+    .module-body {
+        overflow: hidden;
+    }
+    .module-body-inner {
+        padding: 0 0 20px 72px;
+        font-family: "DM Sans", sans-serif;
+        font-weight: 300;
+        font-size: 14px;
+        line-height: 1.7;
+        color: #8890bb;
+        max-width: 600px;
+    }
+    .module-detail-link {
+        display: inline-block;
+        margin-top: 10px;
+        font-family: "DM Mono", monospace;
+        font-size: 10px;
+        letter-spacing: 0.1em;
+        color: #e05c20;
+        text-decoration: none;
+    }
+    .module-detail-link:hover {
+        text-decoration: underline;
+    }
+
+    .catalog-link {
+        display: inline-block;
+        margin-top: 24px;
+        font-family: "DM Mono", monospace;
+        font-size: 11px;
+        color: #e05c20;
+        letter-spacing: 0.1em;
+        text-decoration: none;
+    }
+    .catalog-link:hover {
+        text-decoration: underline;
+    }
+
+    /* ── PREREQUISITES ── */
+    .td-prereq {
+        background: #07090f;
+        padding: clamp(80px, 11vw, 144px) 0;
+    }
+    .prereq-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: clamp(32px, 4vw, 64px);
+    }
+    @media (max-width: 768px) {
+        .prereq-grid {
+            grid-template-columns: 1fr;
         }
+    }
+    .dash-list {
+        list-style: none;
+        padding: 0;
+        margin-top: 20px;
+    }
+    .dash-list li {
+        font-family: "DM Sans", sans-serif;
+        font-weight: 300;
+        font-size: 13px;
+        color: #8890bb;
+        line-height: 2;
+    }
+    .dash {
+        color: #e05c20;
+        margin-right: 8px;
+    }
+
+    /* ── ENROLL CTA ── */
+    .td-enroll {
+        background: #020408;
+        padding: clamp(80px, 11vw, 144px) 0;
+    }
+    .td-enroll__inner {
+        text-align: center;
+        max-width: 480px;
+        margin: 0 auto;
+    }
+    .td-enroll__inner .section-body {
+        max-width: 100%;
+        margin: 0 auto;
+    }
+    .td-enroll__ctas {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        margin-top: 28px;
+        flex-wrap: wrap;
+    }
+    .btn-ember {
+        font-family: "DM Mono", monospace;
+        font-size: 11px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        background: #e05c20;
+        color: #edf0ff;
+        padding: 14px 28px;
+        border-radius: 4px;
+        text-decoration: none;
+        transition: background 0.2s;
+    }
+    .btn-ember:hover {
+        background: #c44e14;
+    }
+    .btn-ghost-ember {
+        font-family: "DM Mono", monospace;
+        font-size: 11px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        border: 1px solid #e05c20;
+        color: #e05c20;
+        padding: 14px 28px;
+        border-radius: 4px;
+        text-decoration: none;
+        background: transparent;
+        transition: background 0.2s;
+    }
+    .btn-ghost-ember:hover {
+        background: rgba(224, 92, 32, 0.08);
+    }
+
+    /* ── 404 ── */
+    .td-404 {
+        min-height: 60vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: #020408;
+        gap: 16px;
+    }
+    .td-404 h1 {
+        font-family: "Cormorant Garamond", serif;
+        font-weight: 700;
+        font-size: 36px;
+        color: #edf0ff;
+    }
+    .td-404 a {
+        font-family: "DM Mono", monospace;
+        font-size: 11px;
+        color: #e05c20;
+        text-decoration: none;
     }
 </style>

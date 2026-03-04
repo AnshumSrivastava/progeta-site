@@ -1,742 +1,544 @@
-<script lang="ts">
-  import ScrollReveal from '$lib/components/animations/ScrollReveal.svelte';
-  import Button from '$lib/components/ui/Button.svelte';
-  import Tag from '$lib/components/ui/Tag.svelte';
-  import GridMorph from '$lib/components/animations/GridMorph.svelte';
-  import { careerTracks } from '$lib/content/jobs';
+<script>
+  import ScrollReveal from "$lib/components/animations/ScrollReveal.svelte";
+  import GridMorph from "$lib/components/animations/GridMorph.svelte";
+  import { onMount } from "svelte";
+
+  /* ── Count-up animation ── */
+  let statsEl;
+  let statsCounted = false;
+  const stats = [
+    { value: 15, suffix: "+", label: "Colleges Engaged" },
+    { value: 2500, suffix: "+", label: "Students Trained" },
+    { value: 54, suffix: "", label: "Technical Modules" },
+    { value: 6, suffix: "", label: "Active Tracks" },
+  ];
+  let displayed = stats.map(() => 0);
+
+  function countUp() {
+    if (statsCounted) return;
+    statsCounted = true;
+    stats.forEach((s, i) => {
+      const duration = 1600;
+      const start = performance.now();
+      function tick(now) {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        displayed[i] = Math.round(eased * s.value);
+        displayed = [...displayed];
+        if (progress < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    });
+  }
+
+  onMount(() => {
+    if (!statsEl) return;
+    const io = new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting) {
+          countUp();
+          io.disconnect();
+        }
+      },
+      { threshold: 0.3 },
+    );
+    io.observe(statsEl);
+    return () => io.disconnect();
+  });
 </script>
 
 <svelte:head>
-  <title>LaunchPad — Progeta Technologies</title>
-  <meta name="description" content="Skills, certifications, and campus programmes that close the gap between education and readiness." />
+  <title>LaunchPad | Progeta Technologies</title>
+  <meta
+    name="description"
+    content="LaunchPad is Progeta Technologies' education initiative — cybersecurity tracks, workshops, student chapters, and verifiable credentials."
+  />
 </svelte:head>
 
-<!-- Secondary Navigation Band -->
-<nav class="sub-nav">
-  <div class="sub-nav__container">
-    <div class="sub-nav__brand">LaunchPad</div>
-    <ul class="sub-nav__links">
-      <li><a href="#overview">Overview</a></li>
-      <li><a href="#blueprint">The Blueprint</a></li>
-      <li><a href="#ecosystem">The Ecosystem</a></li>
-      <li><a href="#events">Live Events</a></li>
-    </ul>
-    <div class="sub-nav__actions">
-      <Button href="#campuses" variant="primary" size="small" accent="var(--accent-red)">For Campuses</Button>
-    </div>
-  </div>
-</nav>
-
-<!-- ═══════════════════════════════════════════════════
-     SECTION 1 — HERO
-     ═══════════════════════════════════════════════════ -->
-<section class="hero" id="overview">
-  <div class="hero__inner">
-    <div class="hero__left">
-      <ScrollReveal>
-        <Tag label="LAUNCHPAD · EDUCATION INITIATIVE" variant="active" />
-      </ScrollReveal>
-      
-      <h1 class="hero__headline">
-        <ScrollReveal delay={200} distance={20} stagger={0}>
-          <span class="hero__line">Engineer</span>
-        </ScrollReveal>
-        <ScrollReveal delay={350} distance={20} stagger={0}>
-          <span class="hero__line">Your Own</span>
-        </ScrollReveal>
-        <ScrollReveal delay={500} distance={20} stagger={0}>
-          <span class="hero__line"><span class="hero__accent">Trajectory.</span></span>
-        </ScrollReveal>
+<!-- ═══ SECTION 1 — HERO ═══ -->
+<section class="lp-hero">
+  <div class="lp-hero__canvas"><GridMorph /></div>
+  <div class="lp-hero__inner container">
+    <ScrollReveal>
+      <span class="eyebrow">LAUNCHPAD · INITIATIVE 01</span>
+    </ScrollReveal>
+    <ScrollReveal delay={100}>
+      <h1 class="lp-hero__heading">
+        The skill gap between<br />education and readiness<br />is
+        <span class="ember">real</span>. We close it.
       </h1>
-
-      <ScrollReveal delay={700} distance={15}>
-        <p class="hero__subline">
-          The gap between academic theory and industry reality is massive. LaunchPad is our immersive ecosystem designed to close that gap through intense, real-world engineering tracks and campus chapters.
-        </p>
-      </ScrollReveal>
-
-      <ScrollReveal delay={800} distance={20}>
-        <div class="hero__ctas">
-          <Button variant="primary" href="#campuses" accent="var(--accent-red)">Bring to Campus</Button>
-          <a href="#ecosystem" class="hero__secondary-cta">Explore Tracks <span class="arrow">→</span></a>
-        </div>
-      </ScrollReveal>
-    </div>
-
-    <div class="hero__right">
-      <ScrollReveal delay={400} scale={0.95} duration={1400} distance={0} class="hero__right-anim">
-        <div class="hero__animation">
-          <GridMorph />
-        </div>
-      </ScrollReveal>
+    </ScrollReveal>
+    <ScrollReveal delay={200}>
+      <p class="lp-hero__body">
+        LaunchPad is Progeta Technologies' education initiative. We train
+        operators, not just students — through live-fire cybersecurity tracks,
+        hands-on workshops, student chapters, and verifiable credentials.
+      </p>
+    </ScrollReveal>
+    <ScrollReveal delay={300}>
+      <div class="lp-hero__ctas">
+        <a href="/tracks" class="btn-solid">Explore Tracks →</a>
+        <a href="/launchpad/colleges" class="btn-ghost">For Colleges →</a>
+      </div>
+    </ScrollReveal>
+    <div class="scroll-indicator" aria-hidden="true">
+      <div class="scroll-line"></div>
+      <span class="scroll-label">SCROLL</span>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════
-     SECTION 2 — THE BLUEPRINT
-     ═══════════════════════════════════════════════════ -->
-<section class="how section" id="blueprint">
+<!-- ═══ SECTION 2 — THE FOUR STAGES ═══ -->
+<section class="lp-stages">
   <div class="container">
     <ScrollReveal>
-      <Tag label="THE BLUEPRINT" variant="category" />
-      <h2 class="section-title">How LaunchPad integrates.</h2>
+      <span class="eyebrow">HOW LAUNCHPAD WORKS</span>
+      <h2 class="section-heading">One ecosystem. Four stages.</h2>
+      <p class="section-body">
+        Every student moves through LaunchPad at their own pace. The four stages
+        build on each other — but you can enter at any point.
+      </p>
     </ScrollReveal>
-    
-    <div class="steps-container">
-      {#each [
-        { num: '01', title: 'Assess the Landscape', body: 'We begin by understanding where your students are — their current skill levels, the gaps between their academics and industry demands, and the specific needs of your institution. No assumptions. Just honest data.' },
-        { num: '02', title: 'Design the Track', body: 'Based on assessment, we design a bespoke track that fits your academic calendar. This is not a generic course — it is tailored content, delivered by practitioners, built around real-world scenarios and outcomes.' },
-        { num: '03', title: 'Deliver with Intensity', body: 'Sessions are delivered on campus or virtually with a focus on hands-on learning. Students do not just listen — they build, break, and rebuild. Every session ends with something tangible.' },
-        { num: '04', title: 'Certify and Connect', body: 'Students who complete tracks earn verified certificates with a unique ID traceable through our verification system. Top performers are connected to opportunities through our network.' },
-      ] as step, i}
-        <div class="step" class:step--alt={i % 2 !== 0}>
-          <span class="step__watermark" aria-hidden="true">{step.num}</span>
-          <div class="step__content">
-            <ScrollReveal delay={i * 100}>
-              <h3 class="step__title">{step.title}</h3>
-              <p class="step__body">{step.body}</p>
-            </ScrollReveal>
+
+    <div class="stages-row">
+      {#each [{ num: "01", name: "Tracks", desc: "Six-month certification programmes in cybersecurity specialisations. Built around real operational roles. Ends with a verifiable credential.", link: "/tracks", cta: "Explore Tracks →" }, { num: "02", name: "Workshops", desc: "Half-day to full-day live simulations. No slides — real environments. Individual modules or as part of a track. Open to all students.", link: "/launchpad/workshops", cta: "View Workshops →" }, { num: "03", name: "Chapters", desc: "A student-led organisation on your campus. Progeta Technologies trains the leaders and provides infrastructure. You run it.", link: "/launchpad/chapters", cta: "Start a Chapter →" }, { num: "04", name: "Certifications", desc: "Verifiable credentials issued at the end of each track. Shareable on LinkedIn. Verifiable at progeta.tech/verify by any employer.", link: "/launchpad/certifications", cta: "View Credentials →" }] as stage, i}
+        <ScrollReveal delay={i * 80}>
+          <a href={stage.link} class="stage-card">
+            <span class="stage-num">STAGE {stage.num}</span>
+            <div class="stage-rule"></div>
+            <span class="stage-name">{stage.name}</span>
+            <p class="stage-desc">{stage.desc}</p>
+            <span class="stage-cta">{stage.cta}</span>
+          </a>
+        </ScrollReveal>
+      {/each}
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SECTION 3 — AUDIENCE SPLIT ═══ -->
+<section class="lp-audience">
+  <div class="audience-split">
+    <ScrollReveal>
+      <div class="audience-panel">
+        <span class="audience-tag">FOR STUDENTS</span>
+        <h3 class="audience-heading">Your track to becoming an operator.</h3>
+        <p class="audience-body">
+          Start with a track in your area of interest. Each track is six months
+          and ends with a credential that signals real capability to employers —
+          not just attendance.
+        </p>
+        <a href="/tracks" class="audience-cta">See all tracks →</a>
+      </div>
+    </ScrollReveal>
+    <ScrollReveal delay={100}>
+      <div class="audience-panel">
+        <span class="audience-tag">FOR INSTITUTIONS</span>
+        <h3 class="audience-heading">Bring LaunchPad to your campus.</h3>
+        <p class="audience-body">
+          Awareness sessions, certification tracks, student chapters, and
+          workshops. Designed to run alongside existing curriculum. Verifiable
+          outcomes for placement.
+        </p>
+        <a href="/launchpad/colleges" class="audience-cta"
+          >Partnership details →</a
+        >
+      </div>
+    </ScrollReveal>
+  </div>
+</section>
+
+<!-- ═══ SECTION 4 — STATS ═══ -->
+<section class="lp-stats" bind:this={statsEl}>
+  <div class="container">
+    <div class="stats-row">
+      {#each stats as stat, i}
+        <ScrollReveal delay={i * 80}>
+          <div class="stat-cell">
+            <span class="stat-number"
+              >{displayed[i].toLocaleString()}{stat.suffix}</span
+            >
+            <span class="stat-label">{stat.label}</span>
           </div>
-        </div>
-      {/each}
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════
-     SECTION 3 — THE ECOSYSTEM (Tracks)
-     ═══════════════════════════════════════════════════ -->
-<section class="tracks section" id="ecosystem">
-  <div class="container--wide">
-    <ScrollReveal>
-      <div class="section-header--split">
-        <div>
-          <Tag label="THE ECOSYSTEM" variant="category" />
-          <h2 class="section-title">Pick your path.</h2>
-          <p class="section-desc">Each track is a 6-month diploma programme with live-fire simulation and a verifiable credential on completion.</p>
-        </div>
-      </div>
-    </ScrollReveal>
-
-    <div class="tracks__grid">
-      {#each careerTracks as track, i}
-        <ScrollReveal delay={i * 80} class="track-wrapper">
-          <a href="/launchpad/tracks/{track.id}" class="track-card">
-            <span class="track__num">TRACK 0{track.id}</span>
-            <h4 class="track__name">{track.title}</h4>
-            <p class="track__desc">{track.description}</p>
-            
-            <div class="track__skills">
-              {#each track.skills.slice(0, 3) as skill}
-                <span class="track__skill">{skill}</span>
-              {/each}
-            </div>
-            
-            <span class="track__status track__status--live">
-              <span class="track__dot"></span>
-              ENROLLING
-            </span>
-          </a>
         </ScrollReveal>
       {/each}
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════
-     SECTION 4 — LIVE EVENTS
-     ═══════════════════════════════════════════════════ -->
-<section class="events section" id="events">
-  <div class="container--wide">
+<!-- ═══ SECTION 5 — CLOSING CTA ═══ -->
+<section class="lp-close">
+  <div class="container">
     <ScrollReveal>
-      <Tag label="UPCOMING ACTIONS" variant="category" />
-      <div class="section-header--split">
-        <h2 class="section-title">Live Sessions.</h2>
-        <Button href="/launchpad/events" variant="ghost">View Calendar <span class="arrow" style="margin-left: 4px;">→</span></Button>
+      <div class="lp-close__inner">
+        <h2 class="section-heading">Not sure where to start?</h2>
+        <p class="section-body">
+          Tell us where you are and what kind of work you want to do. We'll
+          point you to the right track or the right event.
+        </p>
+        <a
+          href="mailto:operations@progeta.tech?subject=LaunchPad Guidance"
+          class="lp-close__cta">Talk to us →</a
+        >
       </div>
     </ScrollReveal>
-
-    <div class="events-list">
-      {#each [1, 2, 3] as i}
-        <ScrollReveal delay={i * 100}>
-          <a href="/launchpad/events" class="event-row">
-            <div class="event-row__date">
-              <span class="date__month">NOV</span>
-              <span class="date__day">{10 + i}</span>
-            </div>
-            <div class="event-row__details">
-              <span class="event__type">VIRTUAL SIMULATION</span>
-              <h4 class="event__title">Incident Response Challenge 0{i}</h4>
-              <p class="event__meta">18:00 IST • Online • 2 Hours</p>
-            </div>
-            <div class="event-row__action">
-              <span class="event__link">Register <span class="arrow">→</span></span>
-            </div>
-          </a>
-        </ScrollReveal>
-      {/each}
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════
-     SECTION 5 — SPLIT CTA
-     ═══════════════════════════════════════════════════ -->
-<section class="final-cta section" id="campuses">
-  <div class="container--wide">
-    <div class="final-cta__content">
-      <ScrollReveal delay={100} distance={30}>
-        <h2 class="final-cta__title">Start Building.</h2>
-        <p class="final-cta__desc">Find where you fit. Whether you are an institution looking to upgrade its curriculum or a student looking to forge a career.</p>
-      </ScrollReveal>
-    </div>
-
-    <!-- The 2-Column Split -->
-    <div class="pathway-grid" style="grid-template-columns: repeat(2, 1fr);">
-      <ScrollReveal delay={200} distance={20}>
-        <a href="/launchpad/students" class="pathway-card" style="--accent: var(--accent-red)">
-          <span class="pathway-label">FOR STUDENTS</span>
-          <h3 class="pathway-title">Find your track.</h3>
-          <p class="pathway-desc">LaunchPad is available to individual students, not just campuses. Find the track that matches where you want to go, and begin.</p>
-          <span class="pathway-action">Explore Programs <span class="arrow">→</span></span>
-        </a>
-      </ScrollReveal>
-
-      <ScrollReveal delay={320} distance={20}>
-        <a href="/contact" class="pathway-card pathway-card--primary" style="--accent: var(--accent-red)">
-          <span class="pathway-label" style="color: var(--ground)">FOR CAMPUSES</span>
-          <h3 class="pathway-title" style="color: var(--ground)">Partner with Us</h3>
-          <p class="pathway-desc" style="color: rgba(0,0,0,0.8)">Bring LaunchPad to your campus. We will work with you to design a programme that fits your needs.</p>
-          <span class="pathway-action" style="color: var(--ground)">Contact Partnerships <span class="arrow">→</span></span>
-        </a>
-      </ScrollReveal>
-    </div>
   </div>
 </section>
 
 <style>
-  /* ═══════════════════════════════════════════════════
-     GENERAL UTILS & SUB-NAV
-     ═══════════════════════════════════════════════════ */
-  .section {
-    padding: var(--sp-16) 0;
+  /* ── TOKENS ── */
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 clamp(20px, 4vw, 64px);
   }
-  .section-label {
-    font-family: var(--font-mono);
+  .eyebrow {
+    font-family: "DM Mono", monospace;
     font-size: 10px;
-    letter-spacing: var(--tracking-widest);
-    color: var(--ink-4);
+    letter-spacing: 0.18em;
     text-transform: uppercase;
+    color: #424870;
     display: block;
-    margin-bottom: var(--sp-4);
+    margin-bottom: 16px;
   }
-  .section-title {
-    font-family: var(--font-display);
-    font-size: clamp(36px, 5vw, 56px);
+  .section-heading {
+    font-family: "Cormorant Garamond", serif;
     font-weight: 700;
-    color: var(--ink-1);
-    line-height: 1.1;
-    margin-top: var(--sp-4);
-    margin-bottom: var(--sp-8);
+    font-size: clamp(32px, 4vw, 48px);
+    line-height: 1.05;
+    color: #edf0ff;
+    margin-bottom: 14px;
   }
-  .section-desc {
-    font-size: var(--text-lg);
-    color: var(--ink-2);
-    max-width: 600px;
-    margin-bottom: var(--sp-10);
-  }
-  .section-header--split {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    margin-bottom: var(--sp-8);
-  }
-
-  .sub-nav {
-    position: sticky;
-    top: 60px; /* Offset for main SiteNav */
-    z-index: 40;
-    background: rgba(10, 11, 14, 0.85);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border-1);
-  }
-  .sub-nav__container {
-    max-width: var(--w-full);
-    margin: 0 auto;
-    padding: 0 var(--sp-8);
-    height: 48px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  .sub-nav__brand {
-    font-family: var(--font-mono);
-    font-size: var(--text-xs);
-    color: var(--accent-red);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-  }
-  .sub-nav__links {
-    display: flex;
-    gap: var(--sp-8);
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-  .sub-nav__links a {
-    font-family: var(--font-body);
-    font-size: var(--text-sm);
-    color: var(--ink-3);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-  .sub-nav__links a:hover {
-    color: var(--ink-1);
-  }
-
-  /* ═══════════════════════════════════════════════════
-     HERO
-     ═══════════════════════════════════════════════════ */
-  .hero {
-    min-height: 90vh;
-    display: flex;
-    align-items: center;
-    position: relative;
-    padding-top: 50px;
-    overflow: hidden;
-  }
-  .hero__inner {
-    max-width: var(--w-full);
-    margin: 0 auto;
-    padding: 0 var(--sp-6);
-    display: flex;
-    align-items: center;
-    width: 100%;
-  }
-  .hero__left {
-    width: 60%;
-    z-index: 2;
-  }
-  .hero__right {
-    width: 40%;
-    display: flex;
-    justify-content: flex-end;
-    z-index: 1;
-    position: relative;
-  }
-  :global(.hero__right-anim) {
-    width: 100%;
-    height: 600px;
-  }
-  .hero__animation {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  /* Headline */
-  .hero__headline {
-    margin-top: var(--sp-6);
-    margin-bottom: var(--sp-8);
-  }
-  .hero__line {
-    display: block;
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: clamp(48px, 8vw, 84px);
-    line-height: 0.95;
-    letter-spacing: var(--tracking-compressed);
-    color: var(--ink-1);
-  }
-  .hero__accent {
-    color: var(--accent-red);
-    background: linear-gradient(to right, var(--accent-red), #ffaa44);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-
-  /* Subline */
-  .hero__subline {
-    font-family: var(--font-body);
-    font-size: 18px;
-    color: var(--ink-2);
-    line-height: 1.6;
-    max-width: 520px;
-    margin-bottom: var(--sp-7);
+  .section-body {
+    font-family: "DM Sans", sans-serif;
     font-weight: 300;
+    font-size: 15px;
+    color: #8890bb;
+    line-height: 1.75;
+    max-width: 560px;
+  }
+  .ember {
+    color: #e05c20;
   }
 
-  /* CTAs */
-  .hero__ctas {
-    display: flex;
-    align-items: center;
-    gap: var(--sp-7);
-  }
-  .hero__secondary-cta {
-    font-family: var(--font-mono);
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: var(--tracking-widest);
-    color: var(--ink-2);
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: var(--sp-2);
-    transition: color 0.2s;
-  }
-  .hero__secondary-cta:hover { color: var(--ink-1); }
-  .hero__secondary-cta .arrow { transition: transform 0.3s var(--ease-out-expo); }
-  .hero__secondary-cta:hover .arrow { transform: translateX(4px); }
-
-
-  /* ═══════════════════════════════════════════════════
-     THE BLUEPRINT (Alternating Steps)
-     ═══════════════════════════════════════════════════ */
-  .steps-container {
-    margin-top: var(--sp-10);
-  }
-  .step {
+  /* ── HERO ── */
+  .lp-hero {
     position: relative;
-    padding: var(--sp-9) 0;
+    min-height: 50vh;
+    display: flex;
+    align-items: flex-end;
+    background: #020408;
+    overflow: hidden;
+    padding-bottom: clamp(60px, 8vw, 100px);
+    padding-top: clamp(100px, 14vw, 160px);
   }
-  .step--alt {
-    background: var(--surface-1);
-    margin-inline: calc(-1 * var(--sp-8));
-    padding-inline: var(--sp-8);
-  }
-  .step__watermark {
+  .lp-hero__canvas {
     position: absolute;
-    top: var(--sp-7);
-    left: 0;
-    font-family: var(--font-mono);
-    font-size: 140px;
-    font-weight: 400;
-    color: var(--ink-4);
-    opacity: 0.4;
-    line-height: 1;
-    z-index: 0;
-    user-select: none;
+    inset: 0;
+    opacity: 0.25;
+    pointer-events: none;
   }
-  .step__content {
+  .lp-hero__inner {
     position: relative;
     z-index: 1;
-    max-width: var(--w-text);
-    margin-left: 120px;
   }
-  .step__title {
-    font-family: var(--font-display);
-    font-weight: 600;
-    font-size: var(--text-xl);
-    margin-bottom: var(--sp-4);
-    color: var(--ink-1);
+  .lp-hero__heading {
+    font-family: "Cormorant Garamond", serif;
+    font-weight: 700;
+    font-size: clamp(48px, 7vw, 80px);
+    line-height: 0.93;
+    letter-spacing: -0.03em;
+    color: #edf0ff;
+    margin-bottom: 20px;
   }
-  .step__body {
-    line-height: var(--leading-relaxed);
-    color: var(--ink-2);
+  .lp-hero__body {
+    font-family: "DM Sans", sans-serif;
+    font-weight: 300;
+    font-size: clamp(15px, 1.5vw, 17px);
+    color: #8890bb;
+    max-width: 480px;
+    line-height: 1.75;
   }
-
-
-  /* ═══════════════════════════════════════════════════
-     THE ECOSYSTEM (3-Column Track Grid)
-     ═══════════════════════════════════════════════════ */
-  .tracks__grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--sp-7);
-    margin-top: var(--sp-8);
-  }
-  
-  :global(.track-wrapper) {
+  .lp-hero__ctas {
     display: flex;
-    height: 100%;
+    gap: 12px;
+    margin-top: 36px;
+    flex-wrap: wrap;
+  }
+  .btn-solid {
+    font-family: "DM Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    background: #edf0ff;
+    color: #020408;
+    padding: 14px 28px;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+  .btn-solid:hover {
+    opacity: 0.88;
+  }
+  .btn-ghost {
+    font-family: "DM Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    background: transparent;
+    border: 1px solid #e05c20;
+    color: #e05c20;
+    padding: 14px 28px;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .btn-ghost:hover {
+    background: rgba(224, 92, 32, 0.08);
   }
 
-  .track-card {
+  .scroll-indicator {
+    position: absolute;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
     flex-direction: column;
-    text-decoration: none;
-    background: var(--surface-1);
-    padding: var(--sp-8);
-    border: 1px solid var(--border-2);
-    transition: transform 0.3s, border-color 0.3s;
-    position: relative;
-    height: 100%;
-    width: 100%;
+    align-items: center;
+    gap: 8px;
+  }
+  .scroll-line {
+    width: 1px;
+    height: 48px;
+    background: #1e2440;
+    animation: floatLine 2.4s ease-in-out infinite;
+  }
+  .scroll-label {
+    font-family: "DM Mono", monospace;
+    font-size: 9px;
+    color: #1e2440;
+    letter-spacing: 0.14em;
+  }
+  @keyframes floatLine {
+    0%,
+    100% {
+      opacity: 0.4;
+      transform: translateY(0);
+    }
+    50% {
+      opacity: 1;
+      transform: translateY(6px);
+    }
   }
 
-  .track-card::before {
-    content: '';
+  /* ── STAGES ── */
+  .lp-stages {
+    background: #07090f;
+    padding: clamp(80px, 11vw, 144px) 0;
+  }
+  .stages-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: #0f1220;
+    margin-top: 48px;
+  }
+  @media (max-width: 720px) {
+    .stages-row {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 460px) {
+    .stages-row {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .stage-card {
+    background: #07090f;
+    padding: 32px 28px;
+    display: block;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.2s;
+  }
+  .stage-card:hover {
+    background: #0c0e18;
+  }
+  .stage-card::before {
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
     width: 0;
     height: 2px;
-    background: var(--accent-red);
-    transition: width 0.4s ease;
+    background: #e05c20;
+    transition: width 0.5s cubic-bezier(0.76, 0, 0.24, 1);
   }
-
-  .track-card:hover {
-    transform: translateY(-6px);
-    border-color: var(--border-3);
-  }
-
-  .track-card:hover::before {
+  .stage-card:hover::before {
     width: 100%;
   }
-
-  .track__num {
-    font-family: var(--font-mono);
-    font-size: var(--text-xs);
-    color: var(--ink-4);
-    margin-bottom: var(--sp-3);
+  .stage-num {
+    font-family: "DM Mono", monospace;
+    font-size: 10px;
+    color: #1e2440;
+    letter-spacing: 0.14em;
   }
-  .track__name {
-    font-family: var(--font-display);
-    font-weight: 600;
-    font-size: 24px;
-    color: var(--ink-1);
-    line-height: var(--leading-snug);
-    margin-bottom: var(--sp-4);
+  .stage-rule {
+    width: 24px;
+    height: 2px;
+    background: #e05c20;
+    margin: 12px 0 16px;
   }
-  .track__desc {
-    font-weight: 400;
-    color: var(--ink-3);
-    line-height: var(--leading-relaxed);
-    font-size: var(--text-sm);
-    flex-grow: 1;
-    margin-bottom: var(--sp-6);
+  .stage-name {
+    font-family: "DM Sans", sans-serif;
+    font-weight: 500;
+    font-size: 17px;
+    color: #edf0ff;
+    display: block;
   }
-  .track__skills {
-    display: flex;
-    gap: var(--sp-3);
-    flex-wrap: wrap;
-    margin-bottom: var(--sp-5);
+  .stage-desc {
+    font-family: "DM Sans", sans-serif;
+    font-weight: 300;
+    font-size: 13px;
+    color: #8890bb;
+    line-height: 1.65;
+    margin-top: 8px;
   }
-  .track__skill {
-    font-family: var(--font-mono);
-    font-size: var(--text-2xs);
-    color: var(--ink-3);
-    background: var(--ground);
-    padding: 3px 10px;
-    border-radius: 4px;
-    border: 1px solid var(--border-2);
-    letter-spacing: 0.05em;
-  }
-  .track__status {
-    font-family: var(--font-mono);
-    font-size: var(--text-2xs);
-    color: var(--ink-4);
-    display: flex;
-    align-items: center;
-    gap: var(--sp-2);
-    margin-top: auto;
-    border-top: 1px solid var(--border-1);
-    padding-top: var(--sp-4);
-  }
-  .track__status--live {
-    color: var(--accent-red);
-  }
-  .track__dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--accent-red);
-    animation: pulse 2s ease-in-out infinite;
+  .stage-cta {
+    font-family: "DM Mono", monospace;
+    font-size: 10px;
+    color: #e05c20;
+    letter-spacing: 0.1em;
+    display: block;
+    margin-top: 20px;
   }
 
-
-  /* ═══════════════════════════════════════════════════
-     EVENTS LIST (Horizontal Rows)
-     ═══════════════════════════════════════════════════ */
-  .events-list {
-    display: flex;
-    flex-direction: column;
-    margin-top: var(--sp-8);
+  /* ── AUDIENCE ── */
+  .lp-audience {
+    background: #020408;
   }
-  .event-row {
+  .audience-split {
     display: grid;
-    grid-template-columns: 80px 1fr auto;
-    gap: var(--sp-6);
-    align-items: center;
-    padding: var(--sp-6) 0;
-    border-top: 1px solid var(--border-2);
-    text-decoration: none;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: #0f1220;
+  }
+  @media (max-width: 640px) {
+    .audience-split {
+      grid-template-columns: 1fr;
+    }
+  }
+  .audience-panel {
+    background: #020408;
+    padding: clamp(48px, 7vw, 80px) clamp(28px, 5vw, 64px);
     transition: background 0.2s;
   }
-  .event-row:hover {
-    background: var(--surface-1);
-    padding-inline: var(--sp-4);
-    margin-inline: calc(-1 * var(--sp-4));
+  .audience-panel:hover {
+    background: #07090f;
   }
-  .event-row__date {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background: var(--surface-2);
-    padding: var(--sp-3);
-    height: 80px;
-    border-radius: 4px;
-  }
-  .date__month {
-    font-family: var(--font-mono);
-    font-size: var(--text-2xs);
-    color: var(--ink-4);
-  }
-  .date__day {
-    font-family: var(--font-display);
-    font-size: 28px;
-    color: var(--ink-1);
-    font-weight: 600;
-  }
-  .event__type {
-    font-family: var(--font-mono);
-    font-size: var(--text-2xs);
-    color: var(--ink-4);
-    display: block;
-    margin-bottom: var(--sp-1);
-  }
-  .event__title {
-    font-size: var(--text-lg);
-    color: var(--ink-1);
-    font-weight: 500;
-    margin-bottom: var(--sp-1);
-  }
-  .event__meta {
-    font-size: var(--text-sm);
-    color: var(--ink-3);
-  }
-  .event__link {
-    font-family: var(--font-mono);
-    font-size: var(--text-xs);
-    color: var(--ink-2);
-    text-transform: uppercase;
-    display: flex;
-    align-items: center;
-    gap: var(--sp-2);
-    transition: color 0.2s;
-  }
-  .event-row:hover .event__link {
-    color: var(--accent-red);
-  }
-
-
-  /* ═══════════════════════════════════════════════════
-     FINAL CTA (Matches Homepage 2-Col Format)
-     ═══════════════════════════════════════════════════ */
-  .final-cta {
-    background: var(--surface-2);
-    margin-top: var(--sp-12);
-  }
-  .final-cta__content { text-align: center; margin-bottom: var(--sp-11); padding: 0 var(--sp-6); }
-  .final-cta__title {
-    font-family: var(--font-display);
-    font-size: clamp(40px, 6vw, 72px);
-    font-weight: 700;
-    color: var(--ink-1);
-    margin-bottom: var(--sp-5);
-    letter-spacing: var(--tracking-compressed);
-  }
-  .final-cta__desc {
-    font-family: var(--font-body);
-    font-size: 20px;
-    color: var(--ink-2);
-    max-width: 640px;
-    margin: 0 auto;
-    line-height: 1.5;
-  }
-
-  .pathway-grid {
-    display: grid;
-    gap: var(--sp-6);
-    padding: 0 var(--sp-6);
-  }
-  .pathway-card {
-    background: var(--surface-1);
-    border: 1px solid var(--border-2);
-    padding: var(--sp-8);
-    text-decoration: none;
-    display: flex;
-    flex-direction: column;
-    transition: border-color 0.3s, transform 0.3s;
-    position: relative;
-    border-radius: 4px;
-  }
-
-  .pathway-card::before {
-    content: ''; position: absolute; top: 0; left: 0; width: 0; height: 2px;
-    background: var(--accent); transition: width 0.4s ease;
-    border-radius: 4px 4px 0 0;
-  }
-  .pathway-card:hover { border-color: var(--accent); transform: translateY(-6px); }
-  .pathway-card--primary:hover { border-color: transparent; }
-  .pathway-card:hover::before { width: 100%; }
-
-  .pathway-label {
-    font-family: var(--font-mono);
+  .audience-tag {
+    font-family: "DM Mono", monospace;
     font-size: 10px;
-    color: var(--accent);
-    letter-spacing: var(--tracking-widest);
-    margin-bottom: var(--sp-4);
+    letter-spacing: 0.14em;
+    color: #e05c20;
+    border: 1px solid #e05c20;
+    padding: 2px 8px;
+    border-radius: 2px;
+  }
+  .audience-heading {
+    font-family: "Cormorant Garamond", serif;
+    font-weight: 700;
+    font-size: clamp(26px, 3vw, 36px);
+    color: #edf0ff;
+    line-height: 1.1;
+    margin-top: 16px;
+  }
+  .audience-body {
+    font-family: "DM Sans", sans-serif;
+    font-weight: 300;
+    font-size: 14px;
+    color: #8890bb;
+    line-height: 1.75;
+    margin-top: 12px;
+  }
+  .audience-cta {
+    font-family: "DM Mono", monospace;
+    font-size: 11px;
+    color: #e05c20;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 24px;
+    letter-spacing: 0.1em;
+  }
+  .audience-cta:hover {
+    text-decoration: underline;
+  }
+
+  /* ── STATS ── */
+  .lp-stats {
+    background: #07090f;
+    padding: clamp(64px, 8vw, 104px) 0;
+  }
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: #0f1220;
+    text-align: center;
+  }
+  @media (max-width: 640px) {
+    .stats-row {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  .stat-cell {
+    background: #07090f;
+    padding: 40px 20px;
+  }
+  .stat-number {
+    font-family: "DM Mono", monospace;
+    font-weight: 700;
+    font-size: clamp(40px, 5vw, 56px);
+    color: #e05c20;
     display: block;
   }
-  .pathway-title {
-    font-family: var(--font-display);
-    font-size: 24px;
-    color: var(--ink-1);
-    margin-bottom: var(--sp-4);
-    letter-spacing: -0.01em;
+  .stat-label {
+    font-family: "DM Sans", sans-serif;
+    font-weight: 300;
+    font-size: 12px;
+    color: #8890bb;
+    display: block;
+    margin-top: 8px;
+    letter-spacing: 0.06em;
   }
-  .pathway-desc {
-    font-family: var(--font-body);
-    font-size: 15px;
-    color: var(--ink-3);
-    line-height: 1.6;
-    margin-bottom: auto;
-    padding-bottom: var(--sp-8);
+
+  /* ── CLOSING CTA ── */
+  .lp-close {
+    background: #020408;
+    padding: clamp(80px, 11vw, 144px) 0;
   }
-  .pathway-action {
-    font-family: var(--font-mono);
+  .lp-close__inner {
+    text-align: center;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+  .lp-close__inner .section-body {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+  .lp-close__cta {
+    font-family: "DM Mono", monospace;
     font-size: 11px;
-    text-transform: uppercase;
+    color: #e05c20;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 28px;
     letter-spacing: 0.1em;
-    color: var(--ink-1);
-    display: flex;
-    align-items: center;
-    gap: var(--sp-2);
   }
-  .pathway-action .arrow { transition: transform 0.3s var(--ease-out-expo); }
-  .pathway-card:hover .pathway-action .arrow { transform: translateX(4px); }
-
-  /* ═══════════════════════════════════════════════════
-     RESPONSIVE
-     ═══════════════════════════════════════════════════ */
-  @media (max-width: 1024px) {
-    .sub-nav__links { display: none; }
-    .hero__inner { flex-direction: column; text-align: center; padding-top: 80px; }
-    .hero__left, .hero__right { width: 100%; }
-    .hero__right { justify-content: center; margin-top: var(--sp-9); }
-    .hero__ctas { justify-content: center; }
-    .hero__subline { margin-left: auto; margin-right: auto; text-align: center; }
-
-    .step__content { margin-left: 0; }
-    .step__watermark { font-size: 80px; opacity: 0.2; }
-    .step--alt { margin-inline: calc(-1 * var(--sp-5)); padding-inline: var(--sp-5); }
-    
-    .tracks__grid { grid-template-columns: repeat(2, 1fr); }
-    .pathway-grid { grid-template-columns: 1fr !important; }
-  }
-  @media (max-width: 768px) {
-    .section-header--split { flex-direction: column; align-items: flex-start; gap: var(--sp-4); }
-    .hero__ctas { flex-direction: column; gap: var(--sp-5); }
-    .tracks__grid { grid-template-columns: 1fr; }
-    .event-row { grid-template-columns: 1fr; }
-    .event-row__date { height: auto; padding: var(--sp-4); flex-direction: row; gap: var(--sp-3); justify-content: flex-start; }
-    .event-row__action { display: none; }
-    .final-cta__title { font-size: 40px; }
+  .lp-close__cta:hover {
+    text-decoration: underline;
   }
 </style>

@@ -1,8 +1,21 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
   import ScrollReveal from '$lib/components/animations/ScrollReveal.svelte';
   import Button from '$lib/components/ui/Button.svelte';
   import MorphingConstellation from '$lib/components/animations/MorphingConstellation.svelte';
   import { highlights, systemStatus, rotatingFacts } from '$lib/content/highlights';
+
+  onMount(() => {
+    // Intel feed: clone cards for infinite scroll
+    const track = document.querySelector('.briefs-track');
+    if (track && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      Array.from(track.children).forEach(child => {
+        const clone = child.cloneNode(true) as HTMLElement;
+        clone.setAttribute('aria-hidden', 'true');
+        track.appendChild(clone);
+      });
+    }
+  });
 </script>
 
 <svelte:head>
@@ -90,22 +103,30 @@
 </section>
 
 <!-- ═══════════════════════════════════════════════════
-     SECTION 2 — WHAT WE STAND FOR
+     SECTION 2 — MANIFESTO
+     ═══════════════════════════════════════════════════ -->
+<section class="manifesto-section">
+  <div class="manifesto-container">
+    <ScrollReveal delay={200} distance={20}>
+      <span class="manifesto-deco" aria-hidden="true">"</span>
+      <blockquote class="manifesto-quote">
+        <p>We believe every person carries something worth building.</p>
+        <p>A dream unrealised is not a failure of the person —<br>
+           it is a failure of the environment around them.</p>
+        <p class="manifesto-close">
+          Progeta Technologies is that environment, <strong>built differently.</strong>
+        </p>
+      </blockquote>
+      <div style="width: 48px; height: 1px; background: #222840; margin: 32px auto 0;"></div>
+    </ScrollReveal>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     SECTION 2B — BELIEF MARKERS
      ═══════════════════════════════════════════════════ -->
 <section class="vision">
   <div class="container--wide">
-    <div class="vision__quote-wrap">
-      <ScrollReveal delay={300} distance={20}>
-        <blockquote class="vision__quote">
-          <span class="vision__mark">“</span>
-          We believe every person carries something worth building.
-          A dream unrealised is not a failure of the person — 
-          it is a failure of the environment around them.
-          <em class="vision__emphasis">Progeta Technologies is that environment, built differently.</em>
-        </blockquote>
-      </ScrollReveal>
-    </div>
-
     <div class="vision__markers">
       <div class="vision__marker" style="--accent: var(--accent-launchpad)">
         <ScrollReveal delay={500} distance={10}>
@@ -380,10 +401,14 @@
       </ScrollReveal>
     </div>
     
-    <div class="manifesto-wrap">
+    <div class="truth-section-wrap">
       <ScrollReveal delay={700}>
-        <span class="manifesto-label">THE MANDATE</span>
-        <h2 class="manifesto-text">We are looking for those who seek the hard truth over the easy lie<span class="manifesto-period">.</span></h2>
+        <div class="truth-container">
+          <p class="truth-text-main">
+            We are looking for those who seek the hard truth over the easy lie.
+          </p>
+          <div class="truth-rule"></div>
+        </div>
       </ScrollReveal>
     </div>
   </div>
@@ -607,48 +632,55 @@
   }
 
   /* ═══════════════════════════════════════════════════
-     VISION (WHAT WE STAND FOR)
+     MANIFESTO SECTION
+     ═══════════════════════════════════════════════════ */
+  .manifesto-section {
+    background: #07090F;
+    padding: clamp(88px, 11vw, 148px) clamp(24px, 5vw, 72px);
+  }
+  .manifesto-container {
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+  }
+  .manifesto-deco {
+    position: absolute;
+    top: -20px;
+    left: -8px;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 200px;
+    font-weight: 700;
+    line-height: 1;
+    color: #0C0E18;
+    pointer-events: none;
+    user-select: none;
+    z-index: 0;
+  }
+  .manifesto-quote {
+    position: relative;
+    z-index: 1;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(19px, 2.3vw, 26px);
+    line-height: 1.85;
+    color: #EDF0FF;
+    margin: 0;
+    padding: 0;
+    border: none;
+  }
+  .manifesto-quote p { margin-bottom: 1.3em; }
+  .manifesto-quote p:last-child { margin-bottom: 0; }
+  .manifesto-close { font-style: normal; }
+  .manifesto-close strong { font-weight: 600; }
+
+  /* ═══════════════════════════════════════════════════
+     VISION (BELIEF MARKERS)
      ═══════════════════════════════════════════════════ */
   .vision {
     padding: var(--sp-12) 0;
     background: var(--surface-1);
-  }
-
-  .vision__quote-wrap {
-    max-width: 1000px;
-    margin: 0 auto var(--sp-11);
-    position: relative;
-    text-align: center;
-  }
-
-  .vision__mark {
-    font-family: var(--font-display);
-    font-size: 120px;
-    line-height: 1;
-    color: #424870;
-    opacity: 0.5;
-    position: absolute;
-    top: -20px;
-    left: -40px;
-  }
-
-  .vision__quote {
-    border-left: 2px solid #EDF0FF;
-    padding-left: 32px;
-    margin-left: 16px;
-    position: relative;
-    font-family: var(--font-display);
-    font-size: clamp(20px, 3vw, 32px);
-    line-height: var(--leading-tight);
-    color: var(--ink-1);
-    font-weight: 300;
-  }
-
-  .vision__emphasis {
-    display: block;
-    margin-top: var(--sp-6);
-    font-style: italic;
-    color: var(--ink-3);
   }
 
   .vision__markers {
@@ -1278,33 +1310,30 @@
     transform: translateX(4px);
   }
 
-  .manifesto-wrap {
+  .truth-section-wrap {
     text-align: center;
-    padding: 80px 0;
-    border-top: 1px solid #1C2033;
-    border-bottom: 1px solid #1C2033;
-    margin: 120px 0;
+    padding: clamp(80px, 10vw, 120px) 0;
+    margin: 60px 0;
   }
-
-  .manifesto-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.16em;
-    color: #424870;
-    display: block;
-    margin-bottom: 24px;
+  .truth-container {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
   }
-
-  .manifesto-text {
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 300;
-    font-size: clamp(24px, 4vw, 42px);
-    color: #F5F7FA;
+  .truth-text-main {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 700;
+    font-size: clamp(28px, 4.5vw, 58px);
+    line-height: 1.1;
     letter-spacing: -0.02em;
+    color: #EDF0FF;
+    margin: 0;
   }
-
-  .manifesto-period {
-    color: #5D3FD3;
+  .truth-rule {
+    width: 40px;
+    height: 2px;
+    background: #222840;
+    margin: 32px auto 0;
   }
 
   /* ═══════════════════════════════════════════════════

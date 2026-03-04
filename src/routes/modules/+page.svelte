@@ -1,403 +1,338 @@
 <script>
     import { allModules } from "$lib/content/modules";
-    import { fade, fly } from "svelte/transition";
+    import ScrollReveal from "$lib/components/animations/ScrollReveal.svelte";
 
-    let searchQuery = "";
-    let currentFilter = "all";
+    let typeFilter = "all";
+    let categoryFilter = "all";
+
+    const techCategories = [
+        "Offensive Security",
+        "GRC & Strategy",
+        "Future Tech & AI",
+    ];
+    const profCategories = [
+        "Communication",
+        "Management & Business",
+        "EQ & Leadership",
+    ];
+
+    $: visibleCategories =
+        typeFilter === "Soft Skills"
+            ? profCategories
+            : typeFilter === "Technical"
+              ? techCategories
+              : [];
+
+    $: showCategoryRow = typeFilter !== "all";
 
     $: filteredModules = allModules.filter((m) => {
-        const matchesType = currentFilter === "all" || m.type === currentFilter;
-        const matchesSearch =
-            m.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            (m.category &&
-                m.category.toLowerCase().includes(searchQuery.toLowerCase()));
-        return matchesType && matchesSearch;
+        const matchesType = typeFilter === "all" || m.type === typeFilter;
+        const matchesCat =
+            categoryFilter === "all" ||
+            (m.category && m.category === categoryFilter);
+        return matchesType && matchesCat;
     });
 
-    function setFilter(filter) {
-        currentFilter = filter;
+    function setType(t) {
+        typeFilter = t;
+        categoryFilter = "all";
+    }
+    function setCat(c) {
+        categoryFilter = c;
     }
 
     function getLink(mod) {
-        const typePath = mod.type === "Technical" ? "technical" : "soft_skills";
-        return `/modules/${typePath}/${mod.id}`;
+        return `/modules/${mod.type === "Technical" ? "technical" : "soft_skills"}/${mod.id}`;
     }
+
+    $: techCount = allModules.filter((m) => m.type === "Technical").length;
+    $: profCount = allModules.filter((m) => m.type === "Soft Skills").length;
 </script>
 
 <svelte:head>
-    <title>Module Catalog | Progeta</title>
+    <title>Module Catalog | LaunchPad — Progeta Technologies</title>
+    <meta
+        name="description"
+        content="{techCount} technical modules. {profCount} professional modules. The complete LaunchPad curriculum."
+    />
 </svelte:head>
 
-<!-- ZEN LAYOUT WRAPPER -->
-<div class="zen-page">
-    <div class="zen-container">
-        <!-- HEADER & OMNIBOX -->
-        <header class="catalog-header">
-            <h1 class="page-title">Capability Catalog</h1>
-            <p class="page-subtitle">
-                Explore our full range of technical and professional service
-                modules.
+<!-- ═══ HERO ═══ -->
+<section class="mod-hero">
+    <div class="container">
+        <ScrollReveal>
+            <span class="eyebrow">MODULE CATALOG · LAUNCHPAD</span>
+        </ScrollReveal>
+        <ScrollReveal delay={100}>
+            <h1 class="mod-hero__heading">
+                {techCount} technical modules.<br />{profCount} professional modules.<br
+                />Every one live.
+            </h1>
+        </ScrollReveal>
+        <ScrollReveal delay={200}>
+            <p class="mod-hero__body">
+                This is the full LaunchPad curriculum. Every module is a focused
+                unit of instruction. Modules combine into tracks — or you can
+                take individual workshops. Filter by category to find what you
+                need.
             </p>
+        </ScrollReveal>
+    </div>
+</section>
 
-            <div class="omnibox-wrapper">
-                <div class="omnibox">
-                    <svg
-                        class="search-icon"
-                        width="20"
-                        height="20"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                    >
-                        <circle cx="11" cy="11" r="8"></circle>
-                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                    </svg>
-                    <input
-                        type="text"
-                        placeholder="Search capabilities..."
-                        class="omni-input"
-                        bind:value={searchQuery}
-                    />
-                    <div class="filter-tabs">
-                        <button
-                            class="ft-btn {currentFilter === 'all'
-                                ? 'active'
-                                : ''}"
-                            on:click={() => setFilter("all")}>All</button
-                        >
-                        <button
-                            class="ft-btn {currentFilter === 'Technical'
-                                ? 'active'
-                                : ''}"
-                            on:click={() => setFilter("Technical")}
-                            >Technical</button
-                        >
-                        <button
-                            class="ft-btn {currentFilter === 'Soft Skills'
-                                ? 'active'
-                                : ''}"
-                            on:click={() => setFilter("Soft Skills")}
-                            >Professional</button
-                        >
-                    </div>
-                </div>
-            </div>
-        </header>
-
-        <!-- GRID -->
-        <div class="zen-grid">
-            {#if filteredModules.length === 0}
-                <div class="empty-state" in:fade>
-                    <p>No capabilities found matching "{searchQuery}".</p>
+<!-- ═══ CATALOG ═══ -->
+<section class="mod-catalog">
+    <div class="container--wide">
+        <div class="filter-bar">
+            <div class="filter-row">
+                {#each [{ key: "all", label: "ALL" }, { key: "Technical", label: "TECHNICAL" }, { key: "Soft Skills", label: "PROFESSIONAL" }] as btn}
                     <button
-                        class="btn-reset"
+                        class="filter-btn"
+                        class:active={typeFilter === btn.key}
+                        on:click={() => setType(btn.key)}>{btn.label}</button
+                    >
+                {/each}
+            </div>
+            {#if showCategoryRow}
+                <div class="filter-row">
+                    <button
+                        class="filter-btn"
+                        class:active={categoryFilter === "all"}
+                        on:click={() => setCat("all")}>ALL</button
+                    >
+                    {#each visibleCategories as cat}
+                        <button
+                            class="filter-btn"
+                            class:active={categoryFilter === cat}
+                            on:click={() => setCat(cat)}
+                            >{cat.toUpperCase()}</button
+                        >
+                    {/each}
+                </div>
+            {/if}
+        </div>
+
+        <div class="modules-grid">
+            {#each filteredModules as mod (mod.id + mod.type)}
+                <a href={getLink(mod)} class="module-card">
+                    <span class="module-card-cat">{mod.category || "Core"}</span
+                    >
+                    <span class="module-card-num">#{mod.id}</span>
+                    <h3 class="module-card-name">{mod.title}</h3>
+                    {#if mod.goal}
+                        <p class="module-card-desc">{mod.goal}</p>
+                    {/if}
+                    <span class="module-card-type">{mod.type}</span>
+                </a>
+            {/each}
+
+            {#if filteredModules.length === 0}
+                <div class="empty-state">
+                    <p>No modules match this filter.</p>
+                    <button
+                        class="reset-btn"
                         on:click={() => {
-                            searchQuery = "";
-                            currentFilter = "all";
+                            typeFilter = "all";
+                            categoryFilter = "all";
                         }}>Clear Filters</button
                     >
                 </div>
-            {:else}
-                {#each filteredModules as module, index (module.id + module.type)}
-                    <a
-                        href={getLink(module)}
-                        class="zen-card"
-                        in:fly={{
-                            y: 20,
-                            duration: 300,
-                            delay: Math.min(index * 50, 500),
-                        }}
-                    >
-                        <div class="card-content">
-                            <div class="card-top">
-                                <span class="c-category"
-                                    >{module.category || "Core"}</span
-                                >
-                                <span class="c-id">#{module.id}</span>
-                            </div>
-
-                            <h3 class="c-title">{module.title}</h3>
-
-                            {#if module.goal}
-                                <p class="c-desc">{module.goal}</p>
-                            {/if}
-
-                            <div class="c-footer">
-                                <span class="c-type">{module.type}</span>
-                                <span class="c-arrow">→</span>
-                            </div>
-                        </div>
-                    </a>
-                {/each}
             {/if}
         </div>
     </div>
-</div>
+</section>
 
 <style>
-    /* --- ZEN PROFESSIONAL THEME (LOCAL) --- */
-    :root {
-        --z-bg: #0f1115;
-        --z-card: #16181d;
-        --z-card-hover: #1c1e24;
-        --z-text: #f3f4f6;
-        --z-text-dim: #9ca3af;
-        --z-border: rgba(255, 255, 255, 0.06);
-        --z-accent: #3a3f4b;
-        --z-primary: #fff;
-
-        --font-body: "Inter", sans-serif;
-        --font-head: "Manrope", sans-serif;
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 clamp(20px, 4vw, 64px);
     }
-
-    .zen-page {
-        background-color: var(--z-bg);
-        color: var(--z-text);
-        font-family: var(--font-body);
-        min-height: 100vh;
-        width: 100%;
-        padding-top: 120px; /* Space for Fixed Nav */
-        padding-bottom: 80px;
-    }
-
-    .zen-container {
+    .container--wide {
         max-width: 1400px;
         margin: 0 auto;
-        padding: 0 40px;
+        padding: 0 clamp(20px, 4vw, 48px);
     }
-
-    /* HEADER */
-    .catalog-header {
-        text-align: center;
-        margin-bottom: 60px;
-    }
-
-    .page-title {
-        font-family: var(--font-head);
-        font-size: 3rem;
-        font-weight: 700;
-        letter-spacing: -0.02em;
+    .eyebrow {
+        font-family: "DM Mono", monospace;
+        font-size: 10px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: #424870;
+        display: block;
         margin-bottom: 16px;
-        color: var(--z-primary);
     }
 
-    .page-subtitle {
-        font-size: 1.1rem;
-        color: var(--z-text-dim);
-        margin-bottom: 40px;
-    }
-
-    /* OMNIBOX */
-    .omnibox-wrapper {
+    /* ── HERO ── */
+    .mod-hero {
+        min-height: 44vh;
         display: flex;
-        justify-content: center;
+        align-items: flex-end;
+        background: #020408;
+        padding: clamp(80px, 11vw, 144px) 0 clamp(48px, 6vw, 80px);
     }
-    .omnibox {
-        background: var(--z-card);
-        border: 1px solid var(--z-border);
-        border-radius: 100px;
-        padding: 8px 8px 8px 24px;
-        display: flex;
-        align-items: center;
-        width: 100%;
-        max-width: 700px;
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-        transition:
-            box-shadow 0.3s,
-            border-color 0.3s;
+    .mod-hero__heading {
+        font-family: "Cormorant Garamond", serif;
+        font-weight: 700;
+        font-size: clamp(40px, 5.5vw, 64px);
+        line-height: 0.93;
+        color: #edf0ff;
+        letter-spacing: -0.03em;
+        margin-bottom: 16px;
     }
-    .omnibox:focus-within {
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-        border-color: rgba(255, 255, 255, 0.15);
-    }
-
-    .search-icon {
-        color: var(--z-text-dim);
-        margin-right: 12px;
+    .mod-hero__body {
+        font-family: "DM Sans", sans-serif;
+        font-weight: 300;
+        font-size: 15px;
+        color: #8890bb;
+        max-width: 480px;
+        line-height: 1.75;
     }
 
-    .omni-input {
-        background: transparent;
-        border: none;
-        color: var(--z-text);
-        font-size: 1rem;
-        flex-grow: 1;
-        outline: none;
-        font-family: var(--font-body);
-    }
-    .omni-input::placeholder {
-        color: #555;
+    /* ── CATALOG ── */
+    .mod-catalog {
+        background: #020408;
+        padding: clamp(40px, 5vw, 64px) 0 clamp(80px, 11vw, 144px);
     }
 
-    .filter-tabs {
-        display: flex;
-        gap: 4px;
-        background: rgba(0, 0, 0, 0.2);
-        padding: 4px;
-        border-radius: 100px;
-        margin-left: 12px;
-    }
-    .ft-btn {
-        background: transparent;
-        border: none;
-        color: var(--z-text-dim);
-        font-size: 0.85rem;
-        font-weight: 600;
-        padding: 8px 16px;
-        border-radius: 100px;
-        cursor: pointer;
-        transition: all 0.2s;
-        font-family: var(--font-body);
-    }
-    .ft-btn:hover {
-        color: var(--z-text);
-    }
-    .ft-btn.active {
-        background: var(--z-accent);
-        color: #fff;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-    }
-
-    /* GRID */
-    .zen-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-        gap: 24px;
-    }
-
-    /* ZEN CARD */
-    .zen-card {
-        background: var(--z-card);
-        border: 1px solid var(--z-border);
-        border-radius: 20px;
-        padding: 28px;
-        text-decoration: none;
-        transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+    .filter-bar {
         display: flex;
         flex-direction: column;
+        gap: 10px;
+        margin-bottom: 40px;
+    }
+    .filter-row {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+    }
+    .filter-btn {
+        font-family: "DM Mono", monospace;
+        font-size: 10px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        padding: 7px 14px;
+        border: 1px solid #171b30;
+        border-radius: 3px;
+        background: transparent;
+        color: #424870;
+        cursor: pointer;
+        transition: all 0.18s;
+    }
+    .filter-btn:hover {
+        border-color: #e05c20;
+        color: #edf0ff;
+    }
+    .filter-btn.active {
+        border-color: #e05c20;
+        color: #edf0ff;
+        background: rgba(224, 92, 32, 0.08);
+    }
+
+    .modules-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1px;
+        background: #0f1220;
+    }
+    @media (max-width: 960px) {
+        .modules-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+    @media (max-width: 480px) {
+        .modules-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .module-card {
+        background: #020408;
+        padding: 24px 22px;
+        text-decoration: none;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        transition: background 0.18s;
         position: relative;
         overflow: hidden;
     }
-    .zen-card:hover {
-        transform: translateY(-4px);
-        background: var(--z-card-hover);
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-        border-color: rgba(255, 255, 255, 0.1);
+    .module-card:hover {
+        background: #07090f;
+    }
+    .module-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0;
+        height: 1px;
+        background: #e05c20;
+        transition: width 0.4s cubic-bezier(0.76, 0, 0.24, 1);
+    }
+    .module-card:hover::before {
+        width: 100%;
     }
 
-    .card-top {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 20px;
-        font-size: 0.75rem;
+    .module-card-cat {
+        font-family: "DM Mono", monospace;
+        font-size: 9px;
+        letter-spacing: 0.12em;
         text-transform: uppercase;
-        letter-spacing: 0.05em;
-        font-weight: 600;
+        color: #424870;
     }
-    .c-category {
-        color: var(--z-text-dim);
+    .module-card-num {
+        font-family: "DM Mono", monospace;
+        font-size: 9px;
+        letter-spacing: 0.1em;
+        color: #1e2440;
     }
-    .c-id {
-        color: #555;
-    }
-
-    .c-title {
-        font-family: var(--font-head);
-        font-size: 1.25rem;
-        font-weight: 700;
-        color: var(--z-primary);
-        margin-bottom: 12px;
+    .module-card-name {
+        font-family: "DM Sans", sans-serif;
+        font-weight: 500;
+        font-size: 15px;
+        color: #edf0ff;
         line-height: 1.3;
     }
-
-    .c-desc {
-        font-size: 0.95rem;
-        color: var(--z-text-dim);
+    .module-card-desc {
+        font-family: "DM Sans", sans-serif;
+        font-weight: 300;
+        font-size: 13px;
         line-height: 1.6;
-        margin-bottom: 24px;
-        display: -webkit-box;
-        -webkit-line-clamp: 3;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-        flex-grow: 1;
+        color: #8890bb;
+        flex: 1;
     }
-
-    .c-footer {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding-top: 20px;
-        border-top: 1px solid var(--z-border);
-        margin-top: auto;
-    }
-    .c-type {
-        font-size: 0.75rem;
-        color: #666;
-        font-weight: 600;
+    .module-card-type {
+        font-family: "DM Mono", monospace;
+        font-size: 9px;
+        letter-spacing: 0.1em;
         text-transform: uppercase;
-    }
-    .c-arrow {
-        color: var(--z-primary);
-        opacity: 0;
-        transform: translateX(-10px);
-        transition: all 0.3s;
-        font-size: 1.2rem;
-    }
-    .zen-card:hover .c-arrow {
-        opacity: 1;
-        transform: translateX(0);
+        padding: 2px 7px;
+        border: 1px solid #0f1220;
+        border-radius: 3px;
+        color: #424870;
+        align-self: flex-start;
+        margin-top: 4px;
     }
 
-    /* EMPTY STATE */
     .empty-state {
         grid-column: 1 / -1;
         text-align: center;
-        padding: 80px 0;
-        color: var(--z-text-dim);
+        padding: 80px 20px;
+        background: #020408;
+        color: #8890bb;
+        font-family: "DM Sans", sans-serif;
     }
-    .btn-reset {
+    .reset-btn {
         margin-top: 16px;
+        font-family: "DM Mono", monospace;
+        font-size: 10px;
+        letter-spacing: 0.12em;
         background: transparent;
-        border: 1px solid var(--z-border);
-        color: var(--z-primary);
+        border: 1px solid #e05c20;
+        color: #e05c20;
         padding: 8px 16px;
-        border-radius: 100px;
+        border-radius: 3px;
         cursor: pointer;
-        transition: 0.2s;
-    }
-    .btn-reset:hover {
-        background: rgba(255, 255, 255, 0.05);
-    }
-
-    /* RESPONSIVE */
-    @media (max-width: 768px) {
-        .page-title {
-            font-size: 2rem;
-        }
-        .omnibox {
-            flex-direction: column;
-            padding: 12px;
-            border-radius: 24px;
-        }
-        .omni-input {
-            width: 100%;
-            margin-bottom: 12px;
-            padding: 0 12px;
-        }
-        .filter-tabs {
-            margin-left: 0;
-            width: 100%;
-            justify-content: space-between;
-        }
-        .ft-btn {
-            flex-grow: 1;
-            padding: 8px;
-            font-size: 0.75rem;
-            text-align: center;
-        }
-        .zen-container {
-            padding: 0 20px;
-        }
     }
 </style>

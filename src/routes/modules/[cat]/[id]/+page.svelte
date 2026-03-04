@@ -2,13 +2,14 @@
     import { page } from "$app/stores";
     import { technicalModules, softSkillsModules } from "$lib/content/modules";
     import { careerTracks } from "$lib/content/jobs";
+    import ScrollReveal from "$lib/components/animations/ScrollReveal.svelte";
 
     $: cat = $page.params.cat;
     $: id = $page.params.id;
     $: list = cat === "technical" ? technicalModules : softSkillsModules;
     $: module = list ? list.find((m) => String(m.id) === String(id)) : null;
 
-    // FIND RELATED TRACKS
+    /* Related tracks */
     let relatedTracks = [];
     $: if (module) {
         relatedTracks = careerTracks.filter((track) =>
@@ -18,7 +19,7 @@
         );
     }
 
-    // SYLLABUS LOGIC
+    /* Syllabus */
     $: syllabus = module?.syllabus || [
         {
             title: "Core Concepts",
@@ -30,419 +31,443 @@
         },
     ];
 
-    // TOOLS LOGIC
+    /* Tools */
     $: toolList =
         module?.toolDetails ||
         (module?.tools
             ? module.tools
                   .split(/[,.]/)
                   .filter((t) => t.trim().length > 0)
-                  .map((t) => ({ name: t.trim(), desc: "Standard Toolkit" }))
+                  .map((t) => ({ name: t.trim(), desc: "" }))
             : []);
 
-    // SKILLS LOGIC
+    /* Skills as outcomes */
     $: skillsList = module?.skills
         ? module.skills.split(".").filter((s) => s.trim().length > 0)
         : [];
-
-    // CLEAN TEXT HELPER (Removes (...) content)
-    const cleanText = (text) => text.replace(/\s*\(.*?\)\s*/g, "").trim();
 </script>
 
 <svelte:head>
-    <title>{module ? cleanText(module.title) : "Details"} | Progeta</title>
+    <title>{module ? module.title : "Module"} | Progeta Technologies</title>
 </svelte:head>
 
 {#if module}
-    <div class="zen-layout">
-        <!-- ATMOSPHERE -->
-        <div class="hero-glow"></div>
-
-        <div class="zen-container">
-            <!-- BREADCRUMB -->
-            <div class="nav-bar">
-                <a href="/modules" class="nav-link">← RETURN TO BASE</a>
+    <section class="md-page">
+        <div class="container">
+            <!-- HEADER -->
+            <div class="module-header">
+                <span class="module-watermark" aria-hidden="true"
+                    >#{module.id}</span
+                >
+                <div class="module-header-content">
+                    <ScrollReveal>
+                        <span class="breadcrumb"
+                            >LAUNCHPAD → MODULES → {cat.toUpperCase()} → #{module.id}</span
+                        >
+                        <span class="cat-tag">{module.category || "Core"}</span>
+                        <h1 class="md-title">{module.title}</h1>
+                        <p class="md-goal">
+                            {module.goal || "No objective defined."}
+                        </p>
+                    </ScrollReveal>
+                </div>
             </div>
 
-            <!-- IMMERSIVE HERO -->
-            <header class="detail-hero">
-                <span class="dh-super">{module.category || "Capability"}</span>
-                <h1>{cleanText(module.title)}</h1>
-                <p class="hero-goal">
-                    {module.goal || "No objective defined."}
-                </p>
+            <!-- BODY -->
+            <div class="md-body">
+                <!-- Panel 1: What you will learn -->
+                <div class="md-section">
+                    <ScrollReveal>
+                        <span class="eyebrow">ABOUT THIS MODULE</span>
+                        <h2 class="section-heading">
+                            What you will learn in this module.
+                        </h2>
+                        <p class="md-prose">
+                            {module.goal ||
+                                "This module covers the fundamentals of the subject area."}
+                            {module.skills || ""}
+                        </p>
+                    </ScrollReveal>
+                </div>
 
-                <!-- INCLUDED IN (Moved from Sidebar) -->
-                {#if relatedTracks.length > 0}
-                    <div class="dh-tracks">
-                        <span class="track-label">INCLUDED IN:</span>
-                        <div class="track-list">
-                            {#each relatedTracks as track}
-                                <a
-                                    href="/tracks/{track.id}"
-                                    class="mini-track-pill"
-                                >
-                                    {cleanText(track.title)}
-                                </a>
+                <!-- Panel 2: Outcomes -->
+                {#if skillsList.length > 0}
+                    <div class="md-section md-section--surface">
+                        <ScrollReveal>
+                            <span class="eyebrow">OUTCOMES</span>
+                            <h2 class="section-heading">
+                                What you will be able to do.
+                            </h2>
+                        </ScrollReveal>
+                        <div class="outcomes-grid">
+                            {#each skillsList as skill, i}
+                                <ScrollReveal delay={i * 60}>
+                                    <div class="outcome-item">
+                                        <div class="outcome-bullet"></div>
+                                        <span class="outcome-text"
+                                            >{skill.trim()}</span
+                                        >
+                                    </div>
+                                </ScrollReveal>
                             {/each}
                         </div>
                     </div>
                 {/if}
-            </header>
 
-            <!-- MAIN GRID -->
-            <div class="detail-grid">
-                <!-- LEFT: ARSENAL & SKILLS (Swapped) -->
-                <aside class="col-side">
-                    <!-- TOOLS -->
-                    <section class="zen-card tool-card">
-                        <h3>Tactical Arsenal</h3>
-                        {#if toolList.length > 0}
-                            <div class="tool-list-clean">
-                                {#each toolList as tool}
-                                    <div class="tool-item">
-                                        <strong>{cleanText(tool.name)}</strong>
-                                    </div>
-                                {/each}
-                            </div>
-                        {:else}
-                            <p class="empty-text">
-                                No specific tools required.
-                            </p>
-                        {/if}
-                    </section>
-
-                    <!-- SKILLS GAINED -->
-                    {#if skillsList.length > 0}
-                        <section class="zen-card skill-card">
-                            <h3>Skills Acquired</h3>
-                            <ul class="skill-list">
-                                {#each skillsList as skill}
-                                    <li>{skill}</li>
-                                {/each}
-                            </ul>
-                        </section>
-                    {/if}
-                </aside>
-
-                <!-- RIGHT: TIMELINE SYLLABUS -->
-                <div class="col-main">
-                    <section class="zen-card">
-                        <h2>Operational Phase</h2>
-                        <div class="timeline-container">
-                            {#each syllabus as item, i}
-                                <div class="timeline-node">
-                                    <div class="node-marker">
-                                        <div class="node-dot"></div>
-                                        <div class="node-line"></div>
-                                    </div>
-                                    <div class="node-content">
-                                        <span class="node-idx">0{i + 1}</span>
-                                        <h3>{cleanText(item.title)}</h3>
-                                        <p>{item.desc}</p>
-                                    </div>
-                                </div>
+                <!-- Panel 3: Tools -->
+                {#if toolList.length > 0}
+                    <div class="md-section">
+                        <ScrollReveal>
+                            <span class="eyebrow">TOOLS & STACK</span>
+                            <h2 class="section-heading">
+                                What you will work with.
+                            </h2>
+                        </ScrollReveal>
+                        <div class="tools-grid">
+                            {#each toolList as tool}
+                                <div class="tool-chip">{tool.name}</div>
                             {/each}
                         </div>
-                    </section>
+                    </div>
+                {/if}
+
+                <!-- Panel 4: Metadata & Links -->
+                <div class="md-section md-section--surface">
+                    <div class="md-meta-grid">
+                        <div class="md-meta-col">
+                            <ScrollReveal>
+                                <span class="eyebrow">MODULE INFO</span>
+                                <div class="meta-rows">
+                                    <div class="meta-row">
+                                        <span class="meta-label">TYPE</span
+                                        ><span class="meta-value"
+                                            >{module.type}</span
+                                        >
+                                    </div>
+                                    <div class="meta-row">
+                                        <span class="meta-label">CATEGORY</span
+                                        ><span class="meta-value"
+                                            >{module.category || "Core"}</span
+                                        >
+                                    </div>
+                                    <div class="meta-row">
+                                        <span class="meta-label">FORMAT</span
+                                        ><span class="meta-value"
+                                            >Self-paced with live review</span
+                                        >
+                                    </div>
+                                </div>
+                            </ScrollReveal>
+                        </div>
+                        <div class="md-meta-col">
+                            <ScrollReveal delay={100}>
+                                <span class="eyebrow">INCLUDED IN</span>
+                                {#if relatedTracks.length > 0}
+                                    <ul class="track-links">
+                                        {#each relatedTracks as track}
+                                            <li>
+                                                <a href="/tracks/{track.id}"
+                                                    >{track.title} →</a
+                                                >
+                                            </li>
+                                        {/each}
+                                    </ul>
+                                {:else}
+                                    <p class="meta-note">
+                                        This module is available as a standalone
+                                        workshop.
+                                    </p>
+                                {/if}
+                                <a
+                                    href="/launchpad/workshops"
+                                    class="workshop-cta"
+                                    >Take this as a standalone workshop →</a
+                                >
+                            </ScrollReveal>
+                        </div>
+                    </div>
                 </div>
             </div>
+
+            <div class="md-back">
+                <a href="/modules" class="back-link">← Back to module catalog</a
+                >
+            </div>
         </div>
-    </div>
+    </section>
 {:else}
-    <div class="layout-error">
-        <h1>Capability Not Found</h1>
-        <a href="/modules">Return to Catalog</a>
+    <div class="md-404">
+        <h1>Module not found.</h1>
+        <a href="/modules">← Back to catalog</a>
     </div>
 {/if}
 
 <style>
-    /* --- IMMERSIVE TIMELINE (MARK XVI - REVISION A) --- */
-    :root {
-        --z-bg: #0f1115;
-        --z-card: #14161b;
-        --z-text: #e5e7eb;
-        --z-text-dim: #9ca3af;
-        --z-border: rgba(255, 255, 255, 0.08);
-        --z-accent: #3b82f6; /* Subtle Blue */
-        --font-body: "Inter", sans-serif;
-        --font-head: "Manrope", sans-serif;
-        --radius: 20px;
-    }
-
-    .zen-layout {
-        background-color: var(--z-bg);
-        color: var(--z-text);
-        font-family: var(--font-body);
-        min-height: 100vh;
-        width: 100%;
-        position: relative;
-        overflow-x: hidden;
-    }
-
-    /* ATMOSPHERE */
-    .hero-glow {
-        position: absolute;
-        top: -200px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 1000px;
-        height: 800px;
-        background: radial-gradient(
-            circle,
-            rgba(59, 130, 246, 0.08) 0%,
-            rgba(15, 17, 21, 0) 70%
-        );
-        z-index: 0;
-        pointer-events: none;
-    }
-
-    .zen-container {
+    .container {
         max-width: 1100px;
         margin: 0 auto;
-        padding: 60px 40px;
+        padding: 0 clamp(20px, 4vw, 64px);
+    }
+    .eyebrow {
+        font-family: "DM Mono", monospace;
+        font-size: 10px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: #424870;
+        display: block;
+        margin-bottom: 16px;
+    }
+    .section-heading {
+        font-family: "Cormorant Garamond", serif;
+        font-weight: 700;
+        font-size: clamp(24px, 3vw, 36px);
+        color: #edf0ff;
+        margin-bottom: 16px;
+    }
+
+    .md-page {
+        background: #020408;
+        padding: clamp(120px, 14vw, 180px) 0 clamp(80px, 11vw, 144px);
+    }
+
+    /* ── HEADER ── */
+    .module-header {
+        position: relative;
+        padding-bottom: 48px;
+        border-bottom: 1px solid #0f1220;
+        margin-bottom: 64px;
+    }
+    .module-watermark {
+        position: absolute;
+        top: -20px;
+        right: 0;
+        font-family: "DM Mono", monospace;
+        font-weight: 700;
+        font-size: 120px;
+        color: #07090f;
+        line-height: 1;
+        pointer-events: none;
+        user-select: none;
+        z-index: 0;
+    }
+    .module-header-content {
         position: relative;
         z-index: 1;
     }
 
-    /* NAV */
-    .nav-bar {
-        text-align: center;
-        margin-bottom: 40px;
-    }
-    .nav-link {
-        font-family: "JetBrains Mono", monospace;
-        font-size: 0.75rem;
-        color: var(--z-text-dim);
-        text-decoration: none;
-        letter-spacing: 0.1em;
-        border: 1px solid var(--z-border);
-        padding: 8px 16px;
-        border-radius: 100px;
-        transition: 0.2s;
-    }
-    .nav-link:hover {
-        color: #fff;
-        border-color: rgba(255, 255, 255, 0.3);
-        background: rgba(255, 255, 255, 0.05);
-    }
-
-    /* HERO */
-    .detail-hero {
-        text-align: center;
-        margin: 0 auto 80px;
-        max-width: 800px;
-    }
-    .dh-super {
+    .breadcrumb {
+        font-family: "DM Mono", monospace;
+        font-size: 10px;
+        color: #1e2440;
+        letter-spacing: 0.12em;
         display: block;
-        font-family: var(--font-head);
-        font-weight: 700;
-        text-transform: uppercase;
-        color: var(--z-accent);
         margin-bottom: 16px;
-        font-size: 0.85rem;
-        letter-spacing: 0.05em;
     }
-    h1 {
-        font-family: var(--font-head);
-        font-size: 3.5rem;
-        font-weight: 800;
+    .cat-tag {
+        font-family: "DM Mono", monospace;
+        font-size: 10px;
+        color: #e05c20;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        display: block;
+        margin-bottom: 16px;
+    }
+    .md-title {
+        font-family: "Cormorant Garamond", serif;
+        font-weight: 700;
+        font-size: clamp(32px, 4.5vw, 56px);
+        line-height: 1;
+        color: #edf0ff;
         letter-spacing: -0.03em;
-        line-height: 1.1;
-        margin-bottom: 24px;
-        color: #fff;
-        background: linear-gradient(180deg, #fff 0%, #aaa 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
+        margin-bottom: 16px;
     }
-    .hero-goal {
-        font-size: 1.25rem;
-        line-height: 1.6;
-        color: var(--z-text-dim);
-        margin-bottom: 32px;
+    .md-goal {
+        font-family: "DM Sans", sans-serif;
+        font-weight: 300;
+        font-size: 17px;
+        color: #8890bb;
+        line-height: 1.7;
+        max-width: 600px;
     }
 
-    .dh-tracks {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 12px;
+    /* ── BODY SECTIONS ── */
+    .md-section {
+        padding: clamp(48px, 6vw, 80px) 0;
+    }
+    .md-section--surface {
+        background: #07090f;
+        margin: 0 calc(-1 * clamp(20px, 4vw, 64px));
+        padding-left: clamp(20px, 4vw, 64px);
+        padding-right: clamp(20px, 4vw, 64px);
+    }
+
+    .md-prose {
+        font-family: "DM Sans", sans-serif;
+        font-weight: 300;
+        font-size: 15px;
+        color: #8890bb;
+        line-height: 1.8;
+        max-width: 680px;
+    }
+
+    /* Outcomes */
+    .outcomes-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1px;
+        background: #0f1220;
         margin-top: 32px;
     }
-    .track-label {
-        font-size: 0.7rem;
-        color: var(--z-text-dim);
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        opacity: 0.6;
+    @media (max-width: 640px) {
+        .outcomes-grid {
+            grid-template-columns: 1fr;
+        }
     }
-    .track-list {
+    .outcome-item {
+        background: #07090f;
+        padding: 20px 24px;
         display: flex;
-        gap: 10px;
+        gap: 14px;
+        align-items: flex-start;
+    }
+    .outcome-bullet {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #e05c20;
+        flex-shrink: 0;
+        margin-top: 6px;
+    }
+    .outcome-text {
+        font-family: "DM Sans", sans-serif;
+        font-weight: 300;
+        font-size: 14px;
+        color: #edf0ff;
+        line-height: 1.6;
+    }
+
+    /* Tools */
+    .tools-grid {
+        display: flex;
         flex-wrap: wrap;
-        justify-content: center;
+        gap: 8px;
+        margin-top: 24px;
     }
-    .mini-track-pill {
-        font-size: 0.8rem;
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid var(--z-border);
+    .tool-chip {
+        font-family: "DM Mono", monospace;
+        font-size: 11px;
+        letter-spacing: 0.08em;
         padding: 6px 14px;
-        border-radius: 100px;
-        color: #fff;
-        text-decoration: none;
-        transition: 0.2s;
-    }
-    .mini-track-pill:hover {
-        background: rgba(255, 255, 255, 0.1);
-        border-color: rgba(255, 255, 255, 0.2);
+        border: 1px solid #171b30;
+        border-radius: 3px;
+        color: #8890bb;
     }
 
-    /* GRID - SWAPPED: Left is Tools(1fr), Right is Syllabus(1.4fr for space) */
-    .detail-grid {
+    /* Meta */
+    .md-meta-grid {
         display: grid;
-        grid-template-columns: 1fr 1.4fr;
-        gap: 60px;
-        align-items: start;
+        grid-template-columns: 1fr 1fr;
+        gap: clamp(32px, 4vw, 64px);
     }
-
-    /* LEFT SIDEBAR (STICKY) */
-    .col-side {
-        position: sticky;
-        top: 40px;
+    @media (max-width: 640px) {
+        .md-meta-grid {
+            grid-template-columns: 1fr;
+        }
     }
-
-    /* CARD STYLING */
-    .zen-card {
-        margin-bottom: 40px;
-    }
-    .zen-card h2,
-    .zen-card h3 {
-        font-family: var(--font-head);
-        font-size: 1.1rem;
-        color: #fff;
-        margin-bottom: 24px;
-        letter-spacing: -0.01em;
-    }
-
-    /* TIMELINE */
-    .timeline-container {
-        padding-left: 10px;
-    }
-    .timeline-node {
+    .meta-rows {
         display: flex;
-        gap: 24px;
-        position: relative;
-        padding-bottom: 40px;
+        flex-direction: column;
     }
-    .timeline-node:last-child {
-        padding-bottom: 0;
+    .meta-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        padding: 10px 0;
+        border-bottom: 1px solid #0f1220;
     }
-    .timeline-node:last-child .node-line {
-        display: none;
+    .meta-row:last-child {
+        border-bottom: none;
+    }
+    .meta-label {
+        font-family: "DM Mono", monospace;
+        font-size: 10px;
+        letter-spacing: 0.14em;
+        color: #424870;
+    }
+    .meta-value {
+        font-family: "DM Sans", sans-serif;
+        font-size: 14px;
+        color: #edf0ff;
     }
 
-    .node-marker {
+    .track-links {
+        list-style: none;
+        padding: 0;
+    }
+    .track-links li {
+        margin-bottom: 10px;
+    }
+    .track-links a {
+        font-family: "DM Sans", sans-serif;
+        font-size: 14px;
+        color: #edf0ff;
+        text-decoration: none;
+    }
+    .track-links a:hover {
+        color: #e05c20;
+    }
+    .meta-note {
+        font-family: "DM Sans", sans-serif;
+        font-size: 14px;
+        color: #8890bb;
+    }
+    .workshop-cta {
+        display: inline-block;
+        margin-top: 20px;
+        font-family: "DM Mono", monospace;
+        font-size: 10px;
+        letter-spacing: 0.1em;
+        color: #e05c20;
+        text-decoration: none;
+    }
+    .workshop-cta:hover {
+        text-decoration: underline;
+    }
+
+    .md-back {
+        margin-top: 48px;
+    }
+    .back-link {
+        font-family: "DM Mono", monospace;
+        font-size: 11px;
+        color: #424870;
+        text-decoration: none;
+        letter-spacing: 0.1em;
+    }
+    .back-link:hover {
+        color: #e05c20;
+    }
+
+    /* 404 */
+    .md-404 {
+        min-height: 60vh;
         display: flex;
         flex-direction: column;
         align-items: center;
-        width: 20px;
-        flex-shrink: 0;
+        justify-content: center;
+        background: #020408;
+        gap: 16px;
     }
-    .node-dot {
-        width: 12px;
-        height: 12px;
-        background: var(--z-accent);
-        border-radius: 50%;
-        box-shadow: 0 0 10px rgba(59, 130, 246, 0.4);
-        margin-top: 6px;
+    .md-404 h1 {
+        font-family: "Cormorant Garamond", serif;
+        font-weight: 700;
+        font-size: 36px;
+        color: #edf0ff;
     }
-    .node-line {
-        width: 2px;
-        flex-grow: 1;
-        background: rgba(59, 130, 246, 0.2);
-        margin-top: 4px;
-    }
-
-    .node-content {
-        padding-top: 0;
-    }
-    .node-idx {
-        font-family: "JetBrains Mono", monospace;
-        font-size: 0.75rem;
-        color: var(--z-accent);
-        display: block;
-        margin-bottom: 4px;
-        opacity: 0.8;
-    }
-    .node-content h3 {
-        margin: 0 0 8px 0;
-        font-size: 1.1rem;
-        color: #fff;
-    }
-    .node-content p {
-        margin: 0;
-        font-size: 0.95rem;
-        color: var(--z-text-dim);
-        line-height: 1.6;
-    }
-
-    /* TOOL LIST CLEAN */
-    .tool-list-clean {
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-    }
-    .tool-item {
-        background: rgba(255, 255, 255, 0.03);
-        border: 1px solid var(--z-border);
-        border-radius: 8px;
-        padding: 12px 16px;
-        color: #fff;
-        font-size: 0.95rem;
-    }
-
-    /* SKILL LIST */
-    .skill-list {
-        padding-left: 20px;
-        color: var(--z-text-dim);
-        line-height: 1.6;
-        font-size: 0.95rem;
-    }
-    .skill-list li {
-        margin-bottom: 8px;
-    }
-
-    .empty-text {
-        font-style: italic;
-        color: var(--z-text-dim);
-        opacity: 0.6;
-    }
-
-    /* RESPONSIVE */
-    @media (max-width: 900px) {
-        .detail-grid {
-            grid-template-columns: 1fr;
-        }
-        .col-side {
-            position: static;
-            order: 2;
-        } /* Put tools below syllabus on mobile? Or above? */
-        .col-main {
-            order: 1;
-        }
-        h1 {
-            font-size: 2.5rem;
-        }
-        .hero-glow {
-            width: 100%;
-            top: -100px;
-        }
-        .nav-bar {
-            text-align: left;
-        }
-        .detail-hero {
-            text-align: left;
-            margin-bottom: 60px;
-        }
+    .md-404 a {
+        font-family: "DM Mono", monospace;
+        font-size: 11px;
+        color: #e05c20;
+        text-decoration: none;
     }
 </style>
