@@ -31,15 +31,7 @@ export async function GET() {
 
     // Dynamic routes
     const trackUrls = careerTracks.map((t: any) => `/tracks/${t.id}`);
-    const gameUrls = [
-        '/simulations/cmd_hero',
-        '/simulations/linux-labyrinth',
-        '/simulations/packet-hunter',
-        '/simulations/incident-zero',
-        '/simulations/social-vector',
-        '/simulations/threat-map',
-        '/simulations/the-board'
-    ]; // Assuming these are the valid hardcoded simulation routes based on previous inspection
+    const gameUrls = games.map((g: any) => `/simulations/${g.id}`);
 
     const techModuleUrls = technicalModules.map((m: any) => `/modules/technical/${m.id}`);
     const profModuleUrls = softSkillsModules.map((m: any) => `/modules/soft_skills/${m.id}`);

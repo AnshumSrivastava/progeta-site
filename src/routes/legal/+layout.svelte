@@ -1,12 +1,9 @@
 <script lang="ts">
     import SiteNav from "$lib/components/site/SiteNav.svelte";
     import SiteFooter from "$lib/components/site/SiteFooter.svelte";
-    import BrandEngine from "$lib/components/decor/BrandEngine.svelte";
 </script>
 
 <div class="legal-layout">
-    <BrandEngine opacity={0.03} />
-
     <header class="legal-nav">
         <SiteNav />
     </header>
