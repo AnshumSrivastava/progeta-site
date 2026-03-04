@@ -11,7 +11,7 @@
             diffLabel: "INTERMEDIATE",
             tools: ["cd", "ls", "sudo", "chmod", "grep", "find"],
             cta: "LAUNCH LAB →",
-            href: "/games/linux-labyrinth",
+            href: "/simulations/linux-labyrinth",
         },
         {
             status: "LIVE",
@@ -22,7 +22,7 @@
             diffLabel: "ADVANCED",
             tools: ["Wireshark", "tcpdump", "PCAP analysis"],
             cta: "LAUNCH LAB →",
-            href: "/games/packet-hunter",
+            href: "/simulations/packet-hunter",
         },
         {
             status: "LIVE",
@@ -33,7 +33,7 @@
             diffLabel: "INTERMEDIATE",
             tools: ["SIEM", "Playbooks", "Log analysis"],
             cta: "LAUNCH LAB →",
-            href: "/games/incident-zero",
+            href: "/simulations/incident-zero",
         },
         {
             status: "BETA",
@@ -44,7 +44,7 @@
             diffLabel: "BEGINNER",
             tools: ["Email analysis", "Header inspection", "OSINT"],
             cta: "LAUNCH BETA →",
-            href: "/games/social-vector",
+            href: "/simulations/social-vector",
         },
         {
             status: "BETA",
@@ -55,7 +55,7 @@
             diffLabel: "ADVANCED",
             tools: ["IoC analysis", "MITRE ATT&CK", "Threat profiling"],
             cta: "LAUNCH BETA →",
-            href: "/games/threat-map",
+            href: "/simulations/threat-map",
         },
         {
             status: "LIVE",
@@ -66,7 +66,7 @@
             diffLabel: "INTERMEDIATE",
             tools: ["Game theory", "Risk analysis", "Decision matrices"],
             cta: "SEE THE BOARD →",
-            href: "/games/the-board",
+            href: "/simulations/the-board",
         },
         {
             status: "COMING SOON",

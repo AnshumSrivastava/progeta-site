@@ -39,55 +39,116 @@
     <div class="nav-content">
         <!-- Brand -->
         <a href="{base}/" class="brand">
-            <img src="{base}/logo_icon.svg" alt="Progeta Technologies" class="brand-logo" />
+            <img
+                src="{base}/logo_icon.svg"
+                alt="Progeta Technologies"
+                class="brand-logo"
+            />
             <span class="brand-name">Progeta Technologies</span>
         </a>
 
         <!-- Desktop Links -->
         <div class="nav-links">
-            <div class="dropdown-wrapper" on:click|stopPropagation on:keydown|stopPropagation role="menu" tabindex="0">
+            <div
+                class="dropdown-wrapper"
+                on:click|stopPropagation
+                on:keydown|stopPropagation
+                role="menu"
+                tabindex="0"
+            >
                 <button
                     class="nav-link"
                     class:active={ecosystemOpen}
                     on:click={toggleEcosystem}
                 >
                     ECOSYSTEM
-                    <svg width="10" height="6" viewBox="0 0 10 6" fill="none" style="margin-left: 4px;">
-                        <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <svg
+                        width="10"
+                        height="6"
+                        viewBox="0 0 10 6"
+                        fill="none"
+                        style="margin-left: 4px;"
+                    >
+                        <path
+                            d="M1 1L5 5L9 1"
+                            stroke="currentColor"
+                            stroke-width="1.5"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        />
                     </svg>
                 </button>
 
                 {#if ecosystemOpen}
-                    <div class="dropdown-panel" transition:fly={{ y: -8, duration: 150 }}>
-                        <a href="{base}/launchpad" class="eco-card" on:click={closeEcosystem}>
+                    <div
+                        class="dropdown-panel"
+                        transition:fly={{ y: -8, duration: 150 }}
+                    >
+                        <a
+                            href="{base}/launchpad"
+                            class="eco-card"
+                            on:click={closeEcosystem}
+                        >
                             <span class="eco-name">LAUNCHPAD</span>
-                            <span class="eco-desc">Skills for students and campuses.</span>
+                            <span class="eco-desc"
+                                >Skills for students and campuses.</span
+                            >
                             <span class="eco-cta">Explore →</span>
                         </a>
-                        <a href="{base}/selfos" class="eco-card" on:click={closeEcosystem}>
+                        <a
+                            href="{base}/selfos"
+                            class="eco-card"
+                            on:click={closeEcosystem}
+                        >
                             <span class="eco-name">SELFOS</span>
-                            <span class="eco-desc">Your personal operating system.</span>
+                            <span class="eco-desc"
+                                >Your personal operating system.</span
+                            >
                             <span class="eco-cta">Explore →</span>
                         </a>
-                        <a href="{base}/innercircle" class="eco-card" on:click={closeEcosystem}>
+                        <a
+                            href="{base}/innercircle"
+                            class="eco-card"
+                            on:click={closeEcosystem}
+                        >
                             <span class="eco-name">INNERCIRCLE</span>
-                            <span class="eco-desc">A vetted network for the driven.</span>
+                            <span class="eco-desc"
+                                >A vetted network for the driven.</span
+                            >
                             <span class="eco-cta">Apply →</span>
                         </a>
                     </div>
                 {/if}
             </div>
 
-            <a href="{base}/tracks" class="nav-link" class:active={currentPath.startsWith(base + '/tracks')}>TRACKS</a>
-            <a href="{base}/games" class="nav-link" class:active={currentPath.startsWith(base + '/games')}>GAMES</a>
-            <a href="{base}/about" class="nav-link" class:active={currentPath.startsWith(base + '/about')}>ABOUT</a>
+            <a
+                href="{base}/tracks"
+                class="nav-link"
+                class:active={currentPath.startsWith(base + "/tracks")}
+                >TRACKS</a
+            >
+            <a
+                href="{base}/simulations"
+                class="nav-link"
+                class:active={currentPath.startsWith(base + "/simulations")}
+                >SIMULATIONS</a
+            >
+            <a
+                href="{base}/about"
+                class="nav-link"
+                class:active={currentPath.startsWith(base + "/about")}>ABOUT</a
+            >
         </div>
 
         <!-- Desktop CTA -->
         <a href="{base}/contact" class="nav-cta">Get in Touch</a>
 
         <!-- Mobile Menu Toggle -->
-        <button class="menu-toggle" on:click={toggleMenu} aria-label="Toggle Menu">
+        <button
+            class="menu-toggle"
+            on:click={toggleMenu}
+            aria-label="Toggle Menu"
+        >
             <div class="hamburger" class:open={isMenuOpen}>
                 <span></span>
                 <span></span>
@@ -113,7 +174,14 @@
             transition:fly={{ x: 0, y: -20, duration: 200 }}
         >
             <button class="close-btn" on:click={closeMenu} aria-label="Close">
-                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                <svg
+                    viewBox="0 0 24 24"
+                    width="24"
+                    height="24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                >
                     <line x1="18" y1="6" x2="6" y2="18"></line>
                     <line x1="6" y1="6" x2="18" y2="18"></line>
                 </svg>
@@ -121,27 +189,47 @@
 
             <div class="mobile-links">
                 <!-- Ecosystem links first, visually separated -->
-                <a href="{base}/launchpad" on:click={closeMenu} class="mobile-link mobile-link--eco">
+                <a
+                    href="{base}/launchpad"
+                    on:click={closeMenu}
+                    class="mobile-link mobile-link--eco"
+                >
                     <span>LAUNCHPAD</span>
                     <span class="mobile-arrow">→</span>
                 </a>
-                <a href="{base}/selfos" on:click={closeMenu} class="mobile-link mobile-link--eco">
+                <a
+                    href="{base}/selfos"
+                    on:click={closeMenu}
+                    class="mobile-link mobile-link--eco"
+                >
                     <span>SELFOS</span>
                     <span class="mobile-arrow">→</span>
                 </a>
-                <a href="{base}/innercircle" on:click={closeMenu} class="mobile-link mobile-link--eco">
+                <a
+                    href="{base}/innercircle"
+                    on:click={closeMenu}
+                    class="mobile-link mobile-link--eco"
+                >
                     <span>INNERCIRCLE</span>
                     <span class="mobile-arrow">→</span>
                 </a>
 
                 <div class="mobile-divider"></div>
 
-                <a href="{base}/tracks" on:click={closeMenu} class="mobile-link">
+                <a
+                    href="{base}/tracks"
+                    on:click={closeMenu}
+                    class="mobile-link"
+                >
                     <span>TRACKS</span>
                     <span class="mobile-arrow">→</span>
                 </a>
-                <a href="{base}/games" on:click={closeMenu} class="mobile-link">
-                    <span>GAMES</span>
+                <a
+                    href="{base}/simulations"
+                    on:click={closeMenu}
+                    class="mobile-link"
+                >
+                    <span>SIMULATIONS</span>
                     <span class="mobile-arrow">→</span>
                 </a>
                 <a href="{base}/about" on:click={closeMenu} class="mobile-link">
@@ -151,18 +239,38 @@
             </div>
 
             <div class="mobile-bottom">
-                <a href="{base}/contact" class="btn-primary mobile-cta" on:click={closeMenu}>
+                <a
+                    href="{base}/contact"
+                    class="btn-primary mobile-cta"
+                    on:click={closeMenu}
+                >
                     GET IN TOUCH
                 </a>
 
                 <div class="mobile-socials">
-                    <a href="https://linkedin.com/company/progetatechnologies" target="_blank" rel="noopener">LI</a>
+                    <a
+                        href="https://linkedin.com/company/progetatechnologies"
+                        target="_blank"
+                        rel="noopener">LI</a
+                    >
                     <span class="social-dot">·</span>
-                    <a href="https://instagram.com/progetatechnologies" target="_blank" rel="noopener">IG</a>
+                    <a
+                        href="https://instagram.com/progetatechnologies"
+                        target="_blank"
+                        rel="noopener">IG</a
+                    >
                     <span class="social-dot">·</span>
-                    <a href="https://discord.gg/progetatechnologies" target="_blank" rel="noopener">DC</a>
+                    <a
+                        href="https://discord.gg/progetatechnologies"
+                        target="_blank"
+                        rel="noopener">DC</a
+                    >
                     <span class="social-dot">·</span>
-                    <a href="https://github.com/progetatechnologies" target="_blank" rel="noopener">GH</a>
+                    <a
+                        href="https://github.com/progetatechnologies"
+                        target="_blank"
+                        rel="noopener">GH</a
+                    >
                 </div>
             </div>
         </div>
@@ -220,7 +328,7 @@
     }
 
     .nav-link {
-        font: 500 var(--text-xs)/1 var(--font-mono);
+        font: 500 var(--text-xs) / 1 var(--font-mono);
         letter-spacing: 0.08em;
         text-transform: uppercase;
         color: var(--color-secondary);
@@ -268,17 +376,17 @@
         background: var(--color-muted);
     }
     .eco-name {
-        font: 800 var(--text-sm)/1 var(--font-display);
+        font: 800 var(--text-sm) / 1 var(--font-display);
         color: var(--color-primary);
         letter-spacing: 0.04em;
     }
     .eco-desc {
-        font: 400 var(--text-xs)/1.4 var(--font-body);
+        font: 400 var(--text-xs) / 1.4 var(--font-body);
         color: var(--color-secondary);
         margin-top: 4px;
     }
     .eco-cta {
-        font: 500 var(--text-xs)/1 var(--font-mono);
+        font: 500 var(--text-xs) / 1 var(--font-mono);
         color: var(--color-signal);
         margin-top: 8px;
         letter-spacing: 0.04em;
@@ -286,7 +394,7 @@
 
     /* CTA */
     .nav-cta {
-        font: 600 var(--text-xs)/1 var(--font-mono);
+        font: 600 var(--text-xs) / 1 var(--font-mono);
         letter-spacing: 0.08em;
         color: var(--color-void);
         background: var(--color-signal);
@@ -319,8 +427,12 @@
         background: var(--color-primary);
         transition: all 0.2s ease;
     }
-    .hamburger span:first-child { top: 0; }
-    .hamburger span:last-child { bottom: 0; }
+    .hamburger span:first-child {
+        top: 0;
+    }
+    .hamburger span:last-child {
+        bottom: 0;
+    }
     .hamburger.open span:first-child {
         top: 50%;
         transform: translateY(-50%) rotate(45deg);
@@ -367,7 +479,7 @@
         align-items: center;
         justify-content: space-between;
         padding: 20px 0;
-        font: 600 var(--text-md)/1 var(--font-display);
+        font: 600 var(--text-md) / 1 var(--font-display);
         letter-spacing: 0.04em;
         color: var(--color-primary);
         text-decoration: none;
@@ -402,7 +514,7 @@
         align-items: center;
         justify-content: center;
         gap: var(--space-2);
-        font: 600 var(--text-sm)/1 var(--font-mono);
+        font: 600 var(--text-sm) / 1 var(--font-mono);
     }
     .mobile-socials a {
         color: var(--color-secondary);

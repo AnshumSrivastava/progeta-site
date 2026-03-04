@@ -10,6 +10,12 @@
 
   let { children } = $props();
 
+  const siteTitle = "Progeta Technologies | Engineering & Security";
+  const siteDesc =
+    "Technical education, digital sovereignty operations, and immersive tactical engineering simulations.";
+  const siteUrl = "https://progeta.tech";
+  let canonicalUrl = $derived(`${siteUrl}${$page.url.pathname}`);
+
   let loading = $state(true);
   let contentVisible = $state(false);
   let transitioning = $state(false);
@@ -44,7 +50,39 @@
 </script>
 
 <svelte:head>
-  <title>Progeta Technologies</title>
+  <title>{siteTitle}</title>
+  <meta name="description" content={siteDesc} />
+
+  <link rel="canonical" href={canonicalUrl} />
+
+  <meta property="og:title" content={siteTitle} />
+  <meta property="og:description" content={siteDesc} />
+  <meta property="og:url" content={canonicalUrl} />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Progeta Technologies" />
+  <meta property="og:image" content="{siteUrl}/og-image.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={siteTitle} />
+  <meta name="twitter:description" content={siteDesc} />
+
+  {@html `
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Progeta Technologies",
+      "url": "https://progeta.tech",
+      "logo": "https://progeta.tech/favicon.png",
+      "sameAs": [
+        "https://linkedin.com/company/progeta",
+        "https://instagram.com/progeta.tech",
+        "https://github.com/progeta"
+      ],
+      "description": "True technical education and digital sovereignty operations."
+    }
+    </script>
+  `}
 </svelte:head>
 
 {#if loading}

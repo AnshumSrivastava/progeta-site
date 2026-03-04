@@ -1,35 +1,49 @@
 <script lang="ts">
-  import type { Snippet } from 'svelte';
+  import type { Snippet } from "svelte";
 
-  type Variant = 'primary' | 'secondary' | 'ghost' | 'text';
-  type Size = 'sm' | 'md' | 'lg';
+  type Variant = "primary" | "secondary" | "ghost" | "text";
+  type Size = "sm" | "md" | "lg";
   let {
-    variant = 'primary',
-    size = 'md',
+    variant = "primary",
+    size = "md",
     href,
-    type = 'button',
+    type = "button",
     disabled = false,
     accent,
+    target,
     children,
     onclick,
   }: {
     variant?: Variant;
     size?: Size;
     href?: string;
-    type?: 'button' | 'submit';
+    type?: "button" | "submit";
     disabled?: boolean;
     accent?: string;
+    target?: string;
     children?: Snippet;
     onclick?: (e: Event) => void;
   } = $props();
 </script>
 
 {#if href}
-  <a {href} class="btn btn--{variant} btn--{size}" class:disabled style={accent ? `--btn-accent: ${accent}` : ''}>
+  <a
+    {href}
+    {target}
+    class="btn btn--{variant} btn--{size}"
+    class:disabled
+    style={accent ? `--btn-accent: ${accent}` : ""}
+  >
     {@render children?.()}
   </a>
 {:else}
-  <button {type} {disabled} class="btn btn--{variant} btn--{size}" {onclick} style={accent ? `--btn-accent: ${accent}` : ''}>
+  <button
+    {type}
+    {disabled}
+    class="btn btn--{variant} btn--{size}"
+    {onclick}
+    style={accent ? `--btn-accent: ${accent}` : ""}
+  >
     {@render children?.()}
   </button>
 {/if}
@@ -50,14 +64,23 @@
     border: none;
     outline: none;
   }
-  
+
   .btn:hover {
     transform: scale(1.02);
   }
 
-  .btn--sm { font-size: var(--text-xs); padding: 10px 18px; }
-  .btn--md { font-size: 12px;           padding: 13px 24px; }
-  .btn--lg { font-size: var(--text-sm); padding: 16px 32px; }
+  .btn--sm {
+    font-size: var(--text-xs);
+    padding: 10px 18px;
+  }
+  .btn--md {
+    font-size: 12px;
+    padding: 13px 24px;
+  }
+  .btn--lg {
+    font-size: var(--text-sm);
+    padding: 16px 32px;
+  }
 
   .btn--primary {
     background: var(--btn-accent, var(--ink-1));
@@ -94,9 +117,17 @@
     text-transform: none;
     letter-spacing: var(--tracking-normal);
   }
-  .btn--text:hover { color: var(--ink-1); }
-  .btn--text::after { content: ' →'; transition: transform 0.15s; display: inline-block; }
-  .btn--text:hover::after { transform: translateX(3px); }
+  .btn--text:hover {
+    color: var(--ink-1);
+  }
+  .btn--text::after {
+    content: " →";
+    transition: transform 0.15s;
+    display: inline-block;
+  }
+  .btn--text:hover::after {
+    transform: translateX(3px);
+  }
 
   .disabled {
     opacity: 0.4;

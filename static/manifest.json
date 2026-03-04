@@ -1,0 +1,21 @@
+{
+    "name": "Progeta Technologies",
+    "short_name": "Progeta",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#020408",
+    "theme_color": "#020408",
+    "description": "True technical education and digital sovereignty operations.",
+    "icons": [
+        {
+            "src": "/favicon.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/favicon.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}

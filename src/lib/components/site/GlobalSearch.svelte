@@ -167,9 +167,10 @@
       description: "Deep tech analysis and operations briefings.",
     },
     {
-      title: "Cyber Games",
-      type: "Resources",
-      href: "/resources/games",
+      // id: "sr-7", // Removed as it's not in SearchResult interface
+      title: "Interactive Simulations",
+      type: "Resources", // Changed from 'category' to 'type' to match SearchResult interface
+      href: "/resources/simulations",
       description: "Interactive operational learning experiences.",
     },
     {

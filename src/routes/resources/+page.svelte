@@ -54,10 +54,10 @@
                 </div>
             </a>
 
-            <!-- Games -->
+            <!-- Simulations -->
             <a
-                href="/resources/games"
-                class="resource-strip resource-strip--games"
+                href="/resources/simulations"
+                class="resource-strip resource-strip--simulations"
             >
                 <div class="strip-watermark">G</div>
                 <div class="strip-content">
@@ -151,10 +151,11 @@
                     <span class="latest-cta">Read Brief →</span>
                 </a>
 
-                <!-- Games -->
+                <!-- Simulations -->
                 <a
-                    href="/games/linux-labyrinth"
-                    class="latest-cell latest-cell--games"
+                    href="/simulations/linux-labyrinth"
+                    class="content-card content-card--interactive"
+                    style="--delay: 100ms"
                 >
                     <span class="latest-source">ACTIVE LAB</span>
                     <h3 class="latest-title">Linux Terminal Labyrinth</h3>
@@ -282,7 +283,7 @@
     .resource-strip--articles::before {
         background: var(--ink-1);
     }
-    .resource-strip--games::before {
+    .resource-strip--simulations::before {
         background: var(--accent-launchpad);
     }
     .resource-strip--gallery::before {
@@ -365,7 +366,7 @@
     .resource-strip--articles:hover .strip-heading {
         color: #ffffff;
     }
-    .resource-strip--games:hover .strip-heading {
+    .resource-strip--simulations:hover .strip-heading {
         color: var(--accent-launchpad);
     }
     .resource-strip--gallery:hover .strip-heading {
@@ -410,7 +411,7 @@
     .latest-cell--articles .latest-source {
         color: var(--ink-1);
     }
-    .latest-cell--games .latest-source {
+    .content-card--interactive .latest-source {
         color: var(--accent-launchpad);
     }
     .latest-cell--gallery .latest-source {
@@ -446,7 +447,7 @@
     .latest-cell--articles .latest-cta {
         color: var(--ink-1);
     }
-    .latest-cell--games .latest-cta {
+    .content-card--interactive .latest-cta {
         color: var(--accent-launchpad);
     }
     .latest-cell--gallery .latest-cta {

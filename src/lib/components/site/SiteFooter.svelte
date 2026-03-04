@@ -58,7 +58,7 @@
       <div class="footer__col">
         <span class="footer__label">Resources</span>
         <a href="/resources/articles">Articles</a>
-        <a href="/resources/games">Games</a>
+        <a href="/resources/simulations">Simulations</a>
         <a href="/resources/gallery">Gallery</a>
         <a href="/resources/glossary">Glossary</a>
         <a href="/verify">Verify Certificate</a>
@@ -78,6 +78,15 @@
         <span class="footer__label">Company</span>
         <a href="/about">About</a>
         <a href="/pricing">Pricing</a>
+      </div>
+
+      <!-- Col 6: Legal -->
+      <div class="footer__col">
+        <span class="footer__label">Legal & Trust</span>
+        <a href="/legal/privacy-policy">Privacy Policy</a>
+        <a href="/legal/terms-of-service">Terms of Service</a>
+        <a href="/legal/cookie-policy">Cookie Policy</a>
+        <a href="/legal/disclaimer">Disclaimer</a>
       </div>
     </div>
 
@@ -112,10 +121,10 @@
     padding: 0 var(--sp-8);
   }
 
-  /* ── GRID: brand + 5 link columns ── */
+  /* ── GRID: brand + 6 link columns ── */
   .footer__grid {
     display: grid;
-    grid-template-columns: 240px repeat(5, 1fr);
+    grid-template-columns: 240px repeat(6, 1fr);
     gap: var(--sp-8);
     padding-bottom: var(--sp-9);
     align-items: start;

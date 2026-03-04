@@ -101,9 +101,9 @@
           accent: "",
         },
         {
-          name: "Games",
-          desc: "Interactive learning experiences.",
-          href: "/resources/games",
+          name: "Simulations",
+          desc: "Interactive security environments.",
+          href: "/resources/simulations",
           accent: "",
         },
         {

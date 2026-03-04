@@ -4,6 +4,9 @@
     import { technicalModules, softSkillsModules } from "$lib/content/modules";
     import { tracksMeta, getLevelLabel } from "$lib/content/launchpad-data";
     import ScrollReveal from "$lib/components/animations/ScrollReveal.svelte";
+    import EnrollmentModal from "$lib/components/ui/EnrollmentModal.svelte";
+
+    let isModalOpen = false;
 
     $: id = parseInt($page.params.id);
     $: track = careerTracks.find((t) => t.id === id);
@@ -81,9 +84,9 @@
                             </div>
                         {/each}
                     </div>
-                    <a
-                        href="mailto:operations@progeta.tech?subject=Enrollment - {track.title}"
-                        class="track-enroll-btn">ENROLL IN THIS TRACK →</a
+                    <button
+                        on:click={() => (isModalOpen = true)}
+                        class="track-enroll-btn">ENROLL IN THIS TRACK →</button
                     >
                 </ScrollReveal>
             </div>
@@ -240,9 +243,9 @@
                         steps.
                     </p>
                     <div class="td-enroll__ctas">
-                        <a
-                            href="mailto:operations@progeta.tech?subject=Enrollment - {track.title}"
-                            class="btn-ember">ENROLL NOW →</a
+                        <button
+                            on:click={() => (isModalOpen = true)}
+                            class="btn-ember">ENROLL NOW →</button
                         >
                         <a
                             href="mailto:operations@progeta.tech?subject=Question - {track.title}"
@@ -259,6 +262,11 @@
         <a href="/tracks">← Back to all tracks</a>
     </div>
 {/if}
+
+<EnrollmentModal
+    bind:isOpen={isModalOpen}
+    trackName={track ? track.title : ""}
+/>
 
 <style>
     .container {
@@ -409,6 +417,7 @@
         font-size: 12px;
         letter-spacing: 0.14em;
         text-transform: uppercase;
+        cursor: pointer;
         text-align: center;
         text-decoration: none;
         border-radius: 4px;
@@ -641,6 +650,8 @@
         background: #e05c20;
         color: #edf0ff;
         padding: 14px 28px;
+        border: none;
+        cursor: pointer;
         border-radius: 4px;
         text-decoration: none;
         transition: background 0.2s;

@@ -355,7 +355,9 @@
               <span class="mini-stat__lab">Modules</span>
             </div>
           </div>
-          <Button variant="primary" href="/games">Enter Games Lab</Button>
+          <Button variant="primary" href="/simulations"
+            >Enter Simulations</Button
+          >
         </ScrollReveal>
       </div>
       <div class="games-teaser__visual">
