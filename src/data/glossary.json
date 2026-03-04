@@ -184,5 +184,13 @@
         "related": [
             "Lateral Movement"
         ]
+    },
+    {
+        "term": "Zero-Knowledge",
+        "category": "PRIVACY",
+        "definition": "A method by which one party can prove to another party that a given statement is true without conveying any additional information apart from the fact that the statement is indeed true (e.g., Zero-Knowledge Proof).",
+        "related": [
+            "Encryption (E2EE)"
+        ]
     }
 ]

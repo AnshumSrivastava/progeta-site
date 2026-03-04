@@ -181,6 +181,7 @@
         {#if group.dropdown}
           <div
             class="nav__dropdown-wrap"
+            role="group"
             onmouseenter={() => (activeDropdown = group.dropdown ?? null)}
             onmouseleave={() => (activeDropdown = null)}
           >

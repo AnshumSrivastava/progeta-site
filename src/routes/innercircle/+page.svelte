@@ -578,6 +578,7 @@
   role="dialog"
   aria-modal="true"
   aria-label="InnerCircle application"
+  tabindex="-1"
   onkeydown={handleOverlayKeydown}
 >
   <div class="gate-progress-bar">

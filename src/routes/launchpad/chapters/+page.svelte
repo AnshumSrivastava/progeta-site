@@ -147,14 +147,16 @@
         >
             <div class="form-row">
                 <div class="form-field">
-                    <label>Your name</label><input
+                    <label for="chapter_name">Your name</label><input
+                        id="chapter_name"
                         type="text"
                         name="name"
                         required
                     />
                 </div>
                 <div class="form-field">
-                    <label>Your email</label><input
+                    <label for="chapter_email">Your email</label><input
+                        id="chapter_email"
                         type="email"
                         name="email"
                         required
@@ -163,14 +165,17 @@
             </div>
             <div class="form-row">
                 <div class="form-field">
-                    <label>College / Institution</label><input
+                    <label for="chapter_college">College / Institution</label
+                    ><input
+                        id="chapter_college"
                         type="text"
                         name="college"
                         required
                     />
                 </div>
                 <div class="form-field">
-                    <label>City</label><input
+                    <label for="chapter_city">City</label><input
+                        id="chapter_city"
                         type="text"
                         name="city"
                         required
@@ -179,8 +184,8 @@
             </div>
             <div class="form-row">
                 <div class="form-field">
-                    <label>Your role</label>
-                    <select name="role" required>
+                    <label for="chapter_role">Your role</label>
+                    <select id="chapter_role" name="role" required>
                         <option value="" disabled selected>Select...</option>
                         <option value="Student">Student</option>
                         <option value="Faculty / Advisor"
@@ -193,8 +198,12 @@
                     </select>
                 </div>
                 <div class="form-field">
-                    <label>Interested students</label>
-                    <select name="interest_level" required>
+                    <label for="chapter_interest">Interested students</label>
+                    <select
+                        id="chapter_interest"
+                        name="interest_level"
+                        required
+                    >
                         <option value="" disabled selected>Select...</option>
                         <option value="Just me">Just me so far</option>
                         <option value="2-5">2–5 students</option>
@@ -206,8 +215,11 @@
                 </div>
             </div>
             <div class="form-field form-field--full">
-                <label>Tell us about your campus (optional)</label>
-                <textarea name="campus_info" rows="4"></textarea>
+                <label for="chapter_campus_info"
+                    >Tell us about your campus (optional)</label
+                >
+                <textarea id="chapter_campus_info" name="campus_info" rows="4"
+                ></textarea>
             </div>
             <button type="submit" class="form-submit"
                 >SUBMIT CHAPTER APPLICATION →</button

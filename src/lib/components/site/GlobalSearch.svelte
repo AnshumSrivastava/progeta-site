@@ -20,7 +20,7 @@
   let query = $state("");
   let results = $state<SearchResult[]>([]);
   let selectedIndex = $state(0);
-  let inputEl: HTMLInputElement;
+  let inputEl = $state<HTMLInputElement>();
 
   // Expanded index incorporating all LaunchPad directives and site features
   const mockIndex: SearchResult[] = [
