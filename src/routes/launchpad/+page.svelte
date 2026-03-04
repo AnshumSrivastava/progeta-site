@@ -65,15 +65,16 @@
     </ScrollReveal>
     <ScrollReveal delay={100}>
       <h1 class="lp-hero__heading">
-        The skill gap between<br />education and readiness<br />is
-        <span class="ember">real</span>. We close it.
+        Your education prepared you<br />for a path. What if you want<br />to
+        <span class="ember">make your own</span>?
       </h1>
     </ScrollReveal>
     <ScrollReveal delay={200}>
       <p class="lp-hero__body">
-        LaunchPad is Progeta Technologies' education initiative. We train
-        operators, not just students — through live-fire cybersecurity tracks,
-        hands-on workshops, student chapters, and verifiable credentials.
+        LaunchPad is Progeta Technologies' education initiative. Real skills
+        through live-fire cybersecurity tracks, hands-on workshops, student
+        chapters, and verifiable credentials — for people who want capability,
+        not just credentials.
       </p>
     </ScrollReveal>
     <ScrollReveal delay={300}>
@@ -123,7 +124,7 @@
     <ScrollReveal>
       <div class="audience-panel">
         <span class="audience-tag">FOR STUDENTS</span>
-        <h3 class="audience-heading">Your track to becoming an operator.</h3>
+        <h3 class="audience-heading">Your track to real capability.</h3>
         <p class="audience-body">
           Start with a track in your area of interest. Each track is six months
           and ends with a credential that signals real capability to employers —

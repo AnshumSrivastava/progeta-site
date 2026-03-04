@@ -78,7 +78,7 @@
       items: [
         {
           name: "InnerCircle",
-          desc: "A vetted network for builders creating something real.",
+          desc: "A vetted circle for people serious about their time.",
           href: "/innercircle",
           accent: "var(--accent-innercircle)",
         },

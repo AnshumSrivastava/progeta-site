@@ -142,7 +142,7 @@
     stageReady = false;
     stage = n;
     const labels: Record<number, string> = {
-      1: "Question 1 of 3. What are you building right now?",
+      1: "Question 1 of 3. What are you doing with your time right now that actually matters to you?",
       2: "Question 2 of 3. Why does this matter to you?",
       3: "Question 3 of 3. What do you bring to the people around you?",
     };
@@ -305,7 +305,7 @@
   <title>InnerCircle — Progeta Technologies</title>
   <meta
     name="description"
-    content="A vetted network for builders who are actively creating something real. Application-only membership reviewed within 72 hours."
+    content="A vetted circle of people who are serious about what they are doing with their time. Application-only membership reviewed within 72 hours."
   />
 </svelte:head>
 
@@ -327,9 +327,10 @@
     <div class="ic-h1__gap"></div>
     <span class="ic-h1__c" class:vis={heroH1c}>We don't.</span>
     <p class="ic-hero__body" class:vis={heroBody}>
-      InnerCircle is a vetted network for builders who are actively creating
-      something real. Not aspiring to create. Not planning to. Creating. If that
-      is you, read what follows carefully. Then decide if you want to apply.
+      InnerCircle is a vetted circle of people who are serious about what they
+      are doing with their time. Not aspiring to start. Not planning to. Doing.
+      If that is you, read what follows carefully. Then decide if you want to
+      apply.
     </p>
     <button
       class="gate-trigger"
@@ -461,9 +462,10 @@
       </ScrollReveal>
       <ScrollReveal delay={80}>
         <p>
-          You are expected to be building something. Not planning to build. Not
-          between projects. Building. If you stop building, say so. The circle
-          does not penalise pauses — it penalises pretending.
+          You are expected to be doing something. Not waiting to start. Not
+          thinking about starting. Doing — even if you're not yet sure what it
+          becomes. If you pause, say so. The circle does not penalise pauses —
+          it penalises pretending.
         </p>
       </ScrollReveal>
       <ScrollReveal delay={160}>
@@ -532,13 +534,13 @@
     <div class="ic-closing__inner">
       <ScrollReveal>
         <h2 class="ic-section-h ic-section-h--center">
-          This is not for everyone.
+          This requires something specific from you.
         </h2>
         <p class="ic-closing__body">
-          If you are building something and you want to be surrounded by people
-          of equal drive and equal honesty — apply. If you are not sure you
-          qualify, you probably do not. The application is five minutes. The
-          review is 72 hours. There are only two outcomes.
+          If you are serious about what you are doing with your time and you
+          want to be surrounded by people of equal drive and equal honesty —
+          apply. You will know if this is for you. The application is five
+          minutes. The review is 72 hours. There are only two outcomes.
         </p>
         <button class="closing-gate-btn" onclick={openGate}>
           <span class="gate-icon"
@@ -631,11 +633,12 @@
       </h2>
       <p class="gate-body" class:ic-appear={s0_body} class:ic-hidden={!s0_body}>
         This application is read by a person, not filtered by a keyword. Three
-        questions. No word limits. We are looking for builders — people who are
-        creating something right now, not people who plan to.<br /><br />If you
-        are accepted, you receive an invitation within 72 hours. If you are not
-        accepted this round, you will be told why and when to reapply. There is
-        no automatic rejection — just timing and fit.
+        questions. No word limits. We are looking for people who are serious
+        about their time — people who are doing something right now, not people
+        who plan to.<br /><br />If you are accepted, you receive an invitation
+        within 72 hours. If you are not accepted this round, you will be told
+        why and when to reapply. There is no automatic rejection — just timing
+        and fit.
       </p>
       <button
         class="gate-continue"
@@ -652,10 +655,13 @@
       style:display={stage === 1 ? "flex" : "none"}
     >
       <span class="gate-label">QUESTION 01 OF 03</span>
-      <h2 class="gate-q-heading">What are you building right now?</h2>
+      <h2 class="gate-q-heading">
+        What are you doing with your time right now that actually matters to
+        you?
+      </h2>
       <p class="gate-subtext">
-        Not what you want to build. Not what you built last year. What are you
-        building today.
+        Not what you're supposed to be doing. What you're actually working on,
+        pursuing, or figuring out.
       </p>
       <textarea
         class="gate-textarea"
@@ -681,10 +687,7 @@
     >
       <span class="gate-label">QUESTION 02 OF 03</span>
       <h2 class="gate-q-heading">Why does this matter to you?</h2>
-      <p class="gate-subtext">
-        Not to the market. Not to a future investor. To you, specifically. Right
-        now.
-      </p>
+      <p class="gate-subtext">Not the impressive version. The real one.</p>
       <textarea
         class="gate-textarea"
         bind:value={q2}

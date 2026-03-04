@@ -111,12 +111,12 @@
         </ScrollReveal>
         <ScrollReveal delay={200}>
           <p>
-            The founding came from watching students in cities and towns across
-            India — motivated, capable people — limited not by their ability but
-            by what was available to them. The best knowledge was locked behind
-            expensive institutions. The best tools were designed for
-            organisations, not individuals. The best communities required
-            connections most people do not have.
+            The founding came from a simple observation about people with
+            something inside them — motivation, curiosity, an unwillingness to
+            settle — and systems around them that had no idea what to do with
+            it. Education that prepared people for compliance, not capability.
+            Tools that assumed you were a user, not a person. Communities that
+            talked about doing things without ever doing them.
           </p>
         </ScrollReveal>
         <ScrollReveal delay={280}>
@@ -150,18 +150,22 @@
 
         <ScrollReveal delay={240}>
           <p class="directive__body">
-            Progeta Technologies exists because we believe the current digital
-            landscape is accidental. We build products that require
-            responsibility, because responsibility is the precursor to freedom.
+            Progeta Technologies exists because we believe the current state of
+            things is not final. Not for the world, and not for the people in
+            it. We build for the person who looks at their life and thinks —
+            there is more to do here than I am currently doing. Not more by
+            someone else's definition. More by their own. The person who refuses
+            to just complete their life and call it enough.
           </p>
         </ScrollReveal>
         <ScrollReveal delay={360}>
           <p class="directive__body">
-            Our work is not for everyone. It is for the students in small towns
-            who feel limited by their geography. It is for the builders who
-            refuse to use tools that don't respect them. It is for the
-            institutions that want to close the gap between what education
-            promises and what it delivers.
+            Our work requires something specific from you — and you will know if
+            you have it. It is for the person in the first month of college who
+            has no idea what comes next but knows the standard path feels wrong.
+            It is for the person five years into a career who wants to build
+            their own system. It is for anyone who has stopped being satisfied
+            with the default version of their life.
           </p>
         </ScrollReveal>
         <ScrollReveal delay={480}>
@@ -209,8 +213,8 @@
             <h3 class="i-strip-name">LaunchPad</h3>
             <p class="i-strip-desc">
               Campus programmes, certification tracks, workshops, and student
-              chapters. Closing the skill gap between what education delivers
-              and what industry requires.
+              chapters. Real skills for people who want capability, not just
+              credentials.
             </p>
           </div>
           <span class="i-strip-arrow">→</span>
@@ -223,9 +227,9 @@
             <span class="i-strip-label">PRODUCT</span>
             <h3 class="i-strip-name">SelfOS</h3>
             <p class="i-strip-desc">
-              A local-first personal operating system for people who want to run
-              their life with complete intention and privacy. Your data. Your
-              device. Your system.
+              A personal operating system for people who want to run their life
+              the way they want to run it — intentionally, privately, and on
+              their own terms.
             </p>
           </div>
           <span class="i-strip-arrow">→</span>
@@ -238,8 +242,9 @@
             <span class="i-strip-label">COMMUNITY</span>
             <h3 class="i-strip-name">InnerCircle</h3>
             <p class="i-strip-desc">
-              A vetted network of people building something real, held to the
-              standard of action and accountability. Not a forum — a circle.
+              A vetted circle of people who are serious about what they are
+              doing with their time, held to the standard of showing up and
+              contributing. Not a forum — a circle.
             </p>
           </div>
           <span class="i-strip-arrow">→</span>
@@ -272,7 +277,7 @@
     </ScrollReveal>
 
     <div class="beliefs-grid">
-      {#each [{ num: "01", color: "#E05C20", text: "Every person carries something worth building.", support: "The circumstances of your birth do not determine the ceiling of your ambition. Access to the environment to build is a right, not a privilege." }, { num: "02", color: "#1A8FE3", text: "Access to growth should never be conditional.", support: "Geography, income, school quality — none of these should determine who receives the tools, knowledge, and community to grow." }, { num: "03", color: "#18C96A", text: "Safe environments are not optional — they are foundational.", support: "People cannot build with full capacity when they do not feel safe. We create the conditions before we expect the output." }, { num: "04", color: "#424870", text: "Individual growth without social responsibility is incomplete.", support: "We help people build for themselves. And we ask them to build for others, too. Individual duty is the counterweight to individual sovereignty." }] as belief, i}
+      {#each [{ num: "01", color: "#E05C20", text: "Every person carries something worth doing.", support: "You don\u2019t need a grand vision or a five-year plan. You just need to care about something. Start there." }, { num: "02", color: "#1A8FE3", text: "Access to growth should never be conditional.", support: "Geography, income, school quality — none of these should determine who receives the tools, knowledge, and community to grow." }, { num: "03", color: "#18C96A", text: "Safe environments are not optional — they are foundational.", support: "People cannot build with full capacity when they do not feel safe. We create the conditions before we expect the output." }, { num: "04", color: "#424870", text: "Individual growth without social responsibility is incomplete.", support: "We help people build for themselves. And we ask them to build for others, too. Individual duty is the counterweight to individual sovereignty." }] as belief, i}
         <ScrollReveal delay={100 + i * 80}>
           <div class="belief-cell">
             <span class="belief-num">{belief.num}</span>

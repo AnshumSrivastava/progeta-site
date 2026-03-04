@@ -35,7 +35,7 @@
       title: "InnerCircle",
       type: "Community",
       href: "/innercircle",
-      description: "Vetted network for builders.",
+      description: "Vetted circle for people serious about their time.",
     },
     {
       title: "LaunchPad",

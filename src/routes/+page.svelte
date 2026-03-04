@@ -163,8 +163,8 @@
             Equality
           </h3>
           <p class="marker__text">
-            The environment must be accessible to anyone with the drive to build
-            — regardless of background, geography, or circumstance.
+            The environment must be accessible to anyone with the drive to do
+            something real — regardless of where they are starting from.
           </p>
         </ScrollReveal>
       </div>
@@ -208,8 +208,8 @@
         <span class="init-card__label">INITIATIVE // 01</span>
         <h3 class="init-card__title">LaunchPad</h3>
         <p class="init-card__desc">
-          Closing the skill gap between education and readiness through
-          immersive certification tracks and campus programmes.
+          Real skills through immersive certification tracks and campus
+          programmes — for people who want capability, not just credentials.
         </p>
         <ul class="init-card__sublinks">
           <li>Cybersecurity Track</li>
@@ -232,8 +232,9 @@
         <span class="init-card__label">INITIATIVE // 02</span>
         <h3 class="init-card__title">SelfOS</h3>
         <p class="init-card__desc">
-          A local-first personal operating system designed to help you run your
-          life with complete intention and privacy.
+          A personal operating system for people who want to run their life the
+          way they want to run it — intentionally, privately, and on their own
+          terms.
         </p>
         <ul class="init-card__sublinks">
           <li>Local-First Architecture</li>
@@ -255,11 +256,11 @@
         <span class="init-card__label">INITIATIVE // 03</span>
         <h3 class="init-card__title">InnerCircle</h3>
         <p class="init-card__desc">
-          A vetted network for builders who are actively creating something real
-          and want to be surrounded by peers of similar drive.
+          A vetted circle of people who are serious about what they are doing
+          with their time — and want to be around others who feel the same way.
         </p>
         <ul class="init-card__sublinks">
-          <li>Builder Network</li>
+          <li>Vetted Circle</li>
           <li>Invite-Only Events</li>
         </ul>
         <span class="init-card__link"
@@ -304,9 +305,12 @@
             because responsibility is the precursor to freedom.
           </p>
           <p>
-            Our work is not for everyone. It is for the students in small towns
-            who feel limited by their geography. It is for the builders who
-            refuse to use tools that don't respect them.
+            Progeta Technologies exists because we believe the current state of
+            things is not final. Not for the world, and not for the people in
+            it. We build for the person who looks at their life and thinks —
+            there is more to do here than I am currently doing. Not more by
+            someone else's definition. More by their own. The person who refuses
+            to just complete their life and call it enough.
           </p>
         </div>
       </ScrollReveal>
@@ -477,7 +481,7 @@
           class="pathway-card"
           style="--accent: var(--accent-launchpad)"
         >
-          <span class="pathway-label">FOR STUDENTS</span>
+          <span class="pathway-label">LEARNING SOMETHING</span>
           <h3 class="pathway-title">Start a Track</h3>
           <p class="pathway-desc">
             Explore certification tracks in Cybersecurity, AI, Cloud, and more.
@@ -495,7 +499,7 @@
           class="pathway-card"
           style="--accent: var(--accent-launchpad)"
         >
-          <span class="pathway-label">FOR COLLEGES</span>
+          <span class="pathway-label">BRINGING US TO CAMPUS</span>
           <h3 class="pathway-title">Partner with Us</h3>
           <p class="pathway-desc">
             Bring LaunchPad to your campus. Student chapters, sessions, full
@@ -513,11 +517,11 @@
           class="pathway-card"
           style="--accent: var(--accent-innercircle)"
         >
-          <span class="pathway-label">FOR BUILDERS</span>
+          <span class="pathway-label">LOOKING FOR YOUR CIRCLE</span>
           <h3 class="pathway-title">Join InnerCircle</h3>
           <p class="pathway-desc">
-            A vetted community for those actively creating something real. Not
-            for everyone — and that's the point.
+            A circle for people who take what they do with their time seriously.
+            You'll know if this is for you.
           </p>
           <span class="pathway-action"
             >Apply for Access <span class="arrow">→</span></span
@@ -531,7 +535,7 @@
           class="pathway-card"
           style="--accent: var(--accent-selfos)"
         >
-          <span class="pathway-label">FOR ORGANISATIONS</span>
+          <span class="pathway-label">WORKING TOGETHER</span>
           <h3 class="pathway-title">Work With Progeta</h3>
           <p class="pathway-desc">
             Custom training, consulting, or strategic partnerships. We work with
