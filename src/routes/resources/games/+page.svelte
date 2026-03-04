@@ -1,13 +1,20 @@
 <script lang="ts">
     import ScrollReveal from "$lib/components/animations/ScrollReveal.svelte";
-    import { games, TAG_OPTIONS } from "$lib/content/games-catalog";
+    import { games, TAG_OPTIONS, type Game } from "$lib/content/games-catalog";
 
     let activeTag = $state("ALL");
+    let searchQuery = $state("");
 
     const filteredGames = $derived(
-        activeTag === "ALL"
-            ? games
-            : games.filter((g) => g.tags.includes(activeTag)),
+        games.filter((g) => {
+            const matchesTag =
+                activeTag === "ALL" || g.tags.includes(activeTag);
+            const matchesSearch =
+                searchQuery.length === 0 ||
+                g.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                g.tagline.toLowerCase().includes(searchQuery.toLowerCase());
+            return matchesTag && matchesSearch;
+        }),
     );
 
     function todayLabel(): string {
@@ -15,6 +22,27 @@
             .toLocaleDateString("en-GB", { day: "2-digit", month: "short" })
             .toUpperCase();
     }
+
+    // Simulated engagement data (static — no backend)
+    const engagement: Record<string, { stars: number; users: string }> = {
+        "signal-or-noise": { stars: 4.8, users: "2.1k" },
+        "the-breach": { stars: 4.6, users: "890" },
+        mirror: { stars: 4.7, users: "1.4k" },
+        "speech-of-the-day": { stars: 4.5, users: "760" },
+        "quantum-question": { stars: 4.3, users: "540" },
+        "threat-profile": { stars: 4.4, users: "430" },
+        "decision-tree": { stars: 4.9, users: "1.8k" },
+        cipher: { stars: 4.2, users: "670" },
+        "the-audit": { stars: 4.7, users: "1.2k" },
+        "one-concept-a-day": { stars: 4.6, users: "3.2k" },
+        "build-a-threat-model": { stars: 4.1, users: "310" },
+        "reflection-log": { stars: 4.8, users: "2.4k" },
+        "the-board": { stars: 4.5, users: "580" },
+        "system-check": { stars: 4.4, users: "1.9k" },
+    };
+
+    const dailyCount = games.filter((g) => g.frequency === "daily").length;
+    const liveCount = games.filter((g) => g.status === "live").length;
 </script>
 
 <svelte:head>
@@ -26,174 +54,242 @@
     <link rel="canonical" href="https://www.progeta.tech/resources/games" />
 </svelte:head>
 
-<!-- ═══════ SECTION 1 — THE ENTRY ═══════ -->
-<section class="entry">
-    <!-- Rotating geometry -->
-    <div class="entry-geo-wrap">
-        <div class="entry-geo entry-geo--outer"></div>
-        <div class="entry-geo entry-geo--mid"></div>
-        <div class="entry-geo entry-geo--inner"></div>
-    </div>
-
-    <div class="container entry__content">
-        <ScrollReveal delay={200}>
-            <span class="eyebrow">TRAINING LABS · PROGETA TECHNOLOGIES</span>
-        </ScrollReveal>
-        <ScrollReveal delay={500}>
-            <h1 class="entry__heading">Enter.</h1>
-        </ScrollReveal>
-        <ScrollReveal delay={700}>
-            <p class="entry__body">
-                Simulations, challenges, and daily practices across
-                cybersecurity, artificial intelligence, and quantum concepts.
-                Some run in minutes. Some return you every day. All run entirely
-                in your browser.
-            </p>
-        </ScrollReveal>
-        <div class="scroll-indicator" aria-hidden="true">
-            <span class="scroll-line"></span>
-            <span class="scroll-label">SCROLL</span>
-        </div>
-    </div>
-</section>
-
-<!-- ═══════ SECTION 2 — STATS BAR ═══════ -->
-<section class="stats-sec">
-    <div class="container">
-        <ScrollReveal>
-            <div class="game-stats-row">
-                <span>14 ACTIVE LABS</span>
-                <span class="sep">·</span>
-                <span>5 DAILY</span>
-                <span class="sep">·</span>
-                <span>CYBERSECURITY · AI · QUANTUM</span>
-                <span class="sep">·</span>
-                <span>0 ACCOUNTS REQUIRED</span>
-                <span class="sep">·</span>
-                <span>LOCAL STORAGE</span>
+<!-- ═══════ HERO BAR ═══════ -->
+<section class="hero-bar">
+    <div class="hero-bar__inner">
+        <div class="hero-bar__left">
+            <!-- Rotating geometry — compact -->
+            <div class="geo-wrap">
+                <div class="geo geo--outer"></div>
+                <div class="geo geo--mid"></div>
+                <div class="geo geo--inner"></div>
             </div>
-        </ScrollReveal>
-    </div>
-</section>
-
-<!-- ═══════ SECTION 3 — TAG FILTER ═══════ -->
-<section class="filter-sec">
-    <div class="container">
-        <div class="tag-filter">
-            {#each TAG_OPTIONS as tag}
-                <button
-                    class="tag-btn"
-                    class:active={activeTag === tag}
-                    onclick={() => (activeTag = tag)}
-                >
-                    {tag}
-                </button>
-            {/each}
+        </div>
+        <div class="hero-bar__content">
+            <span class="eyebrow">TRAINING LABS · PROGETA TECHNOLOGIES</span>
+            <h1 class="hero-bar__heading">Enter.</h1>
+            <p class="hero-bar__body">
+                Simulations, challenges, and daily practices across
+                cybersecurity, AI, and quantum. All run entirely in your
+                browser.
+            </p>
         </div>
     </div>
 </section>
 
-<!-- ═══════ SECTION 4 — GAME LIST ═══════ -->
-<section class="game-list-sec">
-    <div class="container">
-        {#each filteredGames as game, i}
-            <ScrollReveal delay={80 + i * 40}>
+<!-- ═══════ MAIN SPLIT LAYOUT ═══════ -->
+<div class="split-layout">
+    <!-- ── LEFT SIDEBAR ── -->
+    <aside class="sidebar">
+        <div class="sidebar__sticky">
+            <!-- Search -->
+            <div class="sidebar-block">
+                <label class="sidebar-label" for="game-search">SEARCH</label>
+                <div class="search-wrap">
+                    <input
+                        id="game-search"
+                        type="text"
+                        class="search-input"
+                        placeholder="Find a lab..."
+                        bind:value={searchQuery}
+                    />
+                    {#if searchQuery.length > 0}
+                        <button
+                            class="search-clear"
+                            onclick={() => (searchQuery = "")}>×</button
+                        >
+                    {/if}
+                </div>
+            </div>
+
+            <!-- Filters -->
+            <div class="sidebar-block">
+                <span class="sidebar-label">FILTER BY</span>
+                <div class="filter-list">
+                    {#each TAG_OPTIONS as tag}
+                        <button
+                            class="filter-btn"
+                            class:active={activeTag === tag}
+                            onclick={() => (activeTag = tag)}
+                        >
+                            <span
+                                class="filter-dot"
+                                class:on={activeTag === tag}
+                            ></span>
+                            {tag}
+                        </button>
+                    {/each}
+                </div>
+            </div>
+
+            <!-- Quick Stats -->
+            <div class="sidebar-block">
+                <span class="sidebar-label">SYSTEM STATUS</span>
+                <div class="sidebar-stats">
+                    <div class="sidebar-stat">
+                        <span class="sidebar-stat-val"
+                            >{filteredGames.length}</span
+                        >
+                        <span class="sidebar-stat-lbl">SHOWING</span>
+                    </div>
+                    <div class="sidebar-stat">
+                        <span class="sidebar-stat-val">{dailyCount}</span>
+                        <span class="sidebar-stat-lbl">DAILY</span>
+                    </div>
+                    <div class="sidebar-stat">
+                        <span class="sidebar-stat-val">{liveCount}</span>
+                        <span class="sidebar-stat-lbl">ON-DEMAND</span>
+                    </div>
+                    <div class="sidebar-stat">
+                        <span class="sidebar-stat-val">0</span>
+                        <span class="sidebar-stat-lbl">ACCOUNTS</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Domains -->
+            <div class="sidebar-block">
+                <span class="sidebar-label">DOMAINS</span>
+                <div class="domain-pills">
+                    <span class="domain-pill" style="--d: #E05C20;">CYBER</span>
+                    <span class="domain-pill" style="--d: #1A8FE3;">AI</span>
+                    <span class="domain-pill" style="--d: #A78FFF;"
+                        >QUANTUM</span
+                    >
+                </div>
+            </div>
+
+            <!-- Data notice -->
+            <div class="sidebar-block sidebar-notice">
+                <span class="notice-text"
+                    >All progress stored locally in this browser. No data
+                    uploaded.</span
+                >
+            </div>
+        </div>
+    </aside>
+
+    <!-- ── RIGHT PANEL — GAME CARDS ── -->
+    <main class="game-panel">
+        {#if filteredGames.length === 0}
+            <div class="no-results">
+                <span class="no-results-text">No labs match that filter.</span>
+                <button
+                    class="no-results-reset"
+                    onclick={() => {
+                        activeTag = "ALL";
+                        searchQuery = "";
+                    }}
+                >
+                    CLEAR FILTERS →
+                </button>
+            </div>
+        {/if}
+
+        <div class="game-grid">
+            {#each filteredGames as game, i (game.id)}
                 <a
                     href={game.href}
-                    class="game-band"
-                    style="--game-hover-bg: {game.hoverBg}; --game-accent: {game.accentColor};"
+                    class="game-card"
+                    style="--game-accent: {game.accentColor}; --game-hover-bg: {game.hoverBg};"
                 >
-                    <!-- Index -->
-                    <span class="game-index">{game.index}</span>
-
-                    <!-- Identity -->
-                    <div class="game-identity">
-                        {#if game.frequency === "daily"}
-                            <span class="game-daily-notice"
-                                >NEW TODAY · {todayLabel()}</span
-                            >
-                        {/if}
-                        <div class="game-tags-row">
-                            {#each game.tags as tag}
-                                <span class="game-tag">{tag}</span>
-                            {/each}
-                        </div>
-                        <h2 class="game-name">{game.name}</h2>
-                        <p class="game-desc">{game.description}</p>
-                        <div class="game-meta">
-                            {#each game.meta as m}
-                                <span class="game-meta-item">{m}</span>
-                            {/each}
-                        </div>
-                    </div>
-
-                    <!-- Status + CTA -->
-                    <div class="game-action">
-                        <span class="game-status">
+                    <!-- Top row: index + status -->
+                    <div class="card-top">
+                        <span class="card-index">{game.index}</span>
+                        <span class="card-status">
                             <span
                                 class="status-dot"
                                 class:live={game.status === "live"}
                                 class:daily={game.status === "daily"}
-                                class:soon={game.status === "coming-soon"}
                             ></span>
                             <span
-                                class="status-text"
+                                class="status-label"
                                 class:live={game.status === "live"}
                                 class:daily={game.status === "daily"}
                                 >{game.statusLabel}</span
                             >
                         </span>
-                        <span class="game-enter-cta">{game.cta}</span>
                     </div>
-                </a>
-            </ScrollReveal>
-        {/each}
-    </div>
-</section>
 
-<!-- ═══════ EXPORT UTILITY ═══════ -->
-<section class="export-sec">
-    <div class="container">
-        <ScrollReveal>
-            <div class="export-row">
-                <button
-                    class="export-btn"
-                    onclick={() => {
-                        const keys = Object.keys(localStorage).filter((k) =>
-                            k.startsWith("pt-"),
-                        );
-                        const data: Record<string, string | null> = {};
-                        keys.forEach((k) => {
-                            data[k] = localStorage.getItem(k);
-                        });
-                        const blob = new Blob([JSON.stringify(data, null, 2)], {
-                            type: "application/json",
-                        });
-                        const url = URL.createObjectURL(blob);
-                        const a = document.createElement("a");
-                        a.href = url;
-                        a.download = `progeta-game-data-${new Date().toISOString().slice(0, 10)}.json`;
-                        a.click();
-                        URL.revokeObjectURL(url);
-                    }}>EXPORT ALL MY DATA →</button
-                >
-                <span class="export-note"
-                    >Downloads all locally stored game progress as a JSON file.</span
-                >
-            </div>
-        </ScrollReveal>
-    </div>
-</section>
+                    <!-- Daily notice -->
+                    {#if game.frequency === "daily"}
+                        <span class="daily-badge"
+                            >NEW TODAY · {todayLabel()}</span
+                        >
+                    {/if}
+
+                    <!-- Name -->
+                    <h2 class="card-name">{game.name}</h2>
+
+                    <!-- Tagline -->
+                    <p class="card-tagline">{game.tagline}</p>
+
+                    <!-- Tags -->
+                    <div class="card-tags">
+                        {#each game.tags as tag}
+                            <span class="card-tag">{tag}</span>
+                        {/each}
+                    </div>
+
+                    <!-- Bottom row: stars, users, meta -->
+                    <div class="card-bottom">
+                        <div class="card-engagement">
+                            <span class="card-stars">
+                                <span class="star-icon">★</span>
+                                {engagement[game.id]?.stars ?? "—"}
+                            </span>
+                            <span class="card-users">
+                                <span class="user-icon">●</span>
+                                {engagement[game.id]?.users ?? "—"}
+                            </span>
+                        </div>
+                        <div class="card-meta">
+                            {#each game.meta as m}
+                                <span class="meta-item">{m}</span>
+                            {/each}
+                        </div>
+                    </div>
+
+                    <!-- CTA -->
+                    <span class="card-cta">{game.cta}</span>
+
+                    <!-- Accent line -->
+                    <div class="card-accent-line"></div>
+                </a>
+            {/each}
+        </div>
+
+        <!-- Export utility -->
+        <div class="export-row">
+            <button
+                class="export-btn"
+                onclick={() => {
+                    const keys = Object.keys(localStorage).filter((k) =>
+                        k.startsWith("pt-"),
+                    );
+                    const data: Record<string, string | null> = {};
+                    keys.forEach((k) => {
+                        data[k] = localStorage.getItem(k);
+                    });
+                    const blob = new Blob([JSON.stringify(data, null, 2)], {
+                        type: "application/json",
+                    });
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement("a");
+                    a.href = url;
+                    a.download = `progeta-game-data-${new Date().toISOString().slice(0, 10)}.json`;
+                    a.click();
+                    URL.revokeObjectURL(url);
+                }}>EXPORT ALL MY DATA →</button
+            >
+        </div>
+    </main>
+</div>
 
 <style>
     /* ═══════════════════════════════════════════════════
-     SHARED TOKENS
+     TOKENS
      ═══════════════════════════════════════════════════ */
-    .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 clamp(20px, 4vw, 64px);
-    }
     .eyebrow {
         font-family: "DM Mono", monospace;
         font-size: 10px;
@@ -204,80 +300,80 @@
     }
 
     /* ═══════════════════════════════════════════════════
-     SECTION 1 — ENTRY
+     HERO BAR
      ═══════════════════════════════════════════════════ */
-    .entry {
-        min-height: 100vh;
-        display: flex;
-        align-items: flex-end;
-        padding-bottom: clamp(60px, 8vw, 100px);
+    .hero-bar {
         background: #020408;
-        position: relative;
-        overflow: hidden;
+        padding: clamp(100px, 14vw, 160px) clamp(20px, 4vw, 64px)
+            clamp(40px, 5vw, 60px);
+        border-bottom: 1px solid #0f1220;
     }
-    .entry__content {
-        position: relative;
-        z-index: 1;
+    .hero-bar__inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        gap: 48px;
     }
-    .entry__heading {
+    .hero-bar__left {
+        flex-shrink: 0;
+    }
+    .hero-bar__content {
+        flex: 1;
+    }
+    .hero-bar__heading {
         font-family: "Cormorant Garamond", Georgia, serif;
         font-weight: 700;
-        font-size: clamp(48px, 7vw, 80px);
+        font-size: clamp(48px, 7vw, 72px);
         line-height: 0.9;
         color: #edf0ff;
-        margin-top: 16px;
+        margin-top: 12px;
         letter-spacing: -0.03em;
     }
-    .entry__body {
+    .hero-bar__body {
         font-family: "DM Sans", sans-serif;
         font-weight: 300;
-        font-size: clamp(14px, 1.5vw, 16px);
+        font-size: clamp(14px, 1.4vw, 15px);
         color: #424870;
-        max-width: 420px;
-        margin-top: 16px;
-        line-height: 1.72;
+        max-width: 460px;
+        margin-top: 12px;
+        line-height: 1.68;
     }
 
-    /* Rotating geometry — three concentric rectangles */
-    .entry-geo-wrap {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 120px;
-        height: 120px;
-        pointer-events: none;
-        z-index: 0;
+    /* Rotating geometry — compact version */
+    .geo-wrap {
+        width: 80px;
+        height: 80px;
+        position: relative;
     }
-    .entry-geo {
+    .geo {
         position: absolute;
         border: 1px solid #0f1220;
         top: 50%;
         left: 50%;
     }
-    .entry-geo--outer {
-        width: 120px;
-        height: 120px;
-        margin-top: -60px;
-        margin-left: -60px;
-        animation: rotate-outer 200s linear infinite;
-    }
-    .entry-geo--mid {
+    .geo--outer {
         width: 80px;
         height: 80px;
         margin-top: -40px;
         margin-left: -40px;
-        animation: rotate-mid 120s linear infinite;
+        animation: rot-outer 200s linear infinite;
     }
-    .entry-geo--inner {
-        width: 40px;
-        height: 40px;
-        margin-top: -20px;
-        margin-left: -20px;
-        animation: rotate-inner 75s linear infinite;
+    .geo--mid {
+        width: 52px;
+        height: 52px;
+        margin-top: -26px;
+        margin-left: -26px;
+        animation: rot-mid 120s linear infinite;
     }
-
-    @keyframes rotate-outer {
+    .geo--inner {
+        width: 28px;
+        height: 28px;
+        margin-top: -14px;
+        margin-left: -14px;
+        animation: rot-inner 75s linear infinite;
+    }
+    @keyframes rot-outer {
         from {
             transform: rotate(0deg);
         }
@@ -285,7 +381,7 @@
             transform: rotate(360deg);
         }
     }
-    @keyframes rotate-mid {
+    @keyframes rot-mid {
         from {
             transform: rotate(0deg);
         }
@@ -293,7 +389,7 @@
             transform: rotate(-360deg);
         }
     }
-    @keyframes rotate-inner {
+    @keyframes rot-inner {
         from {
             transform: rotate(15deg);
         }
@@ -302,256 +398,294 @@
         }
     }
 
-    /* Scroll indicator */
-    .scroll-indicator {
-        position: absolute;
-        bottom: -40px;
-        left: 50%;
-        transform: translateX(-50%);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 8px;
-    }
-    .scroll-line {
-        width: 1px;
-        height: 32px;
-        background: #1e2440;
-        animation: float-line 2.4s ease-in-out infinite;
-    }
-    .scroll-label {
-        font-family: "DM Mono", monospace;
-        font-size: 9px;
-        letter-spacing: 0.18em;
-        color: #1e2440;
-    }
-    @keyframes float-line {
-        0%,
-        100% {
-            opacity: 0.4;
-            transform: translateY(0);
-        }
-        50% {
-            opacity: 1;
-            transform: translateY(6px);
-        }
+    /* ═══════════════════════════════════════════════════
+     SPLIT LAYOUT
+     ═══════════════════════════════════════════════════ */
+    .split-layout {
+        display: grid;
+        grid-template-columns: 240px 1fr;
+        max-width: 1400px;
+        margin: 0 auto;
+        min-height: 80vh;
+        background: #020408;
     }
 
     /* ═══════════════════════════════════════════════════
-     SECTION 2 — STATS BAR
+     SIDEBAR
      ═══════════════════════════════════════════════════ */
-    .stats-sec {
-        background: #020408;
+    .sidebar {
+        border-right: 1px solid #0f1220;
+        padding: 0;
+        position: relative;
     }
-    .game-stats-row {
+    .sidebar__sticky {
+        position: sticky;
+        top: 80px;
+        padding: 24px 20px 40px;
+        display: flex;
+        flex-direction: column;
+        gap: 28px;
+        max-height: calc(100vh - 100px);
+        overflow-y: auto;
+    }
+    .sidebar-block {
+    }
+    .sidebar-label {
+        font-family: "DM Mono", monospace;
+        font-size: 9px;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: #1e2440;
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    /* Search */
+    .search-wrap {
+        position: relative;
+    }
+    .search-input {
+        width: 100%;
+        background: #07090f;
+        border: 1px solid #0f1220;
+        border-radius: 3px;
+        padding: 8px 10px;
+        font-family: "DM Mono", monospace;
+        font-size: 11px;
+        color: #8890bb;
+        letter-spacing: 0.04em;
+        outline: none;
+        transition: border-color 0.2s;
+        box-sizing: border-box;
+    }
+    .search-input::placeholder {
+        color: #1e2440;
+    }
+    .search-input:focus {
+        border-color: #424870;
+    }
+    .search-clear {
+        position: absolute;
+        right: 6px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        color: #424870;
+        font-size: 14px;
+        cursor: pointer;
+        padding: 2px 4px;
+    }
+
+    /* Filter list */
+    .filter-list {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+    }
+    .filter-btn {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: transparent;
+        border: none;
+        padding: 6px 8px;
+        border-radius: 3px;
+        font-family: "DM Mono", monospace;
+        font-size: 9px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: #424870;
+        cursor: pointer;
+        transition:
+            background 0.15s,
+            color 0.15s;
+        text-align: left;
+    }
+    .filter-btn:hover {
+        background: #07090f;
+        color: #8890bb;
+    }
+    .filter-btn.active {
+        color: #edf0ff;
+        background: rgba(237, 240, 255, 0.04);
+    }
+    .filter-dot {
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        border: 1px solid #1e2440;
+        flex-shrink: 0;
+        transition:
+            background 0.15s,
+            border-color 0.15s;
+    }
+    .filter-dot.on {
+        background: #edf0ff;
+        border-color: #edf0ff;
+    }
+
+    /* Sidebar stats */
+    .sidebar-stats {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1px;
+        background: #0f1220;
+    }
+    .sidebar-stat {
+        background: #020408;
+        padding: 12px 10px;
+        text-align: center;
+    }
+    .sidebar-stat-val {
+        font-family: "DM Mono", monospace;
+        font-weight: 700;
+        font-size: 18px;
+        color: #edf0ff;
+        display: block;
+    }
+    .sidebar-stat-lbl {
+        font-family: "DM Mono", monospace;
+        font-size: 8px;
+        letter-spacing: 0.12em;
+        color: #1e2440;
+        display: block;
+        margin-top: 2px;
+    }
+
+    /* Domain pills */
+    .domain-pills {
         display: flex;
         flex-wrap: wrap;
-        gap: 8px 16px;
-        align-items: center;
+        gap: 6px;
+    }
+    .domain-pill {
+        font-family: "DM Mono", monospace;
+        font-size: 8px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--d);
+        border: 1px solid var(--d);
+        padding: 3px 8px;
+        border-radius: 2px;
+        opacity: 0.6;
+    }
+
+    /* Notice */
+    .sidebar-notice {
+        margin-top: auto;
+    }
+    .notice-text {
+        font-family: "DM Mono", monospace;
+        font-size: 8px;
+        letter-spacing: 0.08em;
+        color: #1e2440;
+        line-height: 1.5;
+    }
+
+    /* ═══════════════════════════════════════════════════
+     GAME PANEL (RIGHT)
+     ═══════════════════════════════════════════════════ */
+    .game-panel {
+        padding: 24px clamp(20px, 3vw, 40px) 60px;
+        background: #03040a;
+    }
+
+    .no-results {
+        text-align: center;
+        padding: 80px 20px;
+    }
+    .no-results-text {
+        font-family: "DM Mono", monospace;
+        font-size: 11px;
+        color: #424870;
+        display: block;
+        margin-bottom: 12px;
+    }
+    .no-results-reset {
         font-family: "DM Mono", monospace;
         font-size: 10px;
         letter-spacing: 0.12em;
-        text-transform: uppercase;
-        color: #1e2440;
-        padding: 24px 0;
-        border-top: 1px solid #0f1220;
-        border-bottom: 1px solid #0f1220;
-    }
-    .game-stats-row .sep {
-        color: #0f1220;
-    }
-
-    /* ═══════════════════════════════════════════════════
-     SECTION 3 — TAG FILTER
-     ═══════════════════════════════════════════════════ */
-    .filter-sec {
-        background: #020408;
-    }
-    .tag-filter {
-        display: flex;
-        gap: 8px;
-        flex-wrap: wrap;
-        padding: clamp(24px, 3vw, 40px) 0;
-    }
-    .tag-btn {
-        font-family: "DM Mono", monospace;
-        font-size: 9px;
-        letter-spacing: 0.14em;
-        text-transform: uppercase;
-        padding: 6px 12px;
-        border: 1px solid #0f1220;
-        border-radius: 2px;
-        background: transparent;
-        color: #1e2440;
-        cursor: pointer;
-        transition:
-            border-color 0.15s,
-            color 0.15s,
-            background 0.15s;
-    }
-    .tag-btn:hover {
-        border-color: #424870;
-        color: #8890bb;
-    }
-    .tag-btn.active {
-        border-color: #edf0ff;
         color: #edf0ff;
-        background: rgba(237, 240, 255, 0.05);
-    }
-
-    /* ═══════════════════════════════════════════════════
-     SECTION 4 — GAME BANDS
-     ═══════════════════════════════════════════════════ */
-    .game-list-sec {
-        background: #03040a;
-        padding-bottom: clamp(40px, 6vw, 80px);
-    }
-
-    .game-band {
-        border-top: 1px solid #0f1220;
-        padding: clamp(32px, 5vw, 56px) 0;
-        display: grid;
-        grid-template-columns: 48px 1fr minmax(120px, 160px);
-        gap: 0 32px;
-        align-items: start;
+        background: transparent;
+        border: 1px solid #0f1220;
+        padding: 6px 14px;
+        border-radius: 2px;
         cursor: pointer;
+    }
+
+    /* Game grid — 2 columns */
+    .game-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1px;
+        background: #0f1220;
+    }
+
+    /* Game card */
+    .game-card {
+        background: #03040a;
+        padding: clamp(20px, 2.5vw, 32px);
+        display: flex;
+        flex-direction: column;
         text-decoration: none;
         color: inherit;
         position: relative;
         overflow: hidden;
         transition: background 0.3s ease;
+        cursor: pointer;
     }
-    .game-band:last-child {
-        border-bottom: 1px solid #0f1220;
-    }
-    .game-band:hover {
+    .game-card:hover {
         background: var(--game-hover-bg, #07090f);
     }
 
-    .game-band::after {
-        content: "";
+    /* Accent line on hover */
+    .card-accent-line {
         position: absolute;
-        top: -1px;
+        top: 0;
         left: 0;
-        height: 1px;
         width: 0;
+        height: 2px;
         background: var(--game-accent, #edf0ff);
         transition: width 0.5s cubic-bezier(0.76, 0, 0.24, 1);
     }
-    .game-band:hover::after {
+    .game-card:hover .card-accent-line {
         width: 100%;
     }
 
-    /* Index */
-    .game-index {
+    /* Card top row */
+    .card-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 12px;
+    }
+    .card-index {
         font-family: "DM Mono", monospace;
         font-size: 9px;
         letter-spacing: 0.14em;
         color: #1e2440;
-        padding-top: 5px;
     }
-
-    /* Identity */
-    .game-daily-notice {
-        font-family: "DM Mono", monospace;
-        font-size: 8px;
-        letter-spacing: 0.16em;
-        text-transform: uppercase;
-        color: #1a8fe3;
-        margin-bottom: 6px;
-        display: block;
-    }
-    .game-tags-row {
-        display: flex;
-        gap: 6px;
-        flex-wrap: wrap;
-        margin-bottom: 10px;
-    }
-    .game-tag {
-        font-family: "DM Mono", monospace;
-        font-size: 8px;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        padding: 2px 6px;
-        border: 1px solid #0f1220;
-        border-radius: 2px;
-        color: #424870;
-        transition:
-            border-color 0.2s,
-            color 0.2s;
-    }
-    .game-band:hover .game-tag {
-        border-color: #1e2440;
-        color: #8890bb;
-    }
-    .game-name {
-        font-family: "Cormorant Garamond", Georgia, serif;
-        font-weight: 700;
-        font-size: clamp(24px, 3vw, 38px);
-        color: #edf0ff;
-        line-height: 1;
-        margin: 0 0 10px 0;
-        letter-spacing: -0.01em;
-    }
-    .game-desc {
-        font-family: "DM Sans", sans-serif;
-        font-weight: 300;
-        font-size: 14px;
-        line-height: 1.72;
-        color: #424870;
-        max-width: 560px;
-        margin: 0 0 14px 0;
-        transition: color 0.3s ease;
-    }
-    .game-band:hover .game-desc {
-        color: #8890bb;
-    }
-
-    .game-meta {
-        font-family: "DM Mono", monospace;
-        font-size: 9px;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        color: #1e2440;
-        display: flex;
-        gap: 16px;
-        flex-wrap: wrap;
-    }
-
-    /* Action column */
-    .game-action {
-        text-align: right;
-        padding-top: 4px;
-    }
-    .game-status {
+    .card-status {
         display: flex;
         align-items: center;
-        justify-content: flex-end;
-        gap: 6px;
-        font-family: "DM Mono", monospace;
-        font-size: 9px;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        margin-bottom: 12px;
+        gap: 5px;
     }
     .status-dot {
         width: 5px;
         height: 5px;
         border-radius: 50%;
+        background: #1e2440;
     }
     .status-dot.live {
         background: #18c96a;
-        animation: pulse-green 2.4s ease-in-out infinite;
+        animation: pulse-g 2.4s ease-in-out infinite;
     }
     .status-dot.daily {
         background: #1a8fe3;
-        animation: pulse-blue 2s ease-in-out infinite;
+        animation: pulse-b 2s ease-in-out infinite;
     }
-    .status-dot.soon {
-        background: #1e2440;
-    }
-
-    @keyframes pulse-green {
+    @keyframes pulse-g {
         0%,
         100% {
             opacity: 1;
@@ -560,7 +694,7 @@
             opacity: 0.4;
         }
     }
-    @keyframes pulse-blue {
+    @keyframes pulse-b {
         0%,
         100% {
             opacity: 1;
@@ -570,60 +704,157 @@
         }
     }
 
-    .status-text {
+    .status-label {
+        font-family: "DM Mono", monospace;
+        font-size: 8px;
+        letter-spacing: 0.12em;
         color: #424870;
     }
-    .status-text.live {
+    .status-label.live {
         color: #18c96a;
     }
-    .status-text.daily {
+    .status-label.daily {
         color: #1a8fe3;
     }
 
-    .game-enter-cta {
+    /* Daily badge */
+    .daily-badge {
+        font-family: "DM Mono", monospace;
+        font-size: 8px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: #1a8fe3;
+        margin-bottom: 8px;
+        display: block;
+    }
+
+    /* Card name */
+    .card-name {
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-weight: 700;
+        font-size: clamp(20px, 2.2vw, 28px);
+        color: #edf0ff;
+        line-height: 1.05;
+        margin: 0 0 8px 0;
+        letter-spacing: -0.01em;
+    }
+
+    /* Tagline */
+    .card-tagline {
+        font-family: "DM Sans", sans-serif;
+        font-weight: 300;
+        font-style: italic;
+        font-size: 13px;
+        line-height: 1.55;
+        color: #424870;
+        margin: 0 0 12px 0;
+        transition: color 0.3s ease;
+        flex: 1;
+    }
+    .game-card:hover .card-tagline {
+        color: #8890bb;
+    }
+
+    /* Card tags */
+    .card-tags {
+        display: flex;
+        gap: 4px;
+        flex-wrap: wrap;
+        margin-bottom: 14px;
+    }
+    .card-tag {
+        font-family: "DM Mono", monospace;
+        font-size: 7px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        padding: 2px 5px;
+        border: 1px solid #0f1220;
+        border-radius: 2px;
+        color: #424870;
+        transition:
+            border-color 0.2s,
+            color 0.2s;
+    }
+    .game-card:hover .card-tag {
+        border-color: #1e2440;
+        color: #8890bb;
+    }
+
+    /* Bottom row: engagement + meta */
+    .card-bottom {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        margin-bottom: 12px;
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+    .card-engagement {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+    }
+    .card-stars,
+    .card-users {
         font-family: "DM Mono", monospace;
         font-size: 10px;
+        color: #424870;
+        display: flex;
+        align-items: center;
+        gap: 3px;
+    }
+    .star-icon {
+        color: #e05c20;
+        font-size: 10px;
+    }
+    .user-icon {
+        color: #1e2440;
+        font-size: 6px;
+    }
+    .card-meta {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+    .meta-item {
+        font-family: "DM Mono", monospace;
+        font-size: 8px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: #1e2440;
+    }
+
+    /* CTA */
+    .card-cta {
+        font-family: "DM Mono", monospace;
+        font-size: 9px;
         letter-spacing: 0.14em;
         text-transform: uppercase;
         color: #1e2440;
-        opacity: 0;
-        transform: translateX(8px);
-        transition:
-            opacity 0.2s ease,
-            transform 0.2s ease,
-            color 0.2s ease;
-        display: block;
+        transition: color 0.2s ease;
+        margin-top: auto;
     }
-    .game-band:hover .game-enter-cta {
-        opacity: 1;
-        transform: translateX(0);
+    .game-card:hover .card-cta {
         color: var(--game-accent, #edf0ff);
     }
 
     /* ═══════════════════════════════════════════════════
-     EXPORT UTILITY
+     EXPORT ROW
      ═══════════════════════════════════════════════════ */
-    .export-sec {
-        background: #03040a;
-        padding-bottom: clamp(80px, 11vw, 144px);
-    }
     .export-row {
+        margin-top: 32px;
+        padding-top: 24px;
         border-top: 1px solid #0f1220;
-        padding-top: 32px;
-        display: flex;
-        align-items: center;
-        gap: 16px;
-        flex-wrap: wrap;
     }
     .export-btn {
         font-family: "DM Mono", monospace;
-        font-size: 10px;
-        letter-spacing: 0.14em;
+        font-size: 9px;
+        letter-spacing: 0.12em;
         text-transform: uppercase;
         color: #424870;
         background: transparent;
         border: 1px solid #0f1220;
-        padding: 8px 16px;
+        padding: 8px 14px;
         border-radius: 2px;
         cursor: pointer;
         transition:
@@ -634,71 +865,60 @@
         border-color: #edf0ff;
         color: #edf0ff;
     }
-    .export-note {
-        font-family: "DM Mono", monospace;
-        font-size: 9px;
-        letter-spacing: 0.1em;
-        color: #1e2440;
-    }
 
     /* ═══════════════════════════════════════════════════
-     RESPONSIVE (< 640px)
+     RESPONSIVE
      ═══════════════════════════════════════════════════ */
-    @media (max-width: 640px) {
-        .entry__heading {
-            font-size: clamp(40px, 10vw, 56px);
-        }
-        .entry-geo-wrap {
-            width: 80px;
-            height: 80px;
-        }
-        .entry-geo--outer {
-            width: 80px;
-            height: 80px;
-            margin-top: -40px;
-            margin-left: -40px;
-        }
-        .entry-geo--mid {
-            width: 52px;
-            height: 52px;
-            margin-top: -26px;
-            margin-left: -26px;
-        }
-        .entry-geo--inner {
-            width: 28px;
-            height: 28px;
-            margin-top: -14px;
-            margin-left: -14px;
-        }
-
-        .game-band {
+    @media (max-width: 960px) {
+        .game-grid {
             grid-template-columns: 1fr;
-            gap: 12px 0;
-            padding: 24px 0;
         }
-        .game-index {
-            font-size: 8px;
-            margin-bottom: 4px;
-            display: block;
+    }
+
+    @media (max-width: 740px) {
+        .split-layout {
+            grid-template-columns: 1fr;
         }
-        .game-name {
-            font-size: clamp(22px, 6vw, 30px);
+        .sidebar {
+            border-right: none;
+            border-bottom: 1px solid #0f1220;
         }
-        .game-action {
-            text-align: left;
+        .sidebar__sticky {
+            position: static;
+            max-height: none;
+            padding: 20px clamp(16px, 4vw, 40px);
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 16px;
         }
-        .game-status {
-            justify-content: flex-start;
+        .sidebar-block {
+            min-width: 140px;
+            flex: 1;
         }
-        /* CTA always visible on mobile */
-        .game-enter-cta {
-            opacity: 1;
-            transform: translateX(0);
-            color: #424870;
+        .filter-list {
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 4px;
         }
-        .game-stats-row {
-            gap: 6px 12px;
-            font-size: 9px;
+        .sidebar-stats {
+            grid-template-columns: repeat(4, 1fr);
+        }
+        .sidebar-notice {
+            display: none;
+        }
+        .hero-bar__inner {
+            flex-direction: column;
+            gap: 20px;
+            align-items: flex-start;
+        }
+        .hero-bar__heading {
+            font-size: clamp(40px, 9vw, 56px);
+        }
+        .game-grid {
+            grid-template-columns: 1fr;
+        }
+        .card-name {
+            font-size: clamp(20px, 5vw, 26px);
         }
     }
 </style>
