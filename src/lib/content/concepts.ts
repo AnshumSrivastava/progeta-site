@@ -36,7 +36,7 @@ export const concepts: Concept[] = [
         options: [
             'The network memorises every example it has ever seen',
             'The connection weights are adjusted to reduce errors in output',
-            'New neurons are added to increase the network's size',
+            "New neurons are added to increase the network's size",
         ],
         correctIndex: 1,
         reinforcement: 'Training is the process of adjusting weights. The network does not memorise — it generalises patterns from examples by minimising the difference between its output and the correct answer.',
@@ -241,8 +241,8 @@ export const concepts: Concept[] = [
         domain: 'CYBERSECURITY',
         title: 'What is a Firewall?',
         explanation: 'A firewall is a security system that monitors and controls incoming and outgoing network traffic based on predetermined rules. It acts as a barrier between a trusted internal network and untrusted external networks. Firewalls can be hardware devices, software programs, or both. They inspect packets and decide whether to allow or block them.',
-        analogy: 'A firewall is like a security guard at a building entrance. They check every person's ID against a list of who is allowed in and who is not.Some guards are strict(block everything not explicitly allowed), others are permissive(allow everything not explicitly blocked).',
-    question: 'What does a firewall primarily do?',
+        analogy: "A firewall is like a security guard at a building entrance. They check every person's ID against a list of who is allowed in and who is not. Some guards are strict (block everything not explicitly allowed), others are permissive (allow everything not explicitly blocked).",
+        question: 'What does a firewall primarily do?',
         options: [
             'Encrypts all data leaving the network',
             'Filters network traffic based on predefined security rules',
@@ -360,8 +360,8 @@ export const concepts: Concept[] = [
         id: 24,
         domain: 'CYBERSECURITY',
         title: 'What is Ransomware?',
-        explanation: 'Ransomware is malware that encrypts a victim's files and demands payment for the decryption key.Modern ransomware often uses double extortion — encrypting data AND threatening to publish it.It typically spreads through phishing emails, compromised websites, or exploited vulnerabilities.Paying the ransom does not guarantee data recovery.',
-    analogy: 'Someone breaks into your house, puts all your belongings in safes with locks only they have the keys to, and leaves a note demanding payment. Even if you pay, there is no guarantee they will actually give you the keys — and they might come back.',
+        explanation: "Ransomware is malware that encrypts a victim's files and demands payment for the decryption key. Modern ransomware often uses double extortion — encrypting data AND threatening to publish it. It typically spreads through phishing emails, compromised websites, or exploited vulnerabilities. Paying the ransom does not guarantee data recovery.",
+        analogy: 'Someone breaks into your house, puts all your belongings in safes with locks only they have the keys to, and leaves a note demanding payment. Even if you pay, there is no guarantee they will actually give you the keys — and they might come back.',
         question: 'Why do security experts generally advise against paying ransomware demands?',
         options: [
             'Because the payment methods are too complicated',
