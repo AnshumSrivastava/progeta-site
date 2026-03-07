@@ -8,8 +8,6 @@ const NAV_HTML = `
         <a class="nav-logo" href="/" aria-label="Progeta Technologies — Home">Progeta Technologies</a>
 
         <div class="nav-links" id="nav-links">
-            <a href="/about.html" class="nav-link" data-path="/about">Mission</a>
-
             <div class="nav-dropdown" id="initiatives-dropdown">
                 <button class="nav-link nav-dropdown-trigger" aria-expanded="false" aria-haspopup="true">
                     Initiatives
@@ -39,9 +37,87 @@ const NAV_HTML = `
                 </div>
             </div>
 
-            <a href="/games/" class="nav-link" data-path="/games">Games</a>
-            <a href="/intel/" class="nav-link" data-path="/intel">Intel</a>
-            <a href="/about.html" class="nav-link" data-path="/about">About</a>
+            <div class="nav-dropdown" id="academy-dropdown">
+                <button class="nav-link nav-dropdown-trigger" aria-expanded="false" aria-haspopup="true">
+                    Academy
+                    <svg width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true">
+                        <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+                <div class="dropdown-panel" role="menu" aria-label="Academy">
+                    <div class="dropdown-grid">
+                        <a href="/modules/" class="dropdown-item" role="menuitem">
+                            <span class="dropdown-name">Modules</span>
+                            <span class="dropdown-desc">Core learning blocks for various domains.</span>
+                        </a>
+                        <a href="/tracks/" class="dropdown-item" role="menuitem">
+                            <span class="dropdown-name">Tracks</span>
+                            <span class="dropdown-desc">Guided learning paths for mastery.</span>
+                        </a>
+                        <a href="/workshops/" class="dropdown-item" role="menuitem">
+                            <span class="dropdown-name">Workshops</span>
+                            <span class="dropdown-desc">Live, interactive sessions with experts.</span>
+                        </a>
+                        <a href="/simulations/" class="dropdown-item" role="menuitem">
+                            <span class="dropdown-name">Simulations</span>
+                            <span class="dropdown-desc">Real-world scenarios to test your skills.</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="nav-dropdown" id="community-dropdown">
+                <button class="nav-link nav-dropdown-trigger" aria-expanded="false" aria-haspopup="true">
+                    Community
+                    <svg width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true">
+                        <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+                <div class="dropdown-panel" role="menu" aria-label="Community">
+                    <div class="dropdown-grid">
+                        <a href="/community/" class="dropdown-item" role="menuitem">
+                            <span class="dropdown-name">Forum</span>
+                            <span class="dropdown-desc">Connect with others in our community.</span>
+                        </a>
+                        <a href="/events/" class="dropdown-item" role="menuitem">
+                            <span class="dropdown-name">Events</span>
+                            <span class="dropdown-desc">Upcoming meetups and web conferences.</span>
+                        </a>
+                        <a href="/intel/" class="dropdown-item" role="menuitem">
+                            <span class="dropdown-name">Intel</span>
+                            <span class="dropdown-desc">Latest news and insights from Progeta.</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="nav-dropdown" id="resources-dropdown">
+                <button class="nav-link nav-dropdown-trigger" aria-expanded="false" aria-haspopup="true">
+                    Resources
+                    <svg width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true">
+                        <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+                <div class="dropdown-panel" role="menu" aria-label="Resources">
+                    <div class="dropdown-grid">
+                        <a href="/resources/" class="dropdown-item" role="menuitem">
+                            <span class="dropdown-name">Library</span>
+                            <span class="dropdown-desc">Documentation, assets, and tools.</span>
+                        </a>
+                        <a href="/verify/" class="dropdown-item" role="menuitem">
+                            <span class="dropdown-name">Verify</span>
+                            <span class="dropdown-desc">Check the authenticity of certificates.</span>
+                        </a>
+                        <a href="/games/" class="dropdown-item" role="menuitem">
+                            <span class="dropdown-name">Games</span>
+                            <span class="dropdown-desc">Interactive experiences and projects.</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <a href="/about/" class="nav-link" data-path="/about">About</a>
+            <a href="/pricing/" class="nav-link" data-path="/pricing">Pricing</a>
         </div>
 
         <a href="/contact/" class="nav-contact btn-secondary" style="padding:10px 20px;font-size:12px;">Contact</a>
@@ -63,13 +139,33 @@ const NAV_HTML = `
             </svg>
         </button>
         <div class="drawer-links">
-            <a href="/about.html" class="drawer-link">Mission</a>
-            <a href="/launchpad/" class="drawer-link">LaunchPad</a>
-            <a href="/selfos/" class="drawer-link">SelfOS</a>
-            <a href="/innercircle/" class="drawer-link">InnerCircle</a>
-            <a href="/games/" class="drawer-link">Games</a>
-            <a href="/intel/" class="drawer-link">Intel</a>
-            <a href="/about.html" class="drawer-link">About</a>
+            <div class="drawer-section">
+                <span class="drawer-section-label">Initiatives</span>
+                <a href="/launchpad/" class="drawer-link">LaunchPad</a>
+                <a href="/selfos/" class="drawer-link">SelfOS</a>
+                <a href="/innercircle/" class="drawer-link">InnerCircle</a>
+            </div>
+            <div class="drawer-section">
+                <span class="drawer-section-label">Academy</span>
+                <a href="/modules/" class="drawer-link">Modules</a>
+                <a href="/tracks/" class="drawer-link">Tracks</a>
+                <a href="/workshops/" class="drawer-link">Workshops</a>
+                <a href="/simulations/" class="drawer-link">Simulations</a>
+            </div>
+            <div class="drawer-section">
+                <span class="drawer-section-label">Community</span>
+                <a href="/community/" class="drawer-link">Forum</a>
+                <a href="/events/" class="drawer-link">Events</a>
+                <a href="/intel/" class="drawer-link">Intel</a>
+            </div>
+            <div class="drawer-section">
+                <span class="drawer-section-label">Resources</span>
+                <a href="/resources/" class="drawer-link">Library</a>
+                <a href="/verify/" class="drawer-link">Verify</a>
+                <a href="/games/" class="drawer-link">Games</a>
+            </div>
+            <a href="/about/" class="drawer-link">About</a>
+            <a href="/pricing/" class="drawer-link">Pricing</a>
         </div>
         <div class="drawer-bottom">
             <a href="/contact/" class="btn-primary" style="width:100%;text-align:center;justify-content:center;">Contact</a>
@@ -100,22 +196,26 @@ const FOOTER_HTML = `
                 <a href="/launchpad/">LaunchPad</a>
                 <a href="/selfos/">SelfOS</a>
                 <a href="/innercircle/">InnerCircle</a>
-                <span class="footer-muted">More coming</span>
             </div>
             <div class="footer-col">
-                <h4 class="footer-heading">Resources</h4>
-                <a href="/games/">Games</a>
+                <h4 class="footer-heading">Academy</h4>
+                <a href="/modules/">Modules</a>
+                <a href="/tracks/">Tracks</a>
+                <a href="/workshops/">Workshops</a>
+                <a href="/simulations/">Simulations</a>
+            </div>
+            <div class="footer-col">
+                <h4 class="footer-heading">Community</h4>
+                <a href="/community/">Forum</a>
+                <a href="/events/">Events</a>
                 <a href="/intel/">Intel</a>
-                <a href="/verify/">Verify Certificate</a>
-                <a href="/contact/">Contact</a>
             </div>
             <div class="footer-col">
                 <h4 class="footer-heading">Company</h4>
-                <a href="/about.html">Mission</a>
-                <a href="/about.html">About</a>
-                <a href="/contact/">Pricing</a>
-                <a href="#">Privacy Policy</a>
-                <a href="#">Terms of Use</a>
+                <a href="/about/">About</a>
+                <a href="/pricing/">Pricing</a>
+                <a href="/contact/">Contact</a>
+                <a href="/verify/">Verify</a>
             </div>
         </div>
         <div class="footer-bottom">
@@ -141,20 +241,34 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    /* ── Initiatives Dropdown ────────────────────────────── */
-    const trigger = document.querySelector('.nav-dropdown-trigger');
-    const dropdown = document.getElementById('initiatives-dropdown');
-    if (trigger && dropdown) {
-        trigger.addEventListener('click', (e) => {
-            e.stopPropagation();
-            const isOpen = dropdown.classList.toggle('is-open');
-            trigger.setAttribute('aria-expanded', isOpen);
-        });
-        document.addEventListener('click', () => {
+    /* ── Dropdowns ───────────────────────────────────────── */
+    const dropdowns = document.querySelectorAll('.nav-dropdown');
+    dropdowns.forEach(dropdown => {
+        const trigger = dropdown.querySelector('.nav-dropdown-trigger');
+        if (trigger) {
+            trigger.addEventListener('click', (e) => {
+                e.stopPropagation();
+                
+                // Close other dropdowns
+                dropdowns.forEach(other => {
+                    if (other !== dropdown) {
+                        other.classList.remove('is-open');
+                        other.querySelector('.nav-dropdown-trigger')?.setAttribute('aria-expanded', false);
+                    }
+                });
+
+                const isOpen = dropdown.classList.toggle('is-open');
+                trigger.setAttribute('aria-expanded', isOpen);
+            });
+        }
+    });
+
+    document.addEventListener('click', () => {
+        dropdowns.forEach(dropdown => {
             dropdown.classList.remove('is-open');
-            trigger.setAttribute('aria-expanded', false);
+            dropdown.querySelector('.nav-dropdown-trigger')?.setAttribute('aria-expanded', false);
         });
-    }
+    });
 
     /* ── Mobile Drawer ───────────────────────────────────── */
     const hamburger = document.getElementById('nav-hamburger');
