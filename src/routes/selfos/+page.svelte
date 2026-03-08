@@ -88,7 +88,7 @@
     font-size: 10px;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: #424870;
+    color: var(--ink-3);
     display: block;
     margin-bottom: 24px;
   }
@@ -109,9 +109,9 @@
 
   .launch-body {
     font-family: var(--font-body);
-    font-weight: 300;
+    font-weight: 400;
     font-size: 17px;
-    color: #8890bb;
+    color: var(--ink-2);
     max-width: 520px;
     line-height: 1.7;
     margin-bottom: 40px;
@@ -149,7 +149,7 @@
     gap: 8px;
     font-family: var(--font-mono);
     font-size: 10px;
-    color: #424870;
+    color: var(--ink-3);
     letter-spacing: 0.1em;
   }
 

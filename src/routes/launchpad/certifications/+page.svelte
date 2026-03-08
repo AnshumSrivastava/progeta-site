@@ -214,7 +214,7 @@
         font-size: 10px;
         letter-spacing: 0.18em;
         text-transform: uppercase;
-        color: #424870;
+        color: var(--ink-3);
         display: block;
         margin-bottom: 16px;
     }
@@ -227,9 +227,9 @@
     }
     .section-body {
         font-family: "DM Sans", sans-serif;
-        font-weight: 300;
+        font-weight: 400;
         font-size: 14px;
-        color: #8890bb;
+        color: var(--ink-2);
         line-height: 1.7;
     }
     .btn-solid {
@@ -268,16 +268,16 @@
     }
     .cert-hero__body {
         font-family: "DM Sans", sans-serif;
-        font-weight: 300;
+        font-weight: 400;
         font-size: 15px;
-        color: #8890bb;
+        color: var(--ink-2);
         max-width: 520px;
         line-height: 1.75;
     }
 
     /* ── CREDENTIAL CARDS ── */
     .cert-cards-section {
-        background: #07090f;
+        background: var(--ground);
         padding: clamp(80px, 11vw, 144px) 0;
     }
     .cert-grid {
@@ -297,7 +297,7 @@
         }
     }
     .cert-card {
-        background: #07090f;
+        background: var(--ground);
         padding: 28px 24px;
         display: flex;
         flex-direction: column;
@@ -338,13 +338,13 @@
     .cert-req {
         font-family: "DM Mono", monospace;
         font-size: 10px;
-        color: #424870;
+        color: var(--ink-3);
         letter-spacing: 0.08em;
     }
     .cert-issuer {
         font-family: "DM Mono", monospace;
         font-size: 10px;
-        color: #424870;
+        color: var(--ink-3);
         letter-spacing: 0.08em;
     }
     .cert-verify-link {
@@ -366,9 +366,9 @@
     }
     .cert-prose {
         font-family: "DM Sans", sans-serif;
-        font-weight: 300;
+        font-weight: 400;
         font-size: 15px;
-        color: #8890bb;
+        color: var(--ink-2);
         line-height: 1.8;
         margin-bottom: 24px;
     }
@@ -384,10 +384,10 @@
     .verify-format {
         font-family: "DM Mono", monospace;
         font-size: 12px;
-        color: #424870;
+        color: var(--ink-3);
     }
     .verify-format code {
-        color: #8890bb;
+        color: var(--ink-2);
     }
     .verify-widget {
         max-width: 480px;
@@ -400,7 +400,7 @@
     .verify-input {
         flex: 1;
         padding: 14px 18px;
-        background: #07090f;
+        background: var(--ground);
         border: 1px solid #171b30;
         border-right: none;
         font-family: "DM Mono", monospace;
@@ -475,7 +475,7 @@
         font-family: "DM Mono", monospace;
         font-size: 10px;
         letter-spacing: 0.12em;
-        color: #424870;
+        color: var(--ink-3);
     }
     .vr-value {
         font-family: "DM Sans", sans-serif;
@@ -485,6 +485,6 @@
     .vr-note {
         font-family: "DM Sans", sans-serif;
         font-size: 14px;
-        color: #8890bb;
+        color: var(--ink-2);
     }
 </style>

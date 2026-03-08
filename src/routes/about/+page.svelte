@@ -277,7 +277,7 @@
     </ScrollReveal>
 
     <div class="beliefs-grid">
-      {#each [{ num: "01", color: "#E05C20", text: "Every person carries something worth doing.", support: "You don\u2019t need a grand vision or a five-year plan. You just need to care about something. Start there." }, { num: "02", color: "#1A8FE3", text: "Access to growth should never be conditional.", support: "Geography, income, school quality — none of these should determine who receives the tools, knowledge, and community to grow." }, { num: "03", color: "#18C96A", text: "Safe environments are not optional — they are foundational.", support: "People cannot build with full capacity when they do not feel safe. We create the conditions before we expect the output." }, { num: "04", color: "#424870", text: "Individual growth without social responsibility is incomplete.", support: "We help people build for themselves. And we ask them to build for others, too. Individual duty is the counterweight to individual sovereignty." }] as belief, i}
+      {#each [{ num: "01", color: "#E05C20", text: "Every person carries something worth doing.", support: "You don\u2019t need a grand vision or a five-year plan. You just need to care about something. Start there." }, { num: "02", color: "#1A8FE3", text: "Access to growth should never be conditional.", support: "Geography, income, school quality — none of these should determine who receives the tools, knowledge, and community to grow." }, { num: "03", color: "#18C96A", text: "Safe environments are not optional — they are foundational.", support: "People cannot build with full capacity when they do not feel safe. We create the conditions before we expect the output." }, { num: "04", color: "var(--ink-3)", text: "Individual growth without social responsibility is incomplete.", support: "We help people build for themselves. And we ask them to build for others, too. Individual duty is the counterweight to individual sovereignty." }] as belief, i}
         <ScrollReveal delay={100 + i * 80}>
           <div class="belief-cell">
             <span class="belief-num">{belief.num}</span>
@@ -329,7 +329,7 @@
     font-size: 10px;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: #424870;
+    color: var(--ink-3);
     display: block;
   }
   .section-heading {
@@ -412,10 +412,10 @@
   /* Body fade */
   .hero__body {
     font-family: "DM Sans", sans-serif;
-    font-weight: 300;
+    font-weight: 400;
     font-size: clamp(15px, 1.5vw, 17px);
     line-height: 1.78;
-    color: #8890bb;
+    color: var(--ink-2);
     max-width: 520px;
     margin-top: 22px;
     opacity: 0;
@@ -457,7 +457,7 @@
      SECTION 2 — OBSERVATION
      ═══════════════════════════════════════════════════ */
   .observation {
-    background: #07090f;
+    background: var(--ground);
     padding: clamp(80px, 11vw, 144px) 0;
   }
   .observation__grid {
@@ -469,15 +469,15 @@
   .observation__rule {
     width: 32px;
     height: 2px;
-    background: #424870;
+    background: var(--ink-3);
     margin-top: 20px;
   }
   .observation__right p {
     font-family: "DM Sans", sans-serif;
-    font-weight: 300;
+    font-weight: 400;
     font-size: 15px;
     line-height: 1.82;
-    color: #8890bb;
+    color: var(--ink-2);
     margin-bottom: 1.6em;
   }
   .observation__right p:last-child {
@@ -505,7 +505,7 @@
     font-family: "DM Mono", monospace;
     font-weight: 700;
     font-size: clamp(80px, 14vw, 160px);
-    color: #07090f;
+    color: var(--ground);
     line-height: 1;
     pointer-events: none;
     user-select: none;
@@ -518,10 +518,10 @@
   }
   .origin__content p {
     font-family: "DM Sans", sans-serif;
-    font-weight: 300;
+    font-weight: 400;
     font-size: 15px;
     line-height: 1.82;
-    color: #8890bb;
+    color: var(--ink-2);
     max-width: 640px;
     margin-top: 1.6em;
   }
@@ -556,7 +556,7 @@
   .directive__heading-l1 {
     display: block;
     font-family: "Cormorant Garamond", Georgia, serif;
-    font-weight: 300;
+    font-weight: 400;
     font-style: italic;
     font-size: clamp(32px, 4.5vw, 52px);
     line-height: 1.2;
@@ -565,7 +565,7 @@
   .directive__heading-l2 {
     display: block;
     font-family: "Cormorant Garamond", Georgia, serif;
-    font-weight: 300;
+    font-weight: 400;
     font-style: italic;
     font-size: clamp(28px, 4vw, 46px);
     line-height: 1.2;
@@ -573,10 +573,10 @@
   }
   .directive__body {
     font-family: "Cormorant Garamond", Georgia, serif;
-    font-weight: 300;
+    font-weight: 400;
     font-style: italic;
     font-size: clamp(17px, 2vw, 22px);
-    color: #8890bb;
+    color: var(--ink-2);
     line-height: 1.85;
     max-width: 560px;
     margin-top: 28px;
@@ -600,7 +600,7 @@
     font-size: 10px;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: #424870;
+    color: var(--ink-3);
   }
 
   /* ═══════════════════════════════════════════════════
@@ -611,9 +611,9 @@
   }
   .initiatives__intro {
     font-family: "DM Sans", sans-serif;
-    font-weight: 300;
+    font-weight: 400;
     font-size: 15px;
-    color: #8890bb;
+    color: var(--ink-2);
     max-width: 540px;
     margin-top: 14px;
     line-height: 1.7;
@@ -638,7 +638,7 @@
     border-bottom: 1px solid #0f1220;
   }
   .i-strip:hover {
-    background: #07090f;
+    background: var(--ground);
   }
 
   .i-strip::before {
@@ -677,7 +677,7 @@
     font-size: 9px;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: #424870;
+    color: var(--ink-3);
     margin-bottom: 8px;
   }
   .i-strip-name {
@@ -690,16 +690,16 @@
   }
   .i-strip-desc {
     font-family: "DM Sans", sans-serif;
-    font-weight: 300;
+    font-weight: 400;
     font-size: 14px;
     line-height: 1.72;
-    color: #8890bb;
+    color: var(--ink-2);
     max-width: 540px;
     margin: 0;
   }
   .i-strip-arrow {
     font-size: 18px;
-    color: #424870;
+    color: var(--ink-3);
     opacity: 0;
     transform: translateX(-8px);
     transition:
@@ -741,10 +741,10 @@
   }
   .initiative-future-name {
     font-family: "Cormorant Garamond", Georgia, serif;
-    font-weight: 300;
+    font-weight: 400;
     font-style: italic;
     font-size: clamp(18px, 2.2vw, 26px);
-    color: #424870;
+    color: var(--ink-3);
     margin: 0 0 8px 0;
     line-height: 1;
   }
@@ -759,7 +759,7 @@
      SECTION 6 — BELIEFS
      ═══════════════════════════════════════════════════ */
   .beliefs {
-    background: #07090f;
+    background: var(--ground);
     padding: clamp(80px, 11vw, 144px) 0;
   }
   .beliefs-grid {
@@ -770,7 +770,7 @@
     margin-top: 48px;
   }
   .belief-cell {
-    background: #07090f;
+    background: var(--ground);
     padding: clamp(28px, 4vw, 44px);
     transition: background 0.2s ease;
   }
@@ -799,9 +799,9 @@
   }
   .belief-support {
     font-family: "DM Sans", sans-serif;
-    font-weight: 300;
+    font-weight: 400;
     font-size: 13px;
-    color: #8890bb;
+    color: var(--ink-2);
     line-height: 1.68;
     margin: 0;
   }
@@ -827,15 +827,15 @@
   .future__rule {
     width: 40px;
     height: 1px;
-    background: #424870;
+    background: var(--ink-3);
     margin: 22px auto 28px;
   }
   .future__body {
     font-family: "Cormorant Garamond", Georgia, serif;
-    font-weight: 300;
+    font-weight: 400;
     font-style: italic;
     font-size: clamp(17px, 2vw, 22px);
-    color: #8890bb;
+    color: var(--ink-2);
     line-height: 1.85;
     max-width: 520px;
     margin: 0 auto;
@@ -854,7 +854,7 @@
     text-transform: uppercase;
   }
   .mission-contact-email {
-    color: #424870;
+    color: var(--ink-3);
     text-decoration: none;
     transition: color 0.2s ease;
   }

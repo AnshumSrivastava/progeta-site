@@ -250,7 +250,7 @@
         font-size: 10px;
         letter-spacing: 0.18em;
         text-transform: uppercase;
-        color: #424870;
+        color: var(--ink-3);
         display: block;
         margin-bottom: 16px;
     }
@@ -263,9 +263,9 @@
     }
     .section-body {
         font-family: "DM Sans", sans-serif;
-        font-weight: 300;
+        font-weight: 400;
         font-size: 15px;
-        color: #8890bb;
+        color: var(--ink-2);
         line-height: 1.75;
     }
     .btn-solid {
@@ -304,22 +304,22 @@
     }
     .ch-hero__body {
         font-family: "DM Sans", sans-serif;
-        font-weight: 300;
+        font-weight: 400;
         font-size: 15px;
-        color: #8890bb;
+        color: var(--ink-2);
         max-width: 520px;
         line-height: 1.75;
     }
 
     .ch-about {
-        background: #07090f;
+        background: var(--ground);
         padding: clamp(80px, 11vw, 144px) 0;
     }
     .ch-prose {
         font-family: "DM Sans", sans-serif;
-        font-weight: 300;
+        font-weight: 400;
         font-size: 15px;
-        color: #8890bb;
+        color: var(--ink-2);
         line-height: 1.8;
         margin-bottom: 24px;
     }
@@ -347,9 +347,9 @@
     }
     .dash-list li {
         font-family: "DM Sans", sans-serif;
-        font-weight: 300;
+        font-weight: 400;
         font-size: 13px;
-        color: #8890bb;
+        color: var(--ink-2);
         line-height: 2;
     }
     .dash {
@@ -388,7 +388,7 @@
         font-size: 10px;
         letter-spacing: 0.12em;
         text-transform: uppercase;
-        color: #424870;
+        color: var(--ink-3);
     }
     .form-field input,
     .form-field select,
@@ -445,12 +445,12 @@
     .form-alt {
         font-family: "DM Mono", monospace;
         font-size: 11px;
-        color: #424870;
+        color: var(--ink-3);
         margin-top: 24px;
         text-align: center;
     }
     .form-alt a {
-        color: #8890bb;
+        color: var(--ink-2);
         text-decoration: none;
     }
     .form-alt a:hover {

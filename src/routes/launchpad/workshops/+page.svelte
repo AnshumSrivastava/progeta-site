@@ -141,7 +141,7 @@
         font-size: 10px;
         letter-spacing: 0.18em;
         text-transform: uppercase;
-        color: #424870;
+        color: var(--ink-3);
         display: block;
         margin-bottom: 16px;
     }
@@ -154,9 +154,9 @@
     }
     .section-body {
         font-family: "DM Sans", sans-serif;
-        font-weight: 300;
+        font-weight: 400;
         font-size: 15px;
-        color: #8890bb;
+        color: var(--ink-2);
         line-height: 1.75;
         max-width: 480px;
     }
@@ -179,9 +179,9 @@
     }
     .ws-hero__body {
         font-family: "DM Sans", sans-serif;
-        font-weight: 300;
+        font-weight: 400;
         font-size: 15px;
-        color: #8890bb;
+        color: var(--ink-2);
         max-width: 480px;
         line-height: 1.75;
     }
@@ -225,7 +225,7 @@
 
     /* ── FORMATS ── */
     .ws-formats {
-        background: #07090f;
+        background: var(--ground);
         padding: clamp(80px, 11vw, 144px) 0;
     }
     .ws-formats__grid {
@@ -244,7 +244,7 @@
         background: #0f1220;
     }
     .format-card {
-        background: #07090f;
+        background: var(--ground);
         padding: 28px 24px;
     }
     .format-name {
@@ -257,16 +257,16 @@
     .format-meta {
         font-family: "DM Mono", monospace;
         font-size: 10px;
-        color: #424870;
+        color: var(--ink-3);
         letter-spacing: 0.1em;
         display: block;
         margin-bottom: 10px;
     }
     .format-desc {
         font-family: "DM Sans", sans-serif;
-        font-weight: 300;
+        font-weight: 400;
         font-size: 13px;
-        color: #8890bb;
+        color: var(--ink-2);
         line-height: 1.65;
     }
 
@@ -297,7 +297,7 @@
         font-size: 10px;
         letter-spacing: 0.12em;
         text-transform: uppercase;
-        color: #424870;
+        color: var(--ink-3);
     }
     .workshop-name {
         font-family: "DM Sans", sans-serif;
@@ -311,7 +311,7 @@
         font-family: "DM Mono", monospace;
         font-size: 10px;
         letter-spacing: 0.1em;
-        color: #424870;
+        color: var(--ink-3);
     }
     .workshop-action {
         text-align: right;
@@ -326,7 +326,7 @@
         color: #18c96a;
     }
     .workshop-status.soon {
-        color: #424870;
+        color: var(--ink-3);
     }
     .workshop-register {
         font-family: "DM Mono", monospace;
@@ -343,7 +343,7 @@
     .ws-noshow {
         font-family: "DM Sans", sans-serif;
         font-size: 14px;
-        color: #8890bb;
+        color: var(--ink-2);
         margin-top: 32px;
     }
     .ws-noshow a {

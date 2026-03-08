@@ -7,10 +7,10 @@
     /* ── BASE ─────────────────────────────────────────
      The void: near-black with faint blue-grey undertone.
      Deep space between stars.                        */
-    --ground: #0A0B10;
-    --surface-1: #12141C;
-    --surface-2: #1A1D26;
-    --surface-3: #222632;
+    --ground: #0F111A;
+    --surface-1: #171A24;
+    --surface-2: #1F232E;
+    --surface-3: #272B38;
 
     /* ── BORDERS ──────────────────────────────────────
      Three levels: felt → seen → active              */
@@ -22,9 +22,9 @@
      Primary: cool near-white (distant blue-white star)
      Ghost: edge of perception                        */
     --ink-1: #F5F7FA;
-    --ink-2: #A0AEC0;
-    --ink-3: #4A5568;
-    --ink-4: #2D3748;
+    --ink-2: #C4CFDD;
+    --ink-3: #718096;
+    --ink-4: #4A5568;
 
     /* ── ACCENTS ──────────────────────────────────────
      Colour is information, not decoration.

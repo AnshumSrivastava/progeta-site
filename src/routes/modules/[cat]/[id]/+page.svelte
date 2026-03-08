@@ -213,7 +213,7 @@
         font-size: 10px;
         letter-spacing: 0.18em;
         text-transform: uppercase;
-        color: #424870;
+        color: var(--ink-3);
         display: block;
         margin-bottom: 16px;
     }
@@ -244,7 +244,7 @@
         font-family: "DM Mono", monospace;
         font-weight: 700;
         font-size: 120px;
-        color: #07090f;
+        color: var(--ground);
         line-height: 1;
         pointer-events: none;
         user-select: none;
@@ -283,9 +283,9 @@
     }
     .md-goal {
         font-family: "DM Sans", sans-serif;
-        font-weight: 300;
+        font-weight: 400;
         font-size: 17px;
-        color: #8890bb;
+        color: var(--ink-2);
         line-height: 1.7;
         max-width: 600px;
     }
@@ -295,7 +295,7 @@
         padding: clamp(48px, 6vw, 80px) 0;
     }
     .md-section--surface {
-        background: #07090f;
+        background: var(--ground);
         margin: 0 calc(-1 * clamp(20px, 4vw, 64px));
         padding-left: clamp(20px, 4vw, 64px);
         padding-right: clamp(20px, 4vw, 64px);
@@ -303,9 +303,9 @@
 
     .md-prose {
         font-family: "DM Sans", sans-serif;
-        font-weight: 300;
+        font-weight: 400;
         font-size: 15px;
-        color: #8890bb;
+        color: var(--ink-2);
         line-height: 1.8;
         max-width: 680px;
     }
@@ -324,7 +324,7 @@
         }
     }
     .outcome-item {
-        background: #07090f;
+        background: var(--ground);
         padding: 20px 24px;
         display: flex;
         gap: 14px;
@@ -340,7 +340,7 @@
     }
     .outcome-text {
         font-family: "DM Sans", sans-serif;
-        font-weight: 300;
+        font-weight: 400;
         font-size: 14px;
         color: #edf0ff;
         line-height: 1.6;
@@ -360,7 +360,7 @@
         padding: 6px 14px;
         border: 1px solid #171b30;
         border-radius: 3px;
-        color: #8890bb;
+        color: var(--ink-2);
     }
 
     /* Meta */
@@ -392,7 +392,7 @@
         font-family: "DM Mono", monospace;
         font-size: 10px;
         letter-spacing: 0.14em;
-        color: #424870;
+        color: var(--ink-3);
     }
     .meta-value {
         font-family: "DM Sans", sans-serif;
@@ -419,7 +419,7 @@
     .meta-note {
         font-family: "DM Sans", sans-serif;
         font-size: 14px;
-        color: #8890bb;
+        color: var(--ink-2);
     }
     .workshop-cta {
         display: inline-block;
@@ -440,7 +440,7 @@
     .back-link {
         font-family: "DM Mono", monospace;
         font-size: 11px;
-        color: #424870;
+        color: var(--ink-3);
         text-decoration: none;
         letter-spacing: 0.1em;
     }

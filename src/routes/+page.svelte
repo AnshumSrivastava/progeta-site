@@ -144,7 +144,7 @@
         </p>
       </blockquote>
       <div
-        style="width: 48px; height: 1px; background: #222840; margin: 32px auto 0;"
+        style="width: 48px; height: 1px; background: var(--border-2); margin: 32px auto 0;"
       ></div>
     </ScrollReveal>
   </div>
@@ -636,7 +636,7 @@
     font-size: 10px;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: #424870;
+    color: var(--ink-3);
   }
 
   /* Headline */
@@ -670,7 +670,7 @@
     line-height: 1.6;
     max-width: 520px;
     margin-bottom: var(--sp-7);
-    font-weight: 300;
+    font-weight: 400;
   }
 
   /* What's New Pills */
@@ -779,7 +779,7 @@
      MANIFESTO SECTION
      ═══════════════════════════════════════════════════ */
   .manifesto-section {
-    background: #07090f;
+    background: var(--ground);
     padding: clamp(88px, 11vw, 148px) clamp(24px, 5vw, 72px);
   }
   .manifesto-container {
@@ -806,7 +806,7 @@
     z-index: 1;
     font-family: "Cormorant Garamond", Georgia, serif;
     font-style: italic;
-    font-weight: 300;
+    font-weight: 400;
     font-size: clamp(19px, 2.3vw, 26px);
     line-height: 1.85;
     color: #edf0ff;
@@ -1013,7 +1013,7 @@
 
   .init-card--ghost .init-card__title {
     color: var(--ink-4);
-    font-weight: 300;
+    font-weight: 400;
   }
 
   .init-card--ghost .init-card__desc,
@@ -1495,7 +1495,7 @@
   .truth-rule {
     width: 40px;
     height: 2px;
-    background: #222840;
+    background: var(--border-2);
     margin: 32px auto 0;
   }
 

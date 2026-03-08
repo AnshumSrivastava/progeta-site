@@ -158,7 +158,7 @@
         font-size: 10px;
         letter-spacing: 0.18em;
         text-transform: uppercase;
-        color: #424870;
+        color: var(--ink-3);
         display: block;
         margin-bottom: 16px;
     }
@@ -182,9 +182,9 @@
     }
     .mod-hero__body {
         font-family: "DM Sans", sans-serif;
-        font-weight: 300;
+        font-weight: 400;
         font-size: 15px;
-        color: #8890bb;
+        color: var(--ink-2);
         max-width: 480px;
         line-height: 1.75;
     }
@@ -215,7 +215,7 @@
         border: 1px solid #171b30;
         border-radius: 3px;
         background: transparent;
-        color: #424870;
+        color: var(--ink-3);
         cursor: pointer;
         transition: all 0.18s;
     }
@@ -258,7 +258,7 @@
         overflow: hidden;
     }
     .module-card:hover {
-        background: #07090f;
+        background: var(--ground);
     }
     .module-card::before {
         content: "";
@@ -279,7 +279,7 @@
         font-size: 9px;
         letter-spacing: 0.12em;
         text-transform: uppercase;
-        color: #424870;
+        color: var(--ink-3);
     }
     .module-card-num {
         font-family: "DM Mono", monospace;
@@ -296,10 +296,10 @@
     }
     .module-card-desc {
         font-family: "DM Sans", sans-serif;
-        font-weight: 300;
+        font-weight: 400;
         font-size: 13px;
         line-height: 1.6;
-        color: #8890bb;
+        color: var(--ink-2);
         flex: 1;
     }
     .module-card-type {
@@ -310,7 +310,7 @@
         padding: 2px 7px;
         border: 1px solid #0f1220;
         border-radius: 3px;
-        color: #424870;
+        color: var(--ink-3);
         align-self: flex-start;
         margin-top: 4px;
     }
@@ -320,7 +320,7 @@
         text-align: center;
         padding: 80px 20px;
         background: #020408;
-        color: #8890bb;
+        color: var(--ink-2);
         font-family: "DM Sans", sans-serif;
     }
     .reset-btn {

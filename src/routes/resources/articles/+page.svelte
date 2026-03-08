@@ -188,7 +188,7 @@
     }
     .art-body {
         font-family: var(--font-body);
-        font-weight: 300;
+        font-weight: 400;
         font-size: 14px;
         line-height: 1.6;
         color: var(--ink-2);
@@ -304,7 +304,7 @@
     }
     .article-excerpt {
         font-family: var(--font-body);
-        font-weight: 300;
+        font-weight: 400;
         font-size: 14px;
         line-height: 1.78;
         color: var(--ink-2);

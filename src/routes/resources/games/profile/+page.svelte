@@ -150,14 +150,14 @@
         font-family: "DM Mono", monospace;
         font-size: 10px;
         letter-spacing: 0.14em;
-        color: #424870;
+        color: var(--ink-3);
         text-decoration: none;
         display: inline-block;
         margin-bottom: 32px;
         transition: color 0.2s;
     }
     .back-link:hover {
-        color: #8890bb;
+        color: var(--ink-2);
     }
 
     .profile-header {
@@ -168,7 +168,7 @@
         font-size: 9px;
         letter-spacing: 0.18em;
         text-transform: uppercase;
-        color: #424870;
+        color: var(--ink-3);
         display: block;
         margin-bottom: 16px;
     }
@@ -193,7 +193,7 @@
     .level-xp {
         font-family: "DM Mono", monospace;
         font-size: 14px;
-        color: #8890bb;
+        color: var(--ink-2);
     }
     .level-bar {
         width: 100%;
@@ -211,7 +211,7 @@
     .level-next {
         font-family: "DM Mono", monospace;
         font-size: 10px;
-        color: #424870;
+        color: var(--ink-3);
     }
 
     .profile-stats {
@@ -237,7 +237,7 @@
         font-family: "DM Mono", monospace;
         font-size: 9px;
         letter-spacing: 0.12em;
-        color: #424870;
+        color: var(--ink-3);
         display: block;
         margin-top: 4px;
     }
@@ -250,7 +250,7 @@
         font-size: 10px;
         letter-spacing: 0.16em;
         text-transform: uppercase;
-        color: #424870;
+        color: var(--ink-3);
         display: block;
         margin-bottom: 16px;
     }
@@ -279,7 +279,7 @@
         font-family: "DM Mono", monospace;
         font-size: 8px;
         letter-spacing: 0.14em;
-        color: #424870;
+        color: var(--ink-3);
     }
     .badge-name {
         font-family: "Cormorant Garamond", Georgia, serif;
@@ -289,9 +289,9 @@
     }
     .badge-desc {
         font-family: "DM Sans", sans-serif;
-        font-weight: 300;
+        font-weight: 400;
         font-size: 12px;
-        color: #8890bb;
+        color: var(--ink-2);
         line-height: 1.5;
     }
     .badge-xp {
@@ -300,7 +300,7 @@
         color: #18c96a;
     }
     .badge-card.locked .badge-xp {
-        color: #424870;
+        color: var(--ink-3);
     }
 
     .profile-actions {
@@ -316,14 +316,14 @@
         border: 1px solid #171b30;
         border-radius: 3px;
         background: transparent;
-        color: #424870;
+        color: var(--ink-3);
         cursor: pointer;
         transition:
             border-color 0.15s,
             color 0.15s;
     }
     .profile-btn:hover {
-        border-color: #424870;
-        color: #8890bb;
+        border-color: var(--ink-3);
+        color: var(--ink-2);
     }
 </style>

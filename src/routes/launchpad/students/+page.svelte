@@ -135,7 +135,7 @@
         font-size: 10px;
         letter-spacing: 0.18em;
         text-transform: uppercase;
-        color: #424870;
+        color: var(--ink-3);
         display: block;
         margin-bottom: 16px;
     }
@@ -185,15 +185,15 @@
     }
     .hero-body {
         font-family: "DM Sans", sans-serif;
-        font-weight: 300;
+        font-weight: 400;
         font-size: 15px;
-        color: #8890bb;
+        color: var(--ink-2);
         max-width: 520px;
         line-height: 1.75;
     }
 
     .st-entry {
-        background: #07090f;
+        background: var(--ground);
         padding: clamp(80px, 11vw, 144px) 0;
     }
     .entry-strip {
@@ -241,9 +241,9 @@
     }
     .entry-body {
         font-family: "DM Sans", sans-serif;
-        font-weight: 300;
+        font-weight: 400;
         font-size: 14px;
-        color: #8890bb;
+        color: var(--ink-2);
         line-height: 1.7;
     }
     .entry-cta {
@@ -254,7 +254,7 @@
     }
 
     .st-faq {
-        background: #07090f;
+        background: var(--ground);
         padding: 0 0 clamp(80px, 11vw, 144px);
     }
     .faq-list {
@@ -278,7 +278,7 @@
         color: #edf0ff;
     }
     .faq-icon {
-        color: #424870;
+        color: var(--ink-3);
         transition: transform 0.2s;
         display: flex;
         align-items: center;
@@ -288,9 +288,9 @@
     }
     .faq-a {
         font-family: "DM Sans", sans-serif;
-        font-weight: 300;
+        font-weight: 400;
         font-size: 14px;
-        color: #8890bb;
+        color: var(--ink-2);
         line-height: 1.75;
         padding: 0 0 20px;
         max-width: 600px;

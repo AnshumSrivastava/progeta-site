@@ -237,7 +237,7 @@
     }
     .rhub-body {
         font-family: var(--font-body);
-        font-weight: 300;
+        font-weight: 400;
         font-size: 15px;
         line-height: 1.6;
         color: var(--ink-2);
@@ -328,7 +328,7 @@
     }
     .strip-desc {
         font-family: var(--font-body);
-        font-weight: 300;
+        font-weight: 400;
         font-size: 14px;
         line-height: 1.65;
         color: var(--ink-2);
@@ -431,7 +431,7 @@
     }
     .latest-sub {
         font-family: var(--font-body);
-        font-weight: 300;
+        font-weight: 400;
         font-size: 13px;
         color: var(--ink-2);
         line-height: 1.6;

@@ -193,7 +193,7 @@
     margin-bottom: var(--sp-4);
   }
   .mode-card__desc {
-    font-weight: 300;
+    font-weight: 400;
     font-size: var(--text-sm);
     color: var(--ink-2);
     line-height: var(--leading-normal);

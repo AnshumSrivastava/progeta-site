@@ -135,7 +135,7 @@
     font-size: 10px;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: #424870;
+    color: var(--ink-3);
     display: block;
     margin-bottom: 16px;
   }
@@ -148,9 +148,9 @@
   }
   .section-body {
     font-family: "DM Sans", sans-serif;
-    font-weight: 300;
+    font-weight: 400;
     font-size: 15px;
-    color: #8890bb;
+    color: var(--ink-2);
     line-height: 1.75;
     max-width: 560px;
   }
@@ -174,9 +174,9 @@
   }
   .trk-hero__body {
     font-family: "DM Sans", sans-serif;
-    font-weight: 300;
+    font-weight: 400;
     font-size: 15px;
-    color: #8890bb;
+    color: var(--ink-2);
     max-width: 480px;
     line-height: 1.75;
     margin-bottom: 32px;
@@ -196,7 +196,7 @@
     border: 1px solid #171b30;
     border-radius: 3px;
     background: transparent;
-    color: #424870;
+    color: var(--ink-3);
     cursor: pointer;
     transition: all 0.18s;
   }
@@ -268,12 +268,12 @@
     color: #18c96a;
   }
   .track-status--soon {
-    color: #424870;
+    color: var(--ink-3);
   }
   .track-level {
     font-family: "DM Mono", monospace;
     font-size: 9px;
-    color: #424870;
+    color: var(--ink-3);
     letter-spacing: 0.1em;
     text-transform: uppercase;
   }
@@ -295,9 +295,9 @@
   }
   .track-desc {
     font-family: "DM Sans", sans-serif;
-    font-weight: 300;
+    font-weight: 400;
     font-size: 14px;
-    color: #8890bb;
+    color: var(--ink-2);
     line-height: 1.7;
     margin-bottom: 14px;
   }
@@ -314,7 +314,7 @@
     padding: 3px 8px;
     border: 1px solid #171b30;
     border-radius: 3px;
-    color: #424870;
+    color: var(--ink-3);
   }
 
   .track-row__cta {
@@ -324,7 +324,7 @@
   }
   .track-arrow {
     font-size: 20px;
-    color: #424870;
+    color: var(--ink-3);
     transition:
       color 0.2s,
       transform 0.2s;
@@ -351,7 +351,7 @@
 
   /* ── NOT SURE ── */
   .trk-notsure {
-    background: #07090f;
+    background: var(--ground);
     padding: clamp(80px, 11vw, 144px) 0;
   }
   .notsure-cta {

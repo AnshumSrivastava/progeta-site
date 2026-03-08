@@ -199,7 +199,7 @@
     font-size: 10px;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: #424870;
+    color: var(--ink-3);
     display: block;
     margin-bottom: 16px;
   }
@@ -213,9 +213,9 @@
   }
   .section-body {
     font-family: "DM Sans", sans-serif;
-    font-weight: 300;
+    font-weight: 400;
     font-size: 15px;
-    color: #8890bb;
+    color: var(--ink-2);
     line-height: 1.75;
     max-width: 560px;
   }
@@ -255,9 +255,9 @@
   }
   .lp-hero__body {
     font-family: "DM Sans", sans-serif;
-    font-weight: 300;
+    font-weight: 400;
     font-size: clamp(15px, 1.5vw, 17px);
-    color: #8890bb;
+    color: var(--ink-2);
     max-width: 480px;
     line-height: 1.75;
   }
@@ -335,7 +335,7 @@
 
   /* ── STAGES ── */
   .lp-stages {
-    background: #07090f;
+    background: var(--ground);
     padding: clamp(80px, 11vw, 144px) 0;
   }
   .stages-row {
@@ -357,7 +357,7 @@
   }
 
   .stage-card {
-    background: #07090f;
+    background: var(--ground);
     padding: 32px 28px;
     display: block;
     text-decoration: none;
@@ -402,9 +402,9 @@
   }
   .stage-desc {
     font-family: "DM Sans", sans-serif;
-    font-weight: 300;
+    font-weight: 400;
     font-size: 13px;
-    color: #8890bb;
+    color: var(--ink-2);
     line-height: 1.65;
     margin-top: 8px;
   }
@@ -438,7 +438,7 @@
     transition: background 0.2s;
   }
   .audience-panel:hover {
-    background: #07090f;
+    background: var(--ground);
   }
   .audience-tag {
     font-family: "DM Mono", monospace;
@@ -459,9 +459,9 @@
   }
   .audience-body {
     font-family: "DM Sans", sans-serif;
-    font-weight: 300;
+    font-weight: 400;
     font-size: 14px;
-    color: #8890bb;
+    color: var(--ink-2);
     line-height: 1.75;
     margin-top: 12px;
   }
@@ -480,7 +480,7 @@
 
   /* ── STATS ── */
   .lp-stats {
-    background: #07090f;
+    background: var(--ground);
     padding: clamp(64px, 8vw, 104px) 0;
   }
   .stats-row {
@@ -496,7 +496,7 @@
     }
   }
   .stat-cell {
-    background: #07090f;
+    background: var(--ground);
     padding: 40px 20px;
   }
   .stat-number {
@@ -508,9 +508,9 @@
   }
   .stat-label {
     font-family: "DM Sans", sans-serif;
-    font-weight: 300;
+    font-weight: 400;
     font-size: 12px;
-    color: #8890bb;
+    color: var(--ink-2);
     display: block;
     margin-top: 8px;
     letter-spacing: 0.06em;

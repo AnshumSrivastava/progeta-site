@@ -112,7 +112,7 @@
         font-size: 10px;
         letter-spacing: 0.18em;
         text-transform: uppercase;
-        color: #424870;
+        color: var(--ink-3);
         display: block;
         margin-bottom: 16px;
     }
@@ -143,9 +143,9 @@
     }
     .prog-hero__body {
         font-family: "DM Sans", sans-serif;
-        font-weight: 300;
+        font-weight: 400;
         font-size: 15px;
-        color: #8890bb;
+        color: var(--ink-2);
         max-width: 520px;
         line-height: 1.75;
     }
@@ -156,7 +156,7 @@
         padding: clamp(64px, 8vw, 104px) 0;
     }
     .prog-stage--surface {
-        background: #07090f;
+        background: var(--ground);
     }
     .prog-stage__grid {
         display: grid;
@@ -187,7 +187,7 @@
         font-size: 9px;
         letter-spacing: 0.12em;
         text-transform: uppercase;
-        color: #424870;
+        color: var(--ink-3);
         display: block;
         margin-bottom: 12px;
     }
@@ -202,7 +202,7 @@
     .stage-format {
         font-family: "DM Mono", monospace;
         font-size: 10px;
-        color: #424870;
+        color: var(--ink-3);
         display: block;
     }
     .stage-outcome {
@@ -227,9 +227,9 @@
 
     .stage-prose {
         font-family: "DM Sans", sans-serif;
-        font-weight: 300;
+        font-weight: 400;
         font-size: 15px;
-        color: #8890bb;
+        color: var(--ink-2);
         line-height: 1.8;
     }
     .stage-bullets {
@@ -239,7 +239,7 @@
     }
     .stage-bullets li {
         font-family: "DM Sans", sans-serif;
-        font-weight: 300;
+        font-weight: 400;
         font-size: 13px;
         color: #edf0ff;
         line-height: 2;
@@ -305,9 +305,9 @@
     .prog-step-desc {
         display: block;
         font-family: "DM Sans", sans-serif;
-        font-weight: 300;
+        font-weight: 400;
         font-size: 12px;
-        color: #424870;
+        color: var(--ink-3);
     }
     .prog-arrow {
         font-size: 16px;

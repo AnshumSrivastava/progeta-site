@@ -124,7 +124,7 @@
         font-size: 10px;
         letter-spacing: 0.18em;
         text-transform: uppercase;
-        color: #424870;
+        color: var(--ink-3);
         display: block;
         margin-bottom: 16px;
     }
@@ -137,9 +137,9 @@
     }
     .sec-body {
         font-family: "DM Sans", sans-serif;
-        font-weight: 300;
+        font-weight: 400;
         font-size: 15px;
-        color: #8890bb;
+        color: var(--ink-2);
         line-height: 1.75;
         max-width: 480px;
     }
@@ -161,9 +161,9 @@
     }
     .hero-body {
         font-family: "DM Sans", sans-serif;
-        font-weight: 300;
+        font-weight: 400;
         font-size: 14px;
-        color: #8890bb;
+        color: var(--ink-2);
         max-width: 480px;
         line-height: 1.65;
     }
@@ -186,7 +186,7 @@
         border: 1px solid #171b30;
         border-radius: 3px;
         background: transparent;
-        color: #424870;
+        color: var(--ink-3);
         cursor: pointer;
         transition: all 0.18s;
     }
@@ -227,7 +227,7 @@
         font-family: "DM Mono", monospace;
         font-size: 10px;
         letter-spacing: 0.12em;
-        color: #424870;
+        color: var(--ink-3);
     }
     .ev-name {
         font-family: "DM Sans", sans-serif;
@@ -241,7 +241,7 @@
         font-family: "DM Mono", monospace;
         font-size: 10px;
         letter-spacing: 0.1em;
-        color: #424870;
+        color: var(--ink-3);
     }
     .ev-type {
         padding: 2px 7px;
@@ -261,7 +261,7 @@
         color: #18c96a;
     }
     .s-muted {
-        color: #424870;
+        color: var(--ink-3);
     }
     .ev-link {
         font-family: "DM Mono", monospace;
@@ -278,9 +278,9 @@
     .ev-desc {
         padding: 0 0 20px 104px;
         font-family: "DM Sans", sans-serif;
-        font-weight: 300;
+        font-weight: 400;
         font-size: 14px;
-        color: #8890bb;
+        color: var(--ink-2);
         line-height: 1.65;
     }
     @media (max-width: 640px) {
@@ -289,7 +289,7 @@
         }
     }
     .ev-suggest {
-        background: #07090f;
+        background: var(--ground);
         padding: clamp(80px, 11vw, 144px) 0;
     }
     .center-block {

@@ -284,7 +284,7 @@
         font-size: 10px;
         letter-spacing: 0.18em;
         text-transform: uppercase;
-        color: #424870;
+        color: var(--ink-3);
         display: block;
         margin-bottom: 16px;
     }
@@ -297,9 +297,9 @@
     }
     .section-body {
         font-family: "DM Sans", sans-serif;
-        font-weight: 300;
+        font-weight: 400;
         font-size: 14px;
-        color: #8890bb;
+        color: var(--ink-2);
         line-height: 1.7;
         max-width: 520px;
     }
@@ -366,9 +366,9 @@
     }
     .td-hero__body {
         font-family: "DM Sans", sans-serif;
-        font-weight: 300;
+        font-weight: 400;
         font-size: 15px;
-        color: #8890bb;
+        color: var(--ink-2);
         max-width: 480px;
         line-height: 1.75;
     }
@@ -376,7 +376,7 @@
     /* Metadata card */
     .track-meta-card {
         padding: clamp(28px, 4vw, 44px);
-        background: #07090f;
+        background: var(--ground);
         border-left: 2px solid #e05c20;
     }
     .meta-row {
@@ -394,7 +394,7 @@
         font-size: 10px;
         letter-spacing: 0.14em;
         text-transform: uppercase;
-        color: #424870;
+        color: var(--ink-3);
     }
     .meta-value {
         font-family: "DM Sans", sans-serif;
@@ -429,7 +429,7 @@
 
     /* ── COMPETENCIES ── */
     .td-competencies {
-        background: #07090f;
+        background: var(--ground);
         padding: clamp(80px, 11vw, 144px) 0;
     }
     .competency-grid {
@@ -445,7 +445,7 @@
         }
     }
     .competency-item {
-        background: #07090f;
+        background: var(--ground);
         padding: 24px 28px;
         display: flex;
         gap: 16px;
@@ -461,10 +461,10 @@
     }
     .competency-text {
         font-family: "DM Sans", sans-serif;
-        font-weight: 300;
+        font-weight: 400;
         font-size: 14px;
         line-height: 1.65;
-        color: #8890bb;
+        color: var(--ink-2);
     }
     .competency-text strong {
         color: #edf0ff;
@@ -535,14 +535,14 @@
         font-size: 9px;
         letter-spacing: 0.1em;
         text-transform: uppercase;
-        color: #424870;
+        color: var(--ink-3);
         padding: 2px 7px;
         border: 1px solid #171b30;
         border-radius: 3px;
     }
     .module-expand-icon {
         font-size: 14px;
-        color: #424870;
+        color: var(--ink-3);
         transition: transform 0.2s;
         display: flex;
         align-items: center;
@@ -557,10 +557,10 @@
     .module-body-inner {
         padding: 0 0 20px 72px;
         font-family: "DM Sans", sans-serif;
-        font-weight: 300;
+        font-weight: 400;
         font-size: 14px;
         line-height: 1.7;
-        color: #8890bb;
+        color: var(--ink-2);
         max-width: 600px;
     }
     .module-detail-link {
@@ -591,7 +591,7 @@
 
     /* ── PREREQUISITES ── */
     .td-prereq {
-        background: #07090f;
+        background: var(--ground);
         padding: clamp(80px, 11vw, 144px) 0;
     }
     .prereq-grid {
@@ -611,9 +611,9 @@
     }
     .dash-list li {
         font-family: "DM Sans", sans-serif;
-        font-weight: 300;
+        font-weight: 400;
         font-size: 13px;
-        color: #8890bb;
+        color: var(--ink-2);
         line-height: 2;
     }
     .dash {

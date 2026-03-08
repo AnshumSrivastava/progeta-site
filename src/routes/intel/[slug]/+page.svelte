@@ -211,7 +211,7 @@
     /* ── CONTENT (The Article Body) ── */
     .intel-content {
         font-family: var(--font-body);
-        font-weight: 300;
+        font-weight: 400;
         font-size: clamp(16px, 1.6vw, 18px);
         line-height: 1.85;
         color: var(--ink-2);

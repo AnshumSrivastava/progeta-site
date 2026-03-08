@@ -393,7 +393,7 @@
         font-size: 10px;
         letter-spacing: 0.18em;
         text-transform: uppercase;
-        color: #424870;
+        color: var(--ink-3);
         display: block;
     }
 
@@ -428,9 +428,9 @@
     }
     .hero-bar__body {
         font-family: "DM Sans", sans-serif;
-        font-weight: 300;
+        font-weight: 400;
         font-size: clamp(14px, 1.4vw, 15px);
-        color: #424870;
+        color: var(--ink-3);
         max-width: 460px;
         margin-top: 12px;
         line-height: 1.68;
@@ -530,7 +530,7 @@
         font-size: 10px;
         letter-spacing: 0.16em;
         text-transform: uppercase;
-        color: #424870;
+        color: var(--ink-3);
         display: block;
         margin-bottom: 10px;
     }
@@ -541,23 +541,23 @@
     }
     .search-input {
         width: 100%;
-        background: #07090f;
+        background: var(--ground);
         border: 1px solid #0f1220;
         border-radius: 3px;
         padding: 8px 10px;
         font-family: "DM Mono", monospace;
         font-size: 11px;
-        color: #8890bb;
+        color: var(--ink-2);
         letter-spacing: 0.04em;
         outline: none;
         transition: border-color 0.2s;
         box-sizing: border-box;
     }
     .search-input::placeholder {
-        color: #424870;
+        color: var(--ink-3);
     }
     .search-input:focus {
-        border-color: #424870;
+        border-color: var(--ink-3);
     }
     .search-clear {
         position: absolute;
@@ -566,7 +566,7 @@
         transform: translateY(-50%);
         background: none;
         border: none;
-        color: #424870;
+        color: var(--ink-3);
         font-size: 14px;
         cursor: pointer;
         padding: 2px 4px;
@@ -590,7 +590,7 @@
         font-size: 10px;
         letter-spacing: 0.12em;
         text-transform: uppercase;
-        color: #424870;
+        color: var(--ink-3);
         cursor: pointer;
         transition:
             background 0.15s,
@@ -598,8 +598,8 @@
         text-align: left;
     }
     .filter-btn:hover {
-        background: #07090f;
-        color: #8890bb;
+        background: var(--ground);
+        color: var(--ink-2);
     }
     .filter-btn.active {
         color: #edf0ff;
@@ -643,7 +643,7 @@
         font-family: "DM Mono", monospace;
         font-size: 10px;
         letter-spacing: 0.12em;
-        color: #424870;
+        color: var(--ink-3);
         display: block;
         margin-top: 2px;
     }
@@ -674,7 +674,7 @@
         font-family: "DM Mono", monospace;
         font-size: 10px;
         letter-spacing: 0.08em;
-        color: #424870;
+        color: var(--ink-3);
         line-height: 1.5;
     }
 
@@ -683,14 +683,14 @@
         font-family: "DM Mono", monospace;
         font-size: 10px;
         letter-spacing: 0.12em;
-        color: #424870;
+        color: var(--ink-3);
         text-decoration: none;
         display: inline-block;
         margin-top: 8px;
         transition: color 0.15s;
     }
     .profile-link:hover {
-        color: #8890bb;
+        color: var(--ink-2);
     }
 
     /* ═══════════════════════════════════════════════════
@@ -708,7 +708,7 @@
     .no-results-text {
         font-family: "DM Mono", monospace;
         font-size: 11px;
-        color: #424870;
+        color: var(--ink-3);
         display: block;
         margin-bottom: 12px;
     }
@@ -752,7 +752,7 @@
         cursor: pointer;
     }
     .game-card:hover {
-        background: var(--game-hover-bg, #07090f);
+        background: var(--game-hover-bg, var(--ground));
     }
 
     /* Accent line on hover */
@@ -780,7 +780,7 @@
         font-family: "DM Mono", monospace;
         font-size: 10px;
         letter-spacing: 0.14em;
-        color: #424870;
+        color: var(--ink-3);
     }
     .card-status {
         display: flex;
@@ -824,7 +824,7 @@
         font-family: "DM Mono", monospace;
         font-size: 10px;
         letter-spacing: 0.12em;
-        color: #424870;
+        color: var(--ink-3);
     }
     .status-label.live {
         color: #18c96a;
@@ -858,17 +858,17 @@
     /* Tagline */
     .card-tagline {
         font-family: "DM Sans", sans-serif;
-        font-weight: 300;
+        font-weight: 400;
         font-style: italic;
         font-size: 13px;
         line-height: 1.55;
-        color: #424870;
+        color: var(--ink-3);
         margin: 0 0 12px 0;
         transition: color 0.3s ease;
         flex: 1;
     }
     .game-card:hover .card-tagline {
-        color: #8890bb;
+        color: var(--ink-2);
     }
 
     /* Card tags */
@@ -886,14 +886,14 @@
         padding: 2px 5px;
         border: 1px solid #0f1220;
         border-radius: 2px;
-        color: #424870;
+        color: var(--ink-3);
         transition:
             border-color 0.2s,
             color 0.2s;
     }
     .game-card:hover .card-tag {
         border-color: #1e2440;
-        color: #8890bb;
+        color: var(--ink-2);
     }
 
     /* Bottom row: engagement + meta */
@@ -914,7 +914,7 @@
     .card-users {
         font-family: "DM Mono", monospace;
         font-size: 10px;
-        color: #424870;
+        color: var(--ink-3);
         display: flex;
         align-items: center;
         gap: 3px;
@@ -924,7 +924,7 @@
         font-size: 10px;
     }
     .user-icon {
-        color: #424870;
+        color: var(--ink-3);
         font-size: 6px;
     }
     .card-meta {
@@ -937,7 +937,7 @@
         font-size: 10px;
         letter-spacing: 0.1em;
         text-transform: uppercase;
-        color: #424870;
+        color: var(--ink-3);
     }
 
     /* CTA */
@@ -946,7 +946,7 @@
         font-size: 11px;
         letter-spacing: 0.14em;
         text-transform: uppercase;
-        color: #424870;
+        color: var(--ink-3);
         transition: color 0.2s ease;
         margin-top: auto;
     }
@@ -967,7 +967,7 @@
         font-size: 11px;
         letter-spacing: 0.12em;
         text-transform: uppercase;
-        color: #424870;
+        color: var(--ink-3);
         background: transparent;
         border: 1px solid #0f1220;
         padding: 8px 14px;

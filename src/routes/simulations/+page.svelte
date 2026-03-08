@@ -137,7 +137,7 @@
     font-size: var(--text-lg);
   }
   .simulation__desc {
-    font-weight: 300;
+    font-weight: 400;
     line-height: var(--leading-normal);
   }
   .simulation__tags {

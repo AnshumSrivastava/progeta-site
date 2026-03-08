@@ -815,7 +815,7 @@
     font-size: 10px;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: #424870;
+    color: var(--ink-3);
     display: block;
   }
   .ic-eyebrow--static {
@@ -962,9 +962,9 @@
 
   .ic-hero__body {
     font-family: "DM Sans", sans-serif;
-    font-weight: 300;
+    font-weight: 400;
     font-size: clamp(15px, 1.5vw, 17px);
-    color: #8890bb;
+    color: var(--ink-2);
     max-width: 460px;
     margin-top: 22px;
     line-height: 1.78;
@@ -1056,7 +1056,7 @@
 
   /* ── SECTION 2 — WHAT ── */
   .ic-what {
-    background: #07090f;
+    background: var(--ground);
     padding: clamp(80px, 11vw, 144px) 0;
   }
   .ic-what__grid {
@@ -1067,10 +1067,10 @@
   }
   .ic-what__right p {
     font-family: "DM Sans", sans-serif;
-    font-weight: 300;
+    font-weight: 400;
     font-size: 15px;
     line-height: 1.8;
-    color: #8890bb;
+    color: var(--ink-2);
     margin-bottom: 1.5em;
   }
   .ic-what__right p:last-child {
@@ -1116,7 +1116,7 @@
     font-size: 9px;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: #424870;
+    color: var(--ink-3);
     padding-top: 3px;
   }
   .event-name {
@@ -1129,10 +1129,10 @@
   }
   .event-desc {
     font-family: "DM Sans", sans-serif;
-    font-weight: 300;
+    font-weight: 400;
     font-size: 14px;
     line-height: 1.72;
-    color: #8890bb;
+    color: var(--ink-2);
     max-width: 560px;
   }
   .event-format {
@@ -1140,14 +1140,14 @@
     font-size: 10px;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: #424870;
+    color: var(--ink-3);
     text-align: right;
     padding-top: 3px;
   }
 
   /* ── SECTION 4 — STANDARD ── */
   .ic-standard {
-    background: #07090f;
+    background: var(--ground);
     padding: clamp(80px, 11vw, 144px) 0;
   }
   .ic-standard__inner {
@@ -1157,10 +1157,10 @@
   }
   .ic-standard__inner p {
     font-family: "DM Sans", sans-serif;
-    font-weight: 300;
+    font-weight: 400;
     font-size: 15px;
     line-height: 1.8;
-    color: #8890bb;
+    color: var(--ink-2);
     text-align: center;
     margin-bottom: 1.8em;
   }
@@ -1212,10 +1212,10 @@
   }
   .ic-closing__body {
     font-family: "Cormorant Garamond", Georgia, serif;
-    font-weight: 300;
+    font-weight: 400;
     font-style: italic;
     font-size: clamp(17px, 2vw, 22px);
-    color: #8890bb;
+    color: var(--ink-2);
     line-height: 1.85;
     margin-top: 18px;
   }
@@ -1318,7 +1318,7 @@
     height: 2px;
     display: flex;
     gap: 2px;
-    background: #07090f;
+    background: var(--ground);
   }
   .gate-seg {
     flex: 1;
@@ -1342,7 +1342,7 @@
     background: transparent;
     border: 1px solid #171b30;
     border-radius: 50%;
-    color: #424870;
+    color: var(--ink-3);
     font-size: 14px;
     cursor: pointer;
     transition:
@@ -1351,7 +1351,7 @@
     z-index: 2060;
   }
   .gate-close:hover {
-    border-color: #424870;
+    border-color: var(--ink-3);
     color: #edf0ff;
   }
 
@@ -1393,7 +1393,7 @@
     font-size: 10px;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: #424870;
+    color: var(--ink-3);
     margin-bottom: 16px;
   }
   .gate-heading {
@@ -1407,10 +1407,10 @@
   }
   .gate-body {
     font-family: "DM Sans", sans-serif;
-    font-weight: 300;
+    font-weight: 400;
     font-size: 15px;
     line-height: 1.8;
-    color: #8890bb;
+    color: var(--ink-2);
     max-width: 440px;
     margin: 0 auto 32px;
   }
@@ -1441,9 +1441,9 @@
   }
   .gate-subtext {
     font-family: "DM Sans", sans-serif;
-    font-weight: 300;
+    font-weight: 400;
     font-size: 14px;
-    color: #424870;
+    color: var(--ink-3);
     font-style: italic;
     margin-top: 10px;
   }
@@ -1457,7 +1457,7 @@
     border-bottom: 1px solid #171b30;
     color: #edf0ff;
     font-family: "DM Sans", sans-serif;
-    font-weight: 300;
+    font-weight: 400;
     font-size: 15px;
     line-height: 1.75;
     resize: none;
@@ -1481,7 +1481,7 @@
     transition: color 0.2s ease;
   }
   .gate-charcount.cc-mid {
-    color: #424870;
+    color: var(--ink-3);
   }
   .gate-charcount.cc-green {
     color: #18c96a;
@@ -1500,7 +1500,7 @@
     font-size: 9px;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: #424870;
+    color: var(--ink-3);
     margin-bottom: 8px;
     text-align: left;
   }
@@ -1512,7 +1512,7 @@
     border-bottom: 1px solid #171b30;
     color: #edf0ff;
     font-family: "DM Sans", sans-serif;
-    font-weight: 300;
+    font-weight: 400;
     font-size: 14px;
     outline: none;
     transition: border-color 0.2s ease;
@@ -1541,7 +1541,7 @@
   }
   .gate-submit:disabled {
     background: #1e2440;
-    color: #424870;
+    color: var(--ink-3);
     cursor: not-allowed;
   }
   .gate-error {
@@ -1579,7 +1579,7 @@
   }
   .gate-confirm-text {
     font-family: "Cormorant Garamond", Georgia, serif;
-    font-weight: 300;
+    font-weight: 400;
     font-style: italic;
     font-size: clamp(20px, 2.5vw, 28px);
     color: #edf0ff;
@@ -1589,22 +1589,22 @@
   }
   .gate-confirm-email {
     font-family: "DM Sans", sans-serif;
-    font-weight: 300;
+    font-weight: 400;
     font-size: 14px;
-    color: #8890bb;
+    color: var(--ink-2);
     margin: 0 0 48px 0;
   }
   .gate-confirm-return {
     font-family: "DM Mono", monospace;
     font-size: 10px;
-    color: #424870;
+    color: var(--ink-3);
     background: none;
     border: none;
     cursor: pointer;
     transition: color 0.2s ease;
   }
   .gate-confirm-return:hover {
-    color: #8890bb;
+    color: var(--ink-2);
   }
 
   /* ── RESPONSIVE ── */
