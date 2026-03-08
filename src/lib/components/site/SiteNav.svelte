@@ -29,17 +29,17 @@
         {
           heading: "Tracks",
           links: [
-            { label: "CTI Specialist", href: "/launchpad/tracks/cti" },
-            { label: "SOC Analyst", href: "/launchpad/tracks/soc" },
+            { label: "CTI Specialist", href: "/tracks/1" },
+            { label: "SOC Analyst", href: "/tracks/2" },
             {
               label: "DevSecOps Engineer",
-              href: "/launchpad/tracks/devsecops",
+              href: "/tracks/3",
             },
-            { label: "GRC Analyst", href: "/launchpad/tracks/grc" },
-            { label: "Penetration Tester", href: "/launchpad/tracks/pentest" },
+            { label: "GRC Analyst", href: "/tracks/4" },
+            { label: "Penetration Tester", href: "/tracks/5" },
             {
               label: "Automation Engineer",
-              href: "/launchpad/tracks/automation",
+              href: "/tracks/6",
             },
           ],
         },
@@ -56,6 +56,7 @@
             { label: "Modules", href: "/modules" },
             { label: "Workshops", href: "/launchpad/workshops" },
             { label: "Events", href: "/launchpad/events" },
+            { label: "Simulations", href: "/simulations" },
           ],
         },
       ],
@@ -85,7 +86,7 @@
         {
           name: "Events",
           desc: "Live sessions, workshops, and gatherings.",
-          href: "/launchpad/events",
+          href: "/events",
           accent: "",
         },
       ],
@@ -101,9 +102,9 @@
           accent: "",
         },
         {
-          name: "Simulations",
-          desc: "Interactive security environments.",
-          href: "/resources/simulations",
+          name: "Games",
+          desc: "Interactive security environments and projects.",
+          href: "/resources/games",
           accent: "",
         },
         {

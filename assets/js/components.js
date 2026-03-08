@@ -100,15 +100,15 @@ const NAV_HTML = `
                 </button>
                 <div class="dropdown-panel" role="menu" aria-label="Resources">
                     <div class="dropdown-grid">
-                        <a href="/resources/" class="dropdown-item" role="menuitem">
-                            <span class="dropdown-name">Library</span>
-                            <span class="dropdown-desc">Documentation, assets, and tools.</span>
+                        <a href="/resources/articles/" class="dropdown-item" role="menuitem">
+                            <span class="dropdown-name">Articles</span>
+                            <span class="dropdown-desc">Intelligence Briefs on tech, security, and leadership.</span>
                         </a>
                         <a href="/verify/" class="dropdown-item" role="menuitem">
                             <span class="dropdown-name">Verify</span>
                             <span class="dropdown-desc">Check the authenticity of certificates.</span>
                         </a>
-                        <a href="/games/" class="dropdown-item" role="menuitem">
+                        <a href="/resources/games/" class="dropdown-item" role="menuitem">
                             <span class="dropdown-name">Games</span>
                             <span class="dropdown-desc">Interactive experiences and projects.</span>
                         </a>
@@ -160,9 +160,9 @@ const NAV_HTML = `
             </div>
             <div class="drawer-section">
                 <span class="drawer-section-label">Resources</span>
-                <a href="/resources/" class="drawer-link">Library</a>
+                <a href="/resources/articles/" class="drawer-link">Articles</a>
                 <a href="/verify/" class="drawer-link">Verify</a>
-                <a href="/games/" class="drawer-link">Games</a>
+                <a href="/resources/games/" class="drawer-link">Games</a>
             </div>
             <a href="/about/" class="drawer-link">About</a>
             <a href="/pricing/" class="drawer-link">Pricing</a>
