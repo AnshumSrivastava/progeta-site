@@ -154,7 +154,7 @@ main {
 
 /* ─── SECTION LABEL ─────────────────────────────────────────── */
 .section-label {
-    font: 500 var(--text-xs)/1 var(--font-mono);
+    font: 500 var(--text-xs)/1 var(--font-roboto);
     letter-spacing: var(--tracking-wider);
     text-transform: uppercase;
     color: var(--color-ink-tertiary);

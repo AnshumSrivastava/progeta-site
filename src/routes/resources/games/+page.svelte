@@ -502,6 +502,7 @@
         grid-template-columns: 240px 1fr;
         min-height: 80vh;
         background: #020408;
+        font-family: var(--font-roboto);
     }
 
     /* ═══════════════════════════════════════════════════
