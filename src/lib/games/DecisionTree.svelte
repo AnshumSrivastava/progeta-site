@@ -1,10 +1,23 @@
 <script lang="ts">
+    import { Store } from "./store";
+
+    interface Props {
+        onComplete: (data: {
+            score: number;
+            total: number;
+            badgeId?: string | null;
+            statLine: string;
+        }) => void;
+    }
+    let { onComplete }: Props = $props();
+
+    const SLUG = "decision-tree";
     interface TreeNode {
         text: string;
         options?: { label: string; next: number; consequence: string }[];
     }
-
     interface Scenario {
+        id: string;
         title: string;
         context: string;
         domain: string;
@@ -13,6 +26,7 @@
 
     const scenarios: Scenario[] = [
         {
+            id: "vuln-disclosure",
             title: "The Vulnerability You Found",
             context:
                 "You discover a critical vulnerability in a widely-used open source library. It could affect millions of systems. You have not told anyone yet.",
@@ -52,65 +66,43 @@
                         },
                         {
                             label: "Wait the full 90 days as agreed — a promise is a promise",
-                            next: 5,
+                            next: 4,
                             consequence:
                                 "Honour matters, but active exploitation changes the calculus. People are being harmed right now while you wait.",
                         },
                     ],
                 },
                 {
-                    text: "The vulnerability is now public. Attackers are actively exploiting it. Was full disclosure the right call?",
+                    text: "The vulnerability is now public. Attackers are actively exploiting it.",
                     options: [
                         {
                             label: "Yes — people have a right to know about risks that affect them",
-                            next: 6,
+                            next: 4,
                             consequence:
                                 "Transparency is a principle. But timing matters. The same information shared after a patch would have been safer.",
                         },
                         {
                             label: "No — I should have given maintainers time to respond",
-                            next: 6,
+                            next: 4,
                             consequence:
-                                "Responsible disclosure exists to prevent exactly this scenario. Principle without pragmatism can cause harm.",
+                                "Responsible disclosure exists to prevent exactly this scenario.",
                         },
                     ],
                 },
                 {
-                    text: "You sold the vulnerability information. The buyer uses it to attack a hospital network. How do you feel about your decision?",
+                    text: "You sold the vulnerability information. The buyer uses it to attack a hospital network.",
                     options: [
                         {
                             label: "I did not attack anyone — I just provided information",
-                            next: 6,
+                            next: 4,
                             consequence:
-                                "Legally you may be in a grey area. Ethically, supplying the weapon used in an attack creates shared responsibility.",
+                                "Legally grey. Ethically, supplying the weapon used in an attack creates shared responsibility.",
                         },
                         {
                             label: "I should have considered who the buyer might be",
-                            next: 6,
+                            next: 4,
                             consequence:
-                                "The vulnerability market is murky. Without due diligence, you cannot control downstream use. This is the core ethical tension.",
-                        },
-                    ],
-                },
-                {
-                    text: "Your limited advisory helped defenders mitigate while the patch was developed. The maintainers thank you. End result: minimal damage.",
-                    options: [
-                        {
-                            label: "Reflect on the decision",
-                            next: 6,
-                            consequence:
-                                "Balanced disclosure — sharing enough to protect without sharing enough to exploit — is the hardest but often the best path.",
-                        },
-                    ],
-                },
-                {
-                    text: "You waited 90 days. The exploitation caused significant damage during that time. The patch eventually shipped. Was the agreement worth the cost?",
-                    options: [
-                        {
-                            label: "Reflect on the decision",
-                            next: 6,
-                            consequence:
-                                "Rigid adherence to timelines when circumstances change is not honour — it is inflexibility. The goal of disclosure is to reduce harm, not to follow rules.",
+                                "Without due diligence, you cannot control downstream use. This is the core ethical tension.",
                         },
                     ],
                 },
@@ -120,6 +112,7 @@
             ],
         },
         {
+            id: "ai-hiring",
             title: "The AI That Makes Hiring Decisions",
             context:
                 "Your company deploys an AI hiring tool. After 6 months, you notice it consistently ranks male candidates higher than equally qualified female candidates for technical roles.",
@@ -132,7 +125,7 @@
                             label: "Immediately shut down the tool and revert to manual hiring",
                             next: 1,
                             consequence:
-                                "You stop the harm immediately. But manual hiring has its own biases — and the company loses the efficiency gains.",
+                                "You stop the harm immediately. But manual hiring has its own biases — and the company loses efficiency gains.",
                         },
                         {
                             label: "Investigate the training data to find the source of bias",
@@ -144,12 +137,12 @@
                             label: "Adjust the outputs to force equal gender representation",
                             next: 3,
                             consequence:
-                                "Post-hoc adjustment treats symptoms but not causes. And forcing equal outcomes regardless of input quality raises its own ethical questions.",
+                                "Post-hoc adjustment treats symptoms but not causes. Forcing equal outcomes regardless of input quality raises its own questions.",
                         },
                     ],
                 },
                 {
-                    text: "With the tool shut down, hiring managers are overwhelmed. Leadership asks when the AI will be back. What do you recommend?",
+                    text: "With the tool shut down, leadership asks when the AI will be back.",
                     options: [
                         {
                             label: "Only when we have verified the bias is eliminated and tested extensively",
@@ -166,36 +159,36 @@
                     ],
                 },
                 {
-                    text: "You find the training data was 80% male resumes from past hires — the AI learned to prefer what it saw most. How do you fix it?",
+                    text: "You find the training data was 80% male resumes from past hires — the AI learned to prefer what it saw most.",
                     options: [
                         {
                             label: "Retrain with balanced data and add fairness constraints",
                             next: 4,
                             consequence:
-                                'Retraining with deliberately balanced data can reduce bias, but defining "fair" is itself a value judgment.',
+                                'Retraining with balanced data can reduce bias, but defining "fair" is itself a value judgment.',
                         },
                         {
                             label: "Build a separate bias detection system that flags potentially unfair rankings",
                             next: 4,
                             consequence:
-                                "A detection layer adds accountability but increases complexity. It is a good supplement to — not a replacement for — fair training data.",
+                                "A detection layer adds accountability but increases complexity. It supplements — not replaces — fair training data.",
                         },
                     ],
                 },
                 {
-                    text: "You adjusted outputs to force equal representation. A male candidate with stronger qualifications was ranked below a female candidate. Is this fair?",
+                    text: "You adjusted outputs to force equal representation. A stronger candidate was ranked below a weaker one.",
                     options: [
                         {
                             label: "Fairness requires correcting for systemic disadvantage",
                             next: 4,
                             consequence:
-                                "Affirmative correction addresses historical inequality but can feel unjust to individuals. The tension between group fairness and individual fairness is unresolved in AI ethics.",
+                                "Affirmative correction addresses historical inequality but can feel unjust to individuals. The tension is unresolved.",
                         },
                         {
-                            label: "Ranking should always reflect qualifications, regardless of demographics",
+                            label: "Ranking should always reflect qualifications regardless of demographics",
                             next: 4,
                             consequence:
-                                'Merit-based ranking sounds fair, but if the definition of "merit" was shaped by biased historical data, then meritocracy perpetuates existing inequity.',
+                                'Merit-based ranking sounds fair, but if the definition of "merit" was shaped by biased data, meritocracy perpetuates inequity.',
                         },
                     ],
                 },
@@ -206,77 +199,75 @@
         },
     ];
 
-    let scenarioIndex = $state(0);
-    let nodeIndex = $state(0);
+    let scenarioIdx = $state(0);
+    let nodeIdx = $state(0);
     let path = $state<
         { nodeIdx: number; choiceIdx: number; consequence: string }[]
     >([]);
 
-    const scenario = $derived(scenarios[scenarioIndex]);
-    const currentNode = $derived(scenario.nodes[nodeIndex]);
-    const isEnd = $derived(
-        !currentNode.options || currentNode.options.length === 0,
-    );
+    const scenario = $derived(scenarios[scenarioIdx]);
+    const node = $derived(scenario.nodes[nodeIdx]);
+    const isEnd = $derived(!node.options || node.options.length === 0);
 
-    function makeChoice(optionIdx: number) {
-        const opt = currentNode.options![optionIdx];
+    function makeChoice(optIdx: number) {
+        const opt = node.options![optIdx];
         path = [
             ...path,
-            {
-                nodeIdx: nodeIndex,
-                choiceIdx: optionIdx,
-                consequence: opt.consequence,
-            },
+            { nodeIdx, choiceIdx: optIdx, consequence: opt.consequence },
         ];
-        nodeIndex = opt.next;
+        nodeIdx = opt.next;
     }
 
-    function restart() {
-        nodeIndex = 0;
+    function handleRestart() {
+        nodeIdx = 0;
         path = [];
     }
-    function switchScenario(idx: number) {
-        scenarioIndex = idx;
-        nodeIndex = 0;
-        path = [];
+
+    function handleFinish() {
+        if (scenarioIdx < scenarios.length - 1) {
+            scenarioIdx++;
+            nodeIdx = 0;
+            path = [];
+        } else {
+            const data = Store.get(SLUG);
+            const played = data.scenariosPlayed || [];
+            scenarios.forEach((s) => {
+                if (!played.includes(s.id)) played.push(s.id);
+            });
+            Store.set(SLUG, { scenariosPlayed: played });
+
+            let badge: string | null = null;
+            if (Store.addBadge(SLUG, "decision-first"))
+                badge = "decision-first";
+            if (
+                played.length >= scenarios.length &&
+                Store.addBadge(SLUG, "decision-all")
+            )
+                badge = "decision-all";
+
+            onComplete({
+                score: path.length,
+                total: path.length,
+                badgeId: badge,
+                statLine: `${path.length} DECISIONS · ${played.length} SCENARIOS`,
+            });
+        }
     }
 </script>
 
-<svelte:head>
-    <title>Decision Tree — Training Labs — Progeta Technologies</title>
-    <meta
-        name="description"
-        content="Branching ethical scenarios in cybersecurity and AI. No right answers — only trade-offs."
-    />
-</svelte:head>
+<div class="screen-build">
+    <span class="sq-eyebrow"
+        >{scenario.domain} · {scenario.title.toUpperCase()}</span
+    >
 
-<div class="game-shell">
-    <a href="/resources/games" class="back-link">← BACK TO LABS</a>
-    <header class="game-header">
-        <span class="domain-badge">ETHICS</span>
-        <h1 class="game-title">Decision Tree</h1>
-        <p class="game-sub">
-            Every decision closes some doors and opens others. There are no
-            resets.
-        </p>
-    </header>
+    {#if nodeIdx === 0 && path.length === 0}
+        <div class="context-box">
+            <span class="ctx-label">SCENARIO</span>
+            <p class="ctx-text">{scenario.context}</p>
+        </div>
+    {/if}
 
-    <div class="scenario-nav">
-        {#each scenarios as s, i}
-            <button
-                class="scenario-btn"
-                class:active={scenarioIndex === i}
-                onclick={() => switchScenario(i)}>{s.title}</button
-            >
-        {/each}
-    </div>
-
-    <section class="context-box">
-        <span class="ctx-label">{scenario.domain}</span>
-        <p class="ctx-text">{scenario.context}</p>
-    </section>
-
-    <!-- Decision path -->
+    <!-- Path history -->
     {#if path.length > 0}
         <div class="path-history">
             {#each path as step}
@@ -292,12 +283,12 @@
     {/if}
 
     <!-- Current node -->
-    <section class="node-card">
-        <p class="node-text">{currentNode.text}</p>
+    <div class="node-card">
+        <p class="node-text">{node.text}</p>
         {#if !isEnd}
             <div class="node-options">
-                {#each currentNode.options! as opt, i}
-                    <button class="node-opt" onclick={() => makeChoice(i)}
+                {#each node.options! as opt, i}
+                    <button class="sb-option" onclick={() => makeChoice(i)}
                         >{opt.label}</button
                     >
                 {/each}
@@ -305,97 +296,45 @@
         {:else}
             <div class="end-box">
                 <span class="end-label">END OF PATH</span>
-                <button class="retry-btn" onclick={restart}
-                    >EXPLORE A DIFFERENT PATH →</button
-                >
+                <div class="end-actions">
+                    <button class="si-btn" onclick={handleRestart}
+                        >EXPLORE DIFFERENT PATH</button
+                    >
+                    <button class="si-btn primary" onclick={handleFinish}
+                        >{scenarioIdx < scenarios.length - 1
+                            ? "NEXT SCENARIO →"
+                            : "COMPLETE →"}</button
+                    >
+                </div>
             </div>
         {/if}
-    </section>
+    </div>
 </div>
 
 <style>
-    .game-shell {
+    .screen-build {
+        width: 100%;
         max-width: 680px;
-        margin: 0 auto;
-        padding: clamp(100px, 14vw, 140px) clamp(20px, 4vw, 40px) 80px;
-        min-height: 100vh;
-        background: #020408;
     }
-    .back-link {
+    .sq-eyebrow {
         font-family: "DM Mono", monospace;
-        font-size: 10px;
-        letter-spacing: 0.14em;
+        font-size: 9px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
         color: #424870;
-        text-decoration: none;
-        display: inline-block;
-        margin-bottom: 32px;
-        transition: color 0.2s;
+        display: block;
+        margin-bottom: 16px;
     }
-    .back-link:hover {
-        color: #8890bb;
-    }
-    .game-header {
-        margin-bottom: 24px;
-    }
-    .domain-badge {
-        font-family: "DM Mono", monospace;
-        font-size: 10px;
-        letter-spacing: 0.14em;
-        color: #edf0ff;
-        border: 1px solid rgba(237, 240, 255, 0.2);
-        padding: 3px 10px;
-        border-radius: 2px;
-        display: inline-block;
-        margin-bottom: 12px;
-    }
-    .game-title {
-        font-family: "Cormorant Garamond", Georgia, serif;
-        font-weight: 700;
-        font-size: clamp(32px, 5vw, 44px);
-        color: #edf0ff;
-        line-height: 1;
-        margin: 0 0 8px 0;
-    }
-    .game-sub {
-        font-family: "DM Sans", sans-serif;
-        font-weight: 300;
-        font-size: 14px;
-        color: #424870;
-        margin: 0;
-        font-style: italic;
-    }
-
-    .scenario-nav {
-        display: flex;
-        gap: 8px;
-        margin-bottom: 20px;
-        flex-wrap: wrap;
-    }
-    .scenario-btn {
-        font-family: "DM Mono", monospace;
-        font-size: 10px;
-        letter-spacing: 0.1em;
-        color: #424870;
-        background: #07090f;
-        border: 1px solid #0f1220;
-        padding: 8px 14px;
-        border-radius: 2px;
-        cursor: pointer;
-    }
-    .scenario-btn.active {
-        border-color: #edf0ff;
-        color: #edf0ff;
-    }
-
     .context-box {
         background: #07090f;
-        border: 1px solid #0f1220;
-        padding: 16px 20px;
-        margin-bottom: 24px;
+        border: 1px solid #171b30;
+        padding: 20px;
+        margin-bottom: 20px;
+        border-radius: 4px;
     }
     .ctx-label {
         font-family: "DM Mono", monospace;
-        font-size: 10px;
+        font-size: 9px;
         letter-spacing: 0.14em;
         color: #424870;
         display: block;
@@ -403,35 +342,36 @@
     }
     .ctx-text {
         font-family: "DM Sans", sans-serif;
+        font-weight: 300;
         font-size: 14px;
         color: #8890bb;
-        line-height: 1.65;
+        line-height: 1.7;
         margin: 0;
     }
 
     .path-history {
         display: flex;
         flex-direction: column;
-        gap: 12px;
-        margin-bottom: 24px;
+        gap: 8px;
+        margin-bottom: 20px;
         border-left: 2px solid #0f1220;
         padding-left: 16px;
     }
     .path-step {
-        padding: 8px 0;
+        padding: 6px 0;
     }
     .path-choice {
         font-family: "DM Sans", sans-serif;
         font-weight: 500;
-        font-size: 14px;
+        font-size: 13px;
         color: #edf0ff;
         display: block;
-        margin-bottom: 4px;
+        margin-bottom: 2px;
     }
     .path-consequence {
         font-family: "DM Sans", sans-serif;
         font-weight: 300;
-        font-size: 13px;
+        font-size: 12px;
         color: #8890bb;
         line-height: 1.5;
         margin: 0;
@@ -439,8 +379,9 @@
 
     .node-card {
         background: #07090f;
-        border: 1px solid #0f1220;
-        padding: clamp(20px, 3vw, 32px);
+        border: 1px solid #171b30;
+        padding: clamp(20px, 3vw, 28px);
+        border-radius: 4px;
     }
     .node-text {
         font-family: "DM Sans", sans-serif;
@@ -454,28 +395,29 @@
         flex-direction: column;
         gap: 8px;
     }
-    .node-opt {
-        font-family: "DM Sans", sans-serif;
-        font-size: 14px;
-        color: #8890bb;
+    .sb-option {
+        padding: 14px 18px;
+        border: 1px solid #171b30;
+        border-radius: 4px;
         background: #03040a;
-        border: 1px solid #0f1220;
-        padding: 12px 16px;
-        border-radius: 3px;
+        color: #8890bb;
+        font-family: "DM Sans", sans-serif;
+        font-weight: 300;
+        font-size: 14px;
         cursor: pointer;
         text-align: left;
         transition:
             border-color 0.2s,
             color 0.2s;
     }
-    .node-opt:hover {
+    .sb-option:hover {
         border-color: #424870;
         color: #edf0ff;
     }
 
     .end-box {
         text-align: center;
-        padding: 20px 0;
+        padding: 16px 0;
     }
     .end-label {
         font-family: "DM Mono", monospace;
@@ -485,15 +427,25 @@
         display: block;
         margin-bottom: 12px;
     }
-    .retry-btn {
+    .end-actions {
+        display: flex;
+        gap: 8px;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    .si-btn {
         font-family: "DM Mono", monospace;
-        font-size: 11px;
-        letter-spacing: 0.12em;
-        color: #edf0ff;
-        background: transparent;
-        border: 1px solid #424870;
+        font-size: 10px;
+        letter-spacing: 0.14em;
         padding: 10px 20px;
-        border-radius: 2px;
+        border-radius: 3px;
+        background: transparent;
         cursor: pointer;
+        color: #424870;
+        border: 1px solid #171b30;
+    }
+    .si-btn.primary {
+        color: var(--game-accent, #edf0ff);
+        border-color: var(--game-accent, #edf0ff);
     }
 </style>

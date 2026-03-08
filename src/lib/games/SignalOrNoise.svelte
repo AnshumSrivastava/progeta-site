@@ -1,5 +1,17 @@
 <script lang="ts">
-    const STORAGE_KEY = "pt-signal-noise";
+    import { Store } from "./store";
+
+    interface Props {
+        onComplete: (data: {
+            score: number;
+            total: number;
+            badgeId?: string | null;
+            statLine: string;
+        }) => void;
+    }
+    let { onComplete }: Props = $props();
+
+    const SLUG = "signal-or-noise";
 
     interface FeedItem {
         text: string;
@@ -7,14 +19,12 @@
         source: string;
         explanation: string;
     }
-
     interface DayResult {
         date: string;
         score: number;
         total: number;
     }
 
-    // Pool of items — rotates daily
     const itemPool: FeedItem[][] = [
         [
             {
@@ -206,7 +216,6 @@
     function todayStr(): string {
         return new Date().toISOString().slice(0, 10);
     }
-
     function getTodayItems(): FeedItem[] {
         const now = new Date();
         const dayOfYear = Math.floor(
@@ -216,414 +225,281 @@
         return itemPool[dayOfYear % itemPool.length];
     }
 
-    function loadResults(): DayResult[] {
-        if (typeof localStorage === "undefined") return [];
-        try {
-            return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
-        } catch {
-            return [];
-        }
-    }
-    function saveResults(results: DayResult[]) {
-        if (typeof localStorage === "undefined") return;
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(results));
-    }
-
     const items = getTodayItems();
-    let results = $state(loadResults());
+    let gameData = $state(Store.get(SLUG));
+    let history: DayResult[] = $state(gameData.history || []);
     let answers = $state<(string | null)[]>(new Array(items.length).fill(null));
-    let revealed = $state(false);
+    let currentItem = $state(0);
+    let showReveal = $state(false);
 
-    const todayResult = $derived(results.find((r) => r.date === todayStr()));
-    const alreadyDone = $derived(!!todayResult);
+    const todayDone = $derived(history.some((r) => r.date === todayStr()));
 
-    $effect(() => {
-        if (alreadyDone && !revealed) {
-            revealed = true;
-        }
-    });
-
-    function handleAnswer(idx: number, ans: "signal" | "noise") {
-        if (alreadyDone || revealed) return;
-        answers[idx] = ans;
+    function handleAnswer(ans: "signal" | "noise") {
+        if (showReveal || todayDone) return;
+        answers[currentItem] = ans;
         answers = [...answers];
+        showReveal = true;
     }
 
-    function handleSubmit() {
-        if (answers.some((a) => a === null)) return;
-        revealed = true;
-        const score = items.reduce(
-            (acc, item, i) => acc + (answers[i] === item.type ? 1 : 0),
-            0,
-        );
-        const result: DayResult = {
-            date: todayStr(),
-            score,
-            total: items.length,
-        };
-        results = [result, ...results.filter((r) => r.date !== todayStr())];
-        saveResults(results);
-    }
+    function handleContinue() {
+        showReveal = false;
+        if (currentItem < items.length - 1) {
+            currentItem++;
+        } else {
+            // All items answered — submit
+            const score = items.reduce(
+                (acc, item, i) => acc + (answers[i] === item.type ? 1 : 0),
+                0,
+            );
+            const result: DayResult = {
+                date: todayStr(),
+                score,
+                total: items.length,
+            };
+            history = [
+                result,
+                ...history.filter((r) => r.date !== todayStr()),
+            ].slice(0, 30);
 
-    const streak = $derived(() => {
-        const sorted = [...results].sort(
-            (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
-        );
-        let count = 0;
-        const today = new Date();
-        for (let i = 0; i < sorted.length; i++) {
-            const expected = new Date(today);
-            expected.setDate(expected.getDate() - i);
-            if (sorted[i]?.date === expected.toISOString().slice(0, 10))
-                count++;
-            else break;
+            const streak = Store.updateStreak(SLUG);
+            Store.set(SLUG, {
+                history,
+                totalPlayed: (gameData.totalPlayed || 0) + 1,
+                bestScore: Math.max(gameData.bestScore || 0, score),
+            });
+
+            // Check badges
+            let badge: string | null = null;
+            if (Store.addBadge(SLUG, "sns-first-complete"))
+                badge = "sns-first-complete";
+            if (streak >= 3 && Store.addBadge(SLUG, "sns-streak-3"))
+                badge = "sns-streak-3";
+            if (streak >= 7 && Store.addBadge(SLUG, "sns-streak-7"))
+                badge = "sns-streak-7";
+            if (streak >= 30 && Store.addBadge(SLUG, "sns-streak-30"))
+                badge = "sns-streak-30";
+            if (score === items.length && Store.addBadge(SLUG, "sns-perfect"))
+                badge = "sns-perfect";
+
+            onComplete({
+                score,
+                total: items.length,
+                badgeId: badge,
+                statLine: `STREAK: ${streak} DAYS · SCORE: ${score}/${items.length} · ${todayStr()}`,
+            });
         }
-        return count;
-    });
+    }
 </script>
 
-<svelte:head>
-    <title>Signal or Noise — Training Labs — Progeta Technologies</title>
-    <meta
-        name="description"
-        content="Five items a day. Determine which are real signals and which are noise. Covers phishing, AI-generated content, and statistical manipulation."
-    />
-</svelte:head>
+<div class="screen-question">
+    <span class="sq-eyebrow">ITEM {currentItem + 1} OF {items.length}</span>
+    <h2 class="sq-question">Is this signal or noise?</h2>
 
-<div class="game-shell">
-    <a href="/resources/games" class="back-link">← BACK TO LABS</a>
-
-    <header class="game-header">
-        <span class="domain-badge">AWARENESS</span>
-        <h1 class="game-title">Signal or Noise</h1>
-        <p class="game-sub">
-            Every piece of information is trying to tell you something. Most of
-            it is lying.
-        </p>
-    </header>
-
-    <section class="stats-row">
-        <div class="stat-box">
-            <span class="stat-num">{streak()}</span><span class="stat-lbl"
-                >STREAK</span
-            >
+    <!-- The item -->
+    <div class="sq-content">
+        <div
+            class="feed-card"
+            class:email={items[currentItem].source.startsWith("Email")}
+            class:social={items[currentItem].source.includes("LinkedIn") ||
+                items[currentItem].source.includes("Twitter") ||
+                items[currentItem].source.includes("TikTok") ||
+                items[currentItem].source.includes("Instagram") ||
+                items[currentItem].source.includes("Reddit") ||
+                items[currentItem].source.includes("YouTube") ||
+                items[currentItem].source.includes("WhatsApp")}
+        >
+            <span class="feed-source">{items[currentItem].source}</span>
+            <p class="feed-text">{items[currentItem].text}</p>
         </div>
-        <div class="stat-box">
-            <span class="stat-num">{results.length}</span><span class="stat-lbl"
-                >DAYS PLAYED</span
-            >
-        </div>
-        <div class="stat-box">
-            <span class="stat-num"
-                >{results.reduce((a, r) => a + r.score, 0)}/{results.reduce(
-                    (a, r) => a + r.total,
-                    0,
-                )}</span
-            ><span class="stat-lbl">TOTAL CORRECT</span>
-        </div>
-    </section>
+    </div>
 
-    <section class="feed-sec">
-        <span class="sec-label">TODAY'S FEED — {todayStr()}</span>
-
-        <div class="feed-list">
-            {#each items as item, i}
-                <div class="feed-item" class:revealed>
-                    <div class="feed-source">{item.source}</div>
-                    <p class="feed-text">{item.text}</p>
-
-                    <div class="feed-choices">
-                        <button
-                            class="choice-btn"
-                            class:selected={answers[i] === "signal"}
-                            class:correct={revealed && item.type === "signal"}
-                            class:wrong={revealed &&
-                                answers[i] === "signal" &&
-                                item.type !== "signal"}
-                            disabled={revealed}
-                            onclick={() => handleAnswer(i, "signal")}
-                            >SIGNAL</button
-                        >
-                        <button
-                            class="choice-btn"
-                            class:selected={answers[i] === "noise"}
-                            class:correct={revealed && item.type === "noise"}
-                            class:wrong={revealed &&
-                                answers[i] === "noise" &&
-                                item.type !== "noise"}
-                            disabled={revealed}
-                            onclick={() => handleAnswer(i, "noise")}
-                            >NOISE</button
-                        >
-                    </div>
-
-                    {#if revealed}
-                        <div class="feed-explain">
-                            <span
-                                class="explain-verdict"
-                                class:is-signal={item.type === "signal"}
-                                >{item.type === "signal"
-                                    ? "✓ SIGNAL"
-                                    : "✗ NOISE"}</span
-                            >
-                            <p class="explain-text">{item.explanation}</p>
-                        </div>
-                    {/if}
-                </div>
-            {/each}
-        </div>
-
-        {#if !revealed && !alreadyDone}
+    {#if !showReveal}
+        <div class="sq-options sq-options--row">
             <button
-                class="submit-btn"
-                disabled={answers.some((a) => a === null)}
-                onclick={handleSubmit}
+                class="sq-option sq-option--half"
+                onclick={() => handleAnswer("signal")}>SIGNAL</button
             >
-                SUBMIT ANALYSIS →
-            </button>
-        {/if}
+            <button
+                class="sq-option sq-option--half"
+                onclick={() => handleAnswer("noise")}>NOISE</button
+            >
+        </div>
+    {:else}
+        <!-- Reveal -->
+        <div class="sq-options sq-options--row">
+            <button
+                class="sq-option sq-option--half"
+                class:correct={items[currentItem].type === "signal"}
+                class:wrong={answers[currentItem] === "signal" &&
+                    items[currentItem].type !== "signal"}
+                class:selected-wrong={answers[currentItem] === "signal" &&
+                    items[currentItem].type !== "signal"}
+                disabled>SIGNAL</button
+            >
+            <button
+                class="sq-option sq-option--half"
+                class:correct={items[currentItem].type === "noise"}
+                class:wrong={answers[currentItem] === "noise" &&
+                    items[currentItem].type !== "noise"}
+                class:selected-wrong={answers[currentItem] === "noise" &&
+                    items[currentItem].type !== "noise"}
+                disabled>NOISE</button
+            >
+        </div>
 
-        {#if revealed}
-            <div class="score-box">
-                <span class="score-num"
-                    >{todayResult?.score ??
-                        items.reduce(
-                            (acc, item, i) =>
-                                acc + (answers[i] === item.type ? 1 : 0),
-                            0,
-                        )}/{items.length}</span
+        <div class="sq-reveal visible">
+            <p class="sq-reveal-text">
+                <strong
+                    >{items[currentItem].type === "signal"
+                        ? "✓ SIGNAL"
+                        : "✗ NOISE"}</strong
                 >
-                <span class="score-label">CORRECT TODAY</span>
-            </div>
-        {/if}
-    </section>
+                — {items[currentItem].explanation}
+            </p>
+        </div>
+
+        <button class="sq-continue visible" onclick={handleContinue}>
+            {currentItem < items.length - 1 ? "CONTINUE →" : "SEE RESULTS →"}
+        </button>
+    {/if}
 </div>
 
 <style>
-    .game-shell {
-        max-width: 680px;
-        margin: 0 auto;
-        padding: clamp(100px, 14vw, 140px) clamp(20px, 4vw, 40px) 80px;
-        min-height: 100vh;
-        background: #020408;
-    }
-    .back-link {
-        font-family: "DM Mono", monospace;
-        font-size: 10px;
-        letter-spacing: 0.14em;
-        color: #424870;
-        text-decoration: none;
-        display: inline-block;
-        margin-bottom: 32px;
-        transition: color 0.2s;
-    }
-    .back-link:hover {
-        color: #8890bb;
-    }
-    .game-header {
-        margin-bottom: 32px;
-    }
-    .domain-badge {
-        font-family: "DM Mono", monospace;
-        font-size: 10px;
-        letter-spacing: 0.14em;
-        color: #edf0ff;
-        border: 1px solid rgba(237, 240, 255, 0.2);
-        padding: 3px 10px;
-        border-radius: 2px;
-        display: inline-block;
-        margin-bottom: 12px;
-    }
-    .game-title {
-        font-family: "Cormorant Garamond", Georgia, serif;
-        font-weight: 700;
-        font-size: clamp(32px, 5vw, 44px);
-        color: #edf0ff;
-        line-height: 1;
-        margin: 0 0 8px 0;
-    }
-    .game-sub {
-        font-family: "DM Sans", sans-serif;
-        font-weight: 300;
-        font-size: 14px;
-        color: #424870;
-        margin: 0;
-        font-style: italic;
-    }
-
-    .stats-row {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1px;
-        background: #0f1220;
-        margin-bottom: 32px;
-    }
-    .stat-box {
-        background: #03040a;
-        padding: 14px;
-        text-align: center;
-    }
-    .stat-num {
-        font-family: "DM Mono", monospace;
-        font-weight: 700;
-        font-size: 20px;
-        color: #edf0ff;
-        display: block;
-    }
-    .stat-lbl {
-        font-family: "DM Mono", monospace;
-        font-size: 10px;
-        letter-spacing: 0.12em;
-        color: #424870;
-        display: block;
-        margin-top: 4px;
-    }
-
-    .sec-label {
-        font-family: "DM Mono", monospace;
-        font-size: 10px;
-        letter-spacing: 0.14em;
-        color: #424870;
-        display: block;
-        margin-bottom: 16px;
-    }
-    .feed-list {
+    .screen-question {
+        width: 100%;
+        max-width: 640px;
         display: flex;
         flex-direction: column;
-        gap: 12px;
     }
-    .feed-item {
+    .sq-eyebrow {
+        font-family: "DM Mono", monospace;
+        font-size: 9px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: #424870;
+        margin-bottom: 16px;
+    }
+    .sq-question {
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-weight: 700;
+        font-size: clamp(22px, 3.5vw, 32px);
+        color: #edf0ff;
+        line-height: 1.1;
+        margin: 0 0 28px 0;
+    }
+    .sq-content {
+        margin-bottom: 28px;
+    }
+    .feed-card {
+        padding: 20px;
         background: #07090f;
-        border: 1px solid #0f1220;
-        padding: 18px 20px;
+        border: 1px solid #171b30;
+        border-radius: 4px;
+    }
+    .feed-card.email {
+        border-left: 3px solid #e05c20;
+    }
+    .feed-card.social {
+        border-left: 3px solid #1a8fe3;
     }
     .feed-source {
         font-family: "DM Mono", monospace;
-        font-size: 10px;
-        letter-spacing: 0.1em;
+        font-size: 9px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
         color: #424870;
-        margin-bottom: 8px;
+        margin-bottom: 10px;
+        display: block;
     }
     .feed-text {
         font-family: "DM Sans", sans-serif;
+        font-weight: 300;
         font-size: 15px;
         color: #8890bb;
-        line-height: 1.6;
-        margin: 0 0 14px 0;
-    }
-
-    .feed-choices {
-        display: flex;
-        gap: 8px;
-    }
-    .choice-btn {
-        font-family: "DM Mono", monospace;
-        font-size: 10px;
-        letter-spacing: 0.12em;
-        padding: 8px 16px;
-        border: 1px solid #0f1220;
-        border-radius: 2px;
-        background: transparent;
-        color: #424870;
-        cursor: pointer;
-        transition:
-            border-color 0.2s,
-            color 0.2s,
-            background 0.2s;
-        flex: 1;
-    }
-    .choice-btn:not(:disabled):hover {
-        border-color: #424870;
-        color: #8890bb;
-    }
-    .choice-btn:disabled {
-        cursor: default;
-    }
-    .choice-btn.selected {
-        border-color: #edf0ff;
-        color: #edf0ff;
-        background: rgba(237, 240, 255, 0.04);
-    }
-    .choice-btn.correct {
-        border-color: #18c96a;
-        color: #18c96a;
-        background: rgba(24, 201, 106, 0.06);
-    }
-    .choice-btn.wrong {
-        border-color: #e05c20;
-        color: #e05c20;
-        background: rgba(224, 92, 32, 0.06);
-    }
-
-    .feed-explain {
-        margin-top: 14px;
-        padding-top: 12px;
-        border-top: 1px solid #0f1220;
-    }
-    .explain-verdict {
-        font-family: "DM Mono", monospace;
-        font-size: 10px;
-        letter-spacing: 0.12em;
-        color: #e05c20;
-        display: block;
-        margin-bottom: 4px;
-    }
-    .explain-verdict.is-signal {
-        color: #18c96a;
-    }
-    .explain-text {
-        font-family: "DM Sans", sans-serif;
-        font-weight: 300;
-        font-size: 13px;
-        color: #8890bb;
-        line-height: 1.65;
+        line-height: 1.7;
         margin: 0;
     }
-
-    .submit-btn {
-        margin-top: 20px;
+    .sq-options {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+    .sq-options--row {
+        flex-direction: row;
+    }
+    .sq-option {
+        padding: 14px 18px;
+        border: 1px solid #171b30;
+        border-radius: 4px;
+        background: #07090f;
+        color: #8890bb;
         font-family: "DM Mono", monospace;
-        font-size: 11px;
-        letter-spacing: 0.12em;
-        color: #edf0ff;
-        background: transparent;
-        border: 1px solid rgba(237, 240, 255, 0.2);
-        padding: 10px 20px;
-        border-radius: 2px;
+        font-weight: 500;
+        font-size: 12px;
+        letter-spacing: 0.14em;
         cursor: pointer;
+        text-align: center;
         transition:
-            background 0.2s,
-            border-color 0.2s;
+            border-color 0.15s,
+            background 0.15s,
+            color 0.15s;
     }
-    .submit-btn:not(:disabled):hover {
-        background: rgba(237, 240, 255, 0.04);
-        border-color: #edf0ff;
+    .sq-option--half {
+        flex: 1;
     }
-    .submit-btn:disabled {
-        opacity: 0.4;
+    .sq-option:hover:not(:disabled) {
+        border-color: var(--game-accent, #edf0ff);
+        background: #0c0e18;
+        color: #edf0ff;
+    }
+    .sq-option.correct {
+        border-color: #18c96a;
+        background: rgba(24, 201, 106, 0.06);
+        color: #18c96a;
+    }
+    .sq-option.wrong,
+    .sq-option.selected-wrong {
+        border-color: #e05c20;
+        background: rgba(224, 92, 32, 0.06);
+        color: #e05c20;
+    }
+    .sq-option:disabled {
         cursor: default;
     }
-
-    .score-box {
-        margin-top: 24px;
-        text-align: center;
-        padding: 20px;
-        background: #07090f;
-        border: 1px solid #0f1220;
+    .sq-reveal {
+        margin-top: 20px;
+        padding: 16px 18px;
+        border-left: 2px solid var(--game-accent, #edf0ff);
+        background: rgba(255, 255, 255, 0.02);
     }
-    .score-num {
-        font-family: "DM Mono", monospace;
-        font-weight: 700;
-        font-size: 32px;
+    .sq-reveal-text {
+        font-family: "DM Sans", sans-serif;
+        font-weight: 300;
+        font-size: 14px;
+        line-height: 1.72;
+        color: #8890bb;
+        margin: 0;
+    }
+    .sq-reveal-text strong {
         color: #edf0ff;
-        display: block;
+        font-weight: 400;
     }
-    .score-label {
+    .sq-continue {
+        align-self: flex-end;
+        margin-top: 20px;
+        padding: 10px 24px;
+        border: 1px solid var(--game-accent, #edf0ff);
+        border-radius: 3px;
+        background: transparent;
+        color: var(--game-accent, #edf0ff);
         font-family: "DM Mono", monospace;
         font-size: 10px;
-        letter-spacing: 0.12em;
-        color: #424870;
-        display: block;
-        margin-top: 4px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: background 0.15s;
+    }
+    .sq-continue:hover {
+        background: rgba(237, 240, 255, 0.04);
     }
 </style>

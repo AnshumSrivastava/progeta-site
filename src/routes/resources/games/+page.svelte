@@ -1,9 +1,57 @@
 <script lang="ts">
     import ScrollReveal from "$lib/components/animations/ScrollReveal.svelte";
     import { games, TAG_OPTIONS, type Game } from "$lib/content/games-catalog";
+    import GameShell from "$lib/games/GameShell.svelte";
+    import { Store } from "$lib/games/store";
+    import SignalOrNoise from "$lib/games/SignalOrNoise.svelte";
+    import OneConceptADay from "$lib/games/OneConceptADay.svelte";
+    import ReflectionLog from "$lib/games/ReflectionLog.svelte";
+    import SystemCheck from "$lib/games/SystemCheck.svelte";
+    import SpeechOfTheDay from "$lib/games/SpeechOfTheDay.svelte";
+    import Mirror from "$lib/games/Mirror.svelte";
+    import QuantumQuestion from "$lib/games/QuantumQuestion.svelte";
+    import TheAudit from "$lib/games/TheAudit.svelte";
+    import Cipher from "$lib/games/Cipher.svelte";
+    import TheBreach from "$lib/games/TheBreach.svelte";
+    import ThreatProfile from "$lib/games/ThreatProfile.svelte";
+    import DecisionTree from "$lib/games/DecisionTree.svelte";
+    import BuildAThreatModel from "$lib/games/BuildAThreatModel.svelte";
+    import TheBoard from "$lib/games/TheBoard.svelte";
+
+    // Map game IDs to their component constructors
+    const GAME_COMPONENTS: Record<string, any> = {
+        "signal-or-noise": SignalOrNoise,
+        "one-concept-a-day": OneConceptADay,
+        "reflection-log": ReflectionLog,
+        "system-check": SystemCheck,
+        "speech-of-the-day": SpeechOfTheDay,
+        mirror: Mirror,
+        "quantum-question": QuantumQuestion,
+        "the-audit": TheAudit,
+        cipher: Cipher,
+        "the-breach": TheBreach,
+        "threat-profile": ThreatProfile,
+        "decision-tree": DecisionTree,
+        "build-a-threat-model": BuildAThreatModel,
+        "the-board": TheBoard,
+    };
 
     let activeTag = $state("ALL");
     let searchQuery = $state("");
+
+    // Overlay state
+    let activeGame = $state<Game | null>(null);
+    let resultData = $state<{
+        score: number;
+        total: number;
+        badgeId?: string | null;
+        statLine: string;
+        tags: string[];
+    } | null>(null);
+    let shellKey = $state(0);
+
+    // Aggregate data from Store
+    let aggregate = $state(Store.getAggregate());
 
     const filteredGames = $derived(
         games.filter((g) => {
@@ -21,6 +69,33 @@
         return new Date()
             .toLocaleDateString("en-GB", { day: "2-digit", month: "short" })
             .toUpperCase();
+    }
+
+    function openGame(game: Game) {
+        activeGame = game;
+        resultData = null;
+        shellKey++;
+    }
+
+    function closeGame() {
+        activeGame = null;
+        resultData = null;
+        aggregate = Store.getAggregate();
+    }
+
+    function handleGameComplete(data: {
+        score: number;
+        total: number;
+        badgeId?: string | null;
+        statLine: string;
+    }) {
+        if (!activeGame) return;
+        resultData = { ...data, tags: activeGame.tags };
+    }
+
+    function handlePlayAgain() {
+        resultData = null;
+        shellKey++;
     }
 
     // Simulated engagement data (static — no backend)
@@ -141,10 +216,27 @@
                         <span class="sidebar-stat-lbl">ON-DEMAND</span>
                     </div>
                     <div class="sidebar-stat">
-                        <span class="sidebar-stat-val">0</span>
-                        <span class="sidebar-stat-lbl">ACCOUNTS</span>
+                        <span class="sidebar-stat-val"
+                            >{aggregate.totalBadgesEarned}</span
+                        >
+                        <span class="sidebar-stat-lbl">BADGES</span>
                     </div>
                 </div>
+            </div>
+
+            <!-- Player Level -->
+            <div class="sidebar-block">
+                <span class="sidebar-label">YOUR LEVEL</span>
+                <div class="sidebar-stats">
+                    <div class="sidebar-stat">
+                        <span class="sidebar-stat-val">LV{aggregate.level}</span
+                        >
+                        <span class="sidebar-stat-lbl">{aggregate.xp} XP</span>
+                    </div>
+                </div>
+                <a href="/resources/games/profile" class="profile-link"
+                    >MY BADGES →</a
+                >
             </div>
 
             <!-- Domains -->
@@ -188,10 +280,10 @@
 
         <div class="game-grid">
             {#each filteredGames as game, i (game.id)}
-                <a
-                    href={game.href}
+                <button
                     class="game-card"
                     style="--game-accent: {game.accentColor}; --game-hover-bg: {game.hoverBg};"
+                    onclick={() => openGame(game)}
                 >
                     <!-- Top row: index + status -->
                     <div class="card-top">
@@ -255,36 +347,42 @@
 
                     <!-- Accent line -->
                     <div class="card-accent-line"></div>
-                </a>
+                </button>
             {/each}
         </div>
 
         <!-- Export utility -->
         <div class="export-row">
-            <button
-                class="export-btn"
-                onclick={() => {
-                    const keys = Object.keys(localStorage).filter((k) =>
-                        k.startsWith("pt-"),
-                    );
-                    const data: Record<string, string | null> = {};
-                    keys.forEach((k) => {
-                        data[k] = localStorage.getItem(k);
-                    });
-                    const blob = new Blob([JSON.stringify(data, null, 2)], {
-                        type: "application/json",
-                    });
-                    const url = URL.createObjectURL(blob);
-                    const a = document.createElement("a");
-                    a.href = url;
-                    a.download = `progeta-game-data-${new Date().toISOString().slice(0, 10)}.json`;
-                    a.click();
-                    URL.revokeObjectURL(url);
-                }}>EXPORT ALL MY DATA →</button
+            <button class="export-btn" onclick={() => Store.exportAll()}
+                >EXPORT ALL MY DATA →</button
             >
         </div>
     </main>
 </div>
+
+<!-- ═══════ GAME SHELL OVERLAY ═══════ -->
+{#if activeGame}
+    {#key shellKey}
+        <GameShell
+            active={true}
+            gameId={activeGame.id}
+            gameName={activeGame.name}
+            gameIndex={activeGame.index}
+            accentColor={activeGame.accentColor}
+            streakKey={activeGame.frequency === "daily" ? activeGame.id : ""}
+            totalScreens={5}
+            currentScreen={0}
+            {resultData}
+            onClose={closeGame}
+            onPlayAgain={handlePlayAgain}
+        >
+            {#if GAME_COMPONENTS[activeGame.id]}
+                {@const GameComponent = GAME_COMPONENTS[activeGame.id]}
+                <GameComponent onComplete={handleGameComplete} />
+            {/if}
+        </GameShell>
+    {/key}
+{/if}
 
 <style>
     /* ═══════════════════════════════════════════════════
@@ -425,6 +523,7 @@
         overflow-y: auto;
     }
     .sidebar-block {
+        /* Spacing handled by parent gap */
     }
     .sidebar-label {
         font-family: "DM Mono", monospace;
@@ -579,6 +678,21 @@
         line-height: 1.5;
     }
 
+    /* Profile link */
+    .profile-link {
+        font-family: "DM Mono", monospace;
+        font-size: 10px;
+        letter-spacing: 0.12em;
+        color: #424870;
+        text-decoration: none;
+        display: inline-block;
+        margin-top: 8px;
+        transition: color 0.15s;
+    }
+    .profile-link:hover {
+        color: #8890bb;
+    }
+
     /* ═══════════════════════════════════════════════════
      GAME PANEL (RIGHT)
      ═══════════════════════════════════════════════════ */
@@ -618,7 +732,7 @@
         background: #0f1220;
     }
 
-    /* Game card */
+    /* Game card (button reset) */
     .game-card {
         background: #03040a;
         padding: clamp(20px, 2.5vw, 32px);
@@ -629,6 +743,12 @@
         position: relative;
         overflow: hidden;
         transition: background 0.3s ease;
+        border: none;
+        border-radius: 0;
+        text-align: left;
+        cursor: pointer;
+        font: inherit;
+        width: 100%;
         cursor: pointer;
     }
     .game-card:hover {
