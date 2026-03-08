@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SelfOS — Launching Soon | Progeta Technologies</title>
+    <meta name="description"
+        content="A local-first personal operating system designed to help you run your life with complete intention and privacy. Launching Soon.">
+    <link rel="icon" href="/favicon.svg">
+    <link rel="stylesheet" href="/assets/css/tokens.css">
+    <link rel="stylesheet" href="/assets/css/global.css">
+    <link rel="stylesheet" href="/assets/css/components.css">
+    <link rel="stylesheet" href="/assets/css/layout.css">
+    <link rel="stylesheet" href="/assets/css/animations.css">
+    <style>
+        .launch-hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: #020408;
+            overflow: hidden;
+            padding: 120px 0;
+            position: relative;
+        }
+
+        .launch-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 64px;
+            align-items: center;
+            position: relative;
+            z-index: 5;
+        }
+
+        .eyebrow {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--color-ink-tertiary);
+            display: block;
+            margin-bottom: 24px;
+        }
+
+        .launch-heading {
+            font-size: clamp(40px, 6vw, 72px);
+            line-height: 1.05;
+            color: #edf0ff;
+            margin-bottom: 24px;
+            letter-spacing: -0.02em;
+        }
+
+        .text-accent {
+            color: var(--color-accent, #1a8fe3);
+        }
+
+        .launch-body {
+            font-size: 18px;
+            color: var(--color-ink-tertiary);
+            max-width: 520px;
+            line-height: 1.7;
+            margin-bottom: 40px;
+        }
+
+        .mission-pills {
+            display: flex;
+            gap: 24px;
+            margin-top: 48px;
+        }
+
+        .pill {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--font-mono);
+            font-size: 10px;
+            color: var(--color-ink-tertiary);
+            letter-spacing: 0.1em;
+        }
+
+        .pill-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--color-accent);
+            opacity: 0.6;
+        }
+
+        .visual-right {
+            position: relative;
+            height: 600px;
+            width: 600px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0.7;
+        }
+
+        /* Simplified placeholder for OrbitalSystem since it's a Svelte component */
+        .orbital-placeholder {
+            width: 100%;
+            height: 100%;
+            border: 1px dashed rgba(26, 143, 227, 0.2);
+            border-radius: 50%;
+            position: relative;
+            animation: rotate 60s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .bg-blur {
+            position: absolute;
+            top: 50%;
+            right: 0;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(26, 143, 227, 0.08) 0%, transparent 70%);
+            filter: blur(80px);
+            z-index: 1;
+        }
+
+        @media (max-width: 1024px) {
+            .launch-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .launch-body {
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .mission-pills {
+                justify-content: center;
+            }
+            .visual-right {
+                width: 300px;
+                height: 300px;
+                margin: 40px auto 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="site-nav"></div>
+
+    <main id="main">
+        <section class="launch-hero">
+            <div class="container launch-grid">
+                <div class="content-left">
+                    <span class="eyebrow animate-on-scroll">SELFOS · INITIATIVE 02</span>
+                    <h1 class="launch-heading animate-on-scroll">
+                        The personal<br>operating system<br>for your life.<br>
+                        <span class="text-accent">Launching Soon.</span>
+                    </h1>
+                    <p class="launch-body animate-on-scroll">
+                        SelfOS is currently in private development. We're building a local-first, 
+                        end-to-end encrypted system that puts you back in control of your data, 
+                        your focus, and your intention.
+                    </p>
+                    <div class="launch-ctas animate-on-scroll">
+                        <a href="/contact/" class="btn-primary">Get Notified</a>
+                    </div>
+                    <div class="mission-pills animate-on-scroll">
+                        <div class="pill">
+                            <span class="pill-dot"></span>
+                            LOCAL-FIRST
+                        </div>
+                        <div class="pill">
+                            <span class="pill-dot"></span>
+                            ENCRYPTED
+                        </div>
+                        <div class="pill">
+                            <span class="pill-dot"></span>
+                            YOURS
+                        </div>
+                    </div>
+                </div>
+
+                <div class="visual-right animate-on-scroll">
+                    <div class="orbital-placeholder"></div>
+                </div>
+            </div>
+            <div class="bg-blur"></div>
+        </section>
+    </main>
+
+    <div id="site-footer"></div>
+    <script src="/assets/js/components.js" defer></script>
+    <script src="/assets/js/animations.js" defer></script>
+</body>
+
+</html>
