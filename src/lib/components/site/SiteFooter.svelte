@@ -59,7 +59,6 @@
         <span class="footer__label">Resources</span>
         <a href="/resources/articles">Articles</a>
         <a href="/resources/simulations">Simulations</a>
-        <a href="/resources/gallery">Gallery</a>
         <a href="/resources/glossary">Glossary</a>
         <a href="/verify">Verify Certificate</a>
       </div>

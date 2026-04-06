@@ -335,45 +335,8 @@
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════
-     SECTION 6 — GAMES
-     ═══════════════════════════════════════════════════ -->
-<section class="games-teaser">
-  <div class="container--wide">
-    <div class="games-teaser__grid">
-      <div class="games-teaser__content">
-        <ScrollReveal delay={100} distance={20}>
-          <span class="section-label">INTERACTIVE LABS</span>
-          <h2 class="games-teaser__title">The Training Ground.</h2>
-          <p class="games-teaser__desc">
-            Immersive simulations designed to bridge the gap between theory and
-            tactical reality. From CTI scenarios to infrastructure defense.
-          </p>
-          <div class="games-teaser__stats">
-            <div class="mini-stat">
-              <span class="mini-stat__val">03</span>
-              <span class="mini-stat__lab">Live Sims</span>
-            </div>
-            <div class="mini-stat">
-              <span class="mini-stat__val">12</span>
-              <span class="mini-stat__lab">Modules</span>
-            </div>
-          </div>
-          <Button variant="primary" href="/simulations"
-            >Enter Simulations</Button
-          >
-        </ScrollReveal>
-      </div>
-      <div class="games-teaser__visual">
-        <!-- Abstract game visual placeholder -->
-        <div class="game-orb-wrap">
-          <div class="game-orb"></div>
-          <div class="game-orb-ring"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+
+
 
 <!-- ═══════════════════════════════════════════════════
      SECTION 7 — INTELLIGENCE BRIEFS
@@ -1095,98 +1058,6 @@
     font-style: italic;
   }
 
-  /* ═══════════════════════════════════════════════════
-     GAMES TEASER
-     ═══════════════════════════════════════════════════ */
-  .games-teaser {
-    padding: var(--sp-12) 0;
-    background: #050505;
-    overflow: hidden;
-  }
-
-  .games-teaser__grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--sp-11);
-    align-items: center;
-  }
-
-  .games-teaser__title {
-    font-family: var(--font-display);
-    font-size: 56px;
-    color: #fff;
-    margin: var(--sp-5) 0 var(--sp-6);
-  }
-
-  .games-teaser__desc {
-    font-family: var(--font-body);
-    font-size: 18px;
-    color: #888;
-    line-height: 1.6;
-    max-width: 480px;
-    margin-bottom: var(--sp-8);
-  }
-
-  .games-teaser__stats {
-    display: flex;
-    gap: var(--sp-9);
-    margin-bottom: var(--sp-9);
-  }
-
-  .mini-stat__val {
-    display: block;
-    font-family: var(--font-mono);
-    font-size: 24px;
-    color: #fff;
-  }
-
-  .mini-stat__lab {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    color: #555;
-    text-transform: uppercase;
-  }
-
-  .games-teaser__visual {
-    display: flex;
-    justify-content: center;
-  }
-
-  .game-orb-wrap {
-    position: relative;
-    width: 300px;
-    height: 300px;
-  }
-
-  .game-orb {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    background: radial-gradient(circle at 30% 30%, #333, #000);
-    box-shadow:
-      0 0 50px rgba(255, 100, 0, 0.2),
-      inset 0 0 20px rgba(255, 255, 255, 0.05);
-  }
-
-  .game-orb-ring {
-    position: absolute;
-    top: -20px;
-    left: -20px;
-    right: -20px;
-    bottom: -20px;
-    border: 1px solid rgba(255, 100, 0, 0.3);
-    border-radius: 50%;
-    animation: ringRotate 10s linear infinite;
-  }
-
-  @keyframes ringRotate {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  }
 
   /* ═══════════════════════════════════════════════════
      BRIEFS (MARQUEE)
@@ -1569,17 +1440,7 @@
       grid-template-columns: 1fr;
     }
 
-    .games-teaser__grid {
-      grid-template-columns: 1fr;
-      text-align: center;
-    }
-    .games-teaser__stats {
-      justify-content: center;
-    }
-    .games-teaser__visual {
-      order: -1;
-      margin-bottom: var(--sp-9);
-    }
+
 
     .pathway-grid {
       grid-template-columns: 1fr;

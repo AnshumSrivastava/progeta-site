@@ -12,8 +12,8 @@ export interface HighlightItem {
 }
 
 export const highlights: HighlightItem[] = [
+    { type: 'EVENT', title: 'Hire Ready — 12 April 2026', href: '/events/hireready', label: 'Register Now', accent: 'var(--accent-launchpad)' },
     { type: 'TRACK', title: 'CTI Specialisation', href: '/launchpad/tracks/cti', label: 'Enrolling Now', accent: 'var(--accent-launchpad)' },
-    { type: 'COMMUNITY', title: 'InnerCircle Founders Mixer', href: '/innercircle/events', label: 'March 12' },
     { type: 'SYSTEMS', title: 'SelfOS v2.1 Public Alpha', href: '/selfos', label: 'Update Available', accent: 'var(--accent-selfos)' }
 ];
 

@@ -49,7 +49,7 @@
     line-height: var(--leading-display);
   }
   .brandmark__main {
-    font-family: var(--font-display);
+    font-family: var(--font-roboto);
     font-weight: 700;
     letter-spacing: var(--tracking-compressed);
     color: var(--ink-1);

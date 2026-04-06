@@ -102,18 +102,6 @@
           accent: "",
         },
         {
-          name: "Games",
-          desc: "Interactive security environments and projects.",
-          href: "/resources/games",
-          accent: "",
-        },
-        {
-          name: "Gallery",
-          desc: "Sessions, events, and campus moments.",
-          href: "/resources/gallery",
-          accent: "",
-        },
-        {
           name: "Glossary",
           desc: "Technical terms explained clearly.",
           href: "/resources/glossary",
