@@ -2,31 +2,63 @@
 
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
-import { useRef } from "react";
 
-const fadeUp = {
+const reveal = {
   hidden: {
     opacity: 0,
-    y: 80,
+    y: 40,
+    scale: 0.97,
+    filter: "blur(10px)",
   },
   show: {
     opacity: 1,
     y: 0,
+    scale: 1,
+    filter: "blur(0px)",
   },
 };
 
+const whoBelongs = [
+  {
+    number: "01",
+    title: "Builders",
+    text: "People obsessed with creating things instead of consuming them.",
+  },
+  {
+    number: "02",
+    title: "Operators",
+    text: "People who execute consistently when nobody is watching.",
+  },
+  {
+    number: "03",
+    title: "Founders",
+    text: "People building leverage, companies and opportunities.",
+  },
+  {
+    number: "04",
+    title: "Outliers",
+    text: "People who never felt like they belonged in normal rooms.",
+  },
+];
+
+const processSteps = [
+  "Application",
+  "Review",
+  "Conversation",
+  "Access",
+];
 
 export default function InnerCirclePage() {
   const router = useRouter();
-  const formRef = useRef<HTMLElement>(null);
 
   return (
     <main
       style={{
-        background: "#050505",
-        color: "#FFFFFF",
+        background:
+          "linear-gradient(180deg,#040404 0%,#07111D 50%,#040404 100%)",
+        color: "#F8FAFC",
         minHeight: "100vh",
-        overflow: "hidden",
+        overflowX: "hidden",
         position: "relative",
       }}
     >
@@ -34,14 +66,14 @@ export default function InnerCirclePage() {
       <div
         style={{
           position: "fixed",
-          width: "900px",
-          height: "900px",
+          width: "700px",
+          height: "700px",
           borderRadius: "50%",
           background:
-            "radial-gradient(circle, rgba(139,92,246,.18), transparent 70%)",
-          filter: "blur(150px)",
-          top: "-300px",
-          right: "-300px",
+            "radial-gradient(circle, rgba(245,158,11,.12), transparent 70%)",
+          filter: "blur(120px)",
+          top: "-250px",
+          right: "-250px",
           pointerEvents: "none",
         }}
       />
@@ -53,36 +85,37 @@ export default function InnerCirclePage() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          padding: "120px 24px",
           textAlign: "center",
+          padding: "120px 20px",
         }}
       >
         <motion.div
-          variants={fadeUp}
+          variants={reveal}
           initial="hidden"
           animate="show"
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.9 }}
           style={{
-            maxWidth: "1000px",
-            zIndex: 2,
+            maxWidth: "1100px",
           }}
         >
           <p
             style={{
-              color: "#8B5CF6",
-              letterSpacing: "4px",
-              marginBottom: "20px",
+              color: "#F59E0B",
+              letterSpacing: "5px",
+              textTransform: "uppercase",
               fontWeight: 700,
+              marginBottom: "30px",
             }}
           >
-            PROGETA // INNERCIRCLE
+            Progeta // InnerCircle
           </p>
 
           <h1
             style={{
-              fontSize: "clamp(3rem,8vw,7rem)",
-              lineHeight: 1,
+              fontSize: "clamp(4rem,12vw,10rem)",
+              lineHeight: 0.9,
               fontWeight: 900,
+              marginBottom: "30px",
             }}
           >
             THE
@@ -92,11 +125,11 @@ export default function InnerCirclePage() {
 
           <p
             style={{
-              color: "#A1A1AA",
-              fontSize: "1.25rem",
+              color: "#94A3B8",
+              fontSize: "clamp(1rem,2vw,1.3rem)",
+              lineHeight: 1.9,
               maxWidth: "700px",
-              margin: "30px auto",
-              lineHeight: 1.8,
+              margin: "0 auto",
             }}
           >
             Not everyone gets in.
@@ -104,101 +137,95 @@ export default function InnerCirclePage() {
             And that's the point.
           </p>
 
-         <button
-  onClick={() =>
-    formRef.current?.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    })
-  }
-  style={{
-    background: "#8B5CF6",
-    color: "#FFFFFF",
-    border: "none",
-    padding: "16px 36px",
-    borderRadius: "999px",
-    fontWeight: 700,
-    cursor: "pointer",
-    boxShadow:
-      "0 0 35px rgba(139,92,246,.3)",
-  }}
->
-  Apply For InnerCircle
-</button>
+          <button
+            onClick={() =>
+              router.push("/innercircle/apply")
+            }
+            style={{
+              marginTop: "50px",
+              background: "#D97706",
+              border: "none",
+              color: "#fff",
+              padding: "18px 34px",
+              borderRadius: "999px",
+              fontWeight: 700,
+              cursor: "pointer",
+              fontSize: "1rem",
+            }}
+          >
+            Request Access →
+          </button>
         </motion.div>
       </section>
 
-      {/* WHY */}
+      {/* MANIFESTO */}
       <section
         style={{
-          padding: "140px 24px",
           maxWidth: "1200px",
           margin: "0 auto",
+          padding: "160px 20px",
         }}
       >
         <motion.div
-          variants={fadeUp}
+          variants={reveal}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
         >
           <p
             style={{
-              color: "#8B5CF6",
-              letterSpacing: "3px",
+              color: "#F59E0B",
+              letterSpacing: "4px",
               marginBottom: "20px",
             }}
           >
-            WHY INNERCIRCLE
+            MANIFESTO
           </p>
 
           <h2
             style={{
-              fontSize: "clamp(2.5rem,6vw,5rem)",
+              fontSize: "clamp(2.5rem,7vw,5rem)",
+              lineHeight: 1.05,
               fontWeight: 900,
-              lineHeight: 1.1,
             }}
           >
-            The internet gives
+            You become the
             <br />
-            you information.
+            people you spend
             <br />
-            InnerCircle gives
-            <br />
-            you people.
+            time with.
           </h2>
 
           <p
             style={{
-              marginTop: "30px",
-              color: "#A1A1AA",
-              maxWidth: "700px",
-              lineHeight: 1.8,
+              marginTop: "40px",
+              maxWidth: "750px",
+              color: "#94A3B8",
+              lineHeight: 2,
             }}
           >
-            A curated community of builders,
-            operators, founders and ambitious
-            students focused on execution.
+            InnerCircle exists to connect ambitious people with
+            other ambitious people. Not through algorithms.
+            Not through followers. Through proximity.
           </p>
         </motion.div>
       </section>
 
-      {/* WHO IS IT FOR */}
+      {/* WHO BELONGS */}
       <section
         style={{
-          padding: "120px 24px",
           maxWidth: "1400px",
           margin: "0 auto",
+          padding: "140px 20px",
         }}
       >
         <h2
           style={{
-            fontSize: "3rem",
-            textAlign: "center",
-            marginBottom: "60px",
+            fontSize: "clamp(2rem,6vw,4rem)",
+            marginBottom: "80px",
           }}
         >
-          Who Is It For?
+          Who Gets In
         </h2>
 
         <div
@@ -206,43 +233,35 @@ export default function InnerCirclePage() {
             display: "grid",
             gridTemplateColumns:
               "repeat(auto-fit,minmax(280px,1fr))",
-            gap: "24px",
+            gap: "40px",
           }}
         >
-          {[
-            {
-              title: "Builders",
-              text: "People actively creating projects.",
-            },
-            {
-              title: "Founders",
-              text: "People trying to build something meaningful.",
-            },
-            {
-              title: "Operators",
-              text: "People who care about execution.",
-            },
-            {
-              title: "Learners",
-              text: "People seeking ambitious peers.",
-            },
-          ].map((item) => (
+          {whoBelongs.map((item) => (
             <motion.div
               key={item.title}
-              whileHover={{
-                y: -10,
-                scale: 1.03,
-              }}
+              variants={reveal}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true }}
               style={{
-                background: "#0B0B0B",
-                border: "1px solid #222",
-                borderRadius: "24px",
-                padding: "32px",
+                paddingBottom: "30px",
+                borderBottom:
+                  "1px solid rgba(255,255,255,.08)",
               }}
             >
+              <p
+                style={{
+                  color: "#F59E0B",
+                  marginBottom: "16px",
+                }}
+              >
+                {item.number}
+              </p>
+
               <h3
                 style={{
-                  color: "#8B5CF6",
+                  fontSize: "1.8rem",
+                  marginBottom: "14px",
                 }}
               >
                 {item.title}
@@ -250,8 +269,8 @@ export default function InnerCirclePage() {
 
               <p
                 style={{
-                  color: "#A1A1AA",
-                  marginTop: "12px",
+                  color: "#94A3B8",
+                  lineHeight: 1.8,
                 }}
               >
                 {item.text}
@@ -261,59 +280,46 @@ export default function InnerCirclePage() {
         </div>
       </section>
 
-      {/* APPLICATION PROCESS */}
+      {/* PROCESS */}
       <section
         style={{
-          padding: "140px 24px",
+          padding: "160px 20px",
           textAlign: "center",
         }}
       >
         <h2
           style={{
-            fontSize: "3rem",
+            fontSize: "clamp(2rem,6vw,4rem)",
             marginBottom: "80px",
           }}
         >
-          How It Works
+          The Process
         </h2>
 
         <div
           style={{
-            display: "flex",
-            flexWrap: "wrap",
-            justifyContent: "center",
+            maxWidth: "1200px",
+            margin: "0 auto",
+            display: "grid",
+            gridTemplateColumns:
+              "repeat(auto-fit,minmax(220px,1fr))",
             gap: "40px",
           }}
         >
-          {[
-            "Apply",
-            "Review",
-            "Interview",
-            "Join",
-          ].map((step, index) => (
+          {processSteps.map((step, index) => (
             <motion.div
               key={step}
-              variants={fadeUp}
+              variants={reveal}
               initial="hidden"
               whileInView="show"
               viewport={{ once: true }}
-              transition={{
-                delay: index * 0.15,
-              }}
             >
               <div
                 style={{
-                  width: "90px",
-                  height: "90px",
-                  borderRadius: "50%",
-                  border:
-                    "2px solid #8B5CF6",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  margin: "0 auto 20px",
-                  boxShadow:
-                    "0 0 25px rgba(139,92,246,.25)",
+                  color: "#F59E0B",
+                  fontSize: "3rem",
+                  fontWeight: 900,
+                  marginBottom: "20px",
                 }}
               >
                 0{index + 1}
@@ -325,55 +331,50 @@ export default function InnerCirclePage() {
         </div>
       </section>
 
-      {/* BENEFITS */}
+      {/* WHAT WE REJECT */}
       <section
         style={{
-          padding: "120px 24px",
-          maxWidth: "1400px",
+          maxWidth: "1200px",
           margin: "0 auto",
+          padding: "140px 20px",
+          textAlign: "center",
         }}
       >
         <h2
           style={{
-            textAlign: "center",
-            fontSize: "3rem",
-            marginBottom: "60px",
+            fontSize: "clamp(2.5rem,7vw,5rem)",
+            marginBottom: "50px",
           }}
         >
-          What You Get
+          What We Reject
         </h2>
 
         <div
           style={{
-            display: "grid",
-            gridTemplateColumns:
-              "repeat(auto-fit,minmax(250px,1fr))",
-            gap: "24px",
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "center",
+            gap: "20px",
           }}
         >
           {[
-            "Private Community",
-            "Mentorship",
-            "Founder Sessions",
-            "Peer Accountability",
-            "Opportunities",
-            "Network",
+            "Noise",
+            "Vanity",
+            "Excuses",
+            "Wantrepreneurs",
           ].map((item) => (
-            <motion.div
+            <div
               key={item}
-              whileHover={{
-                y: -8,
-              }}
               style={{
-                background: "#0B0B0B",
-                border: "1px solid #222",
-                borderRadius: "20px",
-                padding: "32px",
-                textAlign: "center",
+                border:
+                  "1px solid rgba(255,255,255,.08)",
+                padding: "14px 22px",
+                borderRadius: "999px",
+                color: "#CBD5E1",
               }}
             >
               {item}
-            </motion.div>
+            </div>
           ))}
         </div>
       </section>
@@ -381,145 +382,95 @@ export default function InnerCirclePage() {
       {/* QUOTE */}
       <section
         style={{
-          padding: "180px 24px",
+          padding: "200px 20px",
           textAlign: "center",
-          maxWidth: "1100px",
-          margin: "0 auto",
         }}
       >
         <motion.h2
-          variants={fadeUp}
+          variants={reveal}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
           style={{
-            fontSize:
-              "clamp(3rem,7vw,6rem)",
+            fontSize: "clamp(3rem,10vw,8rem)",
+            lineHeight: 1,
             fontWeight: 900,
-            lineHeight: 1.1,
           }}
         >
-          Your Environment
+          The Room
           <br />
-          Shapes Your Future.
+          Changes
           <br />
-          Choose Wisely.
+          Everything.
         </motion.h2>
       </section>
 
-     {/* CONTACT FORM */}
-<section
-  ref={formRef}
-  style={{
-    padding: "160px 24px",
-    maxWidth: "900px",
-    margin: "0 auto",
-  }}
->
-  <h2
-    style={{
-      textAlign: "center",
-      fontSize: "clamp(3rem,7vw,5rem)",
-      fontWeight: 900,
-    }}
-  >
-    Let's Build
-    <br />
-    Something Bigger.
-  </h2>
+      {/* CTA */}
+      <section
+        style={{
+          padding: "180px 20px",
+          textAlign: "center",
+          maxWidth: "1000px",
+          margin: "0 auto",
+        }}
+      >
+        <motion.div
+          variants={reveal}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+        >
+          <p
+            style={{
+              color: "#F59E0B",
+              letterSpacing: "4px",
+              marginBottom: "20px",
+            }}
+          >
+            FINAL STEP
+          </p>
 
-  <p
-    style={{
-      textAlign: "center",
-      color: "#A1A1AA",
-      marginTop: "20px",
-      marginBottom: "60px",
-    }}
-  >
-    Interested in Progeta? Send us a message.
-  </p>
+          <h2
+            style={{
+              fontSize: "clamp(3rem,8vw,6rem)",
+              lineHeight: 1,
+              fontWeight: 900,
+            }}
+          >
+            THE DOOR
+            <br />
+            IS OPEN.
+          </h2>
 
-  <form
-    style={{
-      display: "flex",
-      flexDirection: "column",
-      gap: "20px",
-      background: "#0B0B0B",
-      border: "1px solid #222",
-      borderRadius: "24px",
-      padding: "32px",
-    }}
-  >
-    <input
-      placeholder="Full Name"
-      style={inputStyle}
-    />
+          <p
+            style={{
+              color: "#94A3B8",
+              marginTop: "30px",
+              lineHeight: 1.9,
+            }}
+          >
+            For now.
+          </p>
 
-    <input
-      placeholder="Email Address"
-      style={inputStyle}
-    />
-
-    <input
-      placeholder="LinkedIn (Optional)"
-      style={inputStyle}
-    />
-
-    <textarea
-      placeholder="Tell us about yourself..."
-      rows={6}
-      style={{
-        ...inputStyle,
-        resize: "vertical",
-      }}
-    />
-
-   <button
-  type="submit"
-  style={{
-    width: "100%",
-    background:
-      "linear-gradient(135deg, #3B82F6, #2563EB)",
-    border: "none",
-    color: "#FFFFFF",
-    padding: "18px",
-    borderRadius: "14px",
-    fontWeight: 700,
-    fontSize: "1rem",
-    cursor: "pointer",
-    marginTop: "10px",
-    transition: "all 0.3s ease",
-    boxShadow:
-      "0 0 35px rgba(59,130,246,.35)",
-  }}
-  onMouseEnter={(e) => {
-    e.currentTarget.style.transform =
-      "translateY(-2px)";
-    e.currentTarget.style.boxShadow =
-      "0 0 45px rgba(59,130,246,.5)";
-  }}
-  onMouseLeave={(e) => {
-    e.currentTarget.style.transform =
-      "translateY(0)";
-    e.currentTarget.style.boxShadow =
-      "0 0 35px rgba(59,130,246,.35)";
-  }}
->
-  Apply To Progeta →
-</button>
-  </form>
-</section>
-      
+          <button
+            onClick={() =>
+              router.push("/innercircle/apply")
+            }
+            style={{
+              marginTop: "50px",
+              background: "#D97706",
+              border: "none",
+              color: "#fff",
+              padding: "20px 36px",
+              borderRadius: "999px",
+              fontWeight: 700,
+              cursor: "pointer",
+            }}
+          >
+            Request Access →
+          </button>
+        </motion.div>
+      </section>
     </main>
   );
 }
-const inputStyle = {
-  width: "100%",
-  background: "#111111",
-  border: "1px solid #242424",
-  borderRadius: "12px",
-  padding: "16px",
-  color: "#FFFFFF",
-  fontSize: "1rem",
-  outline: "none",
-} as const;
