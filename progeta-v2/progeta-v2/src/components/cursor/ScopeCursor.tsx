@@ -51,11 +51,11 @@ export default function ScopeCursor() {
 
   if (!mounted) return null;
 
-  const ringSize = clicked
+  const size = clicked
     ? 18
     : hovering
-    ? 42
-    : 26;
+    ? 44
+    : 30;
 
   return (
     <div
@@ -68,43 +68,127 @@ export default function ScopeCursor() {
         zIndex: 999999,
       }}
     >
-      {/* Outer ring */}
+      {/* OUTER COSMIC MIST */}
 
       <div
         style={{
           position: "absolute",
           left: "50%",
           top: "50%",
-          width: ringSize,
-          height: ringSize,
+          width: size * 4.5,
+          height: size * 4.5,
           borderRadius: "50%",
-          border: hovering
-            ? "2px solid #ffffff"
-            : "2px solid #00D4D4",
-          transform:
-            "translate(-50%, -50%)",
-          transition: "all .15s ease",
-          boxShadow: hovering
-            ? "0 0 20px rgba(255,255,255,.35)"
-            : "0 0 14px rgba(0,212,212,.45)",
+          transform: "translate(-50%, -50%)",
+
+          background: `
+            radial-gradient(
+              circle,
+              rgba(110,231,255,.18) 0%,
+              rgba(56,189,248,.10) 35%,
+              rgba(14,165,233,.05) 60%,
+              transparent 100%
+            )
+          `,
+
+          filter: "blur(22px)",
+          mixBlendMode: "screen",
+          transition: "all .18s ease",
         }}
       />
 
-      {/* Precise center dot */}
+      {/* GHOST BODY */}
 
       <div
         style={{
           position: "absolute",
           left: "50%",
           top: "50%",
-          width: 5,
-          height: 5,
+          width: size * 2,
+          height: size * 2,
           borderRadius: "50%",
-          background: "#fff",
-          transform:
-            "translate(-50%, -50%)",
-          boxShadow:
-            "0 0 8px rgba(255,255,255,.8)",
+          transform: "translate(-50%, -50%)",
+
+          background: `
+            radial-gradient(
+              circle,
+              rgba(220,250,255,.32) 0%,
+              rgba(125,249,255,.22) 35%,
+              rgba(14,165,233,.12) 70%,
+              transparent 100%
+            )
+          `,
+
+          filter: "blur(12px)",
+          mixBlendMode: "screen",
+          transition: "all .18s ease",
+        }}
+      />
+
+      {/* ENERGY SPHERE */}
+
+      <div
+        style={{
+          position: "absolute",
+          left: "50%",
+          top: "50%",
+          width: size,
+          height: size,
+          borderRadius: "50%",
+          transform: "translate(-50%, -50%)",
+
+          background: `
+            radial-gradient(
+              circle at 40% 35%,
+              rgba(255,255,255,.95) 0%,
+              rgba(220,250,255,.75) 12%,
+              rgba(125,249,255,.45) 35%,
+              rgba(56,189,248,.28) 60%,
+              rgba(14,165,233,.12) 85%,
+              transparent 100%
+            )
+          `,
+
+          filter: "blur(4px)",
+
+          boxShadow: hovering
+            ? `
+              0 0 20px rgba(125,249,255,.65),
+              0 0 40px rgba(56,189,248,.45),
+              0 0 80px rgba(14,165,233,.25)
+            `
+            : `
+              0 0 14px rgba(125,249,255,.45),
+              0 0 30px rgba(56,189,248,.25)
+            `,
+
+          transition: "all .18s ease",
+        }}
+      />
+
+      {/* SOUL CORE */}
+
+      <div
+        style={{
+          position: "absolute",
+          left: "50%",
+          top: "50%",
+
+          width: size * 0.28,
+          height: size * 0.28,
+
+          borderRadius: "50%",
+
+          transform: "translate(-50%, -50%)",
+
+          background: "#FFFFFF",
+
+          boxShadow: `
+            0 0 12px rgba(255,255,255,1),
+            0 0 24px rgba(220,250,255,.95),
+            0 0 50px rgba(125,249,255,.85)
+          `,
+
+          transition: "all .18s ease",
         }}
       />
     </div>
