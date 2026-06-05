@@ -3,14 +3,18 @@
 import { useEffect, useState } from "react";
 
 export default function ScopeCursor() {
-  const [position, setPosition] = useState({
-    x: 0,
-    y: 0,
-  });
-
+  const [mounted, setMounted] = useState(false);
+  const [hovering, setHovering] = useState(false);
   const [clicked, setClicked] = useState(false);
 
+  const [position, setPosition] = useState({
+    x: -100,
+    y: -100,
+  });
+
   useEffect(() => {
+    setMounted(true);
+
     const move = (e: MouseEvent) => {
       setPosition({
         x: e.clientX,
@@ -21,25 +25,37 @@ export default function ScopeCursor() {
     const down = () => setClicked(true);
     const up = () => setClicked(false);
 
+    const hoverCheck = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+
+      setHovering(
+        !!(
+          target.closest("a") ||
+          target.closest("button")
+        )
+      );
+    };
+
     window.addEventListener("mousemove", move);
+    window.addEventListener("mouseover", hoverCheck);
     window.addEventListener("mousedown", down);
     window.addEventListener("mouseup", up);
 
     return () => {
-      window.removeEventListener(
-        "mousemove",
-        move
-      );
-      window.removeEventListener(
-        "mousedown",
-        down
-      );
-      window.removeEventListener(
-        "mouseup",
-        up
-      );
+      window.removeEventListener("mousemove", move);
+      window.removeEventListener("mouseover", hoverCheck);
+      window.removeEventListener("mousedown", down);
+      window.removeEventListener("mouseup", up);
     };
   }, []);
+
+  if (!mounted) return null;
+
+  const ringSize = clicked
+    ? 18
+    : hovering
+    ? 42
+    : 26;
 
   return (
     <div
@@ -47,69 +63,48 @@ export default function ScopeCursor() {
         position: "fixed",
         left: position.x,
         top: position.y,
-        width: clicked ? 40 : 50,
-        height: clicked ? 40 : 50,
-        transform:
-          "translate(-50%, -50%)",
+        transform: "translate(-50%, -50%)",
         pointerEvents: "none",
         zIndex: 999999,
-        transition:
-          "width .15s ease,height .15s ease",
       }}
     >
-      {/* Circle */}
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          border:
-            "2px solid rgba(255,0,0,.8)",
-          borderRadius: "50%",
-          boxShadow:
-            "0 0 15px rgba(255,0,0,.6)",
-        }}
-      />
+      {/* Outer ring */}
 
-      {/* Horizontal */}
-      <div
-        style={{
-          position: "absolute",
-          top: "50%",
-          left: -10,
-          right: -10,
-          height: 1,
-          background:
-            "rgba(255,0,0,.9)",
-        }}
-      />
-
-      {/* Vertical */}
-      <div
-        style={{
-          position: "absolute",
-          left: "50%",
-          top: -10,
-          bottom: -10,
-          width: 1,
-          background:
-            "rgba(255,0,0,.9)",
-        }}
-      />
-
-      {/* Center Dot */}
       <div
         style={{
           position: "absolute",
           left: "50%",
           top: "50%",
-          width: 6,
-          height: 6,
+          width: ringSize,
+          height: ringSize,
           borderRadius: "50%",
-          background: "#ff0000",
+          border: hovering
+            ? "2px solid #ffffff"
+            : "2px solid #00D4D4",
+          transform:
+            "translate(-50%, -50%)",
+          transition: "all .15s ease",
+          boxShadow: hovering
+            ? "0 0 20px rgba(255,255,255,.35)"
+            : "0 0 14px rgba(0,212,212,.45)",
+        }}
+      />
+
+      {/* Precise center dot */}
+
+      <div
+        style={{
+          position: "absolute",
+          left: "50%",
+          top: "50%",
+          width: 5,
+          height: 5,
+          borderRadius: "50%",
+          background: "#fff",
           transform:
             "translate(-50%, -50%)",
           boxShadow:
-            "0 0 10px red",
+            "0 0 8px rgba(255,255,255,.8)",
         }}
       />
     </div>

@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Navbar from "@/components/navigation/Navbar";
+import ScopeCursor from "@/components/cursor/ScopeCursor";
 import { Toaster } from "sonner";
 import "./globals.css";
-import ScopeCursor from "@/components/cursor/ScopeCursor";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,7 +31,8 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable}`}
     >
       <body>
-        <ScopeCursor />
+        { <ScopeCursor />}
+
         <Navbar />
 
         {children}
