@@ -153,7 +153,7 @@ export default function InnerCirclePage() {
               fontSize: "1rem",
             }}
           >
-            Request Access →
+            Apply Now →
           </button>
         </motion.div>
       </section>
@@ -405,72 +405,81 @@ export default function InnerCirclePage() {
         </motion.h2>
       </section>
 
-      {/* CTA */}
-      <section
-        style={{
-          padding: "180px 20px",
-          textAlign: "center",
-          maxWidth: "1000px",
-          margin: "0 auto",
-        }}
-      >
-        <motion.div
-          variants={reveal}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true }}
-        >
-          <p
-            style={{
-              color: "#F59E0B",
-              letterSpacing: "4px",
-              marginBottom: "20px",
-            }}
-          >
-            FINAL STEP
-          </p>
+{/* NEW BATCHES CTA */}
+<section
+  style={{
+    padding: "180px 20px",
+    textAlign: "center",
+    maxWidth: "1100px",
+    margin: "0 auto",
+  }}
+>
+  <motion.div
+    variants={reveal}
+    initial="hidden"
+    whileInView="show"
+    viewport={{ once: true }}
+  >
+    <p
+      style={{
+        color: "#F59E0B",
+        letterSpacing: "4px",
+        marginBottom: "20px",
+        fontWeight: 700,
+      }}
+    >
+      SUMMER 2026 COHORT
+    </p>
 
-          <h2
-            style={{
-              fontSize: "clamp(3rem,8vw,6rem)",
-              lineHeight: 1,
-              fontWeight: 900,
-            }}
-          >
-            THE DOOR
-            <br />
-            IS OPEN.
-          </h2>
+    <h2
+      style={{
+        fontSize: "clamp(3rem,8vw,6rem)",
+        lineHeight: 0.95,
+        fontWeight: 900,
+      }}
+    >
+      NEW BATCHES
+      <br />
+      ARE OPEN.
+    </h2>
 
-          <p
-            style={{
-              color: "#94A3B8",
-              marginTop: "30px",
-              lineHeight: 1.9,
-            }}
-          >
-            For now.
-          </p>
+    <p
+      style={{
+        color: "#94A3B8",
+        marginTop: "30px",
+        lineHeight: 1.9,
+        maxWidth: "700px",
+        marginInline: "auto",
+      }}
+    >
+      Learn AI, Cybersecurity, Development,
+      Quantum Computing and emerging technologies
+      alongside ambitious students building the future.
+    </p>
 
-          <button
-            onClick={() =>
-              router.push("/innercircle/apply")
-            }
-            style={{
-              marginTop: "50px",
-              background: "#D97706",
-              border: "none",
-              color: "#fff",
-              padding: "20px 36px",
-              borderRadius: "999px",
-              fontWeight: 700,
-              cursor: "pointer",
-            }}
-          >
-            Request Access →
-          </button>
-        </motion.div>
-      </section>
+    <button
+      onClick={() =>
+        router.push("/innercircle/batches")
+      }
+      style={{
+        marginTop: "50px",
+        background:
+          "linear-gradient(135deg,#D97706,#F59E0B)",
+        border: "none",
+        color: "#fff",
+        padding: "20px 38px",
+        borderRadius: "999px",
+        fontWeight: 700,
+        fontSize: "1rem",
+        cursor: "pointer",
+        boxShadow:
+          "0 20px 60px rgba(245,158,11,.25)",
+      }}
+    >
+      Check Out The New Batch →
+    </button>
+  </motion.div>
+</section>
     </main>
   );
 }
