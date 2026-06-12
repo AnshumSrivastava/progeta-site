@@ -79,85 +79,82 @@ export default function InnerCirclePage() {
       />
 
       {/* HERO */}
-      <section
-        style={{
-          minHeight: "100vh",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          textAlign: "center",
-          padding: "120px 20px",
-        }}
-      >
-        <motion.div
-          variants={reveal}
-          initial="hidden"
-          animate="show"
-          transition={{ duration: 0.9 }}
-          style={{
-            maxWidth: "1100px",
-          }}
-        >
-          <p
-            style={{
-              color: "#F59E0B",
-              letterSpacing: "5px",
-              textTransform: "uppercase",
-              fontWeight: 700,
-              marginBottom: "30px",
-            }}
-          >
-            Progeta // InnerCircle
-          </p>
+      {/* NEW BATCHES CTA */}
+<section
+  style={{
+    padding: "180px 20px",
+    textAlign: "center",
+    maxWidth: "1100px",
+    margin: "0 auto",
+  }}
+>
+  <motion.div
+    variants={reveal}
+    initial="hidden"
+    whileInView="show"
+    viewport={{ once: true }}
+  >
+    <p
+      style={{
+        color: "#F59E0B",
+        letterSpacing: "4px",
+        marginBottom: "20px",
+        fontWeight: 700,
+      }}
+    >
+      SUMMER 2026 COHORT
+    </p>
 
-          <h1
-            style={{
-              fontSize: "clamp(4rem,12vw,10rem)",
-              lineHeight: 0.9,
-              fontWeight: 900,
-              marginBottom: "30px",
-            }}
-          >
-            THE
-            <br />
-            CIRCLE
-          </h1>
+    <h2
+      style={{
+        fontSize: "clamp(3rem,8vw,6rem)",
+        lineHeight: 0.95,
+        fontWeight: 900,
+      }}
+    >
+      NEW BATCHES
+      <br />
+      ARE OPEN.
+    </h2>
 
-          <p
-            style={{
-              color: "#94A3B8",
-              fontSize: "clamp(1rem,2vw,1.3rem)",
-              lineHeight: 1.9,
-              maxWidth: "700px",
-              margin: "0 auto",
-            }}
-          >
-            Not everyone gets in.
-            <br />
-            And that's the point.
-          </p>
+    <p
+      style={{
+        color: "#94A3B8",
+        marginTop: "30px",
+        lineHeight: 1.9,
+        maxWidth: "700px",
+        marginInline: "auto",
+      }}
+    >
+      Learn AI, Cybersecurity, Development,
+      Quantum Computing and emerging technologies
+      alongside ambitious students building the future.
+    </p>
 
-          <button
-            onClick={() =>
-              router.push("/innercircle/apply")
-            }
-            style={{
-              marginTop: "50px",
-              background: "#D97706",
-              border: "none",
-              color: "#fff",
-              padding: "18px 34px",
-              borderRadius: "999px",
-              fontWeight: 700,
-              cursor: "pointer",
-              fontSize: "1rem",
-            }}
-          >
-            Apply Now →
-          </button>
-        </motion.div>
-      </section>
-
+    <button
+      onClick={() =>
+        router.push("/innercircle/batches")
+      }
+      style={{
+        marginTop: "50px",
+        background:
+          "linear-gradient(135deg,#D97706,#F59E0B)",
+        border: "none",
+        color: "#fff",
+        padding: "20px 38px",
+        borderRadius: "999px",
+        fontWeight: 700,
+        fontSize: "1rem",
+        cursor: "pointer",
+        boxShadow:
+          "0 20px 60px rgba(245,158,11,.25)",
+      }}
+    >
+      Check Out The New Batch →
+    </button>
+  </motion.div>
+</section>
+      
       {/* MANIFESTO */}
       <section
         style={{
@@ -404,82 +401,86 @@ export default function InnerCirclePage() {
           Everything.
         </motion.h2>
       </section>
-
-{/* NEW BATCHES CTA */}
 <section
-  style={{
-    padding: "180px 20px",
-    textAlign: "center",
-    maxWidth: "1100px",
-    margin: "0 auto",
-  }}
->
-  <motion.div
-    variants={reveal}
-    initial="hidden"
-    whileInView="show"
-    viewport={{ once: true }}
-  >
-    <p
-      style={{
-        color: "#F59E0B",
-        letterSpacing: "4px",
-        marginBottom: "20px",
-        fontWeight: 700,
-      }}
-    >
-      SUMMER 2026 COHORT
-    </p>
+        style={{
+          minHeight: "100vh",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          textAlign: "center",
+          padding: "120px 20px",
+        }}
+      >
+        <motion.div
+          variants={reveal}
+          initial="hidden"
+          animate="show"
+          transition={{ duration: 0.9 }}
+          style={{
+            maxWidth: "1100px",
+          }}
+        >
+          <p
+            style={{
+              color: "#F59E0B",
+              letterSpacing: "5px",
+              textTransform: "uppercase",
+              fontWeight: 700,
+              marginBottom: "30px",
+            }}
+          >
+            Progeta // InnerCircle
+          </p>
 
-    <h2
-      style={{
-        fontSize: "clamp(3rem,8vw,6rem)",
-        lineHeight: 0.95,
-        fontWeight: 900,
-      }}
-    >
-      NEW BATCHES
-      <br />
-      ARE OPEN.
-    </h2>
+          <h1
+            style={{
+              fontSize: "clamp(4rem,12vw,10rem)",
+              lineHeight: 0.9,
+              fontWeight: 900,
+              marginBottom: "30px",
+            }}
+          >
+            THE
+            <br />
+            CIRCLE
+          </h1>
 
-    <p
-      style={{
-        color: "#94A3B8",
-        marginTop: "30px",
-        lineHeight: 1.9,
-        maxWidth: "700px",
-        marginInline: "auto",
-      }}
-    >
-      Learn AI, Cybersecurity, Development,
-      Quantum Computing and emerging technologies
-      alongside ambitious students building the future.
-    </p>
+          <p
+            style={{
+              color: "#94A3B8",
+              fontSize: "clamp(1rem,2vw,1.3rem)",
+              lineHeight: 1.9,
+              maxWidth: "700px",
+              margin: "0 auto",
+            }}
+          >
+            Not everyone gets in.
+            <br />
+            And that's the point.
+          </p>
 
-    <button
-      onClick={() =>
-        router.push("/innercircle/batches")
-      }
-      style={{
-        marginTop: "50px",
-        background:
-          "linear-gradient(135deg,#D97706,#F59E0B)",
-        border: "none",
-        color: "#fff",
-        padding: "20px 38px",
-        borderRadius: "999px",
-        fontWeight: 700,
-        fontSize: "1rem",
-        cursor: "pointer",
-        boxShadow:
-          "0 20px 60px rgba(245,158,11,.25)",
-      }}
-    >
-      Check Out The New Batch →
-    </button>
-  </motion.div>
-</section>
+          <button
+            onClick={() =>
+              router.push("/innercircle/apply")
+            }
+            style={{
+              marginTop: "50px",
+              background: "#D97706",
+              border: "none",
+              color: "#fff",
+              padding: "18px 34px",
+              borderRadius: "999px",
+              fontWeight: 700,
+              cursor: "pointer",
+              fontSize: "1rem",
+            }}
+          >
+            Apply Now →
+          </button>
+        </motion.div>
+      </section>
+
+
     </main>
   );
 }
